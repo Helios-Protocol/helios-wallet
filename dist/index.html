@@ -1,0 +1,264 @@
+ <!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HLS Wallet Prototype</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+    <script src="js/helios_web3.js"></script>
+    <script src="js/helios-wallet-master.js"></script>
+    <script src="js/datastructures.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/visual.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:200,300,300i,400,400i,500,600" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+    <div id="page-size-indicator"></div>
+    
+<header id='header_outer' style='position:fixed; z-index:50;'>
+    <div class="header-container">
+        <div class="site-logo">
+            <a href="/">
+                <img src="images/helios_logo.png">
+            </a>
+
+        </div>
+
+        <div id='wallet_test_version_container'>
+            Testnet Wallet V0.1
+        </div>
+
+        <div class="nav-button-box">
+            <div class="nav-button table-cell align-middle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav>
+            <ul class="nav">
+                <li role="presentation" class="nav__item active" id="dashboard_menu_item">
+                    <a href="#dashboard"  class='nav__link'>
+                        Dashboard
+                    </a>
+                </li>
+                <li role="presentation" class="nav__item" id="block_explorer_menu_item">
+                    <a href="#block_explorer"  class='nav__link'>
+                        Block Explorer
+                    </a>
+                </li>
+                <li role="presentation" class="nav__item" id="historical_gas_price_menu_item">
+                    <a href="#historical_gas_price"  class='nav__link'>
+                        Historical Gas Price
+                    </a>
+                </li>
+                <li role="presentation" class="nav__item" id="smart_contracts_menu_item">
+                    <a href="#smart_contracts"  class='nav__link'>
+                        Smart Contracts
+                    </a>
+                </li>
+                <li role="presentation" class="nav__item" id='create_new_wallet_menu_item'>
+                    <a href="#create_new_wallet"  class='nav__link'>
+                        Create New Wallet
+                    </a>
+                </li>
+                <li role="presentation" class="nav__item" id='load_wallet_menu_item'>
+                    <a href="#load_wallet"  class='nav__link'>
+                        Load Wallet
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+    <div id='popup_background'>
+
+</div>
+<div id='popup_outer'>
+    <div id='popup_container'>
+        <div id='exit_popup'><img src='images/exit_popup.png' style='height:27px;'></div>
+        <div id='popup_content'></div>
+        <div style='width:100%; height:1px; clear:both;'></div>
+    </div>
+</div>
+
+
+    <div id="main_outer">
+        <div id="main_inner">
+    <div class='tab_item active' id='dashboard_tab'>
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Send A Transaction
+        </div>
+        <div class='block_content_container'>
+            <form id="add_transaction_form">
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" value = '1' min='0.000000000000000001' placeholder="Amount">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" value = '0x0d1630cb77c00d95f7fa32bccfe80043639681be' placeholder="To">
+                </div>
+
+                <div id='send_transaction_fee_estimation_container'>
+                    <img src='images/hls_small.png' style='height:22px;'>
+                    <div id='send_transaction_fee_estimation_text'>
+                        Estimated fee per transaction: <span class='fee_estimation'>0.000001 or 0.12%</span>
+                    </div>
+                </div>
+                <div id='send_transaction_advanced_options_link' class='link'>
+                    Advanced options >
+                </div>
+                <div id='send_transaction_advanced_options_container'>
+
+                    <div class='input_line_container'>
+                        <div class='required_star'>*</div><input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' placeholder="Gas Price">
+                    </div>
+                    <div class='input_line_container'>
+                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' placeholder="Max Allowed Gas">
+                    </div>
+
+                    <input type="submit" value="Add Transaction to Block">
+                    <div style='clear:both;'></div>
+                    <div class='italic_heading'>
+                        Transactions to send
+                    </div>
+                    <div id='multiple_transaction_container'>
+                        <table id='multiple_transaction_list'>
+                            <thead>
+                                <tr>
+                                    <th>To</th><th>Amount</th><th>Gas Price</th><th>Max Gas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+            <form id="send_block_pre_confirmation">
+                <input type="submit" id='send_block_submit' value="Send" style='position:relative; top:-35px;'>
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <div class='block_1_wide'>
+        <div class='block_title'>
+            Info
+        </div>
+        <div class='block_content_container'>
+
+            <img src='images/x.png' id='connection_status_icon' class='block_1_wide_left_icon'><div id='connection_status' class='block_1_wide_right_text'>Connecting to a node.</div>
+
+            <div class='line_separater'>
+                <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='account_status' class='block_1_wide_right_text'></div>
+            </div>
+            <div class='clear_both'></div>
+        </div>
+
+    </div>
+
+
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Send A Transaction
+        </div>
+        <div class='block_content_container'>
+
+            <div id='transaction_history_container'>
+                <table id='transaction_history_list'>
+                    <thead>
+                        <tr>
+                            <th>Date</th><th>Description</th><th>Amount</th><th>Fees</th><th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class='block_1_wide'>
+        <div class='block_title'>
+            Balances
+        </div>
+        <div class='block_content_container'>
+            <img src='images/hls_large.png' class='block_1_wide_left_icon'><div id='balance_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
+            <div class='line_separater'></div>
+            <div class='thin_line'></div>
+            <div class='line_separater'>
+                <div class='italic_heading'>Altcoins</div>
+            </div>
+            <div class='line_separater'>
+                None...
+            </div>
+        </div>
+    </div>
+
+    
+    <div style='clear:both;'></div>
+</div>
+    <div class='tab_item' id='historical_gas_price_tab'>
+    coming soon
+</div>
+    <div class='tab_item' id='create_new_wallet_tab'>
+    Form for generating a wallet<br>
+    <form id="generate_wallet_form">
+        Password to encrypt wallet: <input id="generate_wallet_form_password" type="password">
+        <br>
+        <input id="generate_wallet_form_submit" type="submit" value="Download Keystore">
+    </form>
+</div>
+    <div class='tab_item' id='load_wallet_tab'>
+    <div id="load_wallet_main">
+        <form id="load_wallet_keystore_form">
+            Keystore file: <input type="file" id="load_wallet_keystore_form_file"><br>
+            Keystore password: <input id="load_wallet_keystore_form_password" type="password">
+            <input type="submit" value="Load">
+        </form>
+    </div>
+</div>
+</div>
+    </div>
+
+    <div class='popup_content_store' id='popup_content_confirm_transactions'>
+        Please confirm your transactions in this list below and click send.
+<br><br>
+<table id='final_tx_list_for_confirmation'>
+    <thead>
+        <tr>
+            <th>To</th><th>Amount</th><th>Gas Price</th><th>Max Gas</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<div style='margin-top:20px;'>
+    <form id="send_block_post_confirmation">
+        <input type="submit" id='send_block_submit' class='light_button' value="Send" >
+    </form>
+    <div class='light_button' id='exit_popup_submit' style='float:left;'>Get me out of here!</div>
+</div>
+    </div>
+
+</body>
+</html>

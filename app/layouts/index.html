@@ -1,0 +1,39 @@
+ <!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HLS Wallet Prototype</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+    <script src="js/helios_web3.js"></script>
+    <script src="js/helios-wallet-master.js"></script>
+    <script src="js/datastructures.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/visual.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:200,300,300i,400,400i,500,600" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+    <div id="page-size-indicator"></div>
+    @@include( '../includes/menu.html')
+    @@include( '../includes/popup.html')
+
+    <div id="main_outer">
+        @@include( '../includes/main_inner.html')
+    </div>
+
+    <div class='popup_content_store' id='popup_content_confirm_transactions'>
+        @@include( '../includes/popup_content_confirm_transactions.html')
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+ 
+<div id="after_wallet_loaded_main">
+            <form id="add_transaction_form">
+                Amount: <input id='input_amount' name='amount' type="text" value = '1'>
+                <br>
+                To: <input id='input_to' name='to' type="text" value = '0x0d1630cb77c00d95f7fa32bccfe80043639681be'>
+                <br>
+                Gas Price: <input id='input_gas_price' name='gas_price' type="number" value = '1' min='1'>
+                <br>
+                Total Gas: <input id='input_total_gas' name='total_gas' type="number" value = '800000'>
+                <br>
+                <input type="submit" value="Add transaction to block">
+            </form>
+
+
+            <form id="send_block">
+                <input type="submit" value="Send block">
+            </form>
+            <div id="receive_incoming_transactions">Receive incoming transactions</div>
+            <div id="refresh_transactions">Refresh transactions</div>
+            <br><br>
+            <div>
+                <div id="tx_list_from_to">
+                    <form id="tx_list_from_to_form">
+                        from:
+                        <select class="from_month">
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <select class="from_year">
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                        </select>
+
+                        to:
+                        <select class="to_month">
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <select class="to_year">
+                            <option value="2019">2019</option>
+                        </select>
+                        <input type="submit" value="View">
+                    </form>
+                </div>
+            </div>
+            Transactions
+            <div id="transactions">
+            </div>
+
+            <br><br><br><br><br>
+            <div id="get_min_gas_price">Get Min Gas Price</div>
+            <div id="get_historical_min_gas_price">Get Historical Min Gas Price</div>
+            <div id="get_transaction_receipt">Get Transaction Receipt</div>
+
+            <div id="plot_div" style="width:800px; height: 500px;"></div>
+        </div>

@@ -1,0 +1,119 @@
+<div class='tab_item active' id='dashboard_tab'>
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Send A Transaction
+        </div>
+        <div class='block_content_container'>
+            <form id="add_transaction_form">
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" value = '1' min='0.000000000000000001' placeholder="Amount">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" value = '0x0d1630cb77c00d95f7fa32bccfe80043639681be' placeholder="To">
+                </div>
+
+                <div id='send_transaction_fee_estimation_container'>
+                    <img src='images/hls_small.png' style='height:22px;'>
+                    <div id='send_transaction_fee_estimation_text'>
+                        Estimated fee per transaction: <span class='fee_estimation'>0.000001 or 0.12%</span>
+                    </div>
+                </div>
+                <div id='send_transaction_advanced_options_link' class='link'>
+                    Advanced options >
+                </div>
+                <div id='send_transaction_advanced_options_container'>
+
+                    <div class='input_line_container'>
+                        <div class='required_star'>*</div><input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' placeholder="Gas Price">
+                    </div>
+                    <div class='input_line_container'>
+                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' placeholder="Max Allowed Gas">
+                    </div>
+
+                    <input type="submit" value="Add Transaction to Block">
+                    <div style='clear:both;'></div>
+                    <div class='italic_heading'>
+                        Transactions to send
+                    </div>
+                    <div id='multiple_transaction_container'>
+                        <table id='multiple_transaction_list'>
+                            <thead>
+                                <tr>
+                                    <th>To</th><th>Amount</th><th>Gas Price</th><th>Max Gas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+            <form id="send_block_pre_confirmation">
+                <input type="submit" id='send_block_submit' value="Send" style='position:relative; top:-35px;'>
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <div class='block_1_wide'>
+        <div class='block_title'>
+            Info
+        </div>
+        <div class='block_content_container'>
+
+            <img src='images/x.png' id='connection_status_icon' class='block_1_wide_left_icon'><div id='connection_status' class='block_1_wide_right_text'>Connecting to a node.</div>
+
+            <div class='line_separater'>
+                <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='account_status' class='block_1_wide_right_text'></div>
+            </div>
+            <div class='clear_both'></div>
+        </div>
+
+    </div>
+
+
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Send A Transaction
+        </div>
+        <div class='block_content_container'>
+
+            <div id='transaction_history_container'>
+                <table id='transaction_history_list'>
+                    <thead>
+                        <tr>
+                            <th>Date</th><th>Description</th><th>Amount</th><th>Fees</th><th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class='block_1_wide'>
+        <div class='block_title'>
+            Balances
+        </div>
+        <div class='block_content_container'>
+            <img src='images/hls_large.png' class='block_1_wide_left_icon'><div id='balance_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
+            <div class='line_separater'></div>
+            <div class='thin_line'></div>
+            <div class='line_separater'>
+                <div class='italic_heading'>Altcoins</div>
+            </div>
+            <div class='line_separater'>
+                None...
+            </div>
+        </div>
+    </div>
+
+    <!--@@include( 'dev_test.html')-->
+    <div style='clear:both;'></div>
+</div>
