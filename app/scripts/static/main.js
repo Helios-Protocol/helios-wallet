@@ -355,7 +355,6 @@ function is_connected(){
 }
 //TODO: add getbalance to web3
 function refresh_balance(){
-    return false;
     if(sending_account == null){
         return
     }
