@@ -1,4 +1,3 @@
-
 // object containing information for showing a list of recent transactions
 class tx_info {
     constructor(timestamp, description, value, gas_cost, to, from, balance, block_number) {
@@ -13,3 +12,6 @@ class tx_info {
     }
 }
 
+module.exports = {
+    tx_info: tx_info
+};

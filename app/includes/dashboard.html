@@ -74,30 +74,7 @@
 
     </div>
 
-
-
-    <div class='block_2_wide'>
-        <div class='block_title'>
-            Send A Transaction
-        </div>
-        <div class='block_content_container'>
-
-            <div id='transaction_history_container'>
-                <table id='transaction_history_list'>
-                    <thead>
-                        <tr>
-                            <th>Date</th><th>Description</th><th>Amount</th><th>Fees</th><th>Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-
-    <div class='block_1_wide'>
+    <div class='block_1_wide' style="float:right">
         <div class='block_title'>
             Balances
         </div>
@@ -114,6 +91,92 @@
         </div>
     </div>
 
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Transaction History
+        </div>
+        <div class='block_content_container'>
+            <div style="margin-bottom:10px;">
+                <div class="label" style="width:212px;"><div class='required_star' style="top:-4px;">*</div>Start Date</div>
+                <div class="label" style="width:200px;"><div class='required_star' style="top:-4px;">*</div>End Date</div>
+            </div>
+            <form id='transaction_history_date_selector'>
+                <div class="custom-select">
+                     <select class="from_month">
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <div class="custom-select" style="margin-right:20px;">
+                    <select class="from_year">
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+                <div class="custom-select">
+                    <select class="to_month">
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <div class="custom-select">
+                    <select class="to_year">
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                    </select>
+                </div>
+                <input type="submit" value="View">
+            </form>
+            <div id='transaction_history_container'>
+                <table id='transaction_history_list'>
+                    <thead>
+                        <tr>
+                            <th>Date</th><th>Description</th><th>Amount</th><th>Fees</th><th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class='block_1_wide' style="float:right">
+        <div class='block_title'>
+            Minimum Gas Price
+        </div>
+        <div class='block_content_container'>
+            <img src='images/gas_icon.png' class='block_1_wide_left_icon'><div id='min_gas_price_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
+            <div class='line_separater'></div>
+
+        </div>
+    </div>
+
+
+
     <!--@@include( 'dev_test.html')-->
     <div style='clear:both;'></div>
+    <!--<div id="test" style="'width:100px; height:50px;">TEST</div>-->
 </div>

@@ -48,7 +48,8 @@ gulp.task("html", function(done) {
 
 // js: Browserify
 let js_folder = "scripts/";
-let js_srcFile = app + js_folder + "main.js";
+let jsFolder = app + js_folder
+let js_srcFile = jsFolder + "main.js";
 let js_destFolder = dist + "js/";
 let js_destFile = "helios-wallet-master.js";
 
@@ -66,14 +67,15 @@ function bundle_js(bundler) {
 
 gulp.task("js", function() {
   let bundler = browserify(js_srcFile)
-  bundle_js(bundler);
+  return bundle_js(bundler);
 });
 
 
 // Copy
 let imgSrcFolder = app + "images/**/*";
 let jsonFile = app + "*.json";
-let jsStaticFolder = app + js_folder + "static/*";
+
+let jsStaticFolder = jsFolder + "static/*";
 let cssFolder = app + "css/*";
 let readMe = "./README.rst";
 
@@ -101,8 +103,10 @@ gulp.task("copy", function() {
 });
 
 
+let js_watchFolder = app + "scripts/**/*.{js,json,html}";
+
 gulp.task("watchJS", function() {
-  gulp.watch(js_srcFile, gulp.series("js"));
+  gulp.watch(js_watchFolder, gulp.parallel(["js","copy"]));
 });
 gulp.task("watchHtml", function() {
   gulp.watch(htmlFiles, gulp.series("html"));
@@ -116,17 +120,14 @@ gulp.task("watchImages", function() {
 gulp.task("watchCss", function() {
   gulp.watch(cssFolder, gulp.series("copy"));
 });
-gulp.task("watchStaticJS", function() {
-  gulp.watch(jsStaticFolder, gulp.series("copy"));
-});
+
 
 gulp.task("watch", gulp.parallel(
   "watchJS",
   "watchHtml",
   "watchIncludes",
   "watchImages",
-  "watchCss",
-  "watchStaticJS"
+  "watchCss"
 ));
 
 // gulp.task("build", ["js", "html"]);

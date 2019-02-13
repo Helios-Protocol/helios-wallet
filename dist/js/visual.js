@@ -58,6 +58,9 @@ var set_account_status = function(status){
 var set_balance_status = function(status){
     $('#balance_status').text(status);
 }
+var set_min_gas_price_status = function(status){
+    $('#min_gas_price_status').text(status);
+}
 
 var set_connection_status = function(status, connected){
     if(connected){
