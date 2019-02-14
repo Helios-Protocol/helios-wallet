@@ -357,7 +357,12 @@ tbody{
 }
 
 
+/*HISTORICAL MIN GAS PRICE*/
 
+#historical_min_gas_plot_div{
+    width:100%;
+    height:500px;
+}
 
 /*FOOTER*/
 #footer{

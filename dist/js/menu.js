@@ -100,4 +100,8 @@ function switchToTab(name){
         $(menu_item_id).addClass('active');
         $(tab_item_id).addClass('active');
     }
+
+    if(name == 'historical_gas_price'){
+        populateHistoricalMinGasPricePlot()
+    }
 }
