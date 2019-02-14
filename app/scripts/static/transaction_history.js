@@ -106,12 +106,7 @@ async function refresh_transactions(){
                 }
                 prev_block_number = tx.block_number
 
-                // if (prev_block_number == null || prev_block_number != tx.block_number) {
-                //     $('#transactions').append("<tr><td>" + d.toLocaleString() + "</td><td>" + tx.description + "</td><td>" + tx.value + "</td><td>" + tx.gas_cost + "</td><td>" + tx.balance + "</td><td>" + tx.block_number + "</td></tr>");
-                // } else {
-                //     $('#transactions').append("<tr><td>" + d.toLocaleString() + "</td><td>" + tx.description + "</td><td>" + tx.value + "</td><td></td><td>" + tx.block_number + "</td></tr>");
-                // }
-                // prev_block_number = tx.block_number
+
             }
         }
     }

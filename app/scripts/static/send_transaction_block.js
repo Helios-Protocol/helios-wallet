@@ -86,7 +86,7 @@ function calculate_estimated_tx_fee_loop(){
     setTimeout(calculate_estimated_tx_fee_loop, 1000);
 }
 
-//
+// 
 // Functions
 //
 function add_transaction_to_block_from_form(){
@@ -94,7 +94,7 @@ function add_transaction_to_block_from_form(){
     var to = $('#input_to').val();
     //Gwei
     var gas_price =numerical.gweiToWei($('#input_gas_price').val());
-    var total_gas =numerical.gweiToWei($('#input_total_gas').val());
+    var total_gas = parseInt($('#input_total_gas').val());
 
     if(!Number.isInteger(amount) || !Number.isInteger(gas_price) || !Number.isInteger(total_gas)){
         popup("Check that Amount, Gas price, Maximum gas are all valid numbers.")
@@ -104,7 +104,7 @@ function add_transaction_to_block_from_form(){
                     from: sending_account.address,
                     to: to,
                     value: amount,
-                    gas: parseInt(total_gas),
+                    gas: total_gas,
                     gasPrice: gas_price,
                     chainId: 1
                 }
