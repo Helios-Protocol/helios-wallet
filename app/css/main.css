@@ -221,13 +221,24 @@ input.filled {
     display:inline-block;
 
 }
-input[type="submit"]{
+input[type="submit"], .button{
     background-color:#1b6371;
     width:auto;
     color:#fff;
     border-radius: 0 9px 0 9px;
     cursor:pointer;
     float:right;
+    height:38px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:2px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    cursor:pointer;
+}
+.button{
+    padding-top:10px;
+    cursor:pointer;
 }
 input[type="submit"].light_button, .light_button{
     background-color:#fff;
@@ -242,9 +253,11 @@ input[type="submit"].light_button, .light_button{
     padding-top:2px;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    cursor:pointer;
 }
 .light_button{
     padding-top:10px;
+    cursor:pointer;
 }
 .label{
     text-transform:uppercase;
@@ -382,6 +395,7 @@ tbody{
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
 #footer_margin{
+    clear:both;
     width:100%;
     height:60px;
 }

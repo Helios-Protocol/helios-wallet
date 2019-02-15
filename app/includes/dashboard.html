@@ -93,6 +93,31 @@
 
     <div class='block_2_wide'>
         <div class='block_title'>
+            Incoming Transactions
+        </div>
+        <div class='block_content_container'>
+
+            <div id='incoming_transactions_container'>
+                <table id='incoming_transactions_list'>
+                    <thead>
+                        <tr>
+                            <th>From</th><th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <div class="button" id="incoming_transactions_accept">Accept incoming transactions</div>
+                <div class="button" id="incoming_transactions_refresh" style="float:left;">Refresh</div>
+                <div class="clear_both"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
             Transaction History
         </div>
         <div class='block_content_container'>
@@ -178,5 +203,5 @@
 
     <!--@@include( 'dev_test.html')-->
     <div style='clear:both;'></div>
-    <!--<div id="test" style="'width:100px; height:50px;">TEST</div>-->
+    <div id="test" style="'width:100px; height:50px;">TEST</div>
 </div>

@@ -22,8 +22,8 @@ $( document ).ready(function() {
         account = web3.hls.accounts.privateKeyToAccount(private_key_string);
         sending_account = account;
         web3.hls.accounts.wallet.add(account);
-
-        set_account_status('Sending from '+account.address);
+        var address = sending_account.address.substr(0,20);
+        set_account_status('Sending from '+address);
 
         console.log("private key added")
     });
@@ -111,6 +111,7 @@ $( document ).ready(function() {
 
     $('#load_wallet_keystore_form').submit(function (e) {
         e.preventDefault();
+        console.log("loading new wallet address")
         var password = $("#load_wallet_keystore_form_password").val();
         var keystore_file = $("#load_wallet_keystore_form_file").prop('files')[0]
 
@@ -127,7 +128,8 @@ $( document ).ready(function() {
             // console.log("private key");
             // console.log(sending_account.privateKey);
             web3.hls.accounts.wallet.add(sending_account);
-            set_account_status('Sending from '+sending_account.address);
+            var address = sending_account.address.substr(0,20);
+            set_account_status('Sending from '+address);
 
             console.log("private key added")
         }
@@ -136,15 +138,12 @@ $( document ).ready(function() {
 
     });
 
-    // $('#test').click(function(){
-    //     console.log('clicked');
-    //     var start_timestamp = new Date('2018', '01', '01').getTime() / 1000
-    //     var end_timestamp = new Date('2020', '01', '01').getTime() / 1000
-    //     accountHelpers.get_all_transactions_from_account(sending_account, start_timestamp, end_timestamp)
-    //         .then(console.log)
-    //     // accountHelpers.test()
-    //     //     .then(console.log)
-    // })
+    $('#test').click(function(){
+        console.log('clicked');
+
+        web3.hls.getReceivableTransactions(sending_account.address)
+            .then(console.log)
+    })
 
     //refresh_loop();
 
