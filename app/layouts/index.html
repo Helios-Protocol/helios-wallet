@@ -26,21 +26,26 @@
 </head>
 
 <body>
-    <div id="page-wrap">
-        <div id="page-size-indicator"></div>
-        @@include( '../includes/menu.html')
-        @@include( '../includes/popup.html')
-
-        <div id="main_outer">
-            @@include( '../includes/main_inner.html')
-        </div>
-
-        <div class='popup_content_store' id='popup_content_confirm_transactions'>
-            @@include( '../includes/popup_content_confirm_transactions.html')
-        </div>
-        <div id="footer_margin"></div>
+    <div id='initial_page'>
+        @@include( '../includes/main_initial.html')
     </div>
-    @@include( '../includes/footer.html')
+    <div id='main_page'>
+        <div id="page-wrap">
+            <div id="page-size-indicator"></div>
+            @@include( '../includes/menu.html')
+            @@include( '../includes/popup.html')
+
+            <div id="main_outer">
+                @@include( '../includes/main_inner.html')
+            </div>
+
+            <div class='popup_content_store' id='popup_content_confirm_transactions'>
+                @@include( '../includes/popup_content_confirm_transactions.html')
+            </div>
+            <div id="footer_margin"></div>
+        </div>
+        @@include( '../includes/footer.html')
+    </div>
 
 </body>
 </html>

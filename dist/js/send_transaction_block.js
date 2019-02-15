@@ -86,7 +86,7 @@ function calculate_estimated_tx_fee_loop(){
     setTimeout(calculate_estimated_tx_fee_loop, 1000);
 }
 
-//
+// 
 // Functions
 //
 function add_transaction_to_block_from_form(){

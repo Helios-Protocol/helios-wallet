@@ -26,9 +26,31 @@
 </head>
 
 <body>
-    <div id="page-wrap">
-        <div id="page-size-indicator"></div>
-        
+    <div id='initial_page'>
+        <div id='initial_page_background'>
+    <img id='initial_page_background_image' src='images/initial_background_1.jpg' style='height:100%;'>
+</div>
+<div id='header_initial'>
+    <div class="header-container">
+        <div class="site-logo">
+            <a href="/">
+                <img src="images/helios_logo.png">
+            </a>
+
+        </div>
+
+        <div id='wallet_test_version_container_initial'>
+            Testnet Wallet V0.1
+        </div>
+    </div>
+</div>
+
+<div class='frontpage_block'></div>
+    </div>
+    <div id='main_page'>
+        <div id="page-wrap">
+            <div id="page-size-indicator"></div>
+            
 <header id='header_outer' style='position:fixed; z-index:50;'>
     <div class="header-container">
         <div class="site-logo">
@@ -88,7 +110,7 @@
     </div>
 </header>
 
-        <div id='popup_background'>
+            <div id='popup_background'>
 
 </div>
 <div id='popup_outer'>
@@ -100,8 +122,8 @@
 </div>
 
 
-        <div id="main_outer">
-            <div id="main_inner">
+            <div id="main_outer">
+                <div id="main_inner">
     <div class='tab_item active' id='dashboard_tab'>
 
     <div class='block_2_wide'>
@@ -308,10 +330,10 @@
     </div>
 </div>
 </div>
-        </div>
+            </div>
 
-        <div class='popup_content_store' id='popup_content_confirm_transactions'>
-            Please confirm your transactions in this list below and click send.
+            <div class='popup_content_store' id='popup_content_confirm_transactions'>
+                Please confirm your transactions in this list below and click send.
 <br><br>
 <table id='final_tx_list_for_confirmation'>
     <thead>
@@ -328,16 +350,17 @@
     </form>
     <div class='light_button' id='exit_popup_submit' style='float:left;'>Get me out of here!</div>
 </div>
+            </div>
+            <div id="footer_margin"></div>
         </div>
-        <div id="footer_margin"></div>
-    </div>
-    <div id="footer">
+        <div id="footer">
     <div id="footer_inner">
         <a href="https://heliosprotocol.io">
             <img src="images/helios_logo.png" style="height:25px;">
         </a>
     </div>
 </div>
+    </div>
 
 </body>
 </html>

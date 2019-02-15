@@ -9,11 +9,20 @@ body{
     padding:0px;
     border:0px;
     margin:0px;
-    font-family: 'Libre Franklin', sans-serif;
+    font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
     height: 100%;
 }
 div{
     position:relative;
+}
+#initial_page{
+    width:100%;
+    height:100%;
+    display:block;
+}
+#main_page{
+    display:none;
+    height: 100%;
 }
 #page-wrap {
     min-height: 100%;
@@ -40,6 +49,15 @@ div{
     right:20px;
     top:0px;
     font-size:15px;
+}
+#wallet_test_version_container_initial{
+    text-transform:uppercase;
+    position:absolute;
+    right:40px;
+    top:30px;
+    font-size:15px;
+    color:#fff;
+    letter-spacing:10px;
 }
 #main_outer{
     width:100%;
@@ -148,6 +166,12 @@ table{
 }
 .popup_content_store{
     display:none;
+}
+
+#initial_page_background{
+    width:100%;
+    height:100%;
+    position:fixed;
 }
 
 
