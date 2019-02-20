@@ -94,23 +94,24 @@ function close_popup(){
 }
 
 function resize_initial_background(){
+
     var window_width = $(window).width();
     var window_height = $(window).height()
 
     var window_aspect_ratio = window_width/window_height;
 
-    var background_width = $('#initial_page_background_image').width();
-    var background_height = $('#initial_page_background_image').height();
+    var background_width = $('#frontpage_page_background_image').width();
+    var background_height = $('#frontpage_page_background_image').height();
 
     var image_aspect_ratio = background_width/background_height;
 
     if(window_aspect_ratio > image_aspect_ratio){
-        $('#initial_page_background_image').css('height', 'auto');
-        $('#initial_page_background_image').css('width', '100%');
+        $('#frontpage_page_background_image').css('height', 'auto');
+        $('#frontpage_page_background_image').css('width', '100%');
     }else{
 
-        $('#initial_page_background_image').css('height', '100%');
-        $('#initial_page_background_image').css('width', 'auto');
+        $('#frontpage_page_background_image').css('height', '100%');
+        $('#frontpage_page_background_image').css('width', 'auto');
     }
 
 }
