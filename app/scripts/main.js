@@ -4,14 +4,22 @@ var accountHelpers = require('./account_helpers.js');
 var fileSaver = require("file-saver");
 var numerical = require("./numerical_helpers");
 var ConnectionMaintainer = require("./node_connection_helpers.js").ConnectionMaintainer;
+var Server = require("./server_interaction.js").Server;
 
-var available_nodes = [
+var cookies = require('browser-cookies');
+
+
+var availableNodes = [
     "ws://127.0.0.1:30304",
     "ws://142.58.49.25:30304"
 ];
 
-var connectionMaintainer = new ConnectionMaintainer(available_nodes);
-connectionMaintainer.startNetworkConnectionMaintainerLoop();
+var connectionMaintainer = new ConnectionMaintainer(availableNodes);
+//connectionMaintainer.startNetworkConnectionMaintainerLoop();
+
+var onlineKeystoreServerUrl = 'https://heliosprotocol.io/wallet-serverside/';
+
+var server = new Server(onlineKeystoreServerUrl);
 
 if (typeof window !== 'undefined') {
     if (typeof window.web3 === 'undefined'){
@@ -29,6 +37,12 @@ if (typeof window !== 'undefined') {
     if (typeof window.connectionMaintainer === 'undefined'){
         window.connectionMaintainer = connectionMaintainer;
     }
+    if (typeof window.server === 'undefined'){
+        window.server = server;
+    }
+    if (typeof window.cookies === 'undefined'){
+        window.cookies = cookies;
+    }
 }
 
 
@@ -37,5 +51,7 @@ module.exports = {
     web3: web3,
     accountHelpers: accountHelpers,
     numerical: numerical,
-    connectionMaintainer:connectionMaintainer
+    connectionMaintainer:connectionMaintainer,
+    server:server,
+    cookies:cookies
 };

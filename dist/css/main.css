@@ -15,13 +15,23 @@ body{
 div{
     position:relative;
 }
+.frontpage_block_content{
+    display:none;
+}
+.frontpage_block_content.active{
+    display:block;
+}
+.page{
+    display:none;
+}
+.page.active{
+    display:block;
+}
 #frontpage_page{
     width:100%;
     height:100%;
-    display:block;
 }
 #main_page{
-    display:none;
     height: 100%;
 }
 #page-wrap {
@@ -186,7 +196,7 @@ h2{
     filter: alpha(opacity=80); /* For IE8 and earlier */
     border-radius: 0 9px 0 9px;
 }
-.frontpage_block_content{
+.frontpage_block_content_container{
     z-index:10;
     padding-left:30px;
     padding-right:30px;

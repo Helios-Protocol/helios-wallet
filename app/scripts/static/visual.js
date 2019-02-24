@@ -78,6 +78,10 @@ var set_connection_status = function(status, connected){
     $('#connection_status').text(status);
 }
 
+var set_username_status = function(username){
+    $('#username_status').text(username);
+}
+
 function popup(content, width){
     if(width == undefined){
         width = 400;
@@ -114,4 +118,11 @@ function resize_initial_background(){
         $('#frontpage_page_background_image').css('width', 'auto');
     }
 
+}
+
+function switchToPage(pageId){
+    if($(pageId).length > 0) {
+        $('.page').removeClass('active');
+        $(pageId).addClass('active');
+    }
 }

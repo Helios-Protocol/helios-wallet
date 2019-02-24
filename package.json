@@ -6,11 +6,18 @@
     "gulp-rename": "^1.4.0"
   },
   "dependencies": {
+    "bcrypt": "^3.0.4",
+    "bcryptjs": "^2.4.3",
+    "browser-cookies": "^1.2.0",
     "browserify": "^16.2.3",
     "file-saver": "^2.0.0",
     "gulp-notify": "^3.2.0",
     "jquery": "^3.3.1",
     "jsdom": "^13.2.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "superagent": "^4.1.0",
+    "tough-cookie": "^3.0.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   }

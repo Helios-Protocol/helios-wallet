@@ -48,11 +48,11 @@ $(document).ready(function(){
         $(this).siblings('.nav__dropdown').addClass('nav__dropdown--open')
     });
 
-    $('.nav__link').click(function(){
-        var hash = $(this).attr('href');
-        var name = hash.substring(1);
-	    switchToTab(name);
-    });
+    window.onhashchange = function() {
+        console.log('test');
+        goToHashFromURL();
+    }
+
 });
 
 $(window).on('load', function(){
@@ -77,31 +77,45 @@ $(window).on('resize', function(){
           currentPageSize = getPageSize();
         }
     }
-})
+});
 
 
 function goToHashFromURL()
 {
 	var hash = window.location.hash;
 	//console.log(hash);
-	if(hash != undefined && hash != ""){
-	    var name = hash.substring(1);
-	    switchToTab(name);
+	if(hash != undefined){
+	    if(hash == ""){
+	        //default tabs
+	        switchToTab('frontpage-sign_in');
+	        switchToTab('dashboard');
+        }else {
+            var name = hash.substring(1);
+            switchToTab(name);
+        }
     }
 
 }
 
 function switchToTab(name){
-    var menu_item_id = "#" + name + "_menu_item";
-    if($(menu_item_id).length > 0){
-        var tab_item_id = "#" + name + "_tab";
-        $('.nav__item').removeClass('active');
-        $('.tab_item').removeClass('active');
-        $(menu_item_id).addClass('active');
-        $(tab_item_id).addClass('active');
-    }
+    if(name.indexOf('frontpage') !== -1){
+        if ($('#'+name).length > 0) {
+            $('.frontpage_block_content').removeClass('active');
+            $('#'+name).addClass('active');
+        }
+    }else {
+        var menu_item_id = "#" + name + "_menu_item";
 
-    if(name == 'historical_gas_price'){
-        populateHistoricalMinGasPricePlot()
+        if ($(menu_item_id).length > 0) {
+            var tab_item_id = "#" + name + "_tab";
+            $('.nav__item').removeClass('active');
+            $('.tab_item').removeClass('active');
+            $(menu_item_id).addClass('active');
+            $(tab_item_id).addClass('active');
+        }
+
+        if (name == 'historical_gas_price') {
+            populateHistoricalMinGasPricePlot()
+        }
     }
 }

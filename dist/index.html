@@ -9,8 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
     <script src="js/helios-wallet-master.js"></script>
     <script src="js/send_transaction_block.js"></script>
-    <script src="js/transaction_history.js"></script>
-    <script src="js/historical_gas_price.js"></script>
+    <script src="js/transaction_history_block.js"></script>
+    <script src="js/frontpage.js"></script>
+    <script src="js/historical_gas_price_block.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/visual.js"></script>
     <script src="js/main.js"></script>
@@ -26,7 +27,19 @@
 </head>
 
 <body>
-    <div id='frontpage_page'>
+    <div id="page-size-indicator"></div>
+    <div id='popup_background'>
+
+</div>
+<div id='popup_outer'>
+    <div id='popup_container'>
+        <div id='exit_popup'><img src='images/exit_popup.png' style='height:27px;'></div>
+        <div id='popup_content'></div>
+        <div style='width:100%; height:1px; clear:both;'></div>
+    </div>
+</div>
+
+    <div id='frontpage_page' class='page active'>
         <div id='frontpage_page_background'>
     <img id='frontpage_page_background_image' src='images/initial_background_1.jpg' style='width:100%;'>
 </div>
@@ -46,52 +59,90 @@
 </div>
 
 <div class='frontpage_block' style="width:350px;">
-    <div class="frontpage_block_background"></div>
-    <div class="frontpage_block_content">
 
-        <h1>Sign in</h1>
-        <div class='line_separater'>
-            <div class='input_line_container'>
-                <div class='required_star'>*</div><input id='input_sign_in_username' class='fillable_input' name='username' type="text"  placeholder="Username">
-            </div>
-            <div class='input_line_container'>
-                <div class='required_star'>*</div><input id='input_sign_in_password' class='fillable_input' name='password' type="text" placeholder="Password">
-            </div>
-        </div>
-        <div>
-            <h2>Don't have an account?</h2>
-            <div class="line_separater_medium">
-                <a href="#frontpage-create_new_account" class="italic">Create a new account</a>
-            </div>
-        </div>
-        <div class='line_separater'>
-            <h2>Advanced Options</h2>
-            <div class="line_separater_medium">
-                <a href="#frontpage-sign_in_metamask" class="italic">Sign in with Metamask</a>
-            </div>
-            <div class="line_separater_medium">
-                <a href="#frontpage-load_wallet_from_keystore" class="italic">Load wallet from keystore file</a>
-            </div>
-            <div class="line_separater_medium">
-                <a href="#frontpage-create_wallet_and_keystore" class="italic">Create new wallet and keystore file</a>
-            </div>
-        </div>
-        <div class="light_button" id="frontpage_sign_in_submit" style="position:relative; float:right; top:30px;">Submit</div>
+    <!--Move these to their own files later-->
+    <div id="frontpage-sign_in" class='frontpage_block_content active'>
+        <div class="frontpage_block_background"></div>
+        <div class="frontpage_block_content_container">
 
+            <h1>Sign in</h1>
+            <div class='line_separater'>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_sign_in_username' class='fillable_input' name='username' type="text"  placeholder="Username">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_sign_in_password' class='fillable_input' name='password' type="text" placeholder="Password">
+                </div>
+            </div>
+            <div>
+                <h2>Don't have an account?</h2>
+                <div class="line_separater_medium">
+                    <a href="#frontpage-create_new_account" class="italic local_link">Create a new account</a>
+                </div>
+            </div>
+            <div class='line_separater'>
+                <h2>Advanced Options</h2>
+                <div class="line_separater_medium">
+                    <a href="#frontpage-sign_in_metamask" class="italic local_link">Sign in with Metamask</a>
+                </div>
+                <div class="line_separater_medium">
+                    <a href="#frontpage-load_wallet_from_keystore" class="italic local_link">Load wallet from keystore file</a>
+                </div>
+                <div class="line_separater_medium">
+                    <a href="#frontpage-create_wallet_and_keystore" class="italic local_link">Create new wallet and keystore file</a>
+                </div>
+            </div>
+            <div class="light_button" id="frontpage_sign_in_submit" style="position:relative; float:right; top:30px;">Submit</div>
+
+        </div>
     </div>
 
+    <div id="frontpage-create_new_account" class='frontpage_block_content'>
+        <div class="frontpage_block_background"></div>
+        <div class="frontpage_block_content_container">
+
+            <h1>Create Account</h1>
+            <div class='line_separater'>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_new_user_username' class='fillable_input' name='username' type="text"  placeholder="Username">
+                </div>
+                <div class='input_line_container'>
+                    <input id='input_new_user_email' class='fillable_input' name='email' type="text"  placeholder="Email">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_new_user_password' class='fillable_input' name='password' type="text" placeholder="Password">
+                </div>
+            </div>
+            <div>
+                <h2>Don't have an account?</h2>
+                <div class="line_separater_medium">
+                    <a href="#frontpage-create_new_account" class="italic">Create a new account</a>
+                </div>
+            </div>
+            <div class='line_separater'>
+                <h2>Advanced Options</h2>
+                <div class="line_separater_medium">
+                    <a href="#frontpage-sign_in_metamask" class="italic">Sign in with Metamask</a>
+                </div>
+                <div class="line_separater_medium">
+                    <a href="#frontpage-load_wallet_from_keystore" class="italic">Load wallet from keystore file</a>
+                </div>
+                <div class="line_separater_medium">
+                    <a href="#frontpage-create_wallet_and_keystore" class="italic">Create new wallet and keystore file</a>
+                </div>
+            </div>
+            <div class="light_button" id="frontpage_new_user_submit" style="position:relative; float:right; top:30px;">Submit</div>
+
+        </div>
+    </div>
 
 </div>
 
 
-<!--Move these to their own files later-->
-<!--<div id="frontpage_page_content-sign_in">-->
-    <!--<h1>Sign in</h1>-->
-<!--</div>-->
     </div>
-    <div id='main_page'>
+    <div id='main_page' class='page'>
         <div id="page-wrap">
-            <div id="page-size-indicator"></div>
+
             
 <header id='header_outer' style='position:fixed; z-index:50;'>
     <div class="header-container">
@@ -152,16 +203,6 @@
     </div>
 </header>
 
-            <div id='popup_background'>
-
-</div>
-<div id='popup_outer'>
-    <div id='popup_container'>
-        <div id='exit_popup'><img src='images/exit_popup.png' style='height:27px;'></div>
-        <div id='popup_content'></div>
-        <div style='width:100%; height:1px; clear:both;'></div>
-    </div>
-</div>
 
 
             <div id="main_outer">

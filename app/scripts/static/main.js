@@ -2,7 +2,12 @@ var sending_account = null;
 
 
 $( document ).ready(function() {
+    console.log("setting cookie")
+    cookies.set('firstName', 'Lisa');
 
+    console.log(cookies.get('firstName'));
+
+    //server.newUser("username", undefined, "password");
     connectionMaintainer.setStatusCallback(set_connection_status);
 
     //testing
@@ -177,7 +182,7 @@ function refresh_balance(){
     if(sending_account == null){
         return
     }
-    if(is_connected()){
+    if(connectionMaintainer.isConnected()){
         web3.hls.getBalance(sending_account.address)
             .then(function(args){
                 set_balance_status(args);
