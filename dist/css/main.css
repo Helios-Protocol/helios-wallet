@@ -50,9 +50,7 @@ div{
     height:80px;
     color: #fff;
 }
-.header-container{
-    overflow:hidden;
-}
+
 #wallet_test_version_container{
     text-transform:uppercase;
     position:absolute;
@@ -117,6 +115,15 @@ a:hover{
     padding:20px;
     border-radius: 0 15px 0 15px;
     color:#fff;
+    z-index:110;
+}
+#loader_container{
+    position:relative;
+    width:400px;
+    margin-left:auto;
+    margin-right:auto;
+    top:200px;
+    padding:20px;
     z-index:110;
 }
 #popup_background{
@@ -201,7 +208,30 @@ h2{
     padding-left:30px;
     padding-right:30px;
     padding-top:13px;
-    padding-bottom:13px;
+    padding-bottom:23px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #1f6370;
+    border-bottom: 16px solid #1f6370;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+
+}
+.popup_loader_container{
+    clear:both;
+    margin-top:20px;
+    width:120px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 
@@ -264,7 +294,7 @@ table{
 
 
 /*Inputs*/
-input{
+input, .file_input{
     height:38px;
     background-color:#898989;
     color:#f0f0f0;
@@ -278,6 +308,10 @@ input{
     box-sizing: border-box;         /* Opera/IE 8+ */
     font-size:17px;
 }
+.file_input{
+    padding-top:8px;
+    cursor:pointer;
+}
 input:focus{
     background-color:#f0f0f0;
     color:#898989;
@@ -290,7 +324,8 @@ input.filled {
     color:#f0f0f0;
 }
 .input_line_container{
-    margin-bottom:20px;
+    clear:left;
+    padding-bottom:20px;
 }
 .input_line_container > input{
     /*width:590px;*/
@@ -373,6 +408,16 @@ input[type="submit"].light_button, .light_button{
 /* Style the arrow inside the select element: */
 .select-selected:after {
     position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #666666 transparent transparent transparent;
+}
+.file_input:after{
+      position: absolute;
     content: "";
     top: 14px;
     right: 10px;

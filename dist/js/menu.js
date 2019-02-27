@@ -31,10 +31,14 @@ $(document).ready(function(){
             $('header').animate({height: '100%'}, 400);
             $('.header-container').animate({height: '100%'}, 400);
             $('.nav').show();
+            // $('nav').show();
         }
         else {
             $('header').animate({height: headerHeightMobile}, 400);
-            $('.header-container').animate({height: headerHeightMobile}, 400);
+            $('.header-container').animate({height: headerHeightMobile}, 400, function(){
+                // $('nav').hide();
+            });
+
         }
     });
 
@@ -52,6 +56,7 @@ $(document).ready(function(){
         console.log('test');
         goToHashFromURL();
     }
+
 
 });
 
@@ -85,10 +90,10 @@ function goToHashFromURL()
 	var hash = window.location.hash;
 	//console.log(hash);
 	if(hash != undefined){
-	    if(hash == ""){
+	    if(hash == "" || hash == "#"){
 	        //default tabs
 	        switchToTab('frontpage-sign_in');
-	        switchToTab('dashboard');
+	        switchToTab('main_page-dashboard');
         }else {
             var name = hash.substring(1);
             switchToTab(name);
@@ -99,23 +104,30 @@ function goToHashFromURL()
 
 function switchToTab(name){
     if(name.indexOf('frontpage') !== -1){
-        if ($('#'+name).length > 0) {
-            $('.frontpage_block_content').removeClass('active');
-            $('#'+name).addClass('active');
-        }
-    }else {
-        var menu_item_id = "#" + name + "_menu_item";
+        $('.frontpage_block_content').removeClass('active');
+    }else if(name.indexOf('main_page') !== -1){
+        $('.tab_item').removeClass('active');
+    }
 
-        if ($(menu_item_id).length > 0) {
-            var tab_item_id = "#" + name + "_tab";
-            $('.nav__item').removeClass('active');
-            $('.tab_item').removeClass('active');
-            $(menu_item_id).addClass('active');
-            $(tab_item_id).addClass('active');
-        }
+    var menu_item_id = "#" + name + "-menu_item";
+    if ($(menu_item_id).length > 0) {
+        $('.nav__item').removeClass('active');
+        $(menu_item_id).addClass('active');
+        $(menu_item_id).parents('.menu_root').addClass('active');
+    }
+    var tab_item_id = "#" + name;
+    if ($(tab_item_id).length > 0) {
+        $(tab_item_id).addClass('active');
+    }
+    if (name == 'historical_gas_price') {
+        populateHistoricalMinGasPricePlot()
+    }
 
-        if (name == 'historical_gas_price') {
-            populateHistoricalMinGasPricePlot()
-        }
+}
+
+function switchToPage(pageId){
+    if($(pageId).length > 0) {
+        $('.page').removeClass('active');
+        $(pageId).addClass('active');
     }
 }

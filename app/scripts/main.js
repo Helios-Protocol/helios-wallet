@@ -8,7 +8,6 @@ var Server = require("./server_interaction.js").Server;
 
 var cookies = require('browser-cookies');
 
-
 var availableNodes = [
     "ws://127.0.0.1:30304",
     "ws://142.58.49.25:30304"

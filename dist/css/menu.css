@@ -47,6 +47,7 @@ header {
 
 .header-container {
   position: relative;
+  overflow: hidden;
 }
 
 @media (min-width: 1060px) {
@@ -120,6 +121,10 @@ nav{
 .nav__item.active{
   border-radius: 0 9px 0 9px;
 }
+.nav__item.has_submenu:hover{
+  border-radius: 0 9px 0 0px;
+  background: rgba(0, 0, 0, 1);
+}
 @media (min-width: 1060px) {
   .nav__item {
     display: inline-block;
@@ -129,7 +134,7 @@ nav{
   .nav__item:hover .nav__header,
   .nav__item.active{
     background: black;
-    background: rgba(0, 0, 0, .8);
+    background: rgba(0, 0, 0, 1);
     color: white;
   }
 
@@ -149,14 +154,12 @@ nav{
 
   .nav__item--left .nav__dropdown {
     right: 0;
-    border-radius: 9px 0 9px 0;
   }
 }
 
-.nav__link,
-.nav__header {
+.nav__link{
   display: block;
-  background: #e6d46a;
+  background: none;
   color:#f6f6f6;
   font-weight: 600;
   text-decoration: none;
@@ -171,16 +174,14 @@ nav{
   line-height: 48px;
 }
 
-.nav__link:hover,
-.nav__header:hover {
+.nav__link:hover {
   cursor: pointer;
-  background: #1f6370;
-  color: #e6d46a;
+  background: #d1d2d2;
+  color: #222;
 }
 
 @media (min-width: 1060px) {
-  .nav__link,
-  .nav__header {
+  .nav__link {
     text-align: left;
     font-size: 13px;
     height: initial;
@@ -191,11 +192,6 @@ nav{
     border-radius: 0 9px 0 9px;
   }
 
-  .nav__link:hover,
-  .nav__header:hover {
-    background: #e6d46a;
-    color: white;
-  }
 }
 
 .nav__dropdown {
@@ -207,8 +203,8 @@ nav{
 
 .nav__dropdown .nav__link,
 .nav__dropdown .nav__header {
-  font-weight: normal;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 14px;
   color: black;
   background: #fde4b8;
   border-radius: 0;
@@ -216,17 +212,20 @@ nav{
 
 .nav__dropdown .nav__link:hover,
 .nav__dropdown .nav__header:hover {
-  background: #1f6370;
-  color: #e6d46a;
+  /*background: #1f6370;*/
+  color: #999999;
 }
 
 @media (min-width: 1060px) {
+  .header-container{
+    overflow: visible;
+  }
   .nav__dropdown {
     position: absolute;
     background: black;
-    background: rgba(0, 0, 0, .8);
+    background: rgba(0, 0, 0, 1);
     padding: 16px 0;
-    border-radius: 0 9px 0 9px;
+    border-radius: 0 0px 0 9px;
   }
 
   .nav__dropdown .nav__link,
@@ -240,10 +239,30 @@ nav{
 
   .nav__dropdown .nav__link:hover,
   .nav__dropdown .nav__header:hover {
-    background: #e5c07c !important;
-    color: black;
+    background: #d1d2d2 !important;
+    color: #222;
   }
 }
 
 
+.wallet_menu_item{
+    width:330px;
+    position:relative;
+}
+.wallet_menu_item_name{
+    width:250px;
+    float:left;
+}
+.wallet_menu_item > .switch_wallet_link{
+    width:59px;
+    position:absolute;
+    right:0px;
+    top:-5px;
 
+}
+
+
+.nav__dropdown .nav__link{
+    padding-top:10px;
+    padding-bottom:10px;
+}

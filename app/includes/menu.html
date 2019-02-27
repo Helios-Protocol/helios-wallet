@@ -22,35 +22,65 @@
 
         <nav>
             <ul class="nav">
-                <li role="presentation" class="nav__item active" id="dashboard_menu_item">
-                    <a href="#dashboard"  class='nav__link'>
+                <li role="presentation" id='main_page-dashboard-menu_item' class="nav__item active menu_root">
+                    <a href="#main_page-dashboard" class='nav__link'>
                         Dashboard
                     </a>
                 </li>
-                <li role="presentation" class="nav__item" id="block_explorer_menu_item">
-                    <a href="#block_explorer"  class='nav__link'>
-                        Block Explorer
-                    </a>
+                <li role="presentation" class="nav__item menu_root has_submenu">
+                    <div class='nav__link'>
+                        Offline wallets
+                    </div>
+                    <ul class="nav__dropdown" id='offline_wallets_menu_list'>
+                        <li role="presentation" id='main_page-add_offline_wallet-menu_item' class="nav__item">
+                            <a href="#main_page-add_offline_wallet"  class='nav__link'>
+                                Add wallet
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li role="presentation" class="nav__item" id="historical_gas_price_menu_item">
-                    <a href="#historical_gas_price"  class='nav__link'>
-                        Historical Gas Price
-                    </a>
+                <li role="presentation" class="nav__item menu_root has_submenu nav__item--left">
+                    <div  class='nav__link'>
+                        Online wallets
+                    </div>
+                     <ul class="nav__dropdown" id='online_wallets_menu_list'>
+                        <li role="presentation" id='main_page-add_online_wallet-menu_item' class="nav__item">
+                            <a href="#main_page-add_online_wallet"  class='nav__link'>
+                                Add wallet
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li role="presentation" class="nav__item" id="smart_contracts_menu_item">
-                    <a href="#smart_contracts"  class='nav__link'>
-                        Smart Contracts
-                    </a>
-                </li>
-                <li role="presentation" class="nav__item" id='create_new_wallet_menu_item'>
-                    <a href="#create_new_wallet"  class='nav__link'>
-                        Create New Wallet
-                    </a>
-                </li>
-                <li role="presentation" class="nav__item" id='load_wallet_menu_item'>
-                    <a href="#load_wallet"  class='nav__link'>
-                        Load Wallet
-                    </a>
+                <!--<li role="presentation" class="nav__item menu_root">-->
+                    <!--<a href="#main_page-block_explorer"  class='nav__link'>-->
+                        <!--Block Explorer-->
+                    <!--</a>-->
+
+                <!--</li>-->
+                <!--<li role="presentation" class="nav__item menu_root" >-->
+                    <!--<a href="#main_page-historical_gas_price"  class='nav__link'>-->
+                        <!--Historical Gas Price-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li role="presentation" class="nav__item menu_root">-->
+                    <!--<a href="#main_page-smart_contracts"  class='nav__link'>-->
+                        <!--Smart Contracts-->
+                    <!--</a>-->
+                <!--</li>-->
+
+                <li role="presentation" class="nav__item menu_root has_submenu nav__item--left" id='load_wallet_menu_item'>
+                    <div class='nav__link' style='position:relative; top:10px;'>
+                        <img src='images/account_menu.png' style='height:28px;'>
+                    </div>
+                    <ul class="nav__dropdown">
+                        <li role="presentation" class="   nav__item">
+                            <div id='logout' class="nav__link">
+                                Logout
+                            </div>
+                        </li>
+
+
+                    </ul>
                 </li>
             </ul>
         </nav>

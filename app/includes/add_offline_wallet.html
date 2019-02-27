@@ -1,0 +1,38 @@
+<div class='tab_item' id='main_page-add_offline_wallet'>
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Generate new wallet
+        </div>
+        <div class='block_content_container'>
+            <form id="generate_offline_wallet_form">
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='generate_offline_wallet_password' class='fillable_input' type="password" placeholder="Password to encrypt wallet">
+                </div>
+
+                <input id="generate_offline_wallet_submit" type="submit" value="Create wallet">
+                <div class='clear_both'></div>
+            </form>
+        </div>
+    </div>
+
+     <div class='block_2_wide'>
+        <div class='block_title'>
+            Add existing wallet
+        </div>
+        <div class='block_content_container'>
+
+            <form id="load_offline_wallet_keystore_form">
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><div id="load_offline_wallet_from_keystore_fake_file_input" class='file_input'>Select keystore file</div>
+                </div>
+                <input type="file" id="load_offline_wallet_from_keystore_file_input" style='display:none'>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id="load_offline_wallet_from_keystore_password" type="password" placeholder="Keystore password">
+                </div>
+                <input type="submit" value="Load wallet">
+                <div class='clear_both'></div>
+            </form>
+        </div>
+    </div>
+
+</div>

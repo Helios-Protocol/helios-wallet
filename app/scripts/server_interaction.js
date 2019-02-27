@@ -1,7 +1,5 @@
 const superagent = require('superagent');
-var request = require('request-promise-native');
 const bcrypt = require('bcryptjs');
-var tough = require('tough-cookie');
 
 
 // When changning password, force user to backup all online wallets first, and let them know that it is encrypted with
@@ -12,6 +10,7 @@ class Server {
         this.serverUrl = serverUrl;
         this.saltRounds = 11;
         this.superagent = superagent.agent();
+        this.use_localStorage = true;
     }
 
     error(errorName, extraData){
@@ -25,6 +24,109 @@ class Server {
         return {'error': true, 'error_description': 'Malformed JSON Response'};
     }
 
+    saveSession(session_hash, username){
+        console.log('Saving session');
+        if (typeof window !== 'undefined' && this.use_localStorage) {
+            window.localStorage.setItem("session_hash", session_hash);
+            if(!(username === undefined)) {
+                window.localStorage.setItem("username", username);
+            }
+        }else{
+            this.session_hash = session_hash;
+            if(!(username === undefined)) {
+                this.username = username;
+            }
+        }
+    }
+
+    loadSession(){
+        if (typeof window !== 'undefined' && this.use_localStorage) {
+            var session_hash = window.localStorage.getItem("session_hash");
+            var username = window.localStorage.getItem("username");
+            return {'session_hash':session_hash, 'username':username};
+        }else{
+            return {'session_hash':this.session_hash, 'username':this.username};
+        }
+    }
+
+    killSession(){
+        if (typeof window !== 'undefined') {
+            window.localStorage.removeItem("session_hash");
+            window.localStorage.removeItem("username");
+        }else{
+            this.session_hash = '';
+            this.username = '';
+        }
+    }
+
+    async renewSession(){
+        console.log("Renewing session");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'renew_session', username: session['username'], session_hash: session['session_hash']};
+            var response = await this.queryServer(query);
+            if(response !== false && "success" in response) {
+                return true;
+            } else{
+                this.killSession();
+            }
+        }
+        return false;
+    }
+
+    async getOnlineWallets(){
+        console.log("Getting online wallets");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'get_wallets', username: session['username'], session_hash: session['session_hash']};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
+    async addOnlineWallet(keystore, name){
+        console.log("Adding online wallet");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'add_keystore',
+                username: session['username'],
+                session_hash: session['session_hash'],
+                keystore:JSON.stringify(keystore),
+                wallet_name: name};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
+    async renameOnlineWallet(wallet_id, previous_wallet_name, new_wallet_name){
+        console.log("Renaming online wallet");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'rename_keystore',
+                username: session['username'],
+                session_hash: session['session_hash'],
+                wallet_id:wallet_id,
+                previous_wallet_name: previous_wallet_name,
+                new_wallet_name: new_wallet_name};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
+    async deleteOnlineWallet(id, name){
+        console.log("Deleting online wallet");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'delete_keystore',
+                username: session['username'],
+                session_hash: session['session_hash'],
+                wallet_id:id,
+                wallet_name: name};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
     async signIn(username, password){
         // Sign wallets with password. But we hide that password from the server by hashing it here with bcrypt.
         // Then in order to stop pass the hash attacks, the server side will also hash the hash with bcrypt.
@@ -33,23 +135,21 @@ class Server {
         var query = {action: 'get_salt', username: username};
         var salt_response = await this.queryServer(query);
         var salt_for_verification = salt_response['salt'];
-        console.log("salt_response = ");
-        console.log(salt_response);
         var password_hash_for_verification = bcrypt.hashSync(password, salt_for_verification);
 
         var new_salt = bcrypt.genSaltSync(this.saltRounds);
         var new_password_hash = bcrypt.hashSync(password, new_salt);
 
-        // console.log("debug");
-        // console.log(username);
-        // console.log(password);
-        // console.log(password_hash);
         query = {   action: 'sign_in',
                     username: username,
                     password_hash_for_verification: password_hash_for_verification,
                     new_password_hash: new_password_hash,
                     new_salt: new_salt};
-        return await this.queryServer(query);
+        var response = await this.queryServer(query);
+        if('session_hash' in response){
+            this.saveSession(response['session_hash'], username);
+        }
+        return response;
     }
 
     async newUser(username, email, password, new_wallet_keystore){
@@ -64,73 +164,8 @@ class Server {
         return await this.queryServer(query);
     }
 
-    // async queryServer(query){
-    //
-    //     var _include_headers = function(body, response, resolveWithFullResponse) {
-    //       return {'response':response, 'headers': response.headers, 'text': body};
-    //     };
-    //
-    //     var options = {
-    //         uri: 'https://google.com',
-    //         headers: {
-    //             'User-Agent': 'Request-Promise'
-    //         },
-    //         transform: _include_headers,
-    //     };
-    //     return await request(options)
-    //     .then(res => {
-    //         console.log('debug');
-    //         console.log(res.headers);
-    //         console.log(res.text);
-    //         var rawcookies = res.response.headers['set-cookie'];
-    //         console.log(rawcookies);
-    //
-    //
-    //     })
-    //     .catch(err => {
-    //         return this.error("HTTP Request Error", [err.message, err.response]);
-    //     });
-    //
-    // }
-
-    // async queryServer(query){
-    //
-    //     var _include_headers = function(body, response, resolveWithFullResponse) {
-    //       return {'response':response, 'headers': response.headers, 'text': body};
-    //     };
-    //
-    //     var options = {
-    //         uri: this.serverUrl,
-    //         qs: query,
-    //         headers: {
-    //             'User-Agent': 'Request-Promise'
-    //         },
-    //         transform: _include_headers,
-    //     };
-    //     return await request(options)
-    //     .then(res => {
-    //         console.log('debug');
-    //         console.log(res.headers);
-    //         console.log(res.text);
-    //         var rawcookies = res.response.headers['set-cookie'];
-    //         console.log(rawcookies);
-    //         try {
-    //             var json_response = JSON.parse(res.text);
-    //         } catch(e) {
-    //             return this.error('Malformed JSON Response', res.text);
-    //         }
-    //         return json_response;
-    //
-    //     })
-    //     .catch(err => {
-    //         return this.error("HTTP Request Error", [err.message, err.response]);
-    //     });
-    //
-    // }
-    //
     async queryServer(query){
         return await superagent.get(this.serverUrl)
-        .withCredentials()
         .query(query)
         .then(res => {
             try {
@@ -138,12 +173,11 @@ class Server {
             } catch(e) {
                 return this.error('Malformed JSON Response', [res.status, res.text]);
             }
-            var cookie = res.header['set-cookie']
-            console.log('successful response from serverside');
-            console.log(res.headers);
-            console.log('cookies');
-            console.log(cookie);
+            console.log("Successful response from server")
             console.log(json_response);
+            if('session_hash' in json_response){
+                this.saveSession(json_response['session_hash']);
+            }
             return json_response;
 
         })

@@ -1,11 +1,20 @@
 var sending_account = null;
-
+var available_offline_accounts = {};
+var available_online_accounts = {};
+var online_wallet_to_id_lookup = {};
+var online_wallet_to_name_lookup = {};
 
 $( document ).ready(function() {
-    console.log("setting cookie")
-    cookies.set('firstName', 'Lisa');
+    // Check for existing session and just refresh it
+    server.renewSession()
+    .then(function(result){
+        if(result) {
+            set_username_status(window.localStorage.getItem('username'));
+            switchToPage('#main_page');
+        }
+    });
 
-    console.log(cookies.get('firstName'));
+
 
     //server.newUser("username", undefined, "password");
     connectionMaintainer.setStatusCallback(set_connection_status);
@@ -14,8 +23,13 @@ $( document ).ready(function() {
     account = web3.hls.accounts.privateKeyToAccount('0x6edbbdf4e1a6e415b29444d38675364f67ae9c5a6192d3d755043f4b61e73cbb');
     sending_account = account;
     web3.hls.accounts.wallet.add(account);
-    var address = sending_account.address.substr(0,20);
-    set_account_status('Sending from '+address+"...");
+
+    $('body').on('click', '#logout', function(e) {
+        server.killSession();
+        switchToPage('#frontpage_page')
+        window.location.hash = '';
+        clear_vars(true);
+    });
 
     $('#load_wallet_form').submit(function (e){
         e.preventDefault();
@@ -104,44 +118,9 @@ $( document ).ready(function() {
             })
     });
 
-    $('#generate_wallet_form').submit(function (e) {
-        e.preventDefault();
-        var password = $("#generate_wallet_form_password").val();
-        var new_wallet = web3.eth.accounts.create();
-        var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, password);
-        var filename = "HLS_wallet_" + new_wallet.address;
-        var blob = new Blob([JSON.stringify(keystore)], {type: "text/plain;charset=utf-8"});
-        fileSaver.saveAs(blob, filename+".txt");
-    });
 
-    $('#load_wallet_keystore_form').submit(function (e) {
-        e.preventDefault();
-        console.log("loading new wallet address")
-        var password = $("#load_wallet_keystore_form_password").val();
-        var keystore_file = $("#load_wallet_keystore_form_file").prop('files')[0]
 
-        var reader = new FileReader();
 
-        reader.onload = function(e) {
-            var json_account = reader.result;
-            try {
-                sending_account = web3.eth.accounts.decrypt(JSON.parse(json_account), password)
-            }catch(err){
-                popup('Incorrect keystore password');
-                return;
-            }
-            // console.log("private key");
-            // console.log(sending_account.privateKey);
-            web3.hls.accounts.wallet.add(sending_account);
-            var address = sending_account.address.substr(0,20);
-            set_account_status('Sending from '+address);
-
-            console.log("private key added")
-        }
-
-        reader.readAsText(keystore_file);
-
-    });
 
     $('#test').click(function(){
         console.log('clicked');
@@ -151,7 +130,7 @@ $( document ).ready(function() {
     })
 
     //refresh_loop();
-
+    refreshDashboard();
     console.log("Starting");
 });
 
@@ -159,14 +138,32 @@ $( document ).ready(function() {
 // Loops
 //
 
-
-
 function refresh_loop(){
     if(sending_account != null){
-        refresh_transactions()
-        refresh_balance()
+        refreshDashboard();
     }
     setTimeout(refresh_loop, 1000);
+}
+
+function refreshDashboard() {
+    if (sending_account === null || sending_account === undefined) {
+        var address = "No wallet loaded";
+        set_account_status(address);
+    } else {
+        if (online_wallet_to_name_lookup[sending_account.address] !== undefined) {
+            var name = online_wallet_to_name_lookup[sending_account.address].substr(0, 20)
+            if (online_wallet_to_name_lookup[sending_account.address].length > 20) {
+                name = name + "...";
+            }
+            var address = sending_account.address.substr(0, 18) + "...";
+            set_account_status(address, name);
+        } else {
+            var address = sending_account.address.substr(0, 20) + "...";
+            set_account_status(address);
+        }
+    }
+    refresh_transactions();
+    refresh_balance();
 }
 
 
@@ -184,12 +181,11 @@ function refresh_balance(){
     }
     if(connectionMaintainer.isConnected()){
         web3.hls.getBalance(sending_account.address)
-            .then(function(args){
-                set_balance_status(args);
-            });
+        .then(function(args){
+            set_balance_status(args);
+        });
     }
 }
-
 
 
 

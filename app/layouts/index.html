@@ -12,6 +12,8 @@
     <script src="js/transaction_history_block.js"></script>
     <script src="js/frontpage.js"></script>
     <script src="js/historical_gas_price_block.js"></script>
+    <script src="js/offline_wallets.js"></script>
+    <script src="js/online_wallets.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/visual.js"></script>
     <script src="js/main.js"></script>
@@ -44,6 +46,9 @@
 
             <div class='popup_content_store' id='popup_content_confirm_transactions'>
                 @@include( '../includes/popup_content_confirm_transactions.html')
+            </div>
+            <div class='popup_content_store' id='popup_content_confirm_online_wallet_delete'>
+                @@include( '../includes/popup_content_confirm_online_wallet_delete.html')
             </div>
             <div id="footer_margin"></div>
         </div>

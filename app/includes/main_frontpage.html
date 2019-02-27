@@ -26,10 +26,10 @@
             <h1>Sign in</h1>
             <div class='line_separater'>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_sign_in_username' class='fillable_input' name='username' type="text"  placeholder="Username">
+                    <div class='required_star'>*</div><input id='input_sign_in_username' class='fillable_input' name='username' type="text" value='test' placeholder="Username">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_sign_in_password' class='fillable_input' name='password' type="text" placeholder="Password">
+                    <div class='required_star'>*</div><input id='input_sign_in_password' class='fillable_input' name='password' type="text" value='test' placeholder="Password">
                 </div>
             </div>
             <div>
@@ -50,7 +50,7 @@
                     <a href="#frontpage-create_wallet_and_keystore" class="italic local_link">Create new wallet and keystore file</a>
                 </div>
             </div>
-            <div class="light_button" id="frontpage_sign_in_submit" style="position:relative; float:right; top:30px;">Submit</div>
+            <div class="light_button" id="frontpage_sign_in_submit" style="position:relative; float:right; top:30px; right:-30px;">Submit</div>
 
         </div>
     </div>
@@ -70,27 +70,17 @@
                 <div class='input_line_container'>
                     <div class='required_star'>*</div><input id='input_new_user_password' class='fillable_input' name='password' type="text" placeholder="Password">
                 </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='input_new_user_password_repeat' class='fillable_input' name='password_repeat' type="text" placeholder="Repeat password">
+                </div>
             </div>
             <div>
-                <h2>Don't have an account?</h2>
                 <div class="line_separater_medium">
-                    <a href="#frontpage-create_new_account" class="italic">Create a new account</a>
+                    <a href="#" class="italic local_link">Back to sign in</a>
                 </div>
             </div>
-            <div class='line_separater'>
-                <h2>Advanced Options</h2>
-                <div class="line_separater_medium">
-                    <a href="#frontpage-sign_in_metamask" class="italic">Sign in with Metamask</a>
-                </div>
-                <div class="line_separater_medium">
-                    <a href="#frontpage-load_wallet_from_keystore" class="italic">Load wallet from keystore file</a>
-                </div>
-                <div class="line_separater_medium">
-                    <a href="#frontpage-create_wallet_and_keystore" class="italic">Create new wallet and keystore file</a>
-                </div>
-            </div>
-            <div class="light_button" id="frontpage_new_user_submit" style="position:relative; float:right; top:30px;">Submit</div>
 
+            <div class="light_button" id="frontpage_new_user_submit" style="position:relative; float:right; top:30px; right:-30px;">Submit</div>
         </div>
     </div>
 

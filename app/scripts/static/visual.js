@@ -36,7 +36,9 @@ $( document ).ready(function() {
 
 
     $('#popup_background').click(function(){
-        close_popup();
+        if(!$(this).hasClass("no_close")){
+            close_popup();
+        }
     })
 
     $('body').on('click', '#exit_popup_submit', function(e) {
@@ -59,8 +61,13 @@ $( document ).ready(function() {
 var set_status = function(status){
     $('#current_status').text(status);
 }
-var set_account_status = function(status){
-    $('#account_status').text(status);
+var set_account_status = function(address, name){
+    if(name === undefined){
+        $('#account_status').html('Sending from wallet<br>'+address);
+    }else{
+        $('#account_status').html('Sending from wallet<br>'+name+"<br>("+address+")");
+    }
+
 }
 var set_balance_status = function(status){
     $('#balance_status').text(status);
@@ -86,10 +93,26 @@ function popup(content, width){
     if(width == undefined){
         width = 400;
     }
+    $('#popup_background').removeClass("no_close");
     $("#popup_container").css("width", width+"px");
-    $('#popup_background').show();
-    $('#popup_outer').show();
     $('#popup_content').html(content)
+    $('#loader_container').hide();
+    $('#popup_container').show();
+    $('#popup_background').fadeIn(200);
+    $('#popup_outer').fadeIn(200);
+}
+
+function loaderPopup(content, width){
+    if(width == undefined){
+        width = 400;
+    }
+    $('#popup_background').addClass("no_close");
+    $("#loader_container").css("width", width+"px");
+    $('#popup_container').hide();
+    $('#loader_container').show();
+    $('#loader_content').html(content)
+    $('#popup_background').fadeIn(200);
+    $('#popup_outer').fadeIn(200);
 }
 function close_popup(){
     $('#popup_background').hide();
@@ -120,9 +143,3 @@ function resize_initial_background(){
 
 }
 
-function switchToPage(pageId){
-    if($(pageId).length > 0) {
-        $('.page').removeClass('active');
-        $(pageId).addClass('active');
-    }
-}
