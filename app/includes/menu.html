@@ -2,7 +2,7 @@
 <header id='header_outer' style='position:fixed; z-index:50;'>
     <div class="header-container">
         <div class="site-logo">
-            <a href="/">
+            <a href="#main_page-dashboard">
                 <img src="images/helios_logo.png">
             </a>
 
@@ -51,6 +51,11 @@
                         </li>
                     </ul>
                 </li>
+                <li role="presentation" id='main_page-contacts-menu_item' class="nav__item menu_root">
+                    <a href="#main_page-contacts" class='nav__link'>
+                        Contacts
+                    </a>
+                </li>
                 <!--<li role="presentation" class="nav__item menu_root">-->
                     <!--<a href="#main_page-block_explorer"  class='nav__link'>-->
                         <!--Block Explorer-->
@@ -69,8 +74,8 @@
                 <!--</li>-->
 
                 <li role="presentation" class="nav__item menu_root has_submenu nav__item--left" id='load_wallet_menu_item'>
-                    <div class='nav__link' style='position:relative; top:10px;'>
-                        <img src='images/account_menu.png' style='height:28px;'>
+                    <div class='nav__link menu_image'>
+                        <img class='menu_image_img' src='images/account_menu.png' style='height:28px;'>
                     </div>
                     <ul class="nav__dropdown">
                         <li role="presentation" class="   nav__item">

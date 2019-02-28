@@ -127,6 +127,43 @@ class Server {
         return false;
     }
 
+    async getContacts(){
+        console.log("Getting contacts");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'get_contacts', username: session['username'], session_hash: session['session_hash']};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
+    async addContact(contact_name, contact_address){
+        console.log("Adding contacts");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'add_contact',
+                username: session['username'],
+                session_hash: session['session_hash'],
+                contact_name: contact_name,
+                contact_address: contact_address};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
+    async deleteContact(id){
+        console.log("Deleting contact");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'delete_contact',
+                username: session['username'],
+                session_hash: session['session_hash'],
+                contact_id:id};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
     async signIn(username, password){
         // Sign wallets with password. But we hide that password from the server by hashing it here with bcrypt.
         // Then in order to stop pass the hash attacks, the server side will also hash the hash with bcrypt.

@@ -14,11 +14,13 @@
     <script src="js/historical_gas_price_block.js"></script>
     <script src="js/offline_wallets.js"></script>
     <script src="js/online_wallets.js"></script>
+    <script src="js/contacts.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/visual.js"></script>
     <script src="js/main.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/custom_select.js"></script>
+    <script src="js/autocomplete.js"></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
@@ -146,7 +148,7 @@
 <header id='header_outer' style='position:fixed; z-index:50;'>
     <div class="header-container">
         <div class="site-logo">
-            <a href="/">
+            <a href="#main_page-dashboard">
                 <img src="images/helios_logo.png">
             </a>
 
@@ -195,6 +197,11 @@
                         </li>
                     </ul>
                 </li>
+                <li role="presentation" id='main_page-contacts-menu_item' class="nav__item menu_root">
+                    <a href="#main_page-contacts" class='nav__link'>
+                        Contacts
+                    </a>
+                </li>
                 <!--<li role="presentation" class="nav__item menu_root">-->
                     <!--<a href="#main_page-block_explorer"  class='nav__link'>-->
                         <!--Block Explorer-->
@@ -213,8 +220,8 @@
                 <!--</li>-->
 
                 <li role="presentation" class="nav__item menu_root has_submenu nav__item--left" id='load_wallet_menu_item'>
-                    <div class='nav__link' style='position:relative; top:10px;'>
-                        <img src='images/account_menu.png' style='height:28px;'>
+                    <div class='nav__link menu_image'>
+                        <img class='menu_image_img' src='images/account_menu.png' style='height:28px;'>
                     </div>
                     <ul class="nav__dropdown">
                         <li role="presentation" class="   nav__item">
@@ -469,7 +476,7 @@
     <div class='tab_item' id='main_page-add_offline_wallet'>
     <div class='block_2_wide'>
         <div class='block_title'>
-            Generate new wallet
+            Add newly generated wallet
         </div>
         <div class='block_content_container'>
             <form id="generate_offline_wallet_form">
@@ -508,7 +515,7 @@
     <div class='tab_item' id='main_page-add_online_wallet'>
     <div class='block_2_wide'>
         <div class='block_title'>
-            Generate new online wallet
+            Add newly generated wallet
         </div>
         <div class='block_content_container'>
             <form id="generate_online_wallet_form">
@@ -626,6 +633,47 @@
 
 </div>
 
+    <div class='tab_item' id='main_page-contacts'>
+    <!--Allow users to publish the contact information for any wallet they have keys for.-->
+    <!--But any contacts they add where they dont own the keys are private.-->
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Contacts
+        </div>
+        <div class='block_content_container'>
+            <div id='contact_list_container'>
+                <table id='contact_list'>
+                    <thead>
+                        <tr>
+                            <th>Name</th><th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Add new contact
+        </div>
+        <div class='block_content_container'>
+            <form id="add_contact_form">
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id="add_contact_form_name" type="text" placeholder="Contact name">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id="add_contact_form_address" type="text" placeholder="Address">
+                </div>
+                <input type="submit" value="Save contact">
+                <div class='clear_both'></div>
+            </form>
+        </div>
+    </div>
+</div>
 </div>
             </div>
 

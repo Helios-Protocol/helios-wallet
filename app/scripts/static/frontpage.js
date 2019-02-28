@@ -18,7 +18,7 @@ $( document ).ready(function() {
                 populateOnlineKeystores(online_keystores, password);
                 close_popup();
                 switchToPage('#main_page');
-
+                afterLoginInit();
             }else{
                 //fail
                 var popup_content = "Oops, something went wrong:<br><br>" + response['error_description'];
@@ -81,3 +81,4 @@ $( document ).ready(function() {
 
 
 });
+

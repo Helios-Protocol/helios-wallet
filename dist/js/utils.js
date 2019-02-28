@@ -71,6 +71,22 @@ function validateInputs(value, type){
                 return "Wallet name cannot be left blank";
             }
             break;
+        case "contact_name":
+            if(value === undefined || value === ''){
+                return "Contact name cannot be left blank";
+            }
+            if(value.length > 50){
+                return "Contact name can be a maximum of 50 characters in length.";
+            }
+            break;
+        case "wallet_address":
+            if(value === undefined || value === ''){
+                return "Wallet address cannot be left blank";
+            }
+            if(!web3.utils.isAddress(value)){
+                return "The given wallet address is not a valid address";
+            }
+            break;
     }
     return true;
 }

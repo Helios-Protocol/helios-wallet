@@ -3,6 +3,9 @@ var available_offline_accounts = {};
 var available_online_accounts = {};
 var online_wallet_to_id_lookup = {};
 var online_wallet_to_name_lookup = {};
+var contact_name_to_address_lookup = {};
+var contact_address_to_name_lookup = {};
+var contact_autocomplete_list = [];
 
 $( document ).ready(function() {
     // Check for existing session and just refresh it
@@ -13,7 +16,6 @@ $( document ).ready(function() {
             switchToPage('#main_page');
         }
     });
-
 
 
     //server.newUser("username", undefined, "password");
@@ -119,19 +121,6 @@ $( document ).ready(function() {
     });
 
 
-
-
-
-    $('#test').click(function(){
-        console.log('clicked');
-
-        web3.hls.getReceivableTransactions(sending_account.address)
-            .then(console.log)
-    })
-
-    //refresh_loop();
-    refreshDashboard();
-    console.log("Starting");
 });
 
 //
@@ -187,6 +176,13 @@ function refresh_balance(){
     }
 }
 
+
+function afterLoginInit(){
+    refreshContactList();
+    //refresh_loop();
+    refreshDashboard();
+    console.log("Starting");
+}
 
 
 

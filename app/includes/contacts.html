@@ -1,0 +1,41 @@
+<div class='tab_item' id='main_page-contacts'>
+    <!--Allow users to publish the contact information for any wallet they have keys for.-->
+    <!--But any contacts they add where they dont own the keys are private.-->
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Contacts
+        </div>
+        <div class='block_content_container'>
+            <div id='contact_list_container'>
+                <table id='contact_list'>
+                    <thead>
+                        <tr>
+                            <th>Name</th><th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Add new contact
+        </div>
+        <div class='block_content_container'>
+            <form id="add_contact_form">
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id="add_contact_form_name" type="text" placeholder="Contact name">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id="add_contact_form_address" type="text" placeholder="Address">
+                </div>
+                <input type="submit" value="Save contact">
+                <div class='clear_both'></div>
+            </form>
+        </div>
+    </div>
+</div>
