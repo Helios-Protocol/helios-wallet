@@ -17,6 +17,14 @@ $( document ).ready(function() {
         }
     });
 
+      if (typeof window['ethereum'] !== 'undefined') {
+        console.log('testtest');
+        console.log(window['ethereum']);
+      } else {
+        console.log('testtest2');
+        console.log(window['ethereum']);
+      }
+
 
     //server.newUser("username", undefined, "password");
     connectionMaintainer.setStatusCallback(set_connection_status);
