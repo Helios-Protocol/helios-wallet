@@ -30,6 +30,8 @@ $( document ).ready(function() {
     connectionMaintainer.setStatusCallback(set_connection_status);
 
     //testing
+    //set web3 to the non fucked one. fucking walletfox....
+    web3 = web3h;
     account = web3.hls.accounts.privateKeyToAccount('0x6edbbdf4e1a6e415b29444d38675364f67ae9c5a6192d3d755043f4b61e73cbb');
     sending_account = account;
     web3.hls.accounts.wallet.add(account);
