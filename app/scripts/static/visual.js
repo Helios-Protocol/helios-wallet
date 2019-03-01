@@ -101,14 +101,15 @@ function popup(content, width){
     $('#popup_background').fadeIn(200);
     $('#popup_outer').fadeIn(200);
     $('#popup_container').data('width', width);
+    positionPopup();
 }
 
 function loaderPopup(content, width){
     if(width == undefined){
         width = 400;
     }
-    if(width > ($(window).width()-40)){
-        width = ($(window).width()-40);
+    if(width > ($(window).width()-80)){
+        width = ($(window).width()-80);
     }
     $('#popup_background').addClass("no_close");
     $("#loader_container").css("width", width+"px");
@@ -117,6 +118,7 @@ function loaderPopup(content, width){
     $('#loader_content').html(content)
     $('#popup_background').fadeIn(200);
     $('#popup_outer').fadeIn(200);
+    positionPopup();
 }
 function close_popup(){
     $('#popup_background').hide();
@@ -158,10 +160,17 @@ function initOnlineMenu(){
 }
 
 function positionPopup(){
+    var scroll = $("html").scrollTop();
     var popupWidth = $('#popup_container').width();
+    var popupHeight = $('#popup_container').outerHeight();
     var windowWidth = $(window).width();
+    var windowHeight = $(window).height();
     var initialWidth = $('#popup_container').data('width');
-    if((windowWidth -40) < initialWidth){
-        $('#popup_container').width((windowWidth -40));
+    if((windowWidth -80) < initialWidth){
+        $('#popup_container').width((windowWidth -80));
     }
+    var top = scroll + (windowHeight-popupHeight)/2;
+    $('#popup_container').css('top', top);
+
+
 }

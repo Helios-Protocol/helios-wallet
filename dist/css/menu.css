@@ -250,6 +250,8 @@ nav{
 .wallet_menu_item{
     width:330px;
     position:relative;
+    margin-left:auto;
+    margin-right:auto;
 }
 .wallet_menu_item_name{
     width:250px;
@@ -259,10 +261,23 @@ nav{
     width:59px;
     position:absolute;
     right:0px;
-    top:-5px;
+    top:10px;
 
 }
 
+@media (min-width: 1060px) {
+  .wallet_menu_item > .switch_wallet_link{
+      width:59px;
+      position:absolute;
+      right:0px;
+      top:-5px;
+
+  }
+
+}
+.offline_menu_item{
+  display:none;
+}
 
 .nav__dropdown .nav__link{
     padding-top:10px;

@@ -38,10 +38,12 @@ $( document ).ready(function() {
             }else{
                 popup("Wallet "+sending_account.address+" is now loaded.", 600);
             }
+            closeMenu();
 
         }else{
             popup("Error: Problem loading wallet.");
         }
+
     });
 
     $('body').on('click', '#load_offline_wallet_from_keystore_fake_file_input', function(e) {
