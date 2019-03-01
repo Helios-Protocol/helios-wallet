@@ -7,10 +7,10 @@
         <div class='block_content_container'>
             <form id="add_transaction_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" value = '1' min='0.000000000000000001' placeholder="Amount">
+                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" min='0.000000000000000001' placeholder="Amount">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" value = '0x0d1630cb77c00d95f7fa32bccfe80043639681be' placeholder="To">
+                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" placeholder="To">
                 </div>
 
                 <div id='send_transaction_fee_estimation_container'>
@@ -203,5 +203,4 @@
 
     <!--@@include( 'dev_test.html')-->
     <div style='clear:both;'></div>
-    <div id="test" style="'width:100px; height:50px;">TEST</div>
 </div>

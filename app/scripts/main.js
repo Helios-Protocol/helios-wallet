@@ -1,5 +1,5 @@
 var web3_main = require('./web3.js');
-var web3h = web3_main.web3;
+var helios_web3 = web3_main.web3;
 var accountHelpers = require('./account_helpers.js');
 var fileSaver = require("file-saver");
 var numerical = require("./numerical_helpers");
@@ -21,8 +21,8 @@ var onlineKeystoreServerUrl = 'https://heliosprotocol.io/wallet-serverside/';
 var server = new Server(onlineKeystoreServerUrl);
 
 if (typeof window !== 'undefined') {
-    if (typeof window.web3h === 'undefined'){
-        window.web3h = web3h;
+    if (typeof window.helios_web3 === 'undefined'){
+        window.helios_web3 = helios_web3;
     }
     if (typeof window.fileSaver === 'undefined'){
         window.fileSaver = fileSaver;
@@ -47,7 +47,7 @@ if (typeof window !== 'undefined') {
 
 module.exports = {
     fileSaver: fileSaver,
-    web3h: web3h,
+    helios_web3: helios_web3,
     accountHelpers: accountHelpers,
     numerical: numerical,
     connectionMaintainer:connectionMaintainer,

@@ -17,7 +17,7 @@ $( document ).ready(function() {
                 var online_keystores = response['keystores'];
                 populateOnlineKeystores(online_keystores, password);
                 close_popup();
-                switchToPage('#main_page');
+                switchToPage('main_page');
                 afterLoginInit();
             }else{
                 //fail
@@ -26,6 +26,7 @@ $( document ).ready(function() {
             }
         });
     });
+
 
     $('body').on('click', '#frontpage_new_user_submit', function(e) {
         var username = $('#input_new_user_username').val();
@@ -61,7 +62,7 @@ $( document ).ready(function() {
                             set_username_status(username);
                             refreshOnlineWallets()
                             .then(function(){
-                                switchToPage('#main_page');
+                                switchToPage('main_page');
                             });
                         }else{
                             //fail
@@ -78,7 +79,11 @@ $( document ).ready(function() {
     });
 
 
-
+    $('body').on('click', '#offline_mode_link', function(e) {
+        switchToPage('main_page');
+        //switchToTab('main_page-add_offline_wallet');
+        offlineModeInit();
+    });
 
 });
 

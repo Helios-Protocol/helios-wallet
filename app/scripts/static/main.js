@@ -13,51 +13,59 @@ $( document ).ready(function() {
     .then(function(result){
         if(result) {
             set_username_status(window.localStorage.getItem('username'));
-            switchToPage('#main_page');
+            switchToPage('main_page');
         }
     });
 
-      if (typeof window['ethereum'] !== 'undefined') {
-        console.log('testtest');
-        console.log(window['ethereum']);
-      } else {
-        console.log('testtest2');
-        console.log(window['ethereum']);
-      }
-
+    // if (ethereum) {
+    //     console.log('Metamask detected');
+    //     ethereum.enable()
+    //     .then(function(accounts){
+    //         var metamaskAccounts = accounts;
+    //         var metamaskAccount = metamaskAccounts[0];
+    //         metamaskAccount.sign("Hello world", "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe")
+    //     });
+    //
+    //     if(web3.currentProvider.isMetaMask === true){
+    //         metamaskWeb3 = web3;
+    //     }else{
+    //         console.log("Unable to find injected metamask web3.")
+    //     }
+    //
+    // }
 
     //server.newUser("username", undefined, "password");
     connectionMaintainer.setStatusCallback(set_connection_status);
 
     //testing
-    //set web3 to the non fucked one. fucking walletfox....
-    web3 = web3h;
-    account = web3.hls.accounts.privateKeyToAccount('0x6edbbdf4e1a6e415b29444d38675364f67ae9c5a6192d3d755043f4b61e73cbb');
-    sending_account = account;
-    web3.hls.accounts.wallet.add(account);
+    //set web3 to the helios version in case metamask fucked with it.
+    web3 = helios_web3;
+    // account = web3.hls.accounts.privateKeyToAccount('0x6edbbdf4e1a6e415b29444d38675364f67ae9c5a6192d3d755043f4b61e73cbb');
+    // sending_account = account;
+    // web3.hls.accounts.wallet.add(account);
 
     $('body').on('click', '#logout', function(e) {
         server.killSession();
-        switchToPage('#frontpage_page')
+        switchToPage('frontpage_page')
         window.location.hash = '';
         clear_vars(true);
     });
 
-    $('#load_wallet_form').submit(function (e){
-        e.preventDefault();
-
-        //clear all variables when a new wallet is loaded
-        clear_vars();
-        var private_key_string = $('#input_private_key').val();
-
-        account = web3.hls.accounts.privateKeyToAccount(private_key_string);
-        sending_account = account;
-        web3.hls.accounts.wallet.add(account);
-        var address = sending_account.address.substr(0,20);
-        set_account_status('Sending from '+address);
-
-        console.log("private key added")
-    });
+    // $('#load_wallet_form').submit(function (e){
+    //     e.preventDefault();
+    //
+    //     //clear all variables when a new wallet is loaded
+    //     clear_vars();
+    //     var private_key_string = $('#input_private_key').val();
+    //
+    //     account = web3.hls.accounts.privateKeyToAccount(private_key_string);
+    //     sending_account = account;
+    //     web3.hls.accounts.wallet.add(account);
+    //     var address = sending_account.address.substr(0,20);
+    //     set_account_status('Sending from '+address);
+    //
+    //     console.log("private key added")
+    // });
 
 
 
@@ -188,7 +196,15 @@ function refresh_balance(){
 
 
 function afterLoginInit(){
+    initOnlineMenu();
     refreshContactList();
+    //refresh_loop();
+    refreshDashboard();
+    console.log("Starting");
+}
+
+function offlineModeInit(){
+    initOfflineMenu();
     //refresh_loop();
     refreshDashboard();
     console.log("Starting");

@@ -100,11 +100,15 @@ function popup(content, width){
     $('#popup_container').show();
     $('#popup_background').fadeIn(200);
     $('#popup_outer').fadeIn(200);
+    $('#popup_container').data('width', width);
 }
 
 function loaderPopup(content, width){
     if(width == undefined){
         width = 400;
+    }
+    if(width > ($(window).width()-40)){
+        width = ($(window).width()-40);
     }
     $('#popup_background').addClass("no_close");
     $("#loader_container").css("width", width+"px");
@@ -143,3 +147,21 @@ function resize_initial_background(){
 
 }
 
+function initOfflineMenu(){
+    $('.online_menu_item').hide();
+    $('.offline_menu_item').show();
+}
+
+function initOnlineMenu(){
+    $('.online_menu_item').show();
+    $('.offline_menu_item').hide();
+}
+
+function positionPopup(){
+    var popupWidth = $('#popup_container').width();
+    var windowWidth = $(window).width();
+    var initialWidth = $('#popup_container').data('width');
+    if((windowWidth -40) < initialWidth){
+        $('#popup_container').width((windowWidth -40));
+    }
+}

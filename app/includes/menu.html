@@ -27,7 +27,7 @@
                         Dashboard
                     </a>
                 </li>
-                <li role="presentation" class="nav__item menu_root has_submenu">
+                <li role="presentation" class="nav__item menu_root nav__item--left has_submenu">
                     <div class='nav__link'>
                         Offline wallets
                     </div>
@@ -39,7 +39,7 @@
                         </li>
                     </ul>
                 </li>
-                <li role="presentation" class="nav__item menu_root has_submenu nav__item--left">
+                <li role="presentation" class="nav__item menu_root has_submenu nav__item--left online_menu_item">
                     <div  class='nav__link'>
                         Online wallets
                     </div>
@@ -51,7 +51,7 @@
                         </li>
                     </ul>
                 </li>
-                <li role="presentation" id='main_page-contacts-menu_item' class="nav__item menu_root">
+                <li role="presentation" id='main_page-contacts-menu_item' class="nav__item menu_root online_menu_item">
                     <a href="#main_page-contacts" class='nav__link'>
                         Contacts
                     </a>
@@ -78,15 +78,20 @@
                         <img class='menu_image_img' src='images/account_menu.png' style='height:28px;'>
                     </div>
                     <ul class="nav__dropdown">
-                        <li role="presentation" class="   nav__item">
+                        <li role="presentation" class="nav__item">
                             <div id='logout' class="nav__link">
-                                Logout
+                                <span class='online_menu_item'>Logout</span>
+                                <span class='offline_menu_item'>Go back to sign in page</span>
                             </div>
                         </li>
 
 
+
+
                     </ul>
                 </li>
+
+
             </ul>
         </nav>
 

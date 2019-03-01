@@ -21,12 +21,15 @@
     <script src="js/menu.js"></script>
     <script src="js/custom_select.js"></script>
     <script src="js/autocomplete.js"></script>
+    <script src="js/metamask.js"></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:200,300,300i,400,400i,500,600" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/main.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 
@@ -37,7 +40,7 @@
 </div>
 <div id='popup_outer'>
     <div id='popup_container'>
-        <div id='exit_popup'><img src='images/exit_popup.png' style='height:27px;'></div>
+        <div id='exit_popup'><img src='images/exit_button.png' style='height:27px;'></div>
         <div id='popup_content'></div>
         <div style='width:100%; height:1px; clear:both;'></div>
     </div>
@@ -94,13 +97,7 @@
             <div class='line_separater'>
                 <h2>Advanced Options</h2>
                 <div class="line_separater_medium">
-                    <a href="#frontpage-sign_in_metamask" class="italic local_link">Sign in with Metamask</a>
-                </div>
-                <div class="line_separater_medium">
-                    <a href="#frontpage-load_wallet_from_keystore" class="italic local_link">Load wallet from keystore file</a>
-                </div>
-                <div class="line_separater_medium">
-                    <a href="#frontpage-create_wallet_and_keystore" class="italic local_link">Create new wallet and keystore file</a>
+                    <a href="#main_page-add_offline_wallet" class="italic local_link" id='offline_mode_link'>Fully offline mode</a>
                 </div>
             </div>
             <div class="light_button" id="frontpage_sign_in_submit" style="position:relative; float:right; top:30px; right:-30px;">Submit</div>
@@ -173,7 +170,7 @@
                         Dashboard
                     </a>
                 </li>
-                <li role="presentation" class="nav__item menu_root has_submenu">
+                <li role="presentation" class="nav__item menu_root nav__item--left has_submenu">
                     <div class='nav__link'>
                         Offline wallets
                     </div>
@@ -185,7 +182,7 @@
                         </li>
                     </ul>
                 </li>
-                <li role="presentation" class="nav__item menu_root has_submenu nav__item--left">
+                <li role="presentation" class="nav__item menu_root has_submenu nav__item--left online_menu_item">
                     <div  class='nav__link'>
                         Online wallets
                     </div>
@@ -197,7 +194,7 @@
                         </li>
                     </ul>
                 </li>
-                <li role="presentation" id='main_page-contacts-menu_item' class="nav__item menu_root">
+                <li role="presentation" id='main_page-contacts-menu_item' class="nav__item menu_root online_menu_item">
                     <a href="#main_page-contacts" class='nav__link'>
                         Contacts
                     </a>
@@ -224,15 +221,20 @@
                         <img class='menu_image_img' src='images/account_menu.png' style='height:28px;'>
                     </div>
                     <ul class="nav__dropdown">
-                        <li role="presentation" class="   nav__item">
+                        <li role="presentation" class="nav__item">
                             <div id='logout' class="nav__link">
-                                Logout
+                                <span class='online_menu_item'>Logout</span>
+                                <span class='offline_menu_item'>Go back to sign in page</span>
                             </div>
                         </li>
 
 
+
+
                     </ul>
                 </li>
+
+
             </ul>
         </nav>
 
@@ -252,10 +254,10 @@
         <div class='block_content_container'>
             <form id="add_transaction_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" value = '1' min='0.000000000000000001' placeholder="Amount">
+                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" min='0.000000000000000001' placeholder="Amount">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" value = '0x0d1630cb77c00d95f7fa32bccfe80043639681be' placeholder="To">
+                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" placeholder="To">
                 </div>
 
                 <div id='send_transaction_fee_estimation_container'>
@@ -448,7 +450,6 @@
 
     
     <div style='clear:both;'></div>
-    <div id="test" style="'width:100px; height:50px;">TEST</div>
 </div>
     <div class='tab_item' id='block_explorer_tab'>
     Coming Soon
@@ -476,7 +477,7 @@
     <div class='tab_item' id='main_page-add_offline_wallet'>
     <div class='block_2_wide'>
         <div class='block_title'>
-            Add newly generated wallet
+            Generate a new offline wallet
         </div>
         <div class='block_content_container'>
             <form id="generate_offline_wallet_form">
@@ -492,7 +493,7 @@
 
      <div class='block_2_wide'>
         <div class='block_title'>
-            Add existing wallet
+            Load existing wallet
         </div>
         <div class='block_content_container'>
 

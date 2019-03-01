@@ -61,11 +61,18 @@ div{
 #wallet_test_version_container_frontpage{
     text-transform:uppercase;
     position:absolute;
-    right:40px;
-    top:30px;
+    left:85px;
+    top:60px;
     font-size:15px;
     color:#fff;
     letter-spacing:10px;
+}
+@media (min-width: 1060px) {
+    #wallet_test_version_container_frontpage{
+        left:auto;
+        right:40px;
+        top:30px;
+    }
 }
 #main_outer{
     width:100%;
@@ -191,7 +198,12 @@ h2{
 .frontpage_block{
     position:relative;
     left:200px;
-    top:200px;
+    top:20%;
+}
+@media (max-width: 700px) {
+    .frontpage_block{
+        left:10%;
+    }
 }
 .frontpage_block_background{
     position:absolute;
