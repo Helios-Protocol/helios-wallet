@@ -10,7 +10,7 @@ class Server {
         this.serverUrl = serverUrl;
         this.saltRounds = 11;
         this.superagent = superagent.agent();
-        this.use_localStorage = true;
+        this.use_localStorage = false;
     }
 
     error(errorName, extraData){

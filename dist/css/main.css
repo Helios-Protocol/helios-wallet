@@ -290,6 +290,11 @@ table{
     margin:20px;
 }
 
+.block_right{
+    float:left;
+}
+
+
 .block_title{
     margin:10px;
     text-transform: uppercase;
@@ -549,8 +554,14 @@ input[type="submit"].light_button, .light_button{
     height:16px;
 }
 tbody{
-    font-size:12px;
+    font-size:14px;
 }
+td{
+    padding-top:10px;
+    border-bottom:1px solid #eee;
+    word-break: break-word;
+}
+
 
 
 /*HISTORICAL MIN GAS PRICE*/
@@ -592,6 +603,9 @@ tbody{
     #footer_inner{
         width:1100px;
     }
+    .block_right{
+        float:right;
+    }
 }
 
 @media (max-width: 733px) {
@@ -600,5 +614,21 @@ tbody{
         float:left;
         margin-left:0px;
         margin-right:0px;
+    }
+}
+#send_block_submit{
+    position:relative;
+    top:-35px;
+}
+#send_block_pre_confirmation{
+    height:0px;
+}
+@media (max-width: 600px){
+    #send_block_submit{
+        top:-20px;
+
+    }
+    #send_block_pre_confirmation{
+        height:15px;
     }
 }
