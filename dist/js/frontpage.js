@@ -60,10 +60,10 @@ $( document ).ready(function() {
                         if(response !== false && "success" in response) {
                             //success
                             set_username_status(username);
-                            refreshOnlineWallets()
-                            .then(function(){
-                                switchToPage('main_page');
-                            });
+                            var online_keystores = response['keystores'];
+                            populateOnlineKeystores(online_keystores, password);
+                            switchToPage('main_page');
+                            afterLoginInit();
                         }else{
                             //fail
                             var popup_content = "Sign in to begin using your new account!<br><br> Enjoy! :)";
