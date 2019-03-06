@@ -12,6 +12,7 @@
     <script src="js/transaction_history_block.js"></script>
     <script src="js/frontpage.js"></script>
     <script src="js/historical_gas_price_block.js"></script>
+    <script src="js/incoming_transactions_block.js"></script>
     <script src="js/offline_wallets.js"></script>
     <script src="js/online_wallets.js"></script>
     <script src="js/contacts.js"></script>
@@ -275,7 +276,7 @@
                         <div class='required_star'>*</div><input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' placeholder="Gas Price">
                     </div>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' placeholder="Max Allowed Gas">
+                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' min='21000' max='31415926' placeholder="Max Allowed Gas">
                     </div>
 
                     <input type="submit" value="Add Transaction to Block">
@@ -355,7 +356,7 @@
                     </tbody>
                 </table>
             </div>
-            <div>
+            <div class='line_separater'>
                 <div class="button" id="incoming_transactions_accept">Accept incoming transactions</div>
                 <div class="button" id="incoming_transactions_refresh" style="float:left;">Refresh</div>
                 <div class="clear_both"></div>
@@ -420,7 +421,7 @@
                 </div>
                 <input type="submit" value="View">
             </form>
-            <div id='transaction_history_container'>
+            <div id='transaction_history_container' class='line_separater'>
                 <table id='transaction_history_list'>
                     <thead>
                         <tr>
@@ -537,11 +538,59 @@
     </div>
 
 
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Add existing wallet
+        </div>
+        <div class='block_content_container'>
+
+            <form id="load_online_wallet_keystore_form">
+                <div class='italic_heading' style='margin-top:0px;'>Online Account information:</div>
+                <div class='line_separater input_line_container'>
+                    <div class='required_star'>*</div><input id='load_online_wallet_username' class='fillable_input' name='username' type="text"  placeholder="Your account username">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='load_online_wallet_password' class='fillable_input' type="password" placeholder="Your account password">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id='load_online_wallet_name' class='fillable_input' type="text" placeholder="Wallet name">
+                </div>
+
+                <div class='italic_heading'>Saved Keystore information:</div>
+
+                <div class='line_separater input_line_container'>
+                    <div class='required_star'>*</div><div id="load_online_wallet_from_keystore_fake_file_input" class='file_input'>Select keystore file</div>
+                </div>
+                <input type="file" id="load_online_wallet_from_keystore_file_input" style='display:none'>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div><input id="load_online_wallet_from_keystore_password" type="password" placeholder="Keystore password">
+                </div>
+                <input type="submit" value="Load wallet">
+                <div class='clear_both'></div>
+            </form>
+        </div>
+    </div>
+
+
 </div>
 
     <div class='tab_item' id='main_page-online_wallet'>
     <input id='currently_editing_online_wallet_address' type="hidden">
-    <div class='block_1_wide' style='float:right'>
+    <div class='block_1_wide block_right'>
+        <div class='block_title'>
+            Quick links
+        </div>
+        <div class='block_content_container'>
+            <input id="edit_online_wallet_enable_wallet_submit" class='switch_wallet_link' data-address='' type="submit" value="Enable wallet" style='width:100%; float:none;'>
+            <div class='line_separater'>
+                <input id="edit_online_wallet_delete_wallet_submit" class='delete_online_wallet_link' data-address='' type="submit" value="Delete wallet" style='width:100%; float:none;'>
+            </div>
+            <div class='clear_both'></div>
+        </div>
+    </div>
+
+
+    <div class='block_2_wide'>
         <div class='block_title'>
             Editing wallet
         </div>
@@ -570,18 +619,7 @@
         </div>
     </div>
 
-    <div class='block_1_wide' style='float:right'>
-        <div class='block_title'>
-            Quick links
-        </div>
-        <div class='block_content_container'>
-            <input id="edit_online_wallet_enable_wallet_submit" class='switch_wallet_link' data-address='' type="submit" value="Enable wallet" style='width:100%; float:none;'>
-            <div class='line_separater'>
-                <input id="edit_online_wallet_delete_wallet_submit" class='delete_online_wallet_link' data-address='' type="submit" value="Delete wallet" style='width:100%; float:none;'>
-            </div>
-            <div class='clear_both'></div>
-        </div>
-    </div>
+
 
     <div class='block_2_wide'>
         <div class='block_title'>
@@ -604,6 +642,31 @@
     <div class='tab_item' id='main_page-offline_wallet'>
     <input id='currently_editing_offline_wallet_address' type="hidden">
 
+    <div class='block_1_wide block_right'>
+        <div class='block_title'>
+            Quick links
+        </div>
+        <div class='block_content_container'>
+            <input id="edit_offline_wallet_enable_wallet_submit" class='switch_wallet_link' data-address='' type="submit" value="Enable wallet" style='width:100%; float:none;'>
+            <div class='line_separater'>
+                <input id="edit_offline_wallet_delete_wallet_submit" class='delete_offline_wallet_link' data-address='' type="submit" value="Delete wallet" style='width:100%; float:none;'>
+            </div>
+            <div class='clear_both'></div>
+        </div>
+    </div>
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Editing wallet
+        </div>
+        <div class='block_content_container'>
+            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_offline_wallet_address_status' class='block_1_wide_right_text'>No wallet loaded</div>
+
+            <div class='clear_both'></div>
+        </div>
+
+    </div>
+
     <div class='block_2_wide'>
         <div class='block_title'>
             Save keystore file
@@ -620,17 +683,7 @@
         </div>
     </div>
 
-    <div class='block_1_wide' style='float:right'>
-        <div class='block_title'>
-            Editing wallet
-        </div>
-        <div class='block_content_container'>
-            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_offline_wallet_address_status' class='block_1_wide_right_text'>No wallet loaded</div>
 
-            <div class='clear_both'></div>
-        </div>
-
-    </div>
 
 </div>
 
@@ -692,7 +745,7 @@
 </table>
 <div style='margin-top:20px;'>
     <form id="send_block_post_confirmation">
-        <input type="submit" id='send_block_submit' class='light_button' value="Send" >
+        <input type="submit" id='send_block_submit' class='light_button' style='top:0px;' value="Send" >
     </form>
     <div class='light_button' id='exit_popup_submit' style='float:left;'>Get me out of here!</div>
 </div>

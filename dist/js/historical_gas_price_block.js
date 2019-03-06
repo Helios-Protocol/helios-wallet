@@ -15,6 +15,7 @@ $( document ).ready(function() {
 });
 
 function populateHistoricalMinGasPricePlot() {
+    console.log("Populating historical min gas price plot")
     if (connectionMaintainer.isConnected()) {
         web3.hls.getHistoricalGasPrice()
         .then(function (args) {

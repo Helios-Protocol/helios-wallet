@@ -27,7 +27,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
         if(new_block.transactions.length > 0){
             for (j = 0; j < new_block.transactions.length; j++) {
                 var tx = new_block.transactions[j];
-                output.push(new datastructures.tx_info(new_block.timestamp, "Send transaction", -1*tx.value, -1*tx.gasUsed, tx.to, null, new_block.accountBalance, new_block.number))
+                output.push(new datastructures.tx_info(new_block.timestamp, "Send transaction", -1*tx.value, -1*tx.gasUsed*tx.gasPrice, tx.to, null, new_block.accountBalance, new_block.number))
 
             }
         }
@@ -39,7 +39,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
                 } else {
                     var description = "Receive transaction"
                 }
-                output.push(new datastructures.tx_info(new_block.timestamp, description, tx.value,-1*tx.gasUsed, null, tx.from, new_block.accountBalance, new_block.number))
+                output.push(new datastructures.tx_info(new_block.timestamp, description, tx.value,-1*tx.gasUsed*tx.gasPrice, null, tx.from, new_block.accountBalance, new_block.number))
             }
         }
         output.push(new datastructures.tx_info(new_block.timestamp, "Reward type 1", new_block.rewardBundle.rewardType1.amount, 0, null, null, new_block.accountBalance, new_block.number))

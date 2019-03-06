@@ -148,19 +148,109 @@ $( document ).ready(function() {
 
     });
 
+    $('body').on('click', '#load_online_wallet_from_keystore_fake_file_input', function(e) {
+        $('#load_online_wallet_from_keystore_file_input').click();
+    });
 
+    $('body').on('change', '#load_online_wallet_from_keystore_file_input', function(e) {
+        var filename = $(this).val().split(/(\\|\/)/g).pop().substr(0,20);
+        if(filename == ""){
+            $('#load_online_wallet_from_keystore_fake_file_input').text("Select keystore file");
+        }else {
+            $('#load_online_wallet_from_keystore_fake_file_input').text(filename + "...");
+        }
+    });
+
+    $('#load_online_wallet_keystore_form').submit(function (e) {
+        e.preventDefault();
+        console.log("loading wallet from keystore")
+        loaderPopup();
+        var password = $("#load_online_wallet_password").val();
+        var username = $("#load_online_wallet_username").val();
+        var wallet_name = $("#load_online_wallet_name").val();
+        if(!(validateInputs(username, 'username') === true)){
+            popup(validateInputs(username, 'username'));
+            return;
+        }
+        if(!(validateInputs(wallet_name, 'wallet_name') === true)){
+            popup(validateInputs(wallet_name, 'wallet_name'));
+            return;
+        }
+
+        var keystore_password = $("#load_online_wallet_from_keystore_password").val();
+        var keystore_file = $("#load_online_wallet_from_keystore_file_input").prop('files')[0]
+
+        if(keystore_password === '' || keystore_file === '' || keystore_file === undefined){
+            popup("You must choose a keystore file and enter a password");
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var json_account = reader.result;
+            try {
+                var new_wallet = web3.eth.accounts.decrypt(JSON.parse(json_account), keystore_password)
+            }catch(err){
+                popup('Incorrect keystore password');
+                return;
+            }
+
+            if(new_wallet.address in available_online_accounts){
+                popup("You have already added a wallet with this address to your online wallets.")
+                return
+            }
+            var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, password);
+
+            server.addOnlineWallet(keystore, wallet_name)
+            .then(function(response2){
+
+                $('#load_online_wallet_username').val("").trigger("change");
+                $('#load_online_wallet_name').val("").trigger("change");
+                $('#load_online_wallet_password').val("").trigger("change");
+
+                $('#load_online_wallet_from_keystore_file_input').val("");
+                $('#load_online_wallet_from_keystore_fake_file_input').text("Select keystore file");
+                $('#load_online_wallet_from_keystore_password').val("");
+
+                addOnlineWallet(new_wallet, response2['id'], wallet_name);
+                refreshDashboard();
+                popup("The new wallet has been added.");
+            });
+
+
+        }
+
+        //Need to sign in to confirm their username and password is correct before encrypting the keystore.
+        server.signIn(username, password)
+        .then(function(response){
+            if(response !== false && "success" in response) {
+                reader.readAsText(keystore_file);
+            }else{
+                popup("The username and password you entered didn't match. Please type the username and password you use to log in to your account.")
+            }
+        });
+
+
+
+
+
+    });
 
 });
 
 function populateOnlineKeystores(keystores, password){
     if(keystores.length > 0){
-        keystores.forEach(function(args){
-            var keystore = args['keystore'];
-            var wallet_id = args['id'];
-            var wallet_name = args['name'];
+        for(var i = 0; i < keystores.length; i++){
+            var keystore = keystores[i]['keystore'];
+            var wallet_id = keystores[i]['id'];
+            var wallet_name = keystores[i]['name'];
             var new_wallet = web3.eth.accounts.decrypt(JSON.parse(keystore), password);
-            addOnlineWallet(new_wallet, wallet_id, wallet_name);
-        });
+            if(i === 0) {
+                addOnlineWallet(new_wallet, wallet_id, wallet_name);
+            }else{
+                addOnlineWallet(new_wallet, wallet_id, wallet_name, true);
+            }
+        }
         return true
     }
 }
@@ -202,11 +292,17 @@ function deleteOnlineWallet(wallet_address){
     }
 }
 
+function deleteAllOnlineWallets(){
+    Object.keys(available_online_accounts).forEach(function(wallet_address) {
+        deleteOnlineWallet(wallet_address);
+    });
+}
+
 function prepareEditOnlineWalletPage(wallet_address, wallet_name){
     //Add the correct data to the editing page
     $('#currently_editing_online_wallet_address').val(wallet_address);
     $('#edit_online_wallet_enable_wallet_submit').data('address', wallet_address);
     $('#edit_online_wallet_delete_wallet_submit').data('address', wallet_address);
     $('#edit_online_wallet_rename_name_input').val(wallet_name).trigger("change");
-    $('#currently_editing_online_wallet_address_status').html(wallet_name + " <br>" + wallet_address.substr(0,20) + "...")
+    $('#currently_editing_online_wallet_address_status').html(wallet_name + " <br>" + wallet_address)
 }

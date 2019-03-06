@@ -11,6 +11,8 @@ function toCSV(data){
 
 var clear_vars = function(include_account = false){
     if (include_account){
+        deleteAllOnlineWallets();
+        deleteAllOfflineWallets();
         sending_account = null;
         available_offline_accounts = {};
         available_online_accounts = {};
@@ -84,7 +86,37 @@ function validateInputs(value, type){
                 return "Wallet address cannot be left blank";
             }
             if(!web3.utils.isAddress(value)){
-                return "The given wallet address is not a valid address";
+                if(!(value in contact_autocomplete_list_to_address_lookup)){
+                    return "The given wallet address is not a valid address or contact.";
+                }
+            }
+            break;
+        case "tx_amount":
+            if(value === undefined || value === ''){
+                return "Transaction amount cannot be left blank";
+            }
+            if(value < 1){
+                return "Transaction amount must be at least 1 wei.";
+            }
+            if(!Number.isInteger(value)){
+                return "Transaction amount must be an integer number of wei.";
+            }
+
+            break;
+        case "gas_price":
+            if(value === undefined || value === ''){
+                return "Transaction gas cannot be left blank";
+            }
+            if(!Number.isInteger(value)){
+                return "Transaction gas must be an integer";
+            }
+            break;
+        case "total_gas":
+            if(value === undefined || value === ''){
+                return "Transaction total gas cannot be left blank";
+            }
+            if(!Number.isInteger(value)){
+                return "Transaction total gas must be an integer";
             }
             break;
     }

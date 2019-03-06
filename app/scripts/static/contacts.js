@@ -67,10 +67,29 @@ async function refreshContactList(){
 
                 contact_name_to_address_lookup[contacts[i]['name']] = contacts[i]['address'];
                 contact_address_to_name_lookup[contacts[i]['address']] = contacts[i]['name'];
-                contact_autocomplete_list.push(contacts[i]['name'] + " <" + contacts[i]['address'] + ">");
+                var autocomplete_entry = contacts[i]['name'] + " <" + contacts[i]['address'] + ">";
+                contact_autocomplete_list.push(autocomplete_entry);
+                contact_autocomplete_list_to_address_lookup[autocomplete_entry] = contacts[i]['address'];
             }
             autocomplete(document.getElementById("input_to"), contact_autocomplete_list);
         }
     });
 
+}
+
+function getAddressFromAutocompleteStringIfExist(autocomplete_string){
+    if(!web3.utils.isAddress(autocomplete_string)){
+        if(autocomplete_string in contact_autocomplete_list_to_address_lookup){
+            return contact_autocomplete_list_to_address_lookup[autocomplete_string];
+        }
+    }
+    return autocomplete_string;
+}
+
+function getAutocompleteStringFromAddressIfExist(address){
+    if(address in contact_address_to_name_lookup){
+        return contact_address_to_name_lookup[address] + " <" + address + ">";
+    }else{
+        return address
+    }
 }

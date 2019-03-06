@@ -24,6 +24,7 @@ var roundD = function roundD(val, decimal_places){
     return val.toFixed(decimal_places)
     //return Math.round(val*(Math.pow(10,(decimal_places+1))))/Math.pow(10,(decimal_places+1))
 }
+var block_gas_limit = 31415926;
 
 module.exports = {
     weiToGwei: weiToGwei,
@@ -31,5 +32,6 @@ module.exports = {
     weiToHls: weiToHls,
     hlsToWei: hlsToWei,
     gweiToHls: gweiToHls,
-    roundD: roundD
+    roundD: roundD,
+    block_gas_limit: block_gas_limit
 };

@@ -80,6 +80,11 @@ $( document ).ready(function() {
                 return;
             }
 
+            if(new_wallet.address in available_offline_accounts){
+                popup("You have already added a wallet with this address to your offline wallets.")
+                return
+            }
+
             $('#load_offline_wallet_from_keystore_file_input').val("");
             $('#load_offline_wallet_from_keystore_fake_file_input').text("Select keystore file");
             $('#load_offline_wallet_from_keystore_password').val("");
@@ -123,6 +128,11 @@ $( document ).ready(function() {
 
     });
 
+    $('body').on('click', '.delete_online_wallet_link', function(e) {
+        var wallet_address = $(this).data('address');
+        deleteOfflineWallet(wallet_address);
+    });
+
 });
 
 
@@ -147,9 +157,26 @@ function addOfflineWallet(new_wallet, do_not_make_active_account){
     $('#offline_wallets_menu_list').prepend(wallet_menu_item);
 }
 
+function deleteOfflineWallet(wallet_address){
+    delete available_offline_accounts[wallet_address];
+    $('.nav__link.edit_offline_wallet[data-address="'+wallet_address+'"]').parent('.nav__item').remove();
+    if(sending_account.address === wallet_address){
+        sending_account = null;
+        refreshDashboard();
+    }
+}
+
+function deleteAllOfflineWallets(){
+    Object.keys(available_offline_accounts).forEach(function(wallet_address) {
+        deleteOfflineWallet(wallet_address);
+    });
+}
+
 function prepareEditOfflineWalletPage(wallet_address){
     //Add the correct data to the editing page
     $('#currently_editing_offline_wallet_address').val(wallet_address);
-    $('#currently_editing_offline_wallet_address_status').html(wallet_address.substr(0,20) + "...")
+    $('#currently_editing_offline_wallet_address_status').html(wallet_address);
+    $('#edit_offline_wallet_enable_wallet_submit').data('address', wallet_address);
+    $('#edit_offline_wallet_delete_wallet_submit').data('address', wallet_address);
 }
 

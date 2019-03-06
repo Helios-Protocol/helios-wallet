@@ -163,14 +163,16 @@ function positionPopup(){
     var scroll = $("html").scrollTop();
     var popupWidth = $('#popup_container').width();
     var popupHeight = $('#popup_container').outerHeight();
+    var loaderHeight = $('#loader_container').outerHeight();
     var windowWidth = $(window).width();
     var windowHeight = $(window).height();
     var initialWidth = $('#popup_container').data('width');
     if((windowWidth -80) < initialWidth){
         $('#popup_container').width((windowWidth -80));
     }
-    var top = scroll + (windowHeight-popupHeight)/2;
-    $('#popup_container').css('top', top);
-
+    var popup_top = scroll + (windowHeight-popupHeight)/2;
+    var loader_top = scroll + (windowHeight-loaderHeight)/2;
+    $('#popup_container').css('top', popup_top);
+    $('#loader_container').css('top', loader_top);
 
 }

@@ -6,16 +6,22 @@ var online_wallet_to_name_lookup = {};
 var contact_name_to_address_lookup = {};
 var contact_address_to_name_lookup = {};
 var contact_autocomplete_list = [];
+var contact_autocomplete_list_to_address_lookup = {};
+var init_complete = false;
+
+
+var current_hls_balance_in_wei = 0;
+var current_min_gas_price = 1;
 
 $( document ).ready(function() {
     // Check for existing session and just refresh it
-    server.renewSession()
-    .then(function(result){
-        if(result) {
-            set_username_status(window.localStorage.getItem('username'));
-            switchToPage('main_page');
-        }
-    });
+    // server.renewSession()
+    // .then(function(result){
+    //     if(result) {
+    //         set_username_status(window.localStorage.getItem('username'));
+    //         switchToPage('main_page');
+    //     }
+    // });
 
     // if (ethereum) {
     //     console.log('Metamask detected');
@@ -37,6 +43,7 @@ $( document ).ready(function() {
     //server.newUser("username", undefined, "password");
     connectionMaintainer.setStatusCallback(set_connection_status);
 
+
     //testing
     //set web3 to the helios version in case metamask fucked with it.
     web3 = helios_web3;
@@ -51,42 +58,11 @@ $( document ).ready(function() {
         clear_vars(true);
     });
 
-    // $('#load_wallet_form').submit(function (e){
-    //     e.preventDefault();
-    //
-    //     //clear all variables when a new wallet is loaded
-    //     clear_vars();
-    //     var private_key_string = $('#input_private_key').val();
-    //
-    //     account = web3.hls.accounts.privateKeyToAccount(private_key_string);
-    //     sending_account = account;
-    //     web3.hls.accounts.wallet.add(account);
-    //     var address = sending_account.address.substr(0,20);
-    //     set_account_status('Sending from '+address);
-    //
-    //     console.log("private key added")
-    // });
-
-
-
     //
     // dev stuff
     //
 
-    $('#receive_incoming_transactions').click(function (e){
 
-        if(sending_account == null){
-            popup('Need to load a wallet first');
-            return
-        }
-
-        web3.hls.sendRewardBlock(sending_account.address)
-        .then(function(){
-            popup("Block successfully sent");
-            clear_vars();
-        })
-
-    });
 
 
     $('#get_min_gas_price').click(function (e){
@@ -153,10 +129,15 @@ function refresh_loop(){
 }
 
 function refreshDashboard() {
+    if(!init_complete){
+        console.log("Skipping refreshDashboard because init not complete");
+        return;
+    }
     if (sending_account === null || sending_account === undefined) {
-        var address = "No wallet loaded";
-        set_account_status(address);
+        console.log('Refreshing dashboard. No account loaded.')
+        set_account_status("No wallet loaded");
     } else {
+        console.log('Refreshing dashboard. Sending account = '+ sending_account.address);
         if (online_wallet_to_name_lookup[sending_account.address] !== undefined) {
             var name = online_wallet_to_name_lookup[sending_account.address].substr(0, 20)
             if (online_wallet_to_name_lookup[sending_account.address].length > 20) {
@@ -169,8 +150,14 @@ function refreshDashboard() {
             set_account_status(address);
         }
     }
-    refresh_transactions();
-    refresh_balance();
+    if(connectionMaintainer.isConnected()) {
+        refresh_transactions();
+        refreshIncomingTransactions();
+        refresh_balance();
+        init_min_gas_price();
+    }else{
+        console.log("Not refreshing some variables because we arent connected to a node.")
+    }
 }
 
 
@@ -183,30 +170,47 @@ function refreshDashboard() {
 
 //TODO: add getbalance to web3
 function refresh_balance(){
+    console.log("Refreshing balance.")
     if(sending_account == null){
         return
     }
     if(connectionMaintainer.isConnected()){
         web3.hls.getBalance(sending_account.address)
         .then(function(args){
-            set_balance_status(args);
+            var hls = numerical.roundD(numerical.weiToHls(args),8);
+            set_balance_status(hls);
+            current_hls_balance_in_wei = args;
         });
     }
 }
 
+function init_min_gas_price(){
+    console.log("Initializing min gas price");
+    if(connectionMaintainer.isConnected()) {
+        web3.hls.getGasPrice()
+        .then(function (min_gas_price) {
+            $('#input_gas_price').attr('value', min_gas_price + 2);
+            $('#input_gas_price').attr('min', min_gas_price+1);
+            set_min_gas_price_status(min_gas_price);
+            current_min_gas_price = min_gas_price;
+        });
+    }
+}
 
 function afterLoginInit(){
+    console.log("AfterLoginInit");
+    init_complete = true;
+    connectionMaintainer.setConnectedCallback(refreshDashboard);
     initOnlineMenu();
     refreshContactList();
-    //refresh_loop();
-    refreshDashboard();
     console.log("Starting");
 }
 
 function offlineModeInit(){
+    console.log("OfflineModeInit");
+    init_complete = true;
+    connectionMaintainer.setConnectedCallback(refreshDashboard);
     initOfflineMenu();
-    //refresh_loop();
-    refreshDashboard();
     console.log("Starting");
 }
 

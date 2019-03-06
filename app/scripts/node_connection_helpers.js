@@ -4,6 +4,7 @@ var web3 = web3Main.web3;
 
 class ConnectionMaintainer {
     constructor(availableNodes, disconnectedLoopPeriod, connectedLoopPeriod) {
+        this.wasConnected = false;
         this.availableNodes = availableNodes;
 
         //The period of time between each retry when we are disconnected.
@@ -23,7 +24,16 @@ class ConnectionMaintainer {
     }
 
     isConnected(){
-        return !(web3.currentProvider == null || !web3.currentProvider.connected);
+        var connected = !(web3.currentProvider == null || !web3.currentProvider.connected);
+        return connected;
+    }
+
+    setConnectedCallback(connectedCallback){
+        console.log('setting connected callback');
+        this.connectedCallback = connectedCallback;
+        if(this.isConnected()){
+            this.connectedCallback();
+        }
     }
 
     setStatusCallback(statusCallback){
@@ -46,20 +56,30 @@ class ConnectionMaintainer {
 
 
     async networkConnectionMaintainerLoop(){
-        //console.log(web3.currentProvider.connected);
-        if(!this.isConnected()){
+        console.log("network connection loop begin");
+        if(!this.isConnected()) {
+            console.log("Attempting to connect to node");
             this.setStatus('Connection to network failed. Retrying connection.');
-            if(await this.connectToFirstAvailableNode()){
-                this.setStatus('Connected to node '+web3.currentProvider.connection.url);
-            }
+            await this.connectToFirstAvailableNode();
         }
 
+
+
         if(this.isConnected()){
+            if(!this.wasConnected){
+                if(this.connectedCallback !== undefined){
+                    this.connectedCallback();
+                }
+
+            }
+            this.setStatus('Connected to node ' + web3.currentProvider.connection.url);
             await sleep(this.connectedLoopPeriod)
             this.networkConnectionMaintainerLoop()
+            this.wasConnected = true;
         }else{
             await sleep(this.disconnectedLoopPeriod)
             this.networkConnectionMaintainerLoop()
+            this.wasConnected = false;
         }
     }
 
@@ -76,13 +96,27 @@ class ConnectionMaintainer {
                 console.log("Successfully connected to " + API_address)
                 return true;
             }
+            console.log("Failed to connect to node " + API_address)
         }
         return false
     }
 
-
-
 }
+var getNodeMessageFromError = function getNodeMessageFromError(error) {
+
+    if (error.message.indexOf('Returned error: ') !== -1) {
+        try {
+            var error_json = error.message.split("Returned error: ");
+            error_json = error_json[error_json.length - 1];
+            var error_array = JSON.parse(error_json);
+            return error_array['error'];
+        } catch (e) {
+            return error.message;
+        }
+    } else {
+        return error.message;
+    }
+};
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -90,7 +124,8 @@ function sleep(ms) {
 
 
 module.exports = {
-    ConnectionMaintainer: ConnectionMaintainer
+    ConnectionMaintainer: ConnectionMaintainer,
+    getNodeMessageFromError: getNodeMessageFromError
 };
 
 

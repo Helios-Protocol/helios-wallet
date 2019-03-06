@@ -28,7 +28,7 @@
                         <div class='required_star'>*</div><input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' placeholder="Gas Price">
                     </div>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' placeholder="Max Allowed Gas">
+                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' min='21000' max='31415926' placeholder="Max Allowed Gas">
                     </div>
 
                     <input type="submit" value="Add Transaction to Block">
@@ -108,7 +108,7 @@
                     </tbody>
                 </table>
             </div>
-            <div>
+            <div class='line_separater'>
                 <div class="button" id="incoming_transactions_accept">Accept incoming transactions</div>
                 <div class="button" id="incoming_transactions_refresh" style="float:left;">Refresh</div>
                 <div class="clear_both"></div>
@@ -173,7 +173,7 @@
                 </div>
                 <input type="submit" value="View">
             </form>
-            <div id='transaction_history_container'>
+            <div id='transaction_history_container' class='line_separater'>
                 <table id='transaction_history_list'>
                     <thead>
                         <tr>

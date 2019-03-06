@@ -31,7 +31,7 @@ function populateSelectYears(){
 }
 
 function selectDefaultYears(){
-
+    console.log("selecting default years");
     var from_timestamp = new Date().getTime()/1000-(60*60*24*60)
     var from_date = new Date(0);
     from_date.setUTCSeconds(from_timestamp.toFixed(0));
@@ -63,7 +63,7 @@ async function refresh_transactions(){
     var start_timestamp = new Date(from_year, from_month, '01').getTime() / 1000
     var end_timestamp = new Date(to_year, to_month, '01').getTime() / 1000
 
-    var txs = await accountHelpers.get_all_transactions_from_account(sending_account, start_timestamp, end_timestamp)
+    var txs = await accountHelpers.get_all_transactions_from_account(sending_account, start_timestamp, end_timestamp);
 
     var tableRef = document.getElementById('transaction_history_list').getElementsByTagName('tbody')[0];
 
@@ -71,7 +71,7 @@ async function refresh_transactions(){
     tableRef.innerHTML = "";
 
     if(!txs){
-
+        popup("No transactions found for this date range.")
     } else {
 
         if (txs.length > 0) {
@@ -97,7 +97,7 @@ async function refresh_transactions(){
                 cell0.innerHTML = d.toLocaleString('en-US',options);
                 cell1.innerHTML = tx.description;
                 cell2.innerHTML = numerical.roundD(numerical.weiToHls(tx.value),6);
-                cell3.innerHTML = numerical.roundD(numerical.weiToGwei(tx.gas_cost),6);
+                cell3.innerHTML = numerical.roundD(numerical.weiToHls(tx.gas_cost),6);
 
                 if (prev_block_number == null || prev_block_number != tx.block_number) {
                     cell4.innerHTML = numerical.roundD(numerical.weiToHls(tx.balance),6);
