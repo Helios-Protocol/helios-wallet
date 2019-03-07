@@ -1,4 +1,4 @@
-
+loader_timeout = undefined;
 
 $( document ).ready(function() {
 
@@ -104,6 +104,10 @@ function popup(content, width){
     positionPopup();
 }
 
+function popupTimeout(){
+    popup("The operation has timed out. Check your connection and try again.");
+}
+
 function loaderPopup(content, width){
     if(width == undefined){
         width = 400;
@@ -119,11 +123,15 @@ function loaderPopup(content, width){
     $('#popup_background').fadeIn(200);
     $('#popup_outer').fadeIn(200);
     positionPopup();
+    loader_timeout = setTimeout(popupTimeout, 10000);
 }
 function close_popup(){
     $('#popup_background').hide();
     $('#popup_outer').hide();
     $('#popup_content').html("")
+    if(loader_timeout !== undefined){
+        clearTimeout(loader_timeout);
+    }
 }
 
 function resize_initial_background(){

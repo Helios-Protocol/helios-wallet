@@ -108,8 +108,8 @@ a:hover{
     height:27px;
     width:27px;
     position:absolute;
-    top:-30px;
-    right:-30px;
+    top:-40px;
+    right:0px;
     cursor:pointer;
 }
 #popup_container{
@@ -123,6 +123,7 @@ a:hover{
     border-radius: 0 15px 0 15px;
     color:#fff;
     z-index:110;
+    word-break: break-word;
 }
 #loader_container{
     position:relative;
@@ -307,6 +308,7 @@ table{
     padding:30px;
     padding-top:22px;
     padding-bottom:22px;
+    word-break: break-word;
 }
 
 
@@ -496,6 +498,7 @@ input[type="submit"].light_button, .light_button{
   top: 100%;
   left: 0;
   right: 0;
+    word-break: break-word;
 }
 .autocomplete-items div {
   padding: 10px;

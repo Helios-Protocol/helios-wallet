@@ -11,7 +11,7 @@ $( document ).ready(function() {
 
     });
 
-    populateHistoricalMinGasPricePlot();
+    //populateHistoricalMinGasPricePlot();
 });
 
 function populateHistoricalMinGasPricePlot() {

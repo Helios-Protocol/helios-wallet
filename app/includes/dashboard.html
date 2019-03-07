@@ -7,16 +7,16 @@
         <div class='block_content_container'>
             <form id="add_transaction_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" min='0.000000000000000001' placeholder="Amount">
+                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" min='0.000000000000000001' placeholder="Amount" autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" placeholder="To">
+                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" placeholder="To" autocomplete="off">
                 </div>
 
                 <div id='send_transaction_fee_estimation_container'>
                     <img src='images/hls_small.png' style='height:22px;'>
                     <div id='send_transaction_fee_estimation_text'>
-                        Estimated fee per transaction: <span class='fee_estimation'>0.000001 or 0.12%</span>
+                        Estimated fee per tx: <span class='fee_estimation'>0.000001 or 0.12%</span>
                     </div>
                 </div>
                 <div id='send_transaction_advanced_options_link' class='link'>
@@ -25,10 +25,10 @@
                 <div id='send_transaction_advanced_options_container'>
 
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' placeholder="Gas Price">
+                        <div class='required_star'>*</div><input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' placeholder="Gas Price" autocomplete="off">
                     </div>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' min='21000' max='31415926' placeholder="Max Allowed Gas">
+                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' min='21000' max='31415926' placeholder="Max Allowed Gas" autocomplete="off">
                     </div>
 
                     <input type="submit" value="Add Transaction to Block">
@@ -109,7 +109,7 @@
                 </table>
             </div>
             <div class='line_separater'>
-                <div class="button" id="incoming_transactions_accept">Accept incoming transactions</div>
+                <div class="button" id="incoming_transactions_accept">Accept transactions</div>
                 <div class="button" id="incoming_transactions_refresh" style="float:left;">Refresh</div>
                 <div class="clear_both"></div>
             </div>
@@ -121,58 +121,68 @@
             Transaction History
         </div>
         <div class='block_content_container'>
-            <div style="margin-bottom:10px;">
-                <div class="label" style="width:212px;"><div class='required_star' style="top:-4px;">*</div>Start Date</div>
-                <div class="label" style="width:200px;"><div class='required_star' style="top:-4px;">*</div>End Date</div>
-            </div>
             <form id='transaction_history_date_selector'>
-                <div class="custom-select">
-                     <select class="from_month">
-                        <option value="1">01</option>
-                        <option value="2">02</option>
-                        <option value="3">03</option>
-                        <option value="4">04</option>
-                        <option value="5">05</option>
-                        <option value="6">06</option>
-                        <option value="7">07</option>
-                        <option value="8">08</option>
-                        <option value="9">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
+                <div style="width:80px; float:right; height:79px;">
+                    <div style="padding-top:27px;">
+                        <input type="submit" value="View">
+                    </div>
                 </div>
-                <div class="custom-select" style="margin-right:20px;">
-                    <select class="from_year">
-                        <option value="2018">2018</option>
-                        <option value="2019">2019</option>
-                        <option value="2020">2020</option>
-                    </select>
+                <div style="width:250px; float:left; padding-bottom:15px;">
+                    <div class="label" style="width:200px; padding-bottom:10px;"><div class='required_star' style="top:-4px;">*</div>Start Date</div>
+                    <div class="custom-select">
+                         <select class="from_month">
+                            <option value="1">01</option>
+                            <option value="2">02</option>
+                            <option value="3">03</option>
+                            <option value="4">04</option>
+                            <option value="5">05</option>
+                            <option value="6">06</option>
+                            <option value="7">07</option>
+                            <option value="8">08</option>
+                            <option value="9">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="custom-select">
+                        <select class="from_year">
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="custom-select">
-                    <select class="to_month">
-                        <option value="1">01</option>
-                        <option value="2">02</option>
-                        <option value="3">03</option>
-                        <option value="4">04</option>
-                        <option value="5">05</option>
-                        <option value="6">06</option>
-                        <option value="7">07</option>
-                        <option value="8">08</option>
-                        <option value="9">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
+                <div style="width:250px; float:left; adding-bottom:15px;">
+                    <div class="label" style="width:200px; padding-bottom:10px;"><div class='required_star' style="top:-4px;">*</div>End Date</div>
+                    <div class="custom-select">
+                        <select class="to_month">
+                            <option value="1">01</option>
+                            <option value="2">02</option>
+                            <option value="3">03</option>
+                            <option value="4">04</option>
+                            <option value="5">05</option>
+                            <option value="6">06</option>
+                            <option value="7">07</option>
+                            <option value="8">08</option>
+                            <option value="9">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="custom-select">
+                        <select class="to_year">
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="custom-select">
-                    <select class="to_year">
-                        <option value="2018">2018</option>
-                        <option value="2019">2019</option>
-                    </select>
-                </div>
-                <input type="submit" value="View">
+
             </form>
+
+
+
             <div id='transaction_history_container' class='line_separater'>
                 <table id='transaction_history_list'>
                     <thead>

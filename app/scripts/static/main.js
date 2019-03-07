@@ -201,6 +201,9 @@ function afterLoginInit(){
     console.log("AfterLoginInit");
     init_complete = true;
     connectionMaintainer.setConnectedCallback(refreshDashboard);
+    if(!connectionMaintainer.isConnected()){
+        refreshDashboard();
+    }
     initOnlineMenu();
     refreshContactList();
     console.log("Starting");
@@ -210,6 +213,9 @@ function offlineModeInit(){
     console.log("OfflineModeInit");
     init_complete = true;
     connectionMaintainer.setConnectedCallback(refreshDashboard);
+    if(!connectionMaintainer.isConnected()){
+        refreshDashboard();
+    }
     initOfflineMenu();
     console.log("Starting");
 }

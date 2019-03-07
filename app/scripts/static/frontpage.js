@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 
     $('body').on('click', '#frontpage_sign_in_submit', function(e) {
+        e.preventDefault();
         var username = $('#input_sign_in_username').val();
         var password = $('#input_sign_in_password').val();
         if(!(validateInputs(username, 'username') === true)){
@@ -29,6 +30,7 @@ $( document ).ready(function() {
 
 
     $('body').on('click', '#frontpage_new_user_submit', function(e) {
+        e.preventDefault();
         var username = $('#input_new_user_username').val();
         var email = $('#input_email_username').val();
         var password = $('#input_new_user_password').val();

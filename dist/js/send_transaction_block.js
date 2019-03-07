@@ -127,7 +127,12 @@ function calculate_estimated_tx_fee_loop(){
     var gas_price =numerical.gweiToHls($('#input_gas_price').val());
     var tx_amount = $('#input_amount').val();
     var estimated_fee = Math.round(21000*gas_price*10000000)/10000000;
-    var estimated_fee_percentage = Math.round(estimated_fee/tx_amount*100000)/100000*100;
+    if(Number.isInteger(tx_amount)){
+        var estimated_fee_percentage = Math.round(estimated_fee/tx_amount*100000)/100000*100;
+    }else{
+        var estimated_fee_percentage = 0;
+    }
+
     $('.fee_estimation').text(estimated_fee+" or "+estimated_fee_percentage+"%")
     setTimeout(calculate_estimated_tx_fee_loop, 1000);
 }

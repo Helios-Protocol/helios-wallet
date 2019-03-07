@@ -28,13 +28,14 @@ class ConnectionMaintainer {
         return connected;
     }
 
-    setConnectedCallback(connectedCallback){
+    setConnectedCallback(connectedCallback) {
         console.log('setting connected callback');
         this.connectedCallback = connectedCallback;
-        if(this.isConnected()){
+        if (this.isConnected()) {
             this.connectedCallback();
         }
     }
+
 
     setStatusCallback(statusCallback){
         console.log('setting callback');
@@ -72,7 +73,7 @@ class ConnectionMaintainer {
                 }
 
             }
-            this.setStatus('Connected to node ' + web3.currentProvider.connection.url);
+            this.setStatus('Connected to node ' + web3.currentProvider.connection.url.substr(0,25) + "...");
             await sleep(this.connectedLoopPeriod)
             this.networkConnectionMaintainerLoop()
             this.wasConnected = true;
