@@ -99,7 +99,6 @@ $( document ).ready(function() {
         }
         web3.hls.sendTransactions(pending_send_transactions)
         .then(function(args){
-            console.log(args)
             if (pending_send_transactions.length <= 1) {
                 popup("Transaction sent successfully")
             } else {

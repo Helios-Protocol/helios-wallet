@@ -200,7 +200,10 @@ class ConnectionMaintainer {
 
     async networkConnectionMaintainerLoop(){
         console.log("network connection loop begin");
-        if(!this.isConnected()) {
+        if(this.isConnected()) {
+            console.log("Pinging ws server for keepalive");
+            web3.hls.ping();
+        }else{
             console.log("Attempting to connect to node");
             this.setStatus('Connection to network failed. Retrying connection.');
             await this.connectToFirstAvailableNode();
@@ -71228,6 +71231,10 @@ var Hls = function Hls() {
     this.ens = new ENS(this);
 
     var methods = [
+        new Method({
+            name: 'ping',
+            call: 'hls_ping'
+        }),
         new Method({
             name: 'test',
             call: 'hls_test'

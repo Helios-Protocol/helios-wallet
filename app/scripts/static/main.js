@@ -10,8 +10,11 @@ var contact_autocomplete_list_to_address_lookup = {};
 var init_complete = false;
 
 
+//CASHES
 var current_hls_balance_in_wei = 0;
 var current_min_gas_price = 1;
+var current_incoming_transactions = []
+
 
 $( document ).ready(function() {
     // Check for existing session and just refresh it

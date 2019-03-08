@@ -48,6 +48,7 @@ $( document ).ready(function() {
             popup("The two passwords must match");
             return;
         }
+        loaderPopup();
 
         var new_wallet = web3.eth.accounts.create();
         var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, password);

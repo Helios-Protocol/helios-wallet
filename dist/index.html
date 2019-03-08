@@ -496,7 +496,7 @@
         <div class='block_content_container'>
             <form id="generate_offline_wallet_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='generate_offline_wallet_password' class='fillable_input' type="password" placeholder="Password to encrypt wallet">
+                    <div class='required_star'>*</div><input id='generate_offline_wallet_password' class='fillable_input' type="password" placeholder="Password to encrypt wallet" autocomplete="off">
                 </div>
 
                 <input id="generate_offline_wallet_submit" type="submit" value="Create wallet">
@@ -517,7 +517,7 @@
                 </div>
                 <input type="file" id="load_offline_wallet_from_keystore_file_input" style='display:none'>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id="load_offline_wallet_from_keystore_password" type="password" placeholder="Keystore password">
+                    <div class='required_star'>*</div><input id="load_offline_wallet_from_keystore_password" type="password" placeholder="Keystore password" autocomplete="off">
                 </div>
                 <input type="submit" value="Load wallet">
                 <div class='clear_both'></div>
@@ -535,13 +535,13 @@
         <div class='block_content_container'>
             <form id="generate_online_wallet_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='generate_online_wallet_username' class='fillable_input' name='username' type="text"  placeholder="Your account username">
+                    <div class='required_star'>*</div><input id='generate_online_wallet_username' class='fillable_input' name='new_online_wallet_username' type="text"  placeholder="Your account username" autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='generate_online_wallet_password' class='fillable_input' type="password" placeholder="Your account password">
+                    <div class='required_star'>*</div><input id='generate_online_wallet_password' class='fillable_input' type="new_online_wallet_password" placeholder="Your account password" autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='generate_online_wallet_name' class='fillable_input' type="text" placeholder="New wallet name">
+                    <div class='required_star'>*</div><input id='generate_online_wallet_name' class='fillable_input' type="text" placeholder="New wallet name" autocomplete="off">
                 </div>
 
                 <input id="generate_online_wallet_submit" type="submit" value="Create new online wallet">
@@ -559,24 +559,27 @@
 
             <form id="load_online_wallet_keystore_form">
                 <div class='italic_heading' style='margin-top:0px;'>Online Account information:</div>
-                <div class='line_separater input_line_container'>
-                    <div class='required_star'>*</div><input id='load_online_wallet_username' class='fillable_input' name='username' type="text"  placeholder="Your account username">
+                <div class="line_separater">
+                    <div class='input_line_container'>
+                        <div class='required_star'>*</div><input id='load_online_wallet_username' class='fillable_input' name='add_online_wallet_username' type="text"  placeholder="Your account username" autocomplete="off">
+                    </div>
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='load_online_wallet_password' class='fillable_input' type="password" placeholder="Your account password">
+                    <div class='required_star'>*</div><input id='load_online_wallet_password' class='fillable_input' type="add_online_wallet_password" placeholder="Your account password" autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='load_online_wallet_name' class='fillable_input' type="text" placeholder="Wallet name">
+                    <div class='required_star'>*</div><input id='load_online_wallet_name' class='fillable_input' type="text" placeholder="Wallet name" autocomplete="off">
                 </div>
 
                 <div class='italic_heading'>Saved Keystore information:</div>
-
-                <div class='line_separater input_line_container'>
-                    <div class='required_star'>*</div><div id="load_online_wallet_from_keystore_fake_file_input" class='file_input'>Select keystore file</div>
+                <div class="line_separater">
+                    <div class='input_line_container'>
+                        <div class='required_star'>*</div><div id="load_online_wallet_from_keystore_fake_file_input" class='file_input'>Select keystore file</div>
+                    </div>
                 </div>
                 <input type="file" id="load_online_wallet_from_keystore_file_input" style='display:none'>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id="load_online_wallet_from_keystore_password" type="password" placeholder="Keystore password">
+                    <div class='required_star'>*</div><input id="load_online_wallet_from_keystore_password" name='add_online_wallet_keystore_password' type="password" placeholder="Keystore password" autocomplete="off">
                 </div>
                 <input type="submit" value="Load wallet">
                 <div class='clear_both'></div>
@@ -608,7 +611,7 @@
             Editing wallet
         </div>
         <div class='block_content_container'>
-            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_online_wallet_address_status' class='block_1_wide_right_text'>No wallet loaded</div>
+            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_online_wallet_address_status' class='block_2_wide_right_text'>No wallet loaded</div>
 
             <div class='clear_both'></div>
         </div>
@@ -673,7 +676,7 @@
             Editing wallet
         </div>
         <div class='block_content_container'>
-            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_offline_wallet_address_status' class='block_1_wide_right_text'>No wallet loaded</div>
+            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_offline_wallet_address_status' class='block_2_wide_right_text'>No wallet loaded</div>
 
             <div class='clear_both'></div>
         </div>

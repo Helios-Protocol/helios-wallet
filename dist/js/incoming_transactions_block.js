@@ -18,14 +18,26 @@ $( document ).ready(function() {
             popup('Need to load a wallet to do this.');
             return
         }
+        if(!connectionMaintainer.isConnected()) {
+            popup('Not connected to a node. Please check your internet connection and retry.');
+            return;
+        }
+        if(current_incoming_transactions.length > 0) {
+            web3.hls.sendRewardBlock(sending_account.address)
+            .then(function () {
+                popup("Block successfully sent");
+                clear_vars();
+                current_incoming_transactions = [];
+                setTimeout(refreshDashboard, 2000);
+            })
+            .catch(function (error) {
+                var error_message = getNodeMessageFromError(error);
+                popup("Error when sending block: " + error_message);
 
-        web3.hls.sendRewardBlock(sending_account.address)
-        .then(function(){
-            popup("Block successfully sent");
-            clear_vars();
-            setTimeout(refreshDashboard, 2000);
-        })
-
+            });
+        }else{
+            popup("There are no incoming transactions to accept.")
+        }
     });
 
 });
@@ -40,6 +52,7 @@ function refreshIncomingTransactions(){
         .then(function (receivableTxs) {
             console.log("receivable transactions:")
             console.log(receivableTxs);
+            current_incoming_transactions = receivableTxs;
             var tableRef = document.getElementById('incoming_transactions_list').getElementsByTagName('tbody')[0];
 
             //clear all rows
