@@ -17,6 +17,8 @@ var current_incoming_transactions = []
 
 
 $( document ).ready(function() {
+
+
     // Check for existing session and just refresh it
     // server.renewSession()
     // .then(function(result){
@@ -53,6 +55,8 @@ $( document ).ready(function() {
     // account = web3.hls.accounts.privateKeyToAccount('0x6edbbdf4e1a6e415b29444d38675364f67ae9c5a6192d3d755043f4b61e73cbb');
     // sending_account = account;
     // web3.hls.accounts.wallet.add(account);
+
+    calculate_estimated_tx_fee_loop();
 
     $('body').on('click', '#logout', function(e) {
         server.killSession();
@@ -180,7 +184,7 @@ function refresh_balance(){
     if(connectionMaintainer.isConnected()){
         web3.hls.getBalance(sending_account.address)
         .then(function(args){
-            var hls = numerical.roundD(numerical.weiToHls(args),8);
+            var hls = numerical.roundD(parseFloat(web3.utils.fromWei(web3.utils.toBN(args))),8);
             set_balance_status(hls);
             current_hls_balance_in_wei = args;
         });

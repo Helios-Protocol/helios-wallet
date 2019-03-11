@@ -95,20 +95,17 @@ function validateInputs(value, type){
             if(value === undefined || value === ''){
                 return "Transaction amount cannot be left blank";
             }
-            if(value < 1){
+            if(!web3.utils.toWei(web3.utils.toBN(value), 'ether').gt(web3.utils.toBN(1))){
                 return "Transaction amount must be at least 1 wei.";
-            }
-            if(!Number.isInteger(value)){
-                return "Transaction amount must be an integer number of wei.";
             }
 
             break;
         case "gas_price":
             if(value === undefined || value === ''){
-                return "Transaction gas cannot be left blank";
+                return "Transaction gas price cannot be left blank";
             }
-            if(!Number.isInteger(value)){
-                return "Transaction gas must be an integer";
+            if(!web3.utils.toWei(web3.utils.toBN(value), 'gwei').gt(web3.utils.toBN(1))){
+                return "Transaction gas price must be at least 1 wei.";
             }
             break;
         case "total_gas":

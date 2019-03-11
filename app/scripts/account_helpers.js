@@ -29,7 +29,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
         if(new_block.transactions.length > 0){
             for (var j = 0; j < new_block.transactions.length; j++) {
                 var tx = new_block.transactions[j];
-                output.push(new datastructures.tx_info(new_block.timestamp, "Send transaction", -1*tx.value, -1*tx.gasUsed*tx.gasPrice, tx.to, null, new_block.accountBalance, new_block.number))
+                output.push(new datastructures.tx_info(new_block.timestamp, "Send transaction", web3.utils.toBN(tx.value).mul(web3.utils.toBN(-1)), web3.utils.toBN(tx.gasUsed).mul(web3.utils.toBN(tx.gasPrice)).mul(web3.utils.toBN(-1)), tx.to, null, new_block.accountBalance, new_block.number))
 
             }
         }
@@ -41,7 +41,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
                 } else {
                     var description = "Receive transaction"
                 }
-                output.push(new datastructures.tx_info(new_block.timestamp, description, tx.value,-1*tx.gasUsed*tx.gasPrice, null, tx.from, new_block.accountBalance, new_block.number))
+                output.push(new datastructures.tx_info(new_block.timestamp, description, tx.value, web3.utils.toBN(tx.gasUsed).mul(web3.utils.toBN(tx.gasPrice)).mul(web3.utils.toBN(-1)), null, tx.from, new_block.accountBalance, new_block.number))
             }
         }
         if(parseFloat(new_block.rewardBundle.rewardType1.amount) !== parseFloat(0)) {

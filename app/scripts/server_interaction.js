@@ -1,4 +1,5 @@
 const superagent = require('superagent');
+const nocache = require('superagent-no-cache');
 const bcrypt = require('bcryptjs');
 
 
@@ -11,6 +12,8 @@ class Server {
         this.saltRounds = 11;
         this.superagent = superagent.agent();
         this.use_localStorage = false;
+        this.queryResponseTimeout = 4000; //Time till server responds
+        this.queryResponseDeadline = 8000; //Allowed time for page to load
     }
 
     error(errorName, extraData){
@@ -21,7 +24,7 @@ class Server {
         if(!(extraData === undefined)){
             console.log(extraData);
         }
-        return {'error': true, 'error_description': 'Malformed JSON Response'};
+        return {'error': true, 'error_description': error_description};
     }
 
     saveSession(session_hash, username){
@@ -203,6 +206,10 @@ class Server {
 
     async queryServer(query){
         return await superagent.get(this.serverUrl)
+        .timeout({
+            response: this.queryResponseTimeout,
+            deadline: this.queryResponseDeadline,
+        })
         .query(query)
         .then(res => {
             try {

@@ -1,19 +1,7 @@
+var web3Main = require('./web3.js');
+var web3 = web3Main.web3;
 
-var weiToGwei = function wei_to_gwei(number){
-    return number/1000000000;
-};
-var gweiToWei = function gwei_to_wei(number){
-    return number*1000000000;
-};
-var weiToHls = function wei_to_hls(number){
-    return number/Math.pow(10,18);
-};
-var hlsToWei = function hls_to_wei(number){
-    return number*Math.pow(10,18);
-};
-var gweiToHls = function gwei_to_hls(number){
-    return weiToHls(gweiToWei(number));
-};
+
 var roundD = function roundD(val, decimal_places){
     if(decimal_places === undefined){
         decimal_places = 0;
@@ -27,11 +15,6 @@ var roundD = function roundD(val, decimal_places){
 var block_gas_limit = 31415926;
 
 module.exports = {
-    weiToGwei: weiToGwei,
-    gweiToWei: gweiToWei,
-    weiToHls: weiToHls,
-    hlsToWei: hlsToWei,
-    gweiToHls: gweiToHls,
     roundD: roundD,
     block_gas_limit: block_gas_limit
 };

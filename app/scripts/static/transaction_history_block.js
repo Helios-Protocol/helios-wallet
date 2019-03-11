@@ -78,7 +78,6 @@ async function refresh_transactions(){
             prev_block_number = null
             for (i = 0; i < txs.length; i++) {
 
-                //var amount_shortened = numerical.roundD(numerical.weiToHls(transaction.value), 10);
 
                 var row = tableRef.insertRow(tableRef.rows.length);
                 var cell0 = row.insertCell(0);
@@ -96,11 +95,11 @@ async function refresh_transactions(){
 
                 cell0.innerHTML = d.toLocaleString('en-US',options);
                 cell1.innerHTML = tx.description;
-                cell2.innerHTML = numerical.roundD(numerical.weiToHls(tx.value),6);
-                cell3.innerHTML = numerical.roundD(numerical.weiToHls(tx.gas_cost),6);
+                cell2.innerHTML = numerical.roundD(parseFloat(web3.utils.fromWei(web3.utils.toBN(tx.value))),6);
+                cell3.innerHTML = numerical.roundD(parseFloat(web3.utils.fromWei(web3.utils.toBN(tx.gas_cost))),6);
 
                 if (prev_block_number == null || prev_block_number != tx.block_number) {
-                    cell4.innerHTML = numerical.roundD(numerical.weiToHls(tx.balance),6);
+                    cell4.innerHTML = numerical.roundD(parseFloat(web3.utils.fromWei(web3.utils.toBN(tx.balance))),6);
                 }else{
                     cell4.innerHTML = "";
                 }

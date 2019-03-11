@@ -17,6 +17,10 @@ var availableNodes = [
     "wss://bootnode.heliosprotocol.io:30304"
 ];
 
+var availableNodes = [
+    "wss://bootnode.heliosprotocol.io:30304"
+];
+
 var connectionMaintainer = new ConnectionMaintainer(availableNodes);
 connectionMaintainer.startNetworkConnectionMaintainerLoop();
 

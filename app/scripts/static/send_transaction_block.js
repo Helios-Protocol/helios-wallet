@@ -9,8 +9,6 @@ var pending_send_transactions = [];
 
 $( document ).ready(function() {
 
-    calculate_estimated_tx_fee_loop();
-
 
 
     $('#add_transaction_form').submit(function (e) {
@@ -53,9 +51,9 @@ $( document ).ready(function() {
             }
         }
 
-        if(getSumPendingTransactionsCost() > current_hls_balance_in_wei){
-            var required_cost = numerical.weiToHls(getSumPendingTransactionsCost());
-            var hls_balance = numerical.weiToHls(current_hls_balance_in_wei);
+        if(getSumPendingTransactionsCost().gt(web3.utils.toBN(current_hls_balance_in_wei))){
+            var required_cost = web3.utils.fromWei(web3.utils.toBN(getSumPendingTransactionsCost()), 'ether').toString();
+            var hls_balance = web3.utils.fromWei(web3.utils.toBN(current_hls_balance_in_wei), ether).toString();
             popup("You don't have enough HLS to cover the transactions and fees. " +
                 "You have a balance of "+hls_balance+" But the transactions and fees add up to "+required_cost +
                 "<br><br>If your balance is incorrect, try sending it again in a few moments.");
@@ -125,10 +123,11 @@ $( document ).ready(function() {
 
 function calculate_estimated_tx_fee_loop(){
     //Gwei
-    var gas_price =numerical.gweiToHls($('#input_gas_price').val());
+    var gas_price = web3.utils.toWei($('#input_gas_price').val(), 'gwei')
+    gas_price = parseFloat(web3.utils.fromWei(web3.utils.toBN(gas_price), 'ether'));
     var tx_amount = $('#input_amount').val();
-    var estimated_fee = Math.round(21000*gas_price*10000000)/10000000;
     if(!isNaN(parseFloat(tx_amount)) && isFinite(tx_amount)){
+        var estimated_fee = Math.round(21000*gas_price*10000000)/10000000;
         var estimated_fee_percentage = Math.round(estimated_fee/tx_amount*100000)/100000*100;
     }else{
         var estimated_fee_percentage = 0;
@@ -142,13 +141,13 @@ function calculate_estimated_tx_fee_loop(){
 // Functions
 //
 function add_transaction_to_block_from_form(){
-    var amount =numerical.hlsToWei($('#input_amount').val());
+
+    var amount =$('#input_amount').val();
     var to = $('#input_to').val();
 
     to = getAddressFromAutocompleteStringIfExist(to);
 
-    //Gwei
-    var gas_price =numerical.gweiToWei($('#input_gas_price').val());
+    var gas_price =$('#input_gas_price').val();
     var total_gas = parseInt($('#input_total_gas').val());
 
     if(!(validateInputs(amount, 'tx_amount') === true)){
@@ -169,11 +168,14 @@ function add_transaction_to_block_from_form(){
         return false;
     }
 
+    amount = web3.utils.toWei(amount.toString(), 'ether');
+    gas_price = web3.utils.toWei(gas_price.toString(), 'gwei');
+
     var transaction = {
                     from: sending_account.address,
                     to: to,
                     value: amount,
-                    gas: total_gas,
+                    gas: total_gas.toString(),
                     gasPrice: gas_price,
                     chainId: 1
                 }
@@ -204,7 +206,7 @@ function refresh_pending_transaction_table(table_id, include_delete_button){
         var transaction = pending_send_transactions[i];
         var index = i;
         var to_shortened = getAutocompleteStringFromAddressIfExist(transaction.to);
-        var amount_shortened = numerical.roundD(numerical.weiToHls(transaction.value), 10);
+        var amount_shortened = numerical.roundD(parseFloat(web3.utils.fromWei(transaction.value, 'ether')), 10);
 
         var row = tableRef.insertRow(tableRef.rows.length);
         var cell1 = row.insertCell(0);
@@ -218,15 +220,16 @@ function refresh_pending_transaction_table(table_id, include_delete_button){
         }
 
         cell2.innerHTML = amount_shortened;
-        cell3.innerHTML =numerical.weiToGwei(transaction.gasPrice); //show in gwei
+        cell3.innerHTML = web3.utils.fromWei(transaction.gasPrice, 'gwei'); //show in gwei
         cell4.innerHTML =transaction.gas; //show in wei
     }
 }
 
 function getSumPendingTransactionsCost(){
-    var total_amount = 0;
+    var total_amount = web3.utils.toBN(0);
     pending_send_transactions.forEach(function(tx){
-        total_amount += tx.value + tx.gas*tx.gasPrice
+        var gas_cost = web3.utils.toBN(tx.gas).mul(web3.utils.toBN(tx.gasPrice))
+        total_amount = total_amount.add(web3.utils.toBN(tx.value)).add(web3.utils.toBN(gas_cost))
     });
     return total_amount;
 }
@@ -243,7 +246,7 @@ function checkPendingTransactionsGasPrice(){
 function checkBlockGasLimit(){
     var gas_used = 0;
     pending_send_transactions.forEach(function(tx){
-        gas_used += tx.gas;
+        gas_used += parseFloat(tx.gas);
     });
 
     return gas_used < numerical.block_gas_limit;

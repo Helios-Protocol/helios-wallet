@@ -64,7 +64,7 @@ function refreshIncomingTransactions(){
                 var cell0 = row.insertCell(0);
                 var cell1 = row.insertCell(1);
 
-                var amount = numerical.weiToHls(tx['value'] - tx['remainingRefund']);
+                var amount = web3.utils.fromWei(web3.utils.toBN(tx['value']).sub(web3.utils.toBN(tx['remainingRefund'])));
                 cell0.innerHTML = getAutocompleteStringFromAddressIfExist(tx.from);
                 cell1.innerHTML = amount;
             });
