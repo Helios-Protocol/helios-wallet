@@ -1,5 +1,4 @@
 const superagent = require('superagent');
-const nocache = require('superagent-no-cache');
 const bcrypt = require('bcryptjs');
 
 
@@ -24,7 +23,7 @@ class Server {
         if(!(extraData === undefined)){
             console.log(extraData);
         }
-        return {'error': true, 'error_description': error_description};
+        return {'error': true, 'error_description': errorName};
     }
 
     saveSession(session_hash, username){

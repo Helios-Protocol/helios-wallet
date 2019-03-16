@@ -20,6 +20,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
     for (var i = start_block_number; i >= 0; i--) {
         console.log("Getting all transactions at block number "+i);
         var new_block = await web3.hls.getBlock(i, account.address, true);
+        console.log("block number "+i+" received");
         if(new_block.timestamp > start_timestamp){
             continue;
         }

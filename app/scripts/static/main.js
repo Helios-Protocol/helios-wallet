@@ -19,6 +19,7 @@ var current_incoming_transactions = []
 $( document ).ready(function() {
 
 
+
     // Check for existing session and just refresh it
     // server.renewSession()
     // .then(function(result){
@@ -55,6 +56,7 @@ $( document ).ready(function() {
     // account = web3.hls.accounts.privateKeyToAccount('0x6edbbdf4e1a6e415b29444d38675364f67ae9c5a6192d3d755043f4b61e73cbb');
     // sending_account = account;
     // web3.hls.accounts.wallet.add(account);
+    //testServer();
 
     calculate_estimated_tx_fee_loop();
 
@@ -127,7 +129,35 @@ $( document ).ready(function() {
 //
 // Loops
 //
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
+async function testServer(){
+    await sleep(100);
+    var start_time = Date.now();
+    if(connectionMaintainer.isConnected()){
+        web3.hls.test()
+        .then(function(res){
+            var duration = Date.now()-start_time
+            console.log('success '+duration+"ms");
+            console.log(res);
+            testServer();
+        })
+        .catch(function(err){
+            var duration = Date.now()-start_time
+            console.log('fail '+duration+"ms");
+            console.log(err);
+            testServer();
+        });
+    }else{
+        console.log('Not connected');
+        await sleep(2000);
+        testServer();
+    }
+
+
+}
 function refresh_loop(){
     if(sending_account != null){
         refreshDashboard();

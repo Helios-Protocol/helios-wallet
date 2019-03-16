@@ -12,10 +12,9 @@ var Server = require("./server_interaction.js").Server;
 //     "ws://142.58.49.25:30304"
 // ];
 
-var availableNodes = [
-    "ws://127.0.0.1:30304",
-    "wss://bootnode.heliosprotocol.io:30304"
-];
+// var availableNodes = [
+//     "ws://127.0.0.1:30304",
+// ];
 
 var availableNodes = [
     "wss://bootnode.heliosprotocol.io:30304"
