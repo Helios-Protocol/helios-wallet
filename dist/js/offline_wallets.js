@@ -160,7 +160,7 @@ function addOfflineWallet(new_wallet, do_not_make_active_account){
 function deleteOfflineWallet(wallet_address){
     delete available_offline_accounts[wallet_address];
     $('.nav__link.edit_offline_wallet[data-address="'+wallet_address+'"]').parent('.nav__item').remove();
-    if(sending_account.address === wallet_address){
+    if(sending_account !== undefined && sending_account !== null && sending_account.address === wallet_address){
         sending_account = null;
         refreshDashboard();
     }

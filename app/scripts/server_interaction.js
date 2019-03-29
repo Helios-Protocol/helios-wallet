@@ -139,6 +139,46 @@ class Server {
         return false;
     }
 
+    async getNew2FASecret(){
+        console.log("Getting new 2FA secret");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'get_new_2fa_secret', username: session['username'], session_hash: session['session_hash']};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
+    async is2FAEnabled(){
+        console.log("Checking if 2FA enabled");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'is_2fa_enabled', username: session['username'], session_hash: session['session_hash']};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
+    async delete2FASecret(){
+        console.log("Deleting 2FA secret");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'delete_2fa_secret', username: session['username'], session_hash: session['session_hash']};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
+    async save2FASecret(secret, code){
+        console.log("Saving 2FA secret");
+        var session = this.loadSession();
+        if(!(session['session_hash'] === undefined)) {
+            var query = {action: 'save_new_2fa_secret', secret: secret, code: code, username: session['username'], session_hash: session['session_hash']};
+            return await this.queryServer(query);
+        }
+        return false;
+    }
+
     async addContact(contact_name, contact_address){
         console.log("Adding contacts");
         var session = this.loadSession();
@@ -166,7 +206,7 @@ class Server {
         return false;
     }
 
-    async signIn(username, password){
+    async signIn(username, password, tfa_code){
         // Sign wallets with password. But we hide that password from the server by hashing it here with bcrypt.
         // Then in order to stop pass the hash attacks, the server side will also hash the hash with bcrypt.
         // Then the keystore encryption keys and login information are both safe.
@@ -181,6 +221,7 @@ class Server {
 
         query = {   action: 'sign_in',
                     username: username,
+                    two_factor_code: tfa_code,
                     password_hash_for_verification: password_hash_for_verification,
                     new_password_hash: new_password_hash,
                     new_salt: new_salt};
@@ -220,6 +261,16 @@ class Server {
             console.log(json_response);
             if('session_hash' in json_response){
                 this.saveSession(json_response['session_hash']);
+            }
+            // check for invalid session
+            if('error' in json_response){
+                if(json_response['error'] == 2020){
+                    if(typeof window.logout !== 'undefined' && typeof window.popup !== 'undefined'){
+                        console.log("Session expired");
+                        window.logout();
+                        window.popup("Your session has expired. Please log in again to continue.");
+                    }
+                }
             }
             return json_response;
 

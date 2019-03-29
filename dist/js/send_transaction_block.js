@@ -126,8 +126,8 @@ function calculate_estimated_tx_fee_loop(){
     var gas_price = web3.utils.toWei($('#input_gas_price').val(), 'gwei')
     gas_price = parseFloat(web3.utils.fromWei(web3.utils.toBN(gas_price), 'ether'));
     var tx_amount = $('#input_amount').val();
+    var estimated_fee = Math.round(21000*gas_price*10000000)/10000000;
     if(!isNaN(parseFloat(tx_amount)) && isFinite(tx_amount)){
-        var estimated_fee = Math.round(21000*gas_price*10000000)/10000000;
         var estimated_fee_percentage = Math.round(estimated_fee/tx_amount*100000)/100000*100;
     }else{
         var estimated_fee_percentage = 0;

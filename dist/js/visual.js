@@ -89,6 +89,14 @@ var set_username_status = function(username){
     $('#username_status').text(username);
 }
 
+function set_two_factor_authentication_status(tfa_enabled){
+    if(tfa_enabled) {
+        $('#two_factor_authentication_status').text('Enabled');
+    }else{
+        $('#two_factor_authentication_status').text('Disabled');
+    }
+}
+
 function popup(content, width){
     if(width == undefined){
         width = 400;

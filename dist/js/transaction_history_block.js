@@ -18,6 +18,11 @@ $( document ).ready(function() {
          refresh_transactions();
     });
 
+    $('body').on('click', '.tx_history_row', function () {
+        console.log('test');
+        $(this).next().toggle();
+    });
+
     populateSelectYears();
     selectDefaultYears();
 });
@@ -80,6 +85,7 @@ async function refresh_transactions(){
 
 
                 var row = tableRef.insertRow(tableRef.rows.length);
+                row.className = 'tx_history_row';
                 var cell0 = row.insertCell(0);
                 var cell1 = row.insertCell(1);
                 var cell2 = row.insertCell(2);
@@ -103,6 +109,26 @@ async function refresh_transactions(){
                 }else{
                     cell4.innerHTML = "";
                 }
+
+
+                //now lets add the details:
+                var detail_row = tableRef.insertRow(tableRef.rows.length);
+                detail_row.className = 'tx_history_detail_row';
+                var detail_cell0 = detail_row.insertCell(0);
+                detail_cell0.className = 'tx_history_cell_full_width';
+                detail_cell0.colSpan = 5;
+                options = { day: 'numeric', year: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName:'short'};
+                var details_content =   "<h3>Transaction details</h3>" +
+                                        "<span class='bold'>Date:</span> "+d.toLocaleString('en-US',options)+"<br>" +
+                                        "<span class='bold'>Description:</span> "+tx.description+"<br>" +
+                                        "<span class='bold'>From:</span> "+getAutocompleteStringFromAddressIfExist(tx.from)+"<br>" +
+                                        "<span class='bold'>To:</span> "+getAutocompleteStringFromAddressIfExist(tx.to)+"<br>" +
+                                        "<span class='bold'>Value:</span> "+web3.utils.fromWei(web3.utils.toBN(tx.value)).toString() +"<br>" +
+                                        "<span class='bold'>Fees:</span> "+web3.utils.fromWei(web3.utils.toBN(tx.gas_cost)).toString() +"<br>" +
+                                        "<span class='bold'>Block number:</span> "+tx.block_number+"<br>"+
+                                        "<span class='bold'>Block final balance:</span> "+web3.utils.fromWei(web3.utils.toBN(tx.balance)).toString();
+                detail_cell0.innerHTML = details_content;
+
                 prev_block_number = tx.block_number
 
 

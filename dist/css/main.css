@@ -15,6 +15,9 @@ body{
 div{
     position:relative;
 }
+.bold{
+    font-weight: bold;
+}
 .frontpage_block_content{
     display:none;
 }
@@ -154,7 +157,7 @@ a:hover{
 }
 .block_1_wide_left_icon{
     float:left;
-    width:36px;
+    height:36px;
 }
 .block_1_wide_right_text{
     float:left;
@@ -204,7 +207,7 @@ h2{
 .frontpage_block{
     position:relative;
     left:200px;
-    top:20%;
+    top:15%;
 }
 @media (max-width: 700px) {
     .frontpage_block{
@@ -262,6 +265,8 @@ h2{
 table{
     text-align: left;
     width:100%;
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 .italic_heading{
     font-weight:400;
@@ -565,6 +570,7 @@ tbody{
     font-size:14px;
 }
 td{
+    padding:5px;
     padding-top:10px;
     border-bottom:1px solid #eee;
     word-break: break-word;
@@ -577,6 +583,20 @@ td{
 #historical_min_gas_plot_div{
     width:100%;
     height:500px;
+}
+
+
+.tx_history_row{
+    cursor:pointer;
+}
+.tx_history_row:hover{
+    background-color:#eeeeee;
+}
+.tx_history_detail_row{
+    display:none;
+}
+.tx_history_cell_full_width{
+    padding:20px;
 }
 
 /*FOOTER*/

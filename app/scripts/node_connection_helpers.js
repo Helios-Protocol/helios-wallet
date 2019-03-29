@@ -63,7 +63,8 @@ class ConnectionMaintainer {
             await web3.hls.ping();
         }else{
             console.log("Attempting to connect to node");
-            this.setStatus('Connection to network failed. Retrying connection.');
+            //this.setStatus('Connection to network failed. Retrying connection.');
+            this.setStatus('Not connected. Helios network is undergoing maintenance.');
             await this.connectToFirstAvailableNode();
         }
 

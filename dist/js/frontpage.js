@@ -4,13 +4,18 @@ $( document ).ready(function() {
         e.preventDefault();
         var username = $('#input_sign_in_username').val();
         var password = $('#input_sign_in_password').val();
+        var tfa_code = $('#input_sign_in_two_factor_authentication').val();
         if(!(validateInputs(username, 'username') === true)){
             popup(validateInputs(username, 'username'));
             return;
         }
+        if(!(validateInputs(tfa_code, 'two_factor_code') === true)){
+            popup(validateInputs(tfa_code, 'two_factor_code'));
+            return;
+        }
 
         loaderPopup();
-        server.signIn(username, password)
+        server.signIn(username, password, tfa_code)
         .then(function(response){
             if(response !== false && "success" in response) {
                 //success
@@ -19,6 +24,8 @@ $( document ).ready(function() {
                 populateOnlineKeystores(online_keystores, password);
                 close_popup();
                 switchToPage('main_page');
+                var tfa_enabled = (response['2fa_enabled'] === 'true');
+                set_two_factor_authentication_status(tfa_enabled);
                 afterLoginInit();
             }else{
                 //fail
@@ -66,6 +73,8 @@ $( document ).ready(function() {
                             var online_keystores = response['keystores'];
                             populateOnlineKeystores(online_keystores, password);
                             switchToPage('main_page');
+                            var tfa_enabled = (response['2fa_enabled'] === 'true');
+                            set_two_factor_authentication_status(tfa_enabled);
                             afterLoginInit();
                         }else{
                             //fail

@@ -72,6 +72,7 @@ async function refreshContactList(){
                 contact_autocomplete_list_to_address_lookup[autocomplete_entry] = contacts[i]['address'];
             }
             autocomplete(document.getElementById("input_to"), contact_autocomplete_list);
+            return true;
         }
     });
 

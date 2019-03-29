@@ -286,7 +286,7 @@ function deleteOnlineWallet(wallet_address){
     delete online_wallet_to_name_lookup[wallet_address];
     delete online_wallet_to_id_lookup[wallet_address];
     $('.nav__link.edit_online_wallet[data-address="'+wallet_address+'"]').parent('.nav__item').remove();
-    if(sending_account.address === wallet_address){
+    if(sending_account !== undefined && sending_account !== null && sending_account.address === wallet_address){
         sending_account = null;
         refreshDashboard();
     }

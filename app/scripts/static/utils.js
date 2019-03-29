@@ -85,7 +85,7 @@ function validateInputs(value, type){
             if(value === undefined || value === ''){
                 return "Wallet address cannot be left blank";
             }
-            if(!web3.utils.isAddress(value)){
+            if(!web3.utils.isAddress(value.toLowerCase())){
                 if(!(value in contact_autocomplete_list_to_address_lookup)){
                     return "The given wallet address is not a valid address or contact.";
                 }
@@ -114,6 +114,11 @@ function validateInputs(value, type){
             }
             if(!Number.isInteger(value)){
                 return "Transaction total gas must be an integer";
+            }
+            break;
+        case "two_factor_code":
+            if(value.trim().length > 6){
+                return "Two factor must be less than 6 characters long.";
             }
             break;
     }

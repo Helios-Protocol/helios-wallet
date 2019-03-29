@@ -1,0 +1,22 @@
+Warning: This will overwrite any previously used two factor authentication!<br><br>
+Scan the QR code below to set up your authenticator app. Or you can manually type in the code below. Then type your authentication code in the box below to confirm.
+<div syle="width:100%; position:relative;">
+    <div style="width:200px; height:200px; margin-left:auto; margin-right:auto;">
+        <img id="two_factor_authentication_confirm_qr_code" src=''>
+    </div>
+    <div id='two_factor_authentication_confirm_secret' style="width:200px; margin-left:auto; margin-right:auto; padding-top:20px;">
+
+    </div>
+</div>
+<div class="clear_both" style="padding-top:20px;">
+    <div style="position:relative;">
+        <form id="confirm_new_two_factor_authentication_secret" >
+            <div class='required_star'>*</div><input id="new_two_factor_authentication_code" type="text" placeholder="Type your two factor code to confirm" autocomplete="off">
+            <div class='line_separater'>
+                <input type="submit" class='light_button' value="Submit">
+                <div class='light_button' id='exit_popup_submit' style='float:left;'>Get me out of here!</div>
+            </div>
+            <div class='clear_both'></div>
+        </form>
+    </div>
+</div>

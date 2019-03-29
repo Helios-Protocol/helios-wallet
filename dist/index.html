@@ -22,7 +22,7 @@
     <script src="js/menu.js"></script>
     <script src="js/custom_select.js"></script>
     <script src="js/autocomplete.js"></script>
-    <script src="js/metamask.js"></script>
+    <script src="js/two_factor_authentication.js"></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
@@ -87,6 +87,9 @@
                     </div>
                     <div class='input_line_container'>
                         <div class='required_star'>*</div><input id='input_sign_in_password' class='fillable_input' name='password' type="password" placeholder="Password">
+                    </div>
+                    <div class='input_line_container'>
+                        <input id='input_sign_in_two_factor_authentication' class='fillable_input' name='two_factor' type="text" placeholder="Two factor code (if enabled)" autocomplete="false">
                     </div>
                 </div>
                 <div>
@@ -225,15 +228,17 @@
                         <img class='menu_image_img' src='images/account_menu.png' style='height:28px;'>
                     </div>
                     <ul class="nav__dropdown">
+                        <li role="presentation" id='main_page-two_factor_authentication-menu_item' class="nav__item online_menu_item">
+                            <a href="#main_page-two_factor_authentication" class='nav__link'>
+                                Two Factor Authentication
+                            </a>
+                        </li>
                         <li role="presentation" class="nav__item">
                             <div id='logout' class="nav__link">
                                 <span class='online_menu_item'>Logout</span>
                                 <span class='offline_menu_item'>Go back to sign in page</span>
                             </div>
                         </li>
-
-
-
 
                     </ul>
                 </li>
@@ -744,6 +749,38 @@
         </div>
     </div>
 </div>
+    <div class='tab_item' id='main_page-two_factor_authentication'>
+    <div class='block_1_wide block_right'>
+        <div class='block_title'>
+            Quick links
+        </div>
+        <div class='block_content_container'>
+            <input id="two_factor_disable" type="submit" value="Disable 2FA" style='width:100%; float:none;'>
+            <div class='line_separater'>
+                <input class="generate_new_two_factor" type="submit" value="Enable 2FA" style='width:100%; float:none;'>
+            </div>
+            <div class='line_separater'>
+                <input class="generate_new_two_factor" type="submit" value="Generate New 2FA" style='width:100%; float:none;'>
+            </div>
+            <div class='clear_both'></div>
+        </div>
+    </div>
+
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Two Factor Authentication Status
+        </div>
+        <div class='block_content_container'>
+            <img src='images/lock_icon.png' class='block_1_wide_left_icon'><div id='two_factor_authentication_status' class='block_2_wide_right_text' style="padding-top:10px;">Disabled</div>
+
+            <div class='clear_both'></div>
+        </div>
+
+    </div>
+
+</div>
+
 </div>
             </div>
 
@@ -782,6 +819,30 @@ Once it is deleted there is no way to recover it.
 <div style='margin-top:20px;'>
     <input type="submit" id='delete_online_wallet_confirmation_popup_submit' data-address='' class='light_button' value="Confirm wallet deletion" >
     <div class='light_button' id='exit_popup_submit' style='float:left;'>Get me out of here!</div>
+</div>
+            </div>
+            <div class='popup_content_store' id='popup_content_new_two_factor_authentication'>
+                Warning: This will overwrite any previously used two factor authentication!<br><br>
+Scan the QR code below to set up your authenticator app. Or you can manually type in the code below. Then type your authentication code in the box below to confirm.
+<div syle="width:100%; position:relative;">
+    <div style="width:200px; height:200px; margin-left:auto; margin-right:auto;">
+        <img id="two_factor_authentication_confirm_qr_code" src=''>
+    </div>
+    <div id='two_factor_authentication_confirm_secret' style="width:200px; margin-left:auto; margin-right:auto; padding-top:20px;">
+
+    </div>
+</div>
+<div class="clear_both" style="padding-top:20px;">
+    <div style="position:relative;">
+        <form id="confirm_new_two_factor_authentication_secret" >
+            <div class='required_star'>*</div><input id="new_two_factor_authentication_code" type="text" placeholder="Type your two factor code to confirm" autocomplete="off">
+            <div class='line_separater'>
+                <input type="submit" class='light_button' value="Submit">
+                <div class='light_button' id='exit_popup_submit' style='float:left;'>Get me out of here!</div>
+            </div>
+            <div class='clear_both'></div>
+        </form>
+    </div>
 </div>
             </div>
             <div id="footer_margin"></div>

@@ -8,6 +8,7 @@ var contact_address_to_name_lookup = {};
 var contact_autocomplete_list = [];
 var contact_autocomplete_list_to_address_lookup = {};
 var init_complete = false;
+var tfa_enabled = false;
 
 
 //CASHES
@@ -61,10 +62,7 @@ $( document ).ready(function() {
     calculate_estimated_tx_fee_loop();
 
     $('body').on('click', '#logout', function(e) {
-        server.killSession();
-        switchToPage('frontpage_page')
-        window.location.hash = '';
-        clear_vars(true);
+        logout();
     });
 
     //
@@ -237,12 +235,18 @@ function init_min_gas_price(){
 function afterLoginInit(){
     console.log("AfterLoginInit");
     init_complete = true;
-    connectionMaintainer.setConnectedCallback(refreshDashboard);
-    if(!connectionMaintainer.isConnected()){
-        refreshDashboard();
-    }
-    initOnlineMenu();
-    refreshContactList();
+    loaderPopup();
+    //Refresh contacts first to make sure they are populated in dashboard transactions.
+    refreshContactList()
+    .then(function(){
+        connectionMaintainer.setConnectedCallback(refreshDashboard);
+        if(!connectionMaintainer.isConnected()){
+            refreshDashboard();
+        }
+        initOnlineMenu();
+        close_popup();
+    });
+
     console.log("Starting");
 }
 
@@ -258,5 +262,10 @@ function offlineModeInit(){
 }
 
 
-
+function logout(){
+    server.killSession();
+    switchToPage('frontpage_page')
+    window.location.hash = '';
+    clear_vars(true);
+}
 
