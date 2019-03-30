@@ -11,7 +11,9 @@ Scan the QR code below to set up your authenticator app. Or you can manually typ
 <div class="clear_both" style="padding-top:20px;">
     <div style="position:relative;">
         <form id="confirm_new_two_factor_authentication_secret" >
-            <div class='required_star'>*</div><input id="new_two_factor_authentication_code" type="text" placeholder="Type your two factor code to confirm" autocomplete="off">
+            <div class='required_star'>*</div>
+            <label class='input__label'>Type your two factor code to confirm</label>
+            <input id="new_two_factor_authentication_code" class='fillable_input' type="text" name="new_two_factor_authentication_code" autocomplete="off">
             <div class='line_separater'>
                 <input type="submit" class='light_button' value="Submit">
                 <div class='light_button' id='exit_popup_submit' style='float:left;'>Get me out of here!</div>

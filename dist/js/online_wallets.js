@@ -155,8 +155,10 @@ $( document ).ready(function() {
     $('body').on('change', '#load_online_wallet_from_keystore_file_input', function(e) {
         var filename = $(this).val().split(/(\\|\/)/g).pop().substr(0,20);
         if(filename == ""){
+            $('#load_online_wallet_from_keystore_fake_file_input').removeClass('filled');
             $('#load_online_wallet_from_keystore_fake_file_input').text("Select keystore file");
         }else {
+            $('#load_online_wallet_from_keystore_fake_file_input').addClass('filled');
             $('#load_online_wallet_from_keystore_fake_file_input').text(filename + "...");
         }
     });

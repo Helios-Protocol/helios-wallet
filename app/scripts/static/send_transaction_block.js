@@ -51,6 +51,11 @@ $( document ).ready(function() {
             }
         }
 
+        if(pending_send_transactions === null || pending_send_transactions === undefined || pending_send_transactions.length == 0){
+            popup("You need to have at least one transaction to do this.");
+            return;
+        }
+
         if(getSumPendingTransactionsCost().gt(web3.utils.toBN(current_hls_balance_in_wei))){
             var required_cost = web3.utils.fromWei(web3.utils.toBN(getSumPendingTransactionsCost()), 'ether').toString();
             var hls_balance = web3.utils.fromWei(web3.utils.toBN(current_hls_balance_in_wei), ether).toString();

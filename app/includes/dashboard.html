@@ -7,10 +7,14 @@
         <div class='block_content_container'>
             <form id="add_transaction_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" min='0.000000000000000001' placeholder="Amount" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Amount</label>
+                    <input id='input_amount' class='fillable_input' name='amount' type="text" min='0.000000000000000001' autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" placeholder="To" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>To</label>
+                    <input id='input_to' class='fillable_input' name='to' type="text" autocomplete="off">
                 </div>
 
                 <div id='send_transaction_fee_estimation_container'>
@@ -25,10 +29,14 @@
                 <div id='send_transaction_advanced_options_container'>
 
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' placeholder="Gas Price" autocomplete="off">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Gas Price</label>
+                        <input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' autocomplete="off">
                     </div>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' min='21000' max='31415926' placeholder="Max Allowed Gas" autocomplete="off">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Max Allowed Gas</label>
+                        <input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' min='21000' max='31415926' autocomplete="off">
                     </div>
 
                     <input type="submit" value="Add Transaction to Block">

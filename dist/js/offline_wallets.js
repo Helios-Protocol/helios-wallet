@@ -16,7 +16,7 @@ $( document ).ready(function() {
         $('#generate_offline_wallet_password').trigger("change");
         addOfflineWallet(new_wallet);
         refreshDashboard();
-        popup("The new wallet has been loaded and added to offline wallets on the top menu.");
+        popup("The new wallet has been loaded and added to local wallets on the top menu.");
     });
 
     $('body').on('click', '.switch_wallet_link', function(e) {
@@ -53,8 +53,10 @@ $( document ).ready(function() {
     $('body').on('change', '#load_offline_wallet_from_keystore_file_input', function(e) {
         var filename = $(this).val().split(/(\\|\/)/g).pop().substr(0,20);
         if(filename == ""){
+            $('#load_offline_wallet_from_keystore_fake_file_input').removeClass('filled');
             $('#load_offline_wallet_from_keystore_fake_file_input').text("Select keystore file");
         }else {
+            $('#load_offline_wallet_from_keystore_fake_file_input').addClass('filled');
             $('#load_offline_wallet_from_keystore_fake_file_input').text(filename + "...");
         }
     });

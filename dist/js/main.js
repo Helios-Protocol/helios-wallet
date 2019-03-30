@@ -267,5 +267,6 @@ function logout(){
     switchToPage('frontpage_page')
     window.location.hash = '';
     clear_vars(true);
+    resize_initial_background();
 }
 

@@ -10,7 +10,8 @@ $( document ).ready(function() {
         }
     });
 
-    $('.fillable_input').change(function() {
+
+    $('body').on('change', '.fillable_input', function(e) {
         if($(this).val() == ''){
             $(this).removeClass('filled')
         }else{
@@ -53,10 +54,51 @@ $( document ).ready(function() {
     resize_initial_background();
 
     $(window).on('resize', function(){
-        resize_initial_background()
+        resize_initial_background();
     });
 
+
+    $('body').on('click', function(e){
+        $('input, textarea').not(e.target).each(function(){
+            // Don't remove the active class if we click on the label
+            if($(e.target).siblings().is($(this))) {
+                return;
+            }
+
+            if(!$(this).val()) {
+                $(this).siblings('.input__label').removeClass('input__label--active');
+            }else{
+                $(this).siblings('.input__label').addClass('input__label--active');
+            }
+        })
+    });
+
+    $('body').on('click', 'input, textarea', function(e) {
+        $(this).siblings('.input__label').addClass('input__label--active');
+    });
+
+    $('body').on('focus', 'input, textarea', function(e) {
+        $(this).siblings('.input__label').addClass('input__label--active');
+    });
+
+    $('body').on('click', '.input__label', function(e) {
+        // Focus the input element after clicking on the label so that the user can start typing right away
+        $(this).addClass('input__label--active');
+        $(this).siblings('input, textarea').focus();
+    });
+
+     $('input').on('animationstart', function(e) {
+        // Focus the input element after clicking on the label so that the user can start typing right away
+        $(this).siblings('.input__label').addClass('input__label--active');
+    });
+
+
+
+
+
 });
+
+
 
 var set_status = function(status){
     $('#current_status').text(status);
@@ -145,7 +187,12 @@ function close_popup(){
 function resize_initial_background(){
 
     var window_width = $(window).width();
-    var window_height = $(window).height()
+    var window_height = $(window).height();
+    console.log('window_height');
+    console.log(window_height);
+    console.log('window_width');
+    console.log(window_width);
+
 
     var window_aspect_ratio = window_width/window_height;
 

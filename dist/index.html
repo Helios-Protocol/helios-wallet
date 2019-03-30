@@ -7,30 +7,31 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
-    <script src="js/helios-wallet-master.js"></script>
-    <script src="js/send_transaction_block.js"></script>
-    <script src="js/transaction_history_block.js"></script>
-    <script src="js/frontpage.js"></script>
-    <script src="js/historical_gas_price_block.js"></script>
-    <script src="js/incoming_transactions_block.js"></script>
-    <script src="js/offline_wallets.js"></script>
-    <script src="js/online_wallets.js"></script>
-    <script src="js/contacts.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/visual.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/menu.js"></script>
-    <script src="js/custom_select.js"></script>
-    <script src="js/autocomplete.js"></script>
-    <script src="js/two_factor_authentication.js"></script>
+    <script src="js/helios-wallet-master.js?version=1"></script>
+    <script src="js/send_transaction_block.js?version=1"></script>
+    <script src="js/transaction_history_block.js?version=1"></script>
+    <script src="js/frontpage.js?version=1"></script>
+    <script src="js/historical_gas_price_block.js?version=1"></script>
+    <script src="js/incoming_transactions_block.js?version=1"></script>
+    <script src="js/offline_wallets.js?version=1"></script>
+    <script src="js/online_wallets.js?version=1"></script>
+    <script src="js/contacts.js?version=1"></script>
+    <script src="js/utils.js?version=1"></script>
+    <script src="js/visual.js?version=1"></script>
+    <script src="js/main.js?version=1"></script>
+    <script src="js/menu.js?version=1"></script>
+    <script src="js/custom_select.js?version=1"></script>
+    <script src="js/autocomplete.js?version=1"></script>
+    <script src="js/two_factor_authentication.js?version=1"></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:200,300,300i,400,400i,500,600" rel="stylesheet">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css?version=1">
+    <link rel="stylesheet" href="css/main.css?version=1">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1f6370" />
 
 </head>
 
@@ -83,13 +84,18 @@
                 <h1>Sign in</h1>
                 <div class='line_separater'>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_sign_in_username' class='fillable_input' name='username' type="text" placeholder="Username">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Username</label>
+                        <input id='input_sign_in_username' class='fillable_input' name='username' type="text">
                     </div>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_sign_in_password' class='fillable_input' name='password' type="password" placeholder="Password">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Password</label>
+                        <input id='input_sign_in_password' class='fillable_input' name='password' type="password">
                     </div>
                     <div class='input_line_container'>
-                        <input id='input_sign_in_two_factor_authentication' class='fillable_input' name='two_factor' type="text" placeholder="Two factor code (if enabled)" autocomplete="false">
+                        <label class='input__label'>Two factor code (if enabled)</label>
+                        <input id='input_sign_in_two_factor_authentication' class='fillable_input' name='two_factor' type="text" autocomplete="false">
                     </div>
                 </div>
                 <div>
@@ -101,7 +107,7 @@
                 <div class='line_separater'>
                     <h2>Advanced Options</h2>
                     <div class="line_separater_medium">
-                        <a href="#main_page-add_offline_wallet" class="italic local_link" id='offline_mode_link'>Fully offline mode</a>
+                        <a href="#main_page-add_offline_wallet" class="italic local_link" id='offline_mode_link'>Local wallet mode</a>
                     </div>
                 </div>
                 <input type="submit" value="Submit" class="light_button" id="frontpage_sign_in_submit" style="position:relative; float:right; top:30px; right:-30px;">
@@ -117,16 +123,23 @@
                 <h1>Create Account</h1>
                 <div class='line_separater'>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_new_user_username' class='fillable_input' name='username' type="text"  placeholder="Username">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Username</label>
+                        <input id='input_new_user_username' class='fillable_input' name='username' type="text">
                     </div>
                     <div class='input_line_container'>
-                        <input id='input_new_user_email' class='fillable_input' name='email' type="text"  placeholder="Email">
+                        <label class='input__label'>Email</label>
+                        <input id='input_new_user_email' class='fillable_input' name='email' type="text">
                     </div>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_new_user_password' class='fillable_input' name='password' type="password" placeholder="Password">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Password</label>
+                        <input id='input_new_user_password' class='fillable_input' name='password' type="password">
                     </div>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_new_user_password_repeat' class='fillable_input' name='password_repeat' type="password" placeholder="Repeat password">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Repeat password</label>
+                        <input id='input_new_user_password_repeat' class='fillable_input' name='password_repeat' type="password">
                     </div>
                 </div>
                 <div>
@@ -179,7 +192,7 @@
                 </li>
                 <li role="presentation" class="nav__item menu_root nav__item--left has_submenu">
                     <div class='nav__link'>
-                        Offline wallets
+                        Local wallets
                     </div>
                     <ul class="nav__dropdown" id='offline_wallets_menu_list'>
                         <li role="presentation" id='main_page-add_offline_wallet-menu_item' class="nav__item">
@@ -263,10 +276,14 @@
         <div class='block_content_container'>
             <form id="add_transaction_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_amount' class='fillable_input' name='amount' type="text" min='0.000000000000000001' placeholder="Amount" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Amount</label>
+                    <input id='input_amount' class='fillable_input' name='amount' type="text" min='0.000000000000000001' autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='input_to' class='fillable_input' name='to' type="text" placeholder="To" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>To</label>
+                    <input id='input_to' class='fillable_input' name='to' type="text" autocomplete="off">
                 </div>
 
                 <div id='send_transaction_fee_estimation_container'>
@@ -281,10 +298,14 @@
                 <div id='send_transaction_advanced_options_container'>
 
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' placeholder="Gas Price" autocomplete="off">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Gas Price</label>
+                        <input id='input_gas_price' class='fillable_input' name='gas_price' type="number" value = '1' min='0.000000001' autocomplete="off">
                     </div>
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' min='21000' max='31415926' placeholder="Max Allowed Gas" autocomplete="off">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Max Allowed Gas</label>
+                        <input id='input_total_gas' class='fillable_input' name='total_gas' type="number" value = '800000' min='21000' max='31415926' autocomplete="off">
                     </div>
 
                     <input type="submit" value="Add Transaction to Block">
@@ -496,12 +517,14 @@
     <div class='tab_item' id='main_page-add_offline_wallet'>
     <div class='block_2_wide'>
         <div class='block_title'>
-            Generate a new offline wallet
+            Generate a new local wallet
         </div>
         <div class='block_content_container'>
             <form id="generate_offline_wallet_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='generate_offline_wallet_password' class='fillable_input' type="password" placeholder="Password to encrypt wallet" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Password to encrypt wallet</label>
+                    <input id='generate_offline_wallet_password' class='fillable_input' type="password" autocomplete="off">
                 </div>
 
                 <input id="generate_offline_wallet_submit" type="submit" value="Create wallet">
@@ -522,7 +545,9 @@
                 </div>
                 <input type="file" id="load_offline_wallet_from_keystore_file_input" style='display:none'>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id="load_offline_wallet_from_keystore_password" type="password" placeholder="Keystore password" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Keystore password</label>
+                    <input id="load_offline_wallet_from_keystore_password" class='fillable_input' type="password" autocomplete="off">
                 </div>
                 <input type="submit" value="Load wallet">
                 <div class='clear_both'></div>
@@ -540,13 +565,19 @@
         <div class='block_content_container'>
             <form id="generate_online_wallet_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='generate_online_wallet_username' class='fillable_input' name='new_online_wallet_username' type="text"  placeholder="Your account username" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Your account username</label>
+                    <input id='generate_online_wallet_username' class='fillable_input' name='new_online_wallet_username' type="text" autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='generate_online_wallet_password' class='fillable_input' type="new_online_wallet_password" placeholder="Your account password" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Your account password</label>
+                    <input id='generate_online_wallet_password' class='fillable_input' name='generate_online_wallet_password' type="password" autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='generate_online_wallet_name' class='fillable_input' type="text" placeholder="New wallet name" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>New wallet name</label>
+                    <input id='generate_online_wallet_name' class='fillable_input' type="text" autocomplete="off">
                 </div>
 
                 <input id="generate_online_wallet_submit" type="submit" value="Create new online wallet">
@@ -566,14 +597,20 @@
                 <div class='italic_heading' style='margin-top:0px;'>Online Account information:</div>
                 <div class="line_separater">
                     <div class='input_line_container'>
-                        <div class='required_star'>*</div><input id='load_online_wallet_username' class='fillable_input' name='add_online_wallet_username' type="text"  placeholder="Your account username" autocomplete="off">
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Your account username</label>
+                        <input id='load_online_wallet_username' class='fillable_input' name='add_online_wallet_username' type="text"  autocomplete="off">
                     </div>
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='load_online_wallet_password' class='fillable_input' type="add_online_wallet_password" placeholder="Your account password" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Your account password</label>
+                    <input id='load_online_wallet_password' class='fillable_input' type="password" autocomplete="off">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='load_online_wallet_name' class='fillable_input' type="text" placeholder="Wallet name" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Wallet name</label>
+                    <input id='load_online_wallet_name' class='fillable_input' type="text" autocomplete="off">
                 </div>
 
                 <div class='italic_heading'>Saved Keystore information:</div>
@@ -584,7 +621,9 @@
                 </div>
                 <input type="file" id="load_online_wallet_from_keystore_file_input" style='display:none'>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id="load_online_wallet_from_keystore_password" name='add_online_wallet_keystore_password' type="password" placeholder="Keystore password" autocomplete="off">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Keystore password</label>
+                    <input id="load_online_wallet_from_keystore_password" class='fillable_input' name='add_online_wallet_keystore_password' type="password" autocomplete="off">
                 </div>
                 <input type="submit" value="Load wallet">
                 <div class='clear_both'></div>
@@ -616,7 +655,7 @@
             Editing wallet
         </div>
         <div class='block_content_container'>
-            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_online_wallet_address_status' class='block_2_wide_right_text'>No wallet loaded</div>
+            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_online_wallet_address_status' class='block_1_wide_right_text'>No wallet loaded</div>
 
             <div class='clear_both'></div>
         </div>
@@ -631,7 +670,9 @@
         <div class='block_content_container'>
             <form id="edit_online_wallet_rename_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='edit_online_wallet_rename_name_input' class='fillable_input' type="text" placeholder="New wallet name">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>New wallet name</label>
+                    <input id='edit_online_wallet_rename_name_input' class='fillable_input' type="text" name="edit_online_wallet_rename_name_input">
                 </div>
 
                 <input id="edit_online_wallet_rename_form_submit" type="submit" value="Rename wallet">
@@ -649,7 +690,9 @@
         <div class='block_content_container'>
             <form id="save_online_wallet_keystore_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='save_online_wallet_keystore_form_password' class='fillable_input' type="password" placeholder="Password to encrypt wallet">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Password to encrypt wallet</label>
+                    <input id='save_online_wallet_keystore_form_password' class='fillable_input' type="password" name="save_online_wallet_keystore_form_password">
                 </div>
 
                 <input id="save_online_wallet_keystore_form_submit" type="submit" value="Save wallet">
@@ -681,7 +724,7 @@
             Editing wallet
         </div>
         <div class='block_content_container'>
-            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_offline_wallet_address_status' class='block_2_wide_right_text'>No wallet loaded</div>
+            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_offline_wallet_address_status' class='block_1_wide_right_text'>No wallet loaded</div>
 
             <div class='clear_both'></div>
         </div>
@@ -695,7 +738,9 @@
         <div class='block_content_container'>
             <form id="save_offline_wallet_keystore_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id='save_offline_wallet_keystore_form_password' class='fillable_input' type="password" placeholder="Password to encrypt wallet">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Password to encrypt wallet</label>
+                    <input id='save_offline_wallet_keystore_form_password' class='fillable_input' type="password">
                 </div>
 
                 <input id="save_offline_wallet_keystore_form_submit" type="submit" value="Save wallet">
@@ -738,10 +783,14 @@
         <div class='block_content_container'>
             <form id="add_contact_form">
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id="add_contact_form_name" type="text" placeholder="Contact name">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Contact name</label>
+                    <input id="add_contact_form_name" class='fillable_input' type="text" name="add_contact_form_name">
                 </div>
                 <div class='input_line_container'>
-                    <div class='required_star'>*</div><input id="add_contact_form_address" type="text" placeholder="Address">
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Address</label>
+                    <input id="add_contact_form_address" class='fillable_input' type="text" name="add_contact_form_address">
                 </div>
                 <input type="submit" value="Save contact">
                 <div class='clear_both'></div>
@@ -772,7 +821,7 @@
             Two Factor Authentication Status
         </div>
         <div class='block_content_container'>
-            <img src='images/lock_icon.png' class='block_1_wide_left_icon'><div id='two_factor_authentication_status' class='block_2_wide_right_text' style="padding-top:10px;">Disabled</div>
+            <img src='images/lock_icon.png' class='block_1_wide_left_icon'><div id='two_factor_authentication_status' class='block_1_wide_right_text' style="padding-top:10px;">Disabled</div>
 
             <div class='clear_both'></div>
         </div>
@@ -835,7 +884,9 @@ Scan the QR code below to set up your authenticator app. Or you can manually typ
 <div class="clear_both" style="padding-top:20px;">
     <div style="position:relative;">
         <form id="confirm_new_two_factor_authentication_secret" >
-            <div class='required_star'>*</div><input id="new_two_factor_authentication_code" type="text" placeholder="Type your two factor code to confirm" autocomplete="off">
+            <div class='required_star'>*</div>
+            <label class='input__label'>Type your two factor code to confirm</label>
+            <input id="new_two_factor_authentication_code" class='fillable_input' type="text" name="new_two_factor_authentication_code" autocomplete="off">
             <div class='line_separater'>
                 <input type="submit" class='light_button' value="Submit">
                 <div class='light_button' id='exit_popup_submit' style='float:left;'>Get me out of here!</div>

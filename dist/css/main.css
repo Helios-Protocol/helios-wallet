@@ -207,7 +207,7 @@ h2{
 .frontpage_block{
     position:relative;
     left:200px;
-    top:15%;
+    top:8%;
 }
 @media (max-width: 700px) {
     .frontpage_block{
@@ -323,22 +323,38 @@ table{
 
 
 /*Inputs*/
+@keyframes onAutoFillStart {  from {/**/}  to {/**/}}
+input:-webkit-autofill {
+    /*// Expose a hook for JavaScript when autofill is shown*/
+    /*// JavaScript can capture 'animationstart' events*/
+    animation-name: onAutoFillStart;
+
+    /*// Make the background color become yellow really slowly*/
+    /*transition: background-color 50000s ease-in-out 0s;*/
+}
+
+input, textarea{
+    padding-top:14px;
+}
 input, .file_input{
-    height:38px;
+    height:50px;
     background-color:#898989;
     color:#f0f0f0;
     border:0px;
     width:100%;
     padding-left:20px;
     padding-right:20px;
-    padding-top:2px;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
-    font-size:17px;
+    font-size:16px;
+}
+.file_input.filled {
+    background-color: #f0f0f0;
+    color: #747474;
 }
 .file_input{
-    padding-top:8px;
+    padding-top:16px;
     cursor:pointer;
 }
 input:focus{
@@ -352,6 +368,30 @@ input.filled {
 ::placeholder{
     color:#f0f0f0;
 }
+.input__label{
+    cursor: text;
+    right: auto;
+    position: absolute;
+    color: #f0f0f0;
+    z-index: 3;
+    height: 20px;
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transform-origin: top left;
+    font-size: 16px;
+    top: 16px;
+    left: 20px;
+    transition: all 0.2s ease;
+}
+
+.input__label--active,
+.input__label--active-always{
+    top: 3px;
+    font-size: 12px;
+    color: #1f6370;
+}
+
 .input_line_container{
     clear:left;
     padding-bottom:20px;
@@ -361,7 +401,7 @@ input.filled {
 }
 .required_star{
     position:absolute;
-    top:10px;
+    top:16px;
     left:-20px;
     font-size:26px;
     color:#ababab;
@@ -448,7 +488,7 @@ input[type="submit"].light_button, .light_button{
 .file_input:after{
       position: absolute;
     content: "";
-    top: 14px;
+    top: 22px;
     right: 10px;
     width: 0;
     height: 0;
