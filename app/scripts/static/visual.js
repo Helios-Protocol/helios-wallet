@@ -59,18 +59,7 @@ $( document ).ready(function() {
 
 
     $('body').on('click', function(e){
-        $('input, textarea').not(e.target).each(function(){
-            // Don't remove the active class if we click on the label
-            if($(e.target).siblings().is($(this))) {
-                return;
-            }
-
-            if(!$(this).val()) {
-                $(this).siblings('.input__label').removeClass('input__label--active');
-            }else{
-                $(this).siblings('.input__label').addClass('input__label--active');
-            }
-        })
+        updateInputLabels();
     });
 
     $('body').on('click', 'input, textarea', function(e) {
@@ -80,6 +69,7 @@ $( document ).ready(function() {
     $('body').on('focus', 'input, textarea', function(e) {
         $(this).siblings('.input__label').addClass('input__label--active');
     });
+
 
     $('body').on('click', '.input__label', function(e) {
         // Focus the input element after clicking on the label so that the user can start typing right away
@@ -99,7 +89,20 @@ $( document ).ready(function() {
 });
 
 
+function updateInputLabels(){
+    $('input, textarea').each(function(){
+        // Don't remove the active class if we click on the label
+        if($(this).is(":focus")) {
+            return;
+        }
 
+        if(!$(this).val()) {
+            $(this).siblings('.input__label').removeClass('input__label--active');
+        }else{
+            $(this).siblings('.input__label').addClass('input__label--active');
+        }
+    })
+}
 var set_status = function(status){
     $('#current_status').text(status);
 }

@@ -216,6 +216,7 @@ $( document ).ready(function() {
 
                 addOnlineWallet(new_wallet, response2['id'], wallet_name);
                 refreshDashboard();
+                updateInputLabels();
                 popup("The new wallet has been added.");
             });
 

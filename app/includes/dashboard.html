@@ -82,47 +82,48 @@
 
     </div>
 
-    <div class='block_1_wide block_right'>
-        <div class='block_title'>
-            Balances
-        </div>
-        <div class='block_content_container'>
-            <img src='images/hls_large.png' class='block_1_wide_left_icon'><div id='balance_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
-            <div class='line_separater'></div>
-            <div class='thin_line'></div>
-            <div class='line_separater'>
-                <div class='italic_heading'>Altcoins</div>
-            </div>
-            <div class='line_separater'>
-                None...
-            </div>
-        </div>
-    </div>
-
-    <div class='block_2_wide'>
+     <div class='block_1_wide block_right'>
         <div class='block_title'>
             Incoming Transactions
         </div>
         <div class='block_content_container'>
-
-            <div id='incoming_transactions_container'>
-                <table id='incoming_transactions_list'>
-                    <thead>
-                        <tr>
-                            <th>From</th><th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+            <div class="button" id="incoming_transactions_accept" style="width:100%; text-align:center;">Check for new ones</div>
+            <div class="clear_both"></div>
             <div class='line_separater'>
-                <div class="button" id="incoming_transactions_accept">Accept transactions</div>
-                <div class="button" id="incoming_transactions_refresh" style="float:left;">Refresh</div>
-                <div class="clear_both"></div>
+                <div class="notes">If you are expecting to receive a transaction, click this button to check and process it.</div>
             </div>
+
         </div>
     </div>
+
+
+
+
+    <!--<div class='block_2_wide'>-->
+        <!--<div class='block_title'>-->
+            <!--Incoming Transactions-->
+        <!--</div>-->
+        <!--<div class='block_content_container'>-->
+
+            <!--&lt;!&ndash;<div id='incoming_transactions_container'>&ndash;&gt;-->
+                <!--&lt;!&ndash;<table id='incoming_transactions_list'>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<thead>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<th>From</th><th>Amount</th>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</thead>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tbody>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
+                <!--&lt;!&ndash;</table>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--<div class='line_separater'>-->
+                <!--<div class="button" id="incoming_transactions_accept">Check for new incoming transactions</div>-->
+                <!--&lt;!&ndash;<div class="button" id="incoming_transactions_refresh" style="float:left;">Refresh</div>&ndash;&gt;-->
+                <!--<div class="clear_both"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
 
     <div class='block_2_wide'>
         <div class='block_title'>
@@ -205,10 +206,26 @@
         </div>
     </div>
 
-
     <div class='block_1_wide block_right'>
         <div class='block_title'>
-            Minimum Gas Price
+            Balances
+        </div>
+        <div class='block_content_container'>
+            <img src='images/hls_large.png' class='block_1_wide_left_icon'><div id='balance_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
+            <div class='line_separater'></div>
+            <div class='thin_line'></div>
+            <div class='line_separater'>
+                <div class='italic_heading'>Altcoins</div>
+            </div>
+            <div class='line_separater'>
+                None...
+            </div>
+        </div>
+    </div>
+
+    <div class='block_1_wide block_right' style="clear:right;">
+        <div class='block_title'>
+            Safe Minimum Gas Price
         </div>
         <div class='block_content_container'>
             <img src='images/gas_icon.png' class='block_1_wide_left_icon'><div id='min_gas_price_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
@@ -216,6 +233,18 @@
 
         </div>
     </div>
+
+    <!--<div class='block_1_wide block_right'>-->
+        <!--<div class='block_title'>-->
+            <!--Testnet Faucet-->
+        <!--</div>-->
+        <!--<div class='block_content_container'>-->
+            <!--<input id="get_faucet" type="submit" value="Get HLS From Faucet" style='width:100%; float:none;'>-->
+            <!--<div class='line_separater'>-->
+                <!--<div class='italic_heading'>Rate limited</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
 
 

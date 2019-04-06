@@ -58,7 +58,7 @@ $( document ).ready(function() {
 
         if(getSumPendingTransactionsCost().gt(web3.utils.toBN(current_hls_balance_in_wei))){
             var required_cost = web3.utils.fromWei(web3.utils.toBN(getSumPendingTransactionsCost()), 'ether').toString();
-            var hls_balance = web3.utils.fromWei(web3.utils.toBN(current_hls_balance_in_wei), ether).toString();
+            var hls_balance = web3.utils.fromWei(web3.utils.toBN(current_hls_balance_in_wei), 'ether').toString();
             popup("You don't have enough HLS to cover the transactions and fees. " +
                 "You have a balance of "+hls_balance+" But the transactions and fees add up to "+required_cost +
                 "<br><br>If your balance is incorrect, try sending it again in a few moments.");
@@ -111,6 +111,7 @@ $( document ).ready(function() {
             setTimeout(refreshDashboard, 2000);
             $('#input_amount').val("").trigger("change");
             $('#input_to').val("").trigger("change");
+            updateInputLabels();
         })
         .catch(function(error){
             var error_message = getNodeMessageFromError(error);
@@ -188,6 +189,10 @@ function add_transaction_to_block_from_form(){
     pending_send_transactions.push(transaction);
 
     refresh_pending_transaction_table()
+
+    $('#input_amount').val("").trigger("change");
+    $('#input_to').val("").trigger("change");
+    updateInputLabels();
 
     return true;
 

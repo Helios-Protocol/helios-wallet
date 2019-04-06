@@ -158,21 +158,22 @@ a:hover{
 .block_1_wide_left_icon{
     float:left;
     height:36px;
+    position:absolute;
 }
 .block_1_wide_right_text{
     float:left;
-    margin-left:15px;
-    width:215px;
+    margin-left:51px;
+    margin-right:5px;
 }
 .block_2_wide_right_text{
     float:left;
-    margin-left:15px;
-    width:550px;
+    margin-left:51px;
+    margin-right:5px;
 }
 .block_1_wide_right_text_one_line{
     float:left;
-    margin-left:15px;
-    width:215px;
+    margin-left:51px;
+    margin-right:5px;
     position:relative;
     top:8px;
 }
@@ -582,6 +583,11 @@ input[type="submit"].light_button, .light_button{
     position:relative;
     top:-6px;
     margin-left:8px;
+}
+.notes{
+    font-weight: 300;
+    font-style: italic;
+    font-size: 13px;
 }
 #send_transaction_advanced_options_link{
     margin-top:8px;

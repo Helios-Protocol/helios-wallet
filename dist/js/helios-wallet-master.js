@@ -10,7 +10,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
     }
 
     try{
-        var start_block_number = await web3.hls.getBlockNumber(account.address);
+        var start_block_number = await web3.hls.getBlockNumber(account.address, start_timestamp);
         console.log("Getting all transactions starting at block number "+start_block_number);
     }catch(err) {
         console.log('error')
@@ -99,6 +99,7 @@ var Server = require("./server_interaction.js").Server;
 // ];
 
 var availableNodes = [
+    "ws://127.0.0.1:30304",
     "wss://bootnode.heliosprotocol.io:30304"
 ];
 
@@ -71085,6 +71086,13 @@ var outputTransactionReceiptFormatter = function (receipt){
 };
 
 
+var inputTimestampFormatter = function(timestamp){
+    if (timestamp === undefined) {
+        return undefined;
+    }
+    return (utils.isHexStrict(timestamp)) ? ((_.isString(timestamp)) ? timestamp.toLowerCase() : timestamp) : utils.numberToHex(timestamp);
+}
+
 
 module.exports = {
     outputBlockCreationParamsFormatter: outputBlockCreationParamsFormatter,
@@ -71092,7 +71100,8 @@ module.exports = {
     outputHistoricalGas: outputHistoricalGas,
     outputTransactionFormatter: outputTransactionFormatter,
     outputTransactionReceiptFormatter: outputTransactionReceiptFormatter,
-    outputReceiveTransactionFormatter: outputReceiveTransactionFormatter
+    outputReceiveTransactionFormatter: outputReceiveTransactionFormatter,
+    inputTimestampFormatter: inputTimestampFormatter
 };
 },{"underscore":468,"web3-core-helpers":482,"web3-eth-iban":513,"web3-utils":531}],549:[function(require,module,exports){
  
@@ -71305,7 +71314,8 @@ var Hls = function Hls() {
         new Method({
             name: 'getBlockNumber',
             call: 'hls_getBlockNumber',
-            params: 1,
+            params: 2,
+            inputFormatter: [formatter.inputAddressFormatter, hls_formatter.inputTimestampFormatter],
             outputFormatter: utils.hexToNumber
         }),
         new Method({
@@ -71339,6 +71349,12 @@ var Hls = function Hls() {
             params: 1,
             inputFormatter: [formatter.inputAddressFormatter],
             outputFormatter: hls_formatter.outputReceiveTransactionFormatter
+        }),
+        new Method({
+            name: 'getFaucet',
+            call: 'hls_getFaucet',
+            params: 1,
+            inputFormatter: [formatter.inputAddressFormatter]
         }),
 
     ];

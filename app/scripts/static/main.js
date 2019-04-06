@@ -69,7 +69,9 @@ $( document ).ready(function() {
     // dev stuff
     //
 
-
+    $('#get_faucet').click(function(){
+         web3.hls.getFaucet(sending_account.address);
+    });
 
 
     $('#get_min_gas_price').click(function (e){
@@ -226,7 +228,7 @@ function init_min_gas_price(){
         .then(function (min_gas_price) {
             $('#input_gas_price').attr('value', min_gas_price + 2);
             $('#input_gas_price').attr('min', min_gas_price+1);
-            set_min_gas_price_status(min_gas_price);
+            set_min_gas_price_status(min_gas_price+1);
             current_min_gas_price = min_gas_price;
         });
     }

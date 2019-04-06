@@ -25,7 +25,7 @@ $( document ).ready(function() {
         if(current_incoming_transactions.length > 0) {
             web3.hls.sendRewardBlock(sending_account.address)
             .then(function () {
-                popup("Block successfully sent");
+                popup("You have received new transactions!");
                 clear_vars();
                 current_incoming_transactions = [];
                 setTimeout(refreshDashboard, 2000);
@@ -36,7 +36,7 @@ $( document ).ready(function() {
 
             });
         }else{
-            popup("There are no incoming transactions to accept.")
+            popup("There are no new incoming transactions.")
         }
     });
 

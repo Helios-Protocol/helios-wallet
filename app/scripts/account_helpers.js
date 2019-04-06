@@ -9,7 +9,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
     }
 
     try{
-        var start_block_number = await web3.hls.getBlockNumber(account.address);
+        var start_block_number = await web3.hls.getBlockNumber(account.address, start_timestamp);
         console.log("Getting all transactions starting at block number "+start_block_number);
     }catch(err) {
         console.log('error')

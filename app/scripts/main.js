@@ -17,6 +17,7 @@ var Server = require("./server_interaction.js").Server;
 // ];
 
 var availableNodes = [
+    "ws://127.0.0.1:30304",
     "wss://bootnode.heliosprotocol.io:30304"
 ];
 
