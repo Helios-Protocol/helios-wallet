@@ -17838,30 +17838,35 @@ utils.intFromLE = intFromLE;
 
 },{"bn.js":28,"minimalistic-assert":120,"minimalistic-crypto-utils":121}],95:[function(require,module,exports){
 module.exports={
-  "_from": "elliptic@^6.0.0",
+  "_args": [
+    [
+      "elliptic@6.4.1",
+      "/d:/Google Drive/forex/blockchain_coding/Helios/prototype desktop/helios-wallet"
+    ]
+  ],
+  "_from": "elliptic@6.4.1",
   "_id": "elliptic@6.4.1",
   "_inBundle": false,
   "_integrity": "sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==",
   "_location": "/elliptic",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "elliptic@^6.0.0",
+    "raw": "elliptic@6.4.1",
     "name": "elliptic",
     "escapedName": "elliptic",
-    "rawSpec": "^6.0.0",
+    "rawSpec": "6.4.1",
     "saveSpec": null,
-    "fetchSpec": "^6.0.0"
+    "fetchSpec": "6.4.1"
   },
   "_requiredBy": [
     "/browserify-sign",
     "/create-ecdh"
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz",
-  "_shasum": "c2d0b7776911b86722c632c3c06c60f2f819939a",
-  "_spec": "elliptic@^6.0.0",
-  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-wallet/node_modules/browserify-sign",
+  "_spec": "6.4.1",
+  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype desktop/helios-wallet",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -17869,7 +17874,6 @@ module.exports={
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "bn.js": "^4.4.0",
     "brorand": "^1.0.1",
@@ -17879,7 +17883,6 @@ module.exports={
     "minimalistic-assert": "^1.0.0",
     "minimalistic-crypto-utils": "^1.0.0"
   },
-  "deprecated": false,
   "description": "EC cryptography",
   "devDependencies": {
     "brfs": "^1.4.3",
@@ -32697,7 +32700,7 @@ module.exports={
   "_args": [
     [
       "elliptic@6.4.1",
-      "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-web3"
+      "/d:/Google Drive/forex/blockchain_coding/Helios/prototype desktop/helios-web3.js"
     ]
   ],
   "_from": "elliptic@6.4.1",
@@ -32726,7 +32729,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz",
   "_spec": "6.4.1",
-  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-web3",
+  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype desktop/helios-web3.js",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -67250,7 +67253,7 @@ module.exports={
   "_args": [
     [
       "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-      "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-web3"
+      "/d:/Google Drive/forex/blockchain_coding/Helios/prototype desktop/helios-web3.js"
     ]
   ],
   "_from": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
@@ -67270,7 +67273,7 @@ module.exports={
   "_requiredBy": [],
   "_resolved": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
   "_spec": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-web3",
+  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype desktop/helios-web3.js",
   "author": {
     "name": "Brian McKelvey",
     "email": "brian@worlize.com",

@@ -190,7 +190,6 @@ function refreshDashboard() {
     }
     if(connectionMaintainer.isConnected()) {
         refresh_transactions();
-        //refreshIncomingTransactions();
         refresh_balance();
         init_min_gas_price();
     }else{
@@ -246,6 +245,7 @@ function afterLoginInit(){
         if(!connectionMaintainer.isConnected()){
             refreshDashboard();
         }
+        sendRewardBlock(sending_account.address)
         initOnlineMenu();
         close_popup();
     });
@@ -260,6 +260,7 @@ function offlineModeInit(){
     if(!connectionMaintainer.isConnected()){
         refreshDashboard();
     }
+    sendRewardBlock(sending_account.address)
     initOfflineMenu();
     console.log("Starting");
 }
