@@ -623,6 +623,26 @@ td{
 }
 
 
+.tx_hist_prev_next_nav{
+    margin-top:10px;
+    clear:both;
+    float:right;
+}
+.tx_hist_page_nav{
+    float:right;
+    margin-right:20px;
+    margin-top:10px;
+}
+.tx_hist_prev_nav{
+    float:right;
+    margin-right:20px;
+    cursor:pointer;
+}
+.tx_hist_next_nav{
+    float:right;
+    cursor:pointer;
+}
+
 
 /*HISTORICAL MIN GAS PRICE*/
 

@@ -3,9 +3,17 @@ var web3 = web3Main.web3;
 var datastructures = require('./datastructures.js');
 
 //returns a list of datastructures.tx_info
-var get_all_transactions_from_account = async function get_all_transactions_from_account(account, start_timestamp, end_timestamp){
+var get_all_transactions_from_account = async function get_all_transactions_from_account(account, start_timestamp, end_timestamp, start_index, length){
     if (start_timestamp < end_timestamp){
         start_timestamp = [end_timestamp, end_timestamp = start_timestamp][0];
+    }
+
+    if(start_index === undefined){
+        start_index = 0
+    }
+
+    if(length === undefined){
+        length = 10
     }
 
     try{
@@ -17,7 +25,16 @@ var get_all_transactions_from_account = async function get_all_transactions_from
     }
     var output = [];
 
-    for (var i = start_block_number; i >= 0; i--) {
+    start_block_number = start_block_number - start_index;
+    end_block_number = start_block_number - length
+    if(end_block_number < 0){
+        end_block_number = 0;
+    }
+    console.log('test');
+    console.log(start_block_number)
+    console.log(end_block_number)
+
+    for (var i = start_block_number; i >= end_block_number; i--) {
         console.log("Getting all transactions at block number "+i);
         var new_block = await web3.hls.getBlock(i, account.address, true);
         console.log("block number "+i+" received");

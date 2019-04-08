@@ -10,6 +10,7 @@ var contact_autocomplete_list_to_address_lookup = {};
 var init_complete = false;
 var tfa_enabled = false;
 
+var newBlockListLength = 10
 
 //CASHES
 var current_hls_balance_in_wei = 0;
@@ -189,7 +190,7 @@ function refreshDashboard() {
     }
     if(connectionMaintainer.isConnected()) {
         refresh_transactions();
-        refreshIncomingTransactions();
+        //refreshIncomingTransactions();
         refresh_balance();
         init_min_gas_price();
     }else{

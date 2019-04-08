@@ -15,12 +15,17 @@ $( document ).ready(function() {
              return
          }
 
-         refresh_transactions();
+         refresh_transactions(0);
     });
 
     $('body').on('click', '.tx_history_row', function () {
         console.log('test');
         $(this).next().toggle();
+    });
+
+    $('body').on('click', '.tx_hist_nav', function () {
+        var start_index = $(this).data('start');
+        refresh_transactions(start_index);
     });
 
     populateSelectYears();
@@ -55,9 +60,13 @@ function selectDefaultYears(){
     $('select.to_month').children("option[value='"+to_month+"']").prop('selected', true)
 }
 
-async function refresh_transactions(){
+async function refresh_transactions(start_index){
     if(sending_account == null){
         return
+    }
+
+    if(start_index === undefined){
+        start_index = 0
     }
 
     var from_month = $('select.from_month').children("option:selected").val();
@@ -68,7 +77,7 @@ async function refresh_transactions(){
     var start_timestamp = new Date(from_year, from_month, '01').getTime() / 1000
     var end_timestamp = new Date(to_year, to_month, '01').getTime() / 1000
 
-    var txs = await accountHelpers.get_all_transactions_from_account(sending_account, start_timestamp, end_timestamp);
+    var txs = await accountHelpers.get_all_transactions_from_account(sending_account, start_timestamp, end_timestamp, start_index);
 
     var tableRef = document.getElementById('transaction_history_list').getElementsByTagName('tbody')[0];
 
@@ -134,5 +143,22 @@ async function refresh_transactions(){
 
             }
         }
+
+        if(start_index <= 0){
+            $('.newest_blocks_nav.explorer_prev_nav').hide();
+        }else{
+            $('.newest_blocks_nav.explorer_prev_nav').show();
+        }
+
+        if((start_index-newBlockListLength) < 0){
+            var prev = 0;
+        }else{
+            var prev = start_index-newBlockListLength;
+        }
+
+        var next = start_index+newBlockListLength
+        $('.tx_hist_nav.tx_hist_prev_nav').data('start', prev);
+        $('.tx_hist_nav.tx_hist_next_nav').data('start', next);
+        $('.tx_hist_page_nav').html(start_index + " - " + next);
     }
 }

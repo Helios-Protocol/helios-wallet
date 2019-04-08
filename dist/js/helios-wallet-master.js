@@ -4,9 +4,17 @@ var web3 = web3Main.web3;
 var datastructures = require('./datastructures.js');
 
 //returns a list of datastructures.tx_info
-var get_all_transactions_from_account = async function get_all_transactions_from_account(account, start_timestamp, end_timestamp){
+var get_all_transactions_from_account = async function get_all_transactions_from_account(account, start_timestamp, end_timestamp, start_index, length){
     if (start_timestamp < end_timestamp){
         start_timestamp = [end_timestamp, end_timestamp = start_timestamp][0];
+    }
+
+    if(start_index === undefined){
+        start_index = 0
+    }
+
+    if(length === undefined){
+        length = 10
     }
 
     try{
@@ -18,7 +26,16 @@ var get_all_transactions_from_account = async function get_all_transactions_from
     }
     var output = [];
 
-    for (var i = start_block_number; i >= 0; i--) {
+    start_block_number = start_block_number - start_index;
+    end_block_number = start_block_number - length
+    if(end_block_number < 0){
+        end_block_number = 0;
+    }
+    console.log('test');
+    console.log(start_block_number)
+    console.log(end_block_number)
+
+    for (var i = start_block_number; i >= end_block_number; i--) {
         console.log("Getting all transactions at block number "+i);
         var new_block = await web3.hls.getBlock(i, account.address, true);
         console.log("block number "+i+" received");
@@ -71091,8 +71108,19 @@ var inputTimestampFormatter = function(timestamp){
         return undefined;
     }
     return (utils.isHexStrict(timestamp)) ? ((_.isString(timestamp)) ? timestamp.toLowerCase() : timestamp) : utils.numberToHex(timestamp);
-}
+};
 
+var inputOptionalHexHashFormatter = function (value) {
+    if (_.isNull(value) || _.isUndefined(value)) {
+        return '0x';
+    }
+    return '0x' + value.toLowerCase().replace('0x','');
+};
+
+var InputBlockFormatter = function(args) {
+    return (_.isString(args[0]) && args[0].indexOf('0x') === 0) ? [formatter.inputBlockNumberFormatter, function (val) { return !!val; }] : [formatter.inputBlockNumberFormatter, function (val) { return val; }, function (val) { return !!val; }];
+
+};
 
 module.exports = {
     outputBlockCreationParamsFormatter: outputBlockCreationParamsFormatter,
@@ -71101,7 +71129,9 @@ module.exports = {
     outputTransactionFormatter: outputTransactionFormatter,
     outputTransactionReceiptFormatter: outputTransactionReceiptFormatter,
     outputReceiveTransactionFormatter: outputReceiveTransactionFormatter,
-    inputTimestampFormatter: inputTimestampFormatter
+    inputTimestampFormatter: inputTimestampFormatter,
+    inputOptionalHexHashFormatter: inputOptionalHexHashFormatter,
+    InputBlockFormatter: InputBlockFormatter
 };
 },{"underscore":468,"web3-core-helpers":482,"web3-eth-iban":513,"web3-utils":531}],549:[function(require,module,exports){
  
@@ -71152,6 +71182,8 @@ var hls_formatter = require('./web3-hls-formatters.js');
 var blockCall = function (args) {
     return (_.isString(args[0]) && args[0].indexOf('0x') === 0) ? "hls_getBlockByHash" : "hls_getBlockByNumber";
 };
+
+
 
 var transactionFromBlockCall = function (args) {
     return (_.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'hls_getTransactionByBlockHashAndIndex' : 'hls_getTransactionByBlockNumberAndIndex';
@@ -71308,7 +71340,14 @@ var Hls = function Hls() {
             name: 'getBlock',
             call: blockCall,
             params: 3,
-            inputFormatter: [formatter.inputBlockNumberFormatter, function (val) { return val; }, function (val) { return !!val; }],
+            inputFormatter: hls_formatter.inputBlockFormatter,
+            outputFormatter: hls_formatter.outputBlockFormatter
+        }),
+        new Method({
+            name: 'getNewestBlocks',
+            call: 'hls_getNewestBlocks',
+            params: 5,
+            inputFormatter: [formatter.inputBlockNumberFormatter, formatter.inputBlockNumberFormatter, hls_formatter.inputOptionalHexHashFormatter, hls_formatter.inputOptionalHexHashFormatter, function (val) { return !!val; }],
             outputFormatter: hls_formatter.outputBlockFormatter
         }),
         new Method({
