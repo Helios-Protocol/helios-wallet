@@ -20,8 +20,6 @@ var current_incoming_transactions = []
 
 $( document ).ready(function() {
 
-
-
     // Check for existing session and just refresh it
     // server.renewSession()
     // .then(function(result){
@@ -166,7 +164,7 @@ function refresh_loop(){
     setTimeout(refresh_loop, 1000);
 }
 
-function refreshDashboard() {
+async function refreshDashboard() {
     if(!init_complete){
         console.log("Skipping refreshDashboard because init not complete");
         return;
@@ -189,9 +187,22 @@ function refreshDashboard() {
         }
     }
     if(connectionMaintainer.isConnected()) {
-        refresh_transactions();
-        refresh_balance();
-        init_min_gas_price();
+        receivingTransactions = await receiveAnyIncomingTransactions(sending_account.address)
+        if(receivingTransactions === true){
+            console.log('Received transactions');
+            sleep(2000)
+            .then(function(){
+                refresh_transactions();
+                refresh_balance();
+                init_min_gas_price();
+            });
+        }else{
+            console.log('No transactions to receive');
+            refresh_transactions();
+            refresh_balance();
+            init_min_gas_price();
+        }
+
     }else{
         console.log("Not refreshing some variables because we arent connected to a node.")
     }
@@ -245,7 +256,7 @@ function afterLoginInit(){
         if(!connectionMaintainer.isConnected()){
             refreshDashboard();
         }
-        sendRewardBlock(sending_account.address)
+        //receiveAnyIncomingTransactions(sending_account.address)
         initOnlineMenu();
         close_popup();
     });
@@ -260,7 +271,7 @@ function offlineModeInit(){
     if(!connectionMaintainer.isConnected()){
         refreshDashboard();
     }
-    sendRewardBlock(sending_account.address)
+    //receiveAnyIncomingTransactions(sending_account.address)
     initOfflineMenu();
     console.log("Starting");
 }
