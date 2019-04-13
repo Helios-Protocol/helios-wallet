@@ -89,7 +89,7 @@ $( document ).ready(function() {
         }
         web3.hls.getBlockNumber(sending_account.address)
             .then(function(args0){
-                web3.hls.getBlock(args0, sending_account.address, true)
+                web3.hls.getBlockByNumber(args0, sending_account.address, true)
                     .then(function(args){
                         if(args.transactions.length > 0) {
                             web3.hls.getTransactionReceipt(args.transactions[0].hash)

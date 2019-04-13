@@ -37,7 +37,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
 
     for (var i = start_block_number; i >= end_block_number; i--) {
         console.log("Getting all transactions at block number "+i);
-        var new_block = await web3.hls.getBlock(i, account.address, true);
+        var new_block = await web3.hls.getBlockByNumber(i, account.address, true);
         console.log("block number "+i+" received");
         if(new_block.timestamp > start_timestamp){
             continue;
@@ -71120,8 +71120,11 @@ var inputOptionalHexHashFormatter = function (value) {
 };
 
 var InputBlockFormatter = function(args) {
-    return (_.isString(args[0]) && args[0].indexOf('0x') === 0) ? [formatter.inputBlockNumberFormatter, function (val) { return !!val; }] : [formatter.inputBlockNumberFormatter, function (val) { return val; }, function (val) { return !!val; }];
 
+    console.log('AAAAAAAAAAA')
+    console.log(args)
+    var toReturn = (_.isString(args[0]) && args[0].indexOf('0x') === 0) ? [function (val) { return val; }, function (val) { return !!val; }] : [formatter.inputBlockNumberFormatter, function (val) { return val; }, function (val) { return !!val; }];
+    console.log(toReturn)
 };
 
 module.exports = {
@@ -71179,11 +71182,6 @@ var abi = require('web3-eth-abi');
 var getNetworkType = require('./getNetworkType.js');
 var formatter = helpers.formatters;
 var hls_formatter = require('./web3-hls-formatters.js');
-
-
-var blockCall = function (args) {
-    return (_.isString(args[0]) && args[0].indexOf('0x') === 0) ? "hls_getBlockByHash" : "hls_getBlockByNumber";
-};
 
 
 
@@ -71339,10 +71337,17 @@ var Hls = function Hls() {
             params: 1
         }),
         new Method({
-            name: 'getBlock',
-            call: blockCall,
+            name: 'getBlockByHash',
+            call: 'hls_getBlockByHash',
+            params: 2,
+            inputFormatter: [formatter.inputBlockNumberFormatter, function (val) { return !!val }],
+            outputFormatter: hls_formatter.outputBlockFormatter
+        }),
+        new Method({
+            name: 'getBlockByNumber',
+            call: 'hls_getBlockByNumber',
             params: 3,
-            inputFormatter: hls_formatter.inputBlockFormatter,
+            inputFormatter: [function (val) { return  val }, function (val) { return  val }, function (val) { return !!val }],
             outputFormatter: hls_formatter.outputBlockFormatter
         }),
         new Method({
@@ -71376,6 +71381,12 @@ var Hls = function Hls() {
             call: 'hls_getTransactionReceipt',
             params: 1,
             outputFormatter: hls_formatter.outputTransactionReceiptFormatter
+        }),
+        new Method({
+            name: 'getTransactionByHash',
+            call: 'hls_getTransactionByHash',
+            params: 1,
+            outputFormatter: formatter.outputTransactionFormatter
         }),
         new Method({
             name: 'getBalance',
