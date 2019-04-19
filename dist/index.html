@@ -7,28 +7,28 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
-    <script src="js/helios-wallet-master.js?version=6"></script>
-    <script src="js/send_transaction_block.js?version=6"></script>
-    <script src="js/transaction_history_block.js?version=6"></script>
-    <script src="js/frontpage.js?version=6"></script>
-    <script src="js/historical_gas_price_block.js?version=6"></script>
-    <script src="js/incoming_transactions_block.js?version=6"></script>
-    <script src="js/offline_wallets.js?version=6"></script>
-    <script src="js/online_wallets.js?version=6"></script>
-    <script src="js/contacts.js?version=6"></script>
-    <script src="js/utils.js?version=6"></script>
-    <script src="js/visual.js?version=6"></script>
-    <script src="js/main.js?version=6"></script>
-    <script src="js/menu.js?version=6"></script>
-    <script src="js/custom_select.js?version=6"></script>
-    <script src="js/autocomplete.js?version=6"></script>
-    <script src="js/two_factor_authentication.js?version=6"></script>
+    <script src="js/helios-wallet-master.js?version=7"></script>
+    <script src="js/send_transaction_block.js?version=7"></script>
+    <script src="js/transaction_history_block.js?version=7"></script>
+    <script src="js/frontpage.js?version=7"></script>
+    <script src="js/historical_gas_price_block.js?version=7"></script>
+    <script src="js/incoming_transactions_block.js?version=7"></script>
+    <script src="js/offline_wallets.js?version=7"></script>
+    <script src="js/online_wallets.js?version=7"></script>
+    <script src="js/contacts.js?version=7"></script>
+    <script src="js/utils.js?version=7"></script>
+    <script src="js/visual.js?version=7"></script>
+    <script src="js/main.js?version=7"></script>
+    <script src="js/menu.js?version=7"></script>
+    <script src="js/custom_select.js?version=7"></script>
+    <script src="js/autocomplete.js?version=7"></script>
+    <script src="js/two_factor_authentication.js?version=7"></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:200,300,300i,400,400i,500,600" rel="stylesheet">
-    <link rel="stylesheet" href="css/menu.css?version=6">
-    <link rel="stylesheet" href="css/main.css?version=6">
+    <link rel="stylesheet" href="css/menu.css?version=7">
+    <link rel="stylesheet" href="css/main.css?version=7">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#1f6370" />
@@ -86,16 +86,16 @@
                     <div class='input_line_container'>
                         <div class='required_star'>*</div>
                         <label class='input__label'>Username</label>
-                        <input id='input_sign_in_username' class='fillable_input' name='username' type="text">
+                        <input id='input_sign_in_username' class='fillable_input' name='username' type="text" autocomplete="account_username">
                     </div>
                     <div class='input_line_container'>
                         <div class='required_star'>*</div>
                         <label class='input__label'>Password</label>
-                        <input id='input_sign_in_password' class='fillable_input' name='password' type="password">
+                        <input id='input_sign_in_password' class='fillable_input' name='password' type="password" autocomplete="account_password">
                     </div>
                     <div class='input_line_container'>
                         <label class='input__label'>Two factor code (if enabled)</label>
-                        <input id='input_sign_in_two_factor_authentication' class='fillable_input' name='two_factor' type="text" autocomplete="false">
+                        <input id='input_sign_in_two_factor_authentication' class='fillable_input' name='two_factor' type="text" autocomplete="off">
                     </div>
                 </div>
                 <div>
@@ -125,21 +125,21 @@
                     <div class='input_line_container'>
                         <div class='required_star'>*</div>
                         <label class='input__label'>Username</label>
-                        <input id='input_new_user_username' class='fillable_input' name='username' type="text">
+                        <input id='input_new_user_username' class='fillable_input' name='username' type="text" autocomplete="off">
                     </div>
                     <div class='input_line_container'>
                         <label class='input__label'>Email</label>
-                        <input id='input_new_user_email' class='fillable_input' name='email' type="text">
+                        <input id='input_new_user_email' class='fillable_input' name='email' type="text" autocomplete="off">
                     </div>
                     <div class='input_line_container'>
                         <div class='required_star'>*</div>
                         <label class='input__label'>Password</label>
-                        <input id='input_new_user_password' class='fillable_input' name='password' type="password">
+                        <input id='input_new_user_password' class='fillable_input' name='password' type="password" autocomplete="off">
                     </div>
                     <div class='input_line_container'>
                         <div class='required_star'>*</div>
                         <label class='input__label'>Repeat password</label>
-                        <input id='input_new_user_password_repeat' class='fillable_input' name='password_repeat' type="password">
+                        <input id='input_new_user_password_repeat' class='fillable_input' name='password_repeat' type="password" autocomplete="off">
                     </div>
                 </div>
                 <div>
@@ -340,13 +340,14 @@
             Info
         </div>
         <div class='block_content_container'>
+            <div>
+                <img src='images/x.png' id='connection_status_icon' class='block_1_wide_left_icon'><div id='connection_status' class='block_1_wide_right_text'>Connecting to a node.</div>
 
-            <img src='images/x.png' id='connection_status_icon' class='block_1_wide_left_icon'><div id='connection_status' class='block_1_wide_right_text'>Connecting to a node.</div>
-
-            <div class='line_separater'>
-                <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='account_status' class='block_1_wide_right_text'></div>
+                <div class='line_separater'>
+                    <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='account_status' class='block_1_wide_right_text'></div>
+                </div>
+                <div class='clear_both'></div>
             </div>
-            <div class='clear_both'></div>
         </div>
 
     </div>
@@ -487,14 +488,16 @@
             Balances
         </div>
         <div class='block_content_container'>
-            <img src='images/hls_large.png' class='block_1_wide_left_icon'><div id='balance_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
-            <div class='line_separater'></div>
-            <div class='thin_line'></div>
-            <div class='line_separater'>
-                <div class='italic_heading'>Altcoins</div>
-            </div>
-            <div class='line_separater'>
-                None...
+            <div>
+                <img src='images/hls_large.png' class='block_1_wide_left_icon'><div id='balance_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
+                <div class='line_separater'></div>
+                <div class='thin_line'></div>
+                <div class='line_separater'>
+                    <div class='italic_heading'>Altcoins</div>
+                </div>
+                <div class='line_separater'>
+                    None...
+                </div>
             </div>
         </div>
     </div>
@@ -504,9 +507,10 @@
             Safe Minimum Gas Price
         </div>
         <div class='block_content_container'>
-            <img src='images/gas_icon.png' class='block_1_wide_left_icon'><div id='min_gas_price_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
-            <div class='line_separater'></div>
-
+            <div>
+                <img src='images/gas_icon.png' class='block_1_wide_left_icon'><div id='min_gas_price_status' class='block_1_wide_right_text_one_line'>Connecting to a node.</div>
+                <div class='line_separater'></div>
+            </div>
         </div>
     </div>
 
@@ -560,7 +564,7 @@
                 <div class='input_line_container'>
                     <div class='required_star'>*</div>
                     <label class='input__label'>Password to encrypt wallet</label>
-                    <input id='generate_offline_wallet_password' class='fillable_input' type="password" autocomplete="off">
+                    <input id='generate_offline_wallet_password' class='fillable_input' type="password" autocomplete="new_keystore_password">
                 </div>
 
                 <input id="generate_offline_wallet_submit" type="submit" value="Create wallet">
@@ -583,7 +587,7 @@
                 <div class='input_line_container'>
                     <div class='required_star'>*</div>
                     <label class='input__label'>Keystore password</label>
-                    <input id="load_offline_wallet_from_keystore_password" class='fillable_input' type="password" autocomplete="off">
+                    <input id="load_offline_wallet_from_keystore_password" class='fillable_input' type="password" autocomplete="saved_keystore_password">
                 </div>
                 <input type="submit" value="Load wallet">
                 <div class='clear_both'></div>
@@ -599,16 +603,16 @@
             Add newly generated wallet
         </div>
         <div class='block_content_container'>
-            <form id="generate_online_wallet_form">
+            <form id="generate_online_wallet_form" name="test">
                 <div class='input_line_container'>
                     <div class='required_star'>*</div>
                     <label class='input__label'>Your account username</label>
-                    <input id='generate_online_wallet_username' class='fillable_input' name='new_online_wallet_username' type="text" autocomplete="off">
+                    <input id='generate_online_wallet_username' class='fillable_input' name='new_online_wallet_username' type="text" autocomplete="account_username">
                 </div>
                 <div class='input_line_container'>
                     <div class='required_star'>*</div>
                     <label class='input__label'>Your account password</label>
-                    <input id='generate_online_wallet_password' class='fillable_input' name='generate_online_wallet_password' type="password" autocomplete="off">
+                    <input id='generate_online_wallet_password' class='fillable_input' name='generate_online_wallet_password' type="password" autocomplete="account_password">
                 </div>
                 <div class='input_line_container'>
                     <div class='required_star'>*</div>
@@ -635,13 +639,13 @@
                     <div class='input_line_container'>
                         <div class='required_star'>*</div>
                         <label class='input__label'>Your account username</label>
-                        <input id='load_online_wallet_username' class='fillable_input' name='add_online_wallet_username' type="text"  autocomplete="off">
+                        <input id='load_online_wallet_username' class='fillable_input' name='add_online_wallet_username' type="text"  autocomplete="account_username">
                     </div>
                 </div>
                 <div class='input_line_container'>
                     <div class='required_star'>*</div>
                     <label class='input__label'>Your account password</label>
-                    <input id='load_online_wallet_password' class='fillable_input' type="password" autocomplete="off">
+                    <input id='load_online_wallet_password' class='fillable_input' type="password" autocomplete="account_password">
                 </div>
                 <div class='input_line_container'>
                     <div class='required_star'>*</div>
@@ -691,9 +695,11 @@
             Editing wallet
         </div>
         <div class='block_content_container'>
-            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_online_wallet_address_status' class='block_2_wide_right_text'>No wallet loaded</div>
+            <div>
+                <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_online_wallet_address_status' class='block_2_wide_right_text'>No wallet loaded</div>
 
-            <div class='clear_both'></div>
+                <div class='clear_both'></div>
+            </div>
         </div>
 
     </div>
@@ -760,9 +766,11 @@
             Editing wallet
         </div>
         <div class='block_content_container'>
-            <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_offline_wallet_address_status' class='block_2_wide_right_text'>No wallet loaded</div>
+            <div>
+                <img src='images/wallet_icon.png' class='block_1_wide_left_icon'><div id='currently_editing_offline_wallet_address_status' class='block_2_wide_right_text'>No wallet loaded</div>
 
-            <div class='clear_both'></div>
+                <div class='clear_both'></div>
+            </div>
         </div>
 
     </div>
@@ -857,9 +865,11 @@
             Two Factor Authentication Status
         </div>
         <div class='block_content_container'>
-            <img src='images/lock_icon.png' class='block_1_wide_left_icon'><div id='two_factor_authentication_status' class='block_1_wide_right_text' style="padding-top:10px;">Disabled</div>
+            <div>
+                <img src='images/lock_icon.png' class='block_1_wide_left_icon'><div id='two_factor_authentication_status' class='block_1_wide_right_text' style="padding-top:10px;">Disabled</div>
 
-            <div class='clear_both'></div>
+                <div class='clear_both'></div>
+            </div>
         </div>
 
     </div>

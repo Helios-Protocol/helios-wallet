@@ -78,12 +78,13 @@ class ConnectionMaintainer {
 
             }
             this.setStatus('Connected to node ' + web3.currentProvider.connection.url.substr(0,25) + "...");
-            await sleep(this.connectedLoopPeriod)
-            this.networkConnectionMaintainerLoop()
+            await sleep(this.connectedLoopPeriod);
+            this.networkConnectionMaintainerLoop();
             this.wasConnected = true;
         }else{
-            await sleep(this.disconnectedLoopPeriod)
-            this.networkConnectionMaintainerLoop()
+            console.log("Connection to node failed. Will retry in "+ this.disconnectedLoopPeriod/1000 + " seconds.")
+            await sleep(this.disconnectedLoopPeriod);
+            this.networkConnectionMaintainerLoop();
             this.wasConnected = false;
         }
     }
@@ -95,7 +96,7 @@ class ConnectionMaintainer {
             var API_address = this.availableNodes[i];
             console.log("Connecting to node " + API_address)
             web3.setProvider(new web3.providers.WebsocketProvider(API_address));
-            await sleep(100);
+            await sleep(1000);
 
             if(this.isConnected()) {
                 console.log("Successfully connected to " + API_address)

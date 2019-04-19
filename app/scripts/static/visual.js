@@ -82,8 +82,10 @@ $( document ).ready(function() {
         $(this).siblings('.input__label').addClass('input__label--active');
     });
 
-
-
+     $('input').on('transitionstart', function(e) {
+        // Focus the input element after clicking on the label so that the user can start typing right away
+        $(this).siblings('.input__label').addClass('input__label--active');
+    });
 
 
 });

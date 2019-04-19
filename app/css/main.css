@@ -156,9 +156,9 @@ a:hover{
     display:none;
 }
 .block_1_wide_left_icon{
-    float:left;
     height:36px;
     position:absolute;
+    left:0px;
 }
 .block_1_wide_right_text{
     float:left;
@@ -332,6 +332,9 @@ input:-webkit-autofill {
 
     /*// Make the background color become yellow really slowly*/
     /*transition: background-color 50000s ease-in-out 0s;*/
+}
+input {
+    transition: background-color 0.1s, color 0.1s, filter 0.1s;
 }
 
 input, textarea{

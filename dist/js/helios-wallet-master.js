@@ -116,7 +116,6 @@ var Server = require("./server_interaction.js").Server;
 // ];
 
 var availableNodes = [
-    "ws://127.0.0.1:30304",
     "wss://bootnode.heliosprotocol.io:30304"
 ];
 
@@ -243,12 +242,13 @@ class ConnectionMaintainer {
 
             }
             this.setStatus('Connected to node ' + web3.currentProvider.connection.url.substr(0,25) + "...");
-            await sleep(this.connectedLoopPeriod)
-            this.networkConnectionMaintainerLoop()
+            await sleep(this.connectedLoopPeriod);
+            this.networkConnectionMaintainerLoop();
             this.wasConnected = true;
         }else{
-            await sleep(this.disconnectedLoopPeriod)
-            this.networkConnectionMaintainerLoop()
+            console.log("Connection to node failed. Will retry in "+ this.disconnectedLoopPeriod/1000 + " seconds.")
+            await sleep(this.disconnectedLoopPeriod);
+            this.networkConnectionMaintainerLoop();
             this.wasConnected = false;
         }
     }
@@ -260,7 +260,7 @@ class ConnectionMaintainer {
             var API_address = this.availableNodes[i];
             console.log("Connecting to node " + API_address)
             web3.setProvider(new web3.providers.WebsocketProvider(API_address));
-            await sleep(100);
+            await sleep(1000);
 
             if(this.isConnected()) {
                 console.log("Successfully connected to " + API_address)
@@ -70956,7 +70956,17 @@ var outputBlockCreationParamsFormatter = function(block_creation_params) {
     return block_creation_params;
 };
 
-var outputTransactionFormatter = function (tx){
+var outputTransactionFormatter = function (tx) {
+    var isReceive = Boolean(parseInt(tx.isReceive));
+    if(isReceive){
+        tx = outputReceiveTransactionFormatter(tx)
+    }else{
+        tx = outputSendTransactionFormatter(tx)
+    }
+    return tx;
+};
+
+var outputSendTransactionFormatter = function (tx){
 
     if(tx.blockNumber !== null)
         tx.blockNumber = utils.hexToNumber(tx.blockNumber);
@@ -70978,21 +70988,27 @@ var outputTransactionFormatter = function (tx){
     }
 
     tx.gasUsed = formatter.outputBigNumberFormatter(tx.gasUsed);
+    tx.isReceive = Boolean(parseInt(tx.isReceive));
 
-    console.log("DEBUG");
-    console.log(tx.gasPrice);
-    console.log(tx.gasUsed);
     return tx;
 };
 
 var outputReceiveTransactionFormatter = function (tx){
-
     tx.remainingRefund = formatter.outputBigNumberFormatter(tx.remainingRefund);
     tx.value = formatter.outputBigNumberFormatter(tx.value);
-    tx.txTypeId = utils.hexToNumber(tx.txTypeId);
     tx.gasUsed = formatter.outputBigNumberFormatter(tx.gasUsed);
     tx.isRefund = Boolean(parseInt(tx.isRefund));
+    tx.isReceive = Boolean(parseInt(tx.isReceive));
     tx.from = utils.toChecksumAddress(tx.from);
+    if(tx.transactionIndex !== undefined) {
+        tx.transactionIndex = utils.hexToNumber(tx.transactionIndex);
+    }else{
+        tx.transactionIndex = null;
+    }
+    if(tx.blockHash === undefined) {
+        tx.blockHash = null;
+    }
+    tx.gasPrice = formatter.outputBigNumberFormatter(tx.gasPrice);
     return tx
 };
 
@@ -71000,14 +71016,16 @@ var outputReceiveTransactionFormatter = function (tx){
 var outputRewardType1Formatter = function (reward){
     reward.amount = formatter.outputBigNumberFormatter(reward.amount);
     return reward
-}
+};
 
 var outputRewardStakingScoreFormatter = function (score){
     score.recipientNodeWalletAddress = utils.toChecksumAddress(score.recipientNodeWalletAddress);
-    score.since_block_number = utils.hexToNumber(score.since_block_number);
+    score.sinceBlockNumber = utils.hexToNumber(score.sinceBlockNumber);
     score.timestamp = utils.hexToNumber(score.timestamp);
+    score.score = utils.hexToNumber(score.score);
+    score.sender = utils.toChecksumAddress(score.sender);
     return score
-}
+};
 
 var outputRewardType2Formatter = function (reward){
     reward.amount = formatter.outputBigNumberFormatter(reward.amount);
@@ -71020,17 +71038,19 @@ var outputRewardType2Formatter = function (reward){
     }
     return reward
 
-}
+};
 
 var outputRewardBundleFormatter = function (bundle){
 
     bundle.rewardType1 = outputRewardType1Formatter(bundle.rewardType1)
     bundle.rewardType2 = outputRewardType2Formatter(bundle.rewardType2)
+    bundle.isReward = Boolean(parseInt(bundle.isReward));
     return bundle
 };
 
 var outputBlockFormatter = function(block) {
     block.chainAddress = utils.toChecksumAddress(block.chainAddress);
+    block.sender = utils.toChecksumAddress(block.sender);
     block.accountBalance = formatter.outputBigNumberFormatter(block.accountBalance);
 
 
@@ -71049,15 +71069,21 @@ var outputBlockFormatter = function(block) {
 
     if (_.isArray(block.transactions)) {
         block.transactions = block.transactions.map(function(item) {
-            if(!_.isString(item))
+            if(!_.isString(item)) {
                 return outputTransactionFormatter(item);
+            }else{
+                return item;
+            }
         });
     }
 
     if (_.isArray(block.receiveTransactions)) {
         block.receiveTransactions = block.receiveTransactions.map(function(item) {
-            if(!_.isString(item))
+            if(!_.isString(item)) {
                 return outputReceiveTransactionFormatter(item);
+            }else{
+                return item;
+            }
         });
     }
 
@@ -71120,11 +71146,19 @@ var inputOptionalHexHashFormatter = function (value) {
 };
 
 var InputBlockFormatter = function(args) {
-
-    console.log('AAAAAAAAAAA')
-    console.log(args)
     var toReturn = (_.isString(args[0]) && args[0].indexOf('0x') === 0) ? [function (val) { return val; }, function (val) { return !!val; }] : [formatter.inputBlockNumberFormatter, function (val) { return val; }, function (val) { return !!val; }];
-    console.log(toReturn)
+};
+
+var outputConnectedNodesFormatter = function(connectedNode){
+    connectedNode.url = utils.hexToUtf8(connectedNode.url);
+    connectedNode.ipAddress = utils.hexToUtf8(connectedNode.ipAddress);
+    connectedNode.udpPort = utils.hexToNumber(connectedNode.udpPort);
+    connectedNode.tcpPort = utils.hexToNumber(connectedNode.tcpPort);
+    connectedNode.stake = formatter.outputBigNumberFormatter(connectedNode.stake);
+    connectedNode.requestsSent = utils.hexToNumber(connectedNode.requestsSent);
+    connectedNode.failedRequests = utils.hexToNumber(connectedNode.failedRequests);
+    connectedNode.averageResponseTime = utils.hexToNumber(connectedNode.averageResponseTime);
+    return connectedNode;
 };
 
 module.exports = {
@@ -71136,7 +71170,8 @@ module.exports = {
     outputReceiveTransactionFormatter: outputReceiveTransactionFormatter,
     inputTimestampFormatter: inputTimestampFormatter,
     inputOptionalHexHashFormatter: inputOptionalHexHashFormatter,
-    InputBlockFormatter: InputBlockFormatter
+    InputBlockFormatter: InputBlockFormatter,
+    outputConnectedNodesFormatter: outputConnectedNodesFormatter
 };
 },{"underscore":468,"web3-core-helpers":482,"web3-eth-iban":513,"web3-utils":531}],549:[function(require,module,exports){
  
@@ -71370,12 +71405,7 @@ var Hls = function Hls() {
             params: 0,
             outputFormatter: utils.hexToNumber
         }),
-        new Method({
-            name: 'getHistoricalGasPrice',
-            call: 'hls_getHistoricalGasPrice',
-            params: 0,
-            outputFormatter: hls_formatter.outputHistoricalGas
-        }),
+
         new Method({
             name: 'getTransactionReceipt',
             call: 'hls_getTransactionReceipt',
@@ -71386,7 +71416,7 @@ var Hls = function Hls() {
             name: 'getTransactionByHash',
             call: 'hls_getTransactionByHash',
             params: 1,
-            outputFormatter: formatter.outputTransactionFormatter
+            outputFormatter: hls_formatter.outputTransactionFormatter
         }),
         new Method({
             name: 'getBalance',
@@ -71407,6 +71437,31 @@ var Hls = function Hls() {
             call: 'hls_getFaucet',
             params: 1,
             inputFormatter: [formatter.inputAddressFormatter]
+        }),
+        new Method({
+            name: 'getConnectedNodes',
+            call: 'hls_getConnectedNodes',
+            params: 0,
+            outputFormatter: hls_formatter.outputConnectedNodesFormatter
+        }),
+
+        new Method({
+            name: 'getHistoricalGasPrice',
+            call: 'hls_getHistoricalGasPrice',
+            params: 0,
+            outputFormatter: hls_formatter.outputHistoricalGas
+        }),
+        new Method({
+            name: 'getApproximateHistoricalNetworkTPCCapability',
+            call: 'hls_getApproximateHistoricalNetworkTPCCapability',
+            params: 0,
+            outputFormatter: hls_formatter.outputHistoricalGas
+        }),
+        new Method({
+            name: 'getApproximateHistoricalTPC',
+            call: 'hls_getApproximateHistoricalTPC',
+            params: 0,
+            outputFormatter: hls_formatter.outputHistoricalGas
         }),
 
     ];
