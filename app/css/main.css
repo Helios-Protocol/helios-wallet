@@ -162,20 +162,45 @@ a:hover{
 }
 .block_1_wide_right_text{
     float:left;
-    margin-left:51px;
-    margin-right:5px;
+    padding-left:51px;
+    padding-right:5px;
+    width:100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    box-sizing: border-box;
+    word-break:normal;
 }
 .block_2_wide_right_text{
     float:left;
     margin-left:51px;
     margin-right:5px;
 }
+.copy_spacing_right{
+    padding-right:30px;
+}
+.copy_icon{
+    width:25px;
+    z-index:99;
+}
+.copy_icon_right{
+    position:absolute;
+    right:0px;
+}
+.copy{
+    cursor:pointer;
+}
 .block_1_wide_right_text_one_line{
     float:left;
-    margin-left:51px;
-    margin-right:5px;
+    padding-left:51px;
+    padding-right:5px;
     position:relative;
     top:8px;
+    width:100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    word-break:normal;
 }
 .clear_both{
     clear:both;

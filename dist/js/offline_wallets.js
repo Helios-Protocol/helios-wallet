@@ -144,7 +144,7 @@ $( document ).ready(function() {
 });
 
 function fixMEWWalletJSON(jsonData){
-    var parsedAccount = JSON.parse(json_account)
+    var parsedAccount = JSON.parse(jsonData)
     if("Crypto" in parsedAccount){
         Object.defineProperty(parsedAccount, "crypto", Object.getOwnPropertyDescriptor(parsedAccount, "Crypto"));
         delete parsedAccount['Crypto'];

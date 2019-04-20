@@ -114,6 +114,12 @@ var set_account_status = function(address, name){
     }else{
         $('#account_status').html('Sending from wallet<br>'+name+"<br>("+address+")");
     }
+    if(web3 !== undefined && address !== undefined && web3.utils.isAddress(address.toLowerCase())){
+        $('.sending_account_copy').show().data('copy', address);
+    }else{
+        $('.sending_account_copy').hide().data('copy', '');
+    }
+
 
 }
 var set_balance_status = function(status){
@@ -178,7 +184,7 @@ function loaderPopup(content, width){
     $('#popup_background').fadeIn(200);
     $('#popup_outer').fadeIn(200);
     positionPopup();
-    loader_timeout = setTimeout(popupTimeout, 10000);
+    //loader_timeout = setTimeout(popupTimeout, 10000);
 }
 function close_popup(){
     $('#popup_background').hide();

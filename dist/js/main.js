@@ -123,6 +123,13 @@ $( document ).ready(function() {
     });
 
 
+    $('body').on('click', '.copy', function(e) {
+        var data = $(this).data('copy');
+        console.log('copying '+data);
+        copyToClipboard(data);
+        popup("Address copied to clipboard");
+    });
+
 });
 
 //
@@ -175,18 +182,15 @@ async function refreshDashboard() {
     } else {
         console.log('Refreshing dashboard. Sending account = '+ sending_account.address);
         if (online_wallet_to_name_lookup[sending_account.address] !== undefined) {
-            var name = online_wallet_to_name_lookup[sending_account.address].substr(0, 20)
-            if (online_wallet_to_name_lookup[sending_account.address].length > 20) {
-                name = name + "...";
-            }
-            var address = sending_account.address.substr(0, 18) + "...";
+            var name = online_wallet_to_name_lookup[sending_account.address]
+            var address = sending_account.address;
             set_account_status(address, name);
         } else {
-            var address = sending_account.address.substr(0, 20) + "...";
+            var address = sending_account.address;
             set_account_status(address);
         }
     }
-    if(connectionMaintainer.isConnected()) {
+    if(connectionMaintainer.isConnected() && sending_account !== null && sending_account!== undefined && sending_account.address !== undefined) {
         receivingTransactions = await receiveAnyIncomingTransactions(sending_account.address)
         if(receivingTransactions === true){
             console.log('Received transactions');
@@ -285,3 +289,13 @@ function logout(){
     resize_initial_background();
 }
 
+
+function copyToClipboard(data) {
+    var $body = document.getElementsByTagName('body')[0];
+    var $tempInput = document.createElement('INPUT');
+    $body.appendChild($tempInput);
+    $tempInput.setAttribute('value', data)
+    $tempInput.select();
+    document.execCommand('copy');
+    $body.removeChild($tempInput);
+}

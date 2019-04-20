@@ -77,7 +77,7 @@ class ConnectionMaintainer {
                 }
 
             }
-            this.setStatus('Connected to node ' + web3.currentProvider.connection.url.substr(0,25) + "...");
+            this.setStatus('Connected to node ' + web3.currentProvider.connection.url);
             await sleep(this.connectedLoopPeriod);
             this.networkConnectionMaintainerLoop();
             this.wasConnected = true;
