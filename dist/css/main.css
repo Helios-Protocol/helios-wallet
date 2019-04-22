@@ -180,7 +180,7 @@ a:hover{
 }
 .copy_icon{
     width:25px;
-    z-index:99;
+    z-index:49;
 }
 .copy_icon_right{
     position:absolute;

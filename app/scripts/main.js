@@ -3,9 +3,15 @@ var helios_web3 = web3_main.web3;
 var accountHelpers = require('./account_helpers.js');
 var fileSaver = require("file-saver");
 var numerical = require("./numerical_helpers");
-var ConnectionMaintainer = require("./node_connection_helpers.js").ConnectionMaintainer;
-var getNodeMessageFromError = require("./node_connection_helpers.js").getNodeMessageFromError;
-var Server = require("./server_interaction.js").Server;
+
+var HeliosUtils = require('helios-utils');
+var ConnectionMaintainer = HeliosUtils.ConnectionMaintainer;
+var getNodeMessageFromError = HeliosUtils.getNodeMessageFromError;
+var KeystoreServer = HeliosUtils.KeystoreServer;
+
+// var ConnectionMaintainer = require("./node_connection_helpers.js").ConnectionMaintainer;
+// var getNodeMessageFromError = require("./node_connection_helpers.js").getNodeMessageFromError;
+// var Server = require("./server_interaction.js").Server;
 
 // var availableNodes = [
 //     "ws://127.0.0.1:30304",
@@ -20,12 +26,12 @@ var availableNodes = [
     "wss://bootnode.heliosprotocol.io:30304"
 ];
 
-var connectionMaintainer = new ConnectionMaintainer(availableNodes);
+var connectionMaintainer = new ConnectionMaintainer(helios_web3, availableNodes);
 connectionMaintainer.startNetworkConnectionMaintainerLoop();
 
 var onlineKeystoreServerUrl = 'https://heliosprotocol.io/wallet-serverside/';
 
-var server = new Server(onlineKeystoreServerUrl);
+var server = new KeystoreServer(onlineKeystoreServerUrl);
 
 if (typeof window !== 'undefined') {
     if (typeof window.helios_web3 === 'undefined'){
