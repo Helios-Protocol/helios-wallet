@@ -17439,7 +17439,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz",
   "_shasum": "c2d0b7776911b86722c632c3c06c60f2f819939a",
   "_spec": "elliptic@^6.0.0",
-  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-wallet/node_modules/browserify-sign",
+  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype desktop/helios-wallet/node_modules/browserify-sign",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -30056,7 +30056,7 @@ core.addProviders(Web3);
 module.exports = Web3;
 
 
-},{"./web3-hls.js":550,"web3-bzz":479,"web3-core":496,"web3-eth":518,"web3-eth-personal":515,"web3-net":519,"web3-shh":528,"web3-utils":532}],195:[function(require,module,exports){
+},{"./web3-hls.js":550,"web3-bzz":479,"web3-core":496,"web3-eth":518,"web3-eth-personal":515,"web3-net":519,"web3-shh":525,"web3-utils":529}],195:[function(require,module,exports){
 (function (process){
 /* Copyright (c) 2017 Rod Vagg, MIT License */
 
@@ -32723,7 +32723,7 @@ module.exports={
   "_args": [
     [
       "elliptic@6.4.1",
-      "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-web3"
+      "F:\\Google Drive\\forex\\blockchain_coding\\Helios\\prototype_desktop_windows\\helios-web3.js"
     ]
   ],
   "_from": "elliptic@6.4.1",
@@ -32752,7 +32752,7 @@ module.exports={
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz",
   "_spec": "6.4.1",
-  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-web3",
+  "_where": "F:\\Google Drive\\forex\\blockchain_coding\\Helios\\prototype_desktop_windows\\helios-web3.js",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -60886,7 +60886,7 @@ module.exports = {
 };
 
 
-},{"underscore":480,"web3-eth-iban":514,"web3-utils":532}],483:[function(require,module,exports){
+},{"underscore":480,"web3-eth-iban":514,"web3-utils":529}],483:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -61531,7 +61531,7 @@ Method.prototype.request = function () {
 
 module.exports = Method;
 
-},{"underscore":484,"web3-core-helpers":483,"web3-core-promievent":486,"web3-core-subscriptions":493,"web3-utils":532}],486:[function(require,module,exports){
+},{"underscore":484,"web3-core-helpers":483,"web3-core-promievent":486,"web3-core-subscriptions":493,"web3-utils":529}],486:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -62028,7 +62028,7 @@ module.exports = {
     BatchManager: BatchManager
 };
 
-},{"./batch.js":488,"./givenProvider.js":489,"./jsonrpc.js":491,"underscore":487,"web3-core-helpers":483,"web3-providers-http":520,"web3-providers-ipc":522,"web3-providers-ws":527}],491:[function(require,module,exports){
+},{"./batch.js":488,"./givenProvider.js":489,"./jsonrpc.js":491,"underscore":487,"web3-core-helpers":483,"web3-providers-http":520,"web3-providers-ipc":522,"web3-providers-ws":524}],491:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -62578,7 +62578,7 @@ var extend = function (pckg) {
 module.exports = extend;
 
 
-},{"web3-core-helpers":483,"web3-core-method":485,"web3-utils":532}],496:[function(require,module,exports){
+},{"web3-core-helpers":483,"web3-core-method":485,"web3-utils":529}],496:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -62981,7 +62981,7 @@ var coder = new ABICoder();
 
 module.exports = coder;
 
-},{"ethers/utils/abi-coder":299,"underscore":497,"web3-utils":532}],499:[function(require,module,exports){
+},{"ethers/utils/abi-coder":299,"underscore":497,"web3-utils":529}],499:[function(require,module,exports){
 arguments[4][478][0].apply(exports,arguments)
 },{"dup":478}],500:[function(require,module,exports){
 (function (global){
@@ -63741,7 +63741,7 @@ if (typeof localStorage === 'undefined') {
 module.exports = Accounts;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"any-promise":200,"buffer":57,"crypto":67,"crypto-browserify":257,"eth-lib/lib/account":291,"eth-lib/lib/bytes":293,"eth-lib/lib/hash":294,"eth-lib/lib/nat":295,"eth-lib/lib/rlp":296,"scrypt.js":441,"underscore":499,"uuid":501,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-utils":532}],503:[function(require,module,exports){
+},{"any-promise":200,"buffer":57,"crypto":67,"crypto-browserify":257,"eth-lib/lib/account":291,"eth-lib/lib/bytes":293,"eth-lib/lib/hash":294,"eth-lib/lib/nat":295,"eth-lib/lib/rlp":296,"scrypt.js":441,"underscore":499,"uuid":501,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-utils":529}],503:[function(require,module,exports){
 arguments[4][478][0].apply(exports,arguments)
 },{"dup":478}],504:[function(require,module,exports){
 /*
@@ -64650,7 +64650,7 @@ Contract.prototype._executeMethod = function _executeMethod(){
 
 module.exports = Contract;
 
-},{"underscore":503,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-core-promievent":486,"web3-core-subscriptions":493,"web3-eth-abi":498,"web3-utils":532}],505:[function(require,module,exports){
+},{"underscore":503,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-core-promievent":486,"web3-core-subscriptions":493,"web3-eth-abi":498,"web3-utils":529}],505:[function(require,module,exports){
 arguments[4][478][0].apply(exports,arguments)
 },{"dup":478}],506:[function(require,module,exports){
 /*
@@ -66012,7 +66012,7 @@ Iban.prototype.toString = function () {
 
 module.exports = Iban;
 
-},{"bn.js":513,"web3-utils":532}],515:[function(require,module,exports){
+},{"bn.js":513,"web3-utils":529}],515:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -66164,7 +66164,7 @@ module.exports = Personal;
 
 
 
-},{"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-net":519,"web3-utils":532}],516:[function(require,module,exports){
+},{"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-net":519,"web3-utils":529}],516:[function(require,module,exports){
 arguments[4][478][0].apply(exports,arguments)
 },{"dup":478}],517:[function(require,module,exports){
 /*
@@ -66714,7 +66714,7 @@ core.addProviders(Eth);
 module.exports = Eth;
 
 
-},{"./getNetworkType.js":517,"underscore":516,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-core-subscriptions":493,"web3-eth-abi":498,"web3-eth-accounts":502,"web3-eth-contract":504,"web3-eth-ens":509,"web3-eth-iban":514,"web3-eth-personal":515,"web3-net":519,"web3-utils":532}],519:[function(require,module,exports){
+},{"./getNetworkType.js":517,"underscore":516,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-core-subscriptions":493,"web3-eth-abi":498,"web3-eth-accounts":502,"web3-eth-contract":504,"web3-eth-ens":509,"web3-eth-iban":514,"web3-eth-personal":515,"web3-net":519,"web3-utils":529}],519:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -66783,7 +66783,7 @@ module.exports = Net;
 
 
 
-},{"web3-core":496,"web3-core-method":485,"web3-utils":532}],520:[function(require,module,exports){
+},{"web3-core":496,"web3-core-method":485,"web3-utils":529}],520:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -66903,7 +66903,7 @@ HttpProvider.prototype.disconnect = function () {
 
 module.exports = HttpProvider;
 
-},{"http":173,"https":114,"web3-core-helpers":483,"xhr2-cookies":542}],521:[function(require,module,exports){
+},{"http":173,"https":114,"web3-core-helpers":483,"xhr2-cookies":541}],521:[function(require,module,exports){
 arguments[4][478][0].apply(exports,arguments)
 },{"dup":478}],522:[function(require,module,exports){
 /*
@@ -67225,148 +67225,6 @@ module.exports = IpcProvider;
 },{"oboe":403,"underscore":521,"web3-core-helpers":483}],523:[function(require,module,exports){
 arguments[4][478][0].apply(exports,arguments)
 },{"dup":478}],524:[function(require,module,exports){
-var _global = (function() { return this || {}; })();
-var NativeWebSocket = _global.WebSocket || _global.MozWebSocket;
-var websocket_version = require('./version');
-
-
-/**
- * Expose a W3C WebSocket class with just one or two arguments.
- */
-function W3CWebSocket(uri, protocols) {
-	var native_instance;
-
-	if (protocols) {
-		native_instance = new NativeWebSocket(uri, protocols);
-	}
-	else {
-		native_instance = new NativeWebSocket(uri);
-	}
-
-	/**
-	 * 'native_instance' is an instance of nativeWebSocket (the browser's WebSocket
-	 * class). Since it is an Object it will be returned as it is when creating an
-	 * instance of W3CWebSocket via 'new W3CWebSocket()'.
-	 *
-	 * ECMAScript 5: http://bclary.com/2004/11/07/#a-13.2.2
-	 */
-	return native_instance;
-}
-if (NativeWebSocket) {
-	['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'].forEach(function(prop) {
-		Object.defineProperty(W3CWebSocket, prop, {
-			get: function() { return NativeWebSocket[prop]; }
-		});
-	});
-}
-
-/**
- * Module exports.
- */
-module.exports = {
-    'w3cwebsocket' : NativeWebSocket ? W3CWebSocket : null,
-    'version'      : websocket_version
-};
-
-},{"./version":525}],525:[function(require,module,exports){
-module.exports = require('../package.json').version;
-
-},{"../package.json":526}],526:[function(require,module,exports){
-module.exports={
-  "_args": [
-    [
-      "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-      "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-web3"
-    ]
-  ],
-  "_from": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-  "_id": "websocket@git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-  "_inBundle": false,
-  "_integrity": "",
-  "_location": "/web3-providers-ws/websocket",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "git",
-    "raw": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-    "rawSpec": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-    "saveSpec": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-    "fetchSpec": "git://github.com/frozeman/WebSocket-Node.git",
-    "gitCommittish": "6c72925e3f8aaaea8dc8450f97627e85263999f2"
-  },
-  "_requiredBy": [],
-  "_resolved": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-  "_spec": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
-  "_where": "/d:/Google Drive/forex/blockchain_coding/Helios/prototype_laptop/helios-web3",
-  "author": {
-    "name": "Brian McKelvey",
-    "email": "brian@worlize.com",
-    "url": "https://www.worlize.com/"
-  },
-  "browser": "lib/browser.js",
-  "bugs": {
-    "url": "https://github.com/theturtle32/WebSocket-Node/issues"
-  },
-  "config": {
-    "verbose": false
-  },
-  "contributors": [
-    {
-      "name": "Iñaki Baz Castillo",
-      "email": "ibc@aliax.net",
-      "url": "http://dev.sipdoc.net"
-    }
-  ],
-  "dependencies": {
-    "debug": "^2.2.0",
-    "nan": "^2.3.3",
-    "typedarray-to-buffer": "^3.1.2",
-    "yaeti": "^0.0.6"
-  },
-  "description": "Websocket Client & Server Library implementing the WebSocket protocol as specified in RFC 6455.",
-  "devDependencies": {
-    "buffer-equal": "^1.0.0",
-    "faucet": "^0.0.1",
-    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
-    "gulp-jshint": "^2.0.4",
-    "jshint": "^2.0.0",
-    "jshint-stylish": "^2.2.1",
-    "tape": "^4.0.1"
-  },
-  "directories": {
-    "lib": "./lib"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "homepage": "https://github.com/theturtle32/WebSocket-Node",
-  "keywords": [
-    "websocket",
-    "websockets",
-    "socket",
-    "networking",
-    "comet",
-    "push",
-    "RFC-6455",
-    "realtime",
-    "server",
-    "client"
-  ],
-  "license": "Apache-2.0",
-  "main": "index",
-  "name": "websocket",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/theturtle32/WebSocket-Node.git"
-  },
-  "scripts": {
-    "gulp": "gulp",
-    "install": "(node-gyp rebuild 2> builderror.log) || (exit 0)",
-    "test": "faucet test/unit"
-  },
-  "version": "1.0.26"
-}
-
-},{}],527:[function(require,module,exports){
 (function (Buffer){
 /*
  This file is part of web3.js.
@@ -67771,7 +67629,7 @@ WebsocketProvider.prototype.disconnect = function () {
 module.exports = WebsocketProvider;
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":57,"underscore":523,"url":186,"web3-core-helpers":483,"websocket":524}],528:[function(require,module,exports){
+},{"buffer":57,"underscore":523,"url":186,"web3-core-helpers":483,"websocket":532}],525:[function(require,module,exports){
 /*
     This file is part of web3.js.
 
@@ -67963,13 +67821,13 @@ module.exports = Shh;
 
 
 
-},{"web3-core":496,"web3-core-method":485,"web3-core-subscriptions":493,"web3-net":519}],529:[function(require,module,exports){
+},{"web3-core":496,"web3-core-method":485,"web3-core-subscriptions":493,"web3-net":519}],526:[function(require,module,exports){
 arguments[4][310][0].apply(exports,arguments)
-},{"dup":310}],530:[function(require,module,exports){
+},{"dup":310}],527:[function(require,module,exports){
 arguments[4][294][0].apply(exports,arguments)
-},{"dup":294}],531:[function(require,module,exports){
+},{"dup":294}],528:[function(require,module,exports){
 arguments[4][478][0].apply(exports,arguments)
-},{"dup":478}],532:[function(require,module,exports){
+},{"dup":478}],529:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -68335,7 +68193,7 @@ module.exports = {
 };
 
 
-},{"./soliditySha3.js":533,"./utils.js":534,"ethjs-unit":309,"randomhex":428,"underscore":531}],533:[function(require,module,exports){
+},{"./soliditySha3.js":530,"./utils.js":531,"ethjs-unit":309,"randomhex":428,"underscore":528}],530:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -68582,7 +68440,7 @@ var soliditySha3 = function () {
 
 module.exports = soliditySha3;
 
-},{"./utils.js":534,"bn.js":529,"underscore":531}],534:[function(require,module,exports){
+},{"./utils.js":531,"bn.js":526,"underscore":528}],531:[function(require,module,exports){
 /*
  This file is part of web3.js.
 
@@ -69055,7 +68913,149 @@ module.exports = {
     sha3: sha3
 };
 
-},{"bn.js":529,"eth-lib/lib/hash":530,"number-to-bn":397,"underscore":531,"utf8":471}],535:[function(require,module,exports){
+},{"bn.js":526,"eth-lib/lib/hash":527,"number-to-bn":397,"underscore":528,"utf8":471}],532:[function(require,module,exports){
+var _global = (function() { return this || {}; })();
+var NativeWebSocket = _global.WebSocket || _global.MozWebSocket;
+var websocket_version = require('./version');
+
+
+/**
+ * Expose a W3C WebSocket class with just one or two arguments.
+ */
+function W3CWebSocket(uri, protocols) {
+	var native_instance;
+
+	if (protocols) {
+		native_instance = new NativeWebSocket(uri, protocols);
+	}
+	else {
+		native_instance = new NativeWebSocket(uri);
+	}
+
+	/**
+	 * 'native_instance' is an instance of nativeWebSocket (the browser's WebSocket
+	 * class). Since it is an Object it will be returned as it is when creating an
+	 * instance of W3CWebSocket via 'new W3CWebSocket()'.
+	 *
+	 * ECMAScript 5: http://bclary.com/2004/11/07/#a-13.2.2
+	 */
+	return native_instance;
+}
+if (NativeWebSocket) {
+	['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'].forEach(function(prop) {
+		Object.defineProperty(W3CWebSocket, prop, {
+			get: function() { return NativeWebSocket[prop]; }
+		});
+	});
+}
+
+/**
+ * Module exports.
+ */
+module.exports = {
+    'w3cwebsocket' : NativeWebSocket ? W3CWebSocket : null,
+    'version'      : websocket_version
+};
+
+},{"./version":533}],533:[function(require,module,exports){
+module.exports = require('../package.json').version;
+
+},{"../package.json":534}],534:[function(require,module,exports){
+module.exports={
+  "_from": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+  "_id": "websocket@1.0.26",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/websocket",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "websocket@git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "name": "websocket",
+    "escapedName": "websocket",
+    "rawSpec": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "saveSpec": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+    "fetchSpec": "git://github.com/frozeman/WebSocket-Node.git",
+    "gitCommittish": "browserifyCompatible"
+  },
+  "_requiredBy": [
+    "/web3-providers-ws"
+  ],
+  "_resolved": "git://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2",
+  "_spec": "websocket@git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible",
+  "_where": "F:\\Google Drive\\forex\\blockchain_coding\\Helios\\prototype_desktop_windows\\helios-web3.js\\node_modules\\web3-providers-ws",
+  "author": {
+    "name": "Brian McKelvey",
+    "email": "brian@worlize.com",
+    "url": "https://www.worlize.com/"
+  },
+  "browser": "lib/browser.js",
+  "bugs": {
+    "url": "https://github.com/theturtle32/WebSocket-Node/issues"
+  },
+  "bundleDependencies": false,
+  "config": {
+    "verbose": false
+  },
+  "contributors": [
+    {
+      "name": "Iñaki Baz Castillo",
+      "email": "ibc@aliax.net",
+      "url": "http://dev.sipdoc.net"
+    }
+  ],
+  "dependencies": {
+    "debug": "^2.2.0",
+    "nan": "^2.3.3",
+    "typedarray-to-buffer": "^3.1.2",
+    "yaeti": "^0.0.6"
+  },
+  "deprecated": false,
+  "description": "Websocket Client & Server Library implementing the WebSocket protocol as specified in RFC 6455.",
+  "devDependencies": {
+    "buffer-equal": "^1.0.0",
+    "faucet": "^0.0.1",
+    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
+    "gulp-jshint": "^2.0.4",
+    "jshint": "^2.0.0",
+    "jshint-stylish": "^2.2.1",
+    "tape": "^4.0.1"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "homepage": "https://github.com/theturtle32/WebSocket-Node",
+  "keywords": [
+    "websocket",
+    "websockets",
+    "socket",
+    "networking",
+    "comet",
+    "push",
+    "RFC-6455",
+    "realtime",
+    "server",
+    "client"
+  ],
+  "license": "Apache-2.0",
+  "main": "index",
+  "name": "websocket",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theturtle32/WebSocket-Node.git"
+  },
+  "scripts": {
+    "gulp": "gulp",
+    "install": "(node-gyp rebuild 2> builderror.log) || (exit 0)",
+    "test": "faucet test/unit"
+  },
+  "version": "1.0.26"
+}
+
+},{}],535:[function(require,module,exports){
 var request = require('xhr-request')
 
 module.exports = function (url, options) {
@@ -69195,256 +69195,7 @@ function xhrRequest (opt, cb) {
   return req
 }
 
-},{"./normalize-response":538,"xhr":540}],540:[function(require,module,exports){
-"use strict";
-var window = require("global/window")
-var isFunction = require("is-function")
-var parseHeaders = require("parse-headers")
-var xtend = require("xtend")
-
-module.exports = createXHR
-// Allow use of default import syntax in TypeScript
-module.exports.default = createXHR;
-createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
-createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
-
-forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
-    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
-        options = initParams(uri, options, callback)
-        options.method = method.toUpperCase()
-        return _createXHR(options)
-    }
-})
-
-function forEachArray(array, iterator) {
-    for (var i = 0; i < array.length; i++) {
-        iterator(array[i])
-    }
-}
-
-function isEmpty(obj){
-    for(var i in obj){
-        if(obj.hasOwnProperty(i)) return false
-    }
-    return true
-}
-
-function initParams(uri, options, callback) {
-    var params = uri
-
-    if (isFunction(options)) {
-        callback = options
-        if (typeof uri === "string") {
-            params = {uri:uri}
-        }
-    } else {
-        params = xtend(options, {uri: uri})
-    }
-
-    params.callback = callback
-    return params
-}
-
-function createXHR(uri, options, callback) {
-    options = initParams(uri, options, callback)
-    return _createXHR(options)
-}
-
-function _createXHR(options) {
-    if(typeof options.callback === "undefined"){
-        throw new Error("callback argument missing")
-    }
-
-    var called = false
-    var callback = function cbOnce(err, response, body){
-        if(!called){
-            called = true
-            options.callback(err, response, body)
-        }
-    }
-
-    function readystatechange() {
-        if (xhr.readyState === 4) {
-            setTimeout(loadFunc, 0)
-        }
-    }
-
-    function getBody() {
-        // Chrome with requestType=blob throws errors arround when even testing access to responseText
-        var body = undefined
-
-        if (xhr.response) {
-            body = xhr.response
-        } else {
-            body = xhr.responseText || getXml(xhr)
-        }
-
-        if (isJson) {
-            try {
-                body = JSON.parse(body)
-            } catch (e) {}
-        }
-
-        return body
-    }
-
-    function errorFunc(evt) {
-        clearTimeout(timeoutTimer)
-        if(!(evt instanceof Error)){
-            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
-        }
-        evt.statusCode = 0
-        return callback(evt, failureResponse)
-    }
-
-    // will load the data & process the response in a special response object
-    function loadFunc() {
-        if (aborted) return
-        var status
-        clearTimeout(timeoutTimer)
-        if(options.useXDR && xhr.status===undefined) {
-            //IE8 CORS GET successful response doesn't have a status field, but body is fine
-            status = 200
-        } else {
-            status = (xhr.status === 1223 ? 204 : xhr.status)
-        }
-        var response = failureResponse
-        var err = null
-
-        if (status !== 0){
-            response = {
-                body: getBody(),
-                statusCode: status,
-                method: method,
-                headers: {},
-                url: uri,
-                rawRequest: xhr
-            }
-            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
-                response.headers = parseHeaders(xhr.getAllResponseHeaders())
-            }
-        } else {
-            err = new Error("Internal XMLHttpRequest Error")
-        }
-        return callback(err, response, response.body)
-    }
-
-    var xhr = options.xhr || null
-
-    if (!xhr) {
-        if (options.cors || options.useXDR) {
-            xhr = new createXHR.XDomainRequest()
-        }else{
-            xhr = new createXHR.XMLHttpRequest()
-        }
-    }
-
-    var key
-    var aborted
-    var uri = xhr.url = options.uri || options.url
-    var method = xhr.method = options.method || "GET"
-    var body = options.body || options.data
-    var headers = xhr.headers = options.headers || {}
-    var sync = !!options.sync
-    var isJson = false
-    var timeoutTimer
-    var failureResponse = {
-        body: undefined,
-        headers: {},
-        statusCode: 0,
-        method: method,
-        url: uri,
-        rawRequest: xhr
-    }
-
-    if ("json" in options && options.json !== false) {
-        isJson = true
-        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
-        if (method !== "GET" && method !== "HEAD") {
-            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
-            body = JSON.stringify(options.json === true ? body : options.json)
-        }
-    }
-
-    xhr.onreadystatechange = readystatechange
-    xhr.onload = loadFunc
-    xhr.onerror = errorFunc
-    // IE9 must have onprogress be set to a unique function.
-    xhr.onprogress = function () {
-        // IE must die
-    }
-    xhr.onabort = function(){
-        aborted = true;
-    }
-    xhr.ontimeout = errorFunc
-    xhr.open(method, uri, !sync, options.username, options.password)
-    //has to be after open
-    if(!sync) {
-        xhr.withCredentials = !!options.withCredentials
-    }
-    // Cannot set timeout with sync request
-    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
-    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
-    if (!sync && options.timeout > 0 ) {
-        timeoutTimer = setTimeout(function(){
-            if (aborted) return
-            aborted = true//IE9 may still call readystatechange
-            xhr.abort("timeout")
-            var e = new Error("XMLHttpRequest timeout")
-            e.code = "ETIMEDOUT"
-            errorFunc(e)
-        }, options.timeout )
-    }
-
-    if (xhr.setRequestHeader) {
-        for(key in headers){
-            if(headers.hasOwnProperty(key)){
-                xhr.setRequestHeader(key, headers[key])
-            }
-        }
-    } else if (options.headers && !isEmpty(options.headers)) {
-        throw new Error("Headers cannot be set on an XDomainRequest object")
-    }
-
-    if ("responseType" in options) {
-        xhr.responseType = options.responseType
-    }
-
-    if ("beforeSend" in options &&
-        typeof options.beforeSend === "function"
-    ) {
-        options.beforeSend(xhr)
-    }
-
-    // Microsoft Edge browser sends "undefined" when send is called with undefined value.
-    // XMLHttpRequest spec says to pass null as body to indicate no body
-    // See https://github.com/naugtur/xhr/issues/100.
-    xhr.send(body || null)
-
-    return xhr
-
-
-}
-
-function getXml(xhr) {
-    // xhr.responseXML will throw Exception "InvalidStateError" or "DOMException"
-    // See https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseXML.
-    try {
-        if (xhr.responseType === "document") {
-            return xhr.responseXML
-        }
-        var firefoxBugTakenEffect = xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
-        if (xhr.responseType === "" && !firefoxBugTakenEffect) {
-            return xhr.responseXML
-        }
-    } catch (e) {}
-
-    return null
-}
-
-function noop() {}
-
-},{"global/window":316,"is-function":341,"parse-headers":409,"xtend":547}],541:[function(require,module,exports){
+},{"./normalize-response":538,"xhr":546}],540:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -69490,7 +69241,7 @@ var SyntaxError = /** @class */ (function (_super) {
 }(Error));
 exports.SyntaxError = SyntaxError;
 
-},{}],542:[function(require,module,exports){
+},{}],541:[function(require,module,exports){
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
@@ -69500,7 +69251,7 @@ __export(require("./xml-http-request"));
 var xml_http_request_event_target_1 = require("./xml-http-request-event-target");
 exports.XMLHttpRequestEventTarget = xml_http_request_event_target_1.XMLHttpRequestEventTarget;
 
-},{"./xml-http-request":546,"./xml-http-request-event-target":544}],543:[function(require,module,exports){
+},{"./xml-http-request":545,"./xml-http-request-event-target":543}],542:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ProgressEvent = /** @class */ (function () {
@@ -69516,7 +69267,7 @@ var ProgressEvent = /** @class */ (function () {
 }());
 exports.ProgressEvent = ProgressEvent;
 
-},{}],544:[function(require,module,exports){
+},{}],543:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var XMLHttpRequestEventTarget = /** @class */ (function () {
@@ -69558,7 +69309,7 @@ var XMLHttpRequestEventTarget = /** @class */ (function () {
 }());
 exports.XMLHttpRequestEventTarget = XMLHttpRequestEventTarget;
 
-},{}],545:[function(require,module,exports){
+},{}],544:[function(require,module,exports){
 (function (Buffer){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -69639,7 +69390,7 @@ var XMLHttpRequestUpload = /** @class */ (function (_super) {
 exports.XMLHttpRequestUpload = XMLHttpRequestUpload;
 
 }).call(this,require("buffer").Buffer)
-},{"./xml-http-request-event-target":544,"buffer":57}],546:[function(require,module,exports){
+},{"./xml-http-request-event-target":543,"buffer":57}],545:[function(require,module,exports){
 (function (process,Buffer){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -70089,7 +69840,256 @@ XMLHttpRequest.prototype.nodejsHttpsAgent = https.globalAgent;
 XMLHttpRequest.prototype.nodejsBaseUrl = null;
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./errors":541,"./progress-event":543,"./xml-http-request-event-target":544,"./xml-http-request-upload":545,"_process":135,"buffer":57,"cookiejar":250,"http":173,"https":114,"os":123,"url":186}],547:[function(require,module,exports){
+},{"./errors":540,"./progress-event":542,"./xml-http-request-event-target":543,"./xml-http-request-upload":544,"_process":135,"buffer":57,"cookiejar":250,"http":173,"https":114,"os":123,"url":186}],546:[function(require,module,exports){
+"use strict";
+var window = require("global/window")
+var isFunction = require("is-function")
+var parseHeaders = require("parse-headers")
+var xtend = require("xtend")
+
+module.exports = createXHR
+// Allow use of default import syntax in TypeScript
+module.exports.default = createXHR;
+createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
+createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
+
+forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
+    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
+        options = initParams(uri, options, callback)
+        options.method = method.toUpperCase()
+        return _createXHR(options)
+    }
+})
+
+function forEachArray(array, iterator) {
+    for (var i = 0; i < array.length; i++) {
+        iterator(array[i])
+    }
+}
+
+function isEmpty(obj){
+    for(var i in obj){
+        if(obj.hasOwnProperty(i)) return false
+    }
+    return true
+}
+
+function initParams(uri, options, callback) {
+    var params = uri
+
+    if (isFunction(options)) {
+        callback = options
+        if (typeof uri === "string") {
+            params = {uri:uri}
+        }
+    } else {
+        params = xtend(options, {uri: uri})
+    }
+
+    params.callback = callback
+    return params
+}
+
+function createXHR(uri, options, callback) {
+    options = initParams(uri, options, callback)
+    return _createXHR(options)
+}
+
+function _createXHR(options) {
+    if(typeof options.callback === "undefined"){
+        throw new Error("callback argument missing")
+    }
+
+    var called = false
+    var callback = function cbOnce(err, response, body){
+        if(!called){
+            called = true
+            options.callback(err, response, body)
+        }
+    }
+
+    function readystatechange() {
+        if (xhr.readyState === 4) {
+            setTimeout(loadFunc, 0)
+        }
+    }
+
+    function getBody() {
+        // Chrome with requestType=blob throws errors arround when even testing access to responseText
+        var body = undefined
+
+        if (xhr.response) {
+            body = xhr.response
+        } else {
+            body = xhr.responseText || getXml(xhr)
+        }
+
+        if (isJson) {
+            try {
+                body = JSON.parse(body)
+            } catch (e) {}
+        }
+
+        return body
+    }
+
+    function errorFunc(evt) {
+        clearTimeout(timeoutTimer)
+        if(!(evt instanceof Error)){
+            evt = new Error("" + (evt || "Unknown XMLHttpRequest Error") )
+        }
+        evt.statusCode = 0
+        return callback(evt, failureResponse)
+    }
+
+    // will load the data & process the response in a special response object
+    function loadFunc() {
+        if (aborted) return
+        var status
+        clearTimeout(timeoutTimer)
+        if(options.useXDR && xhr.status===undefined) {
+            //IE8 CORS GET successful response doesn't have a status field, but body is fine
+            status = 200
+        } else {
+            status = (xhr.status === 1223 ? 204 : xhr.status)
+        }
+        var response = failureResponse
+        var err = null
+
+        if (status !== 0){
+            response = {
+                body: getBody(),
+                statusCode: status,
+                method: method,
+                headers: {},
+                url: uri,
+                rawRequest: xhr
+            }
+            if(xhr.getAllResponseHeaders){ //remember xhr can in fact be XDR for CORS in IE
+                response.headers = parseHeaders(xhr.getAllResponseHeaders())
+            }
+        } else {
+            err = new Error("Internal XMLHttpRequest Error")
+        }
+        return callback(err, response, response.body)
+    }
+
+    var xhr = options.xhr || null
+
+    if (!xhr) {
+        if (options.cors || options.useXDR) {
+            xhr = new createXHR.XDomainRequest()
+        }else{
+            xhr = new createXHR.XMLHttpRequest()
+        }
+    }
+
+    var key
+    var aborted
+    var uri = xhr.url = options.uri || options.url
+    var method = xhr.method = options.method || "GET"
+    var body = options.body || options.data
+    var headers = xhr.headers = options.headers || {}
+    var sync = !!options.sync
+    var isJson = false
+    var timeoutTimer
+    var failureResponse = {
+        body: undefined,
+        headers: {},
+        statusCode: 0,
+        method: method,
+        url: uri,
+        rawRequest: xhr
+    }
+
+    if ("json" in options && options.json !== false) {
+        isJson = true
+        headers["accept"] || headers["Accept"] || (headers["Accept"] = "application/json") //Don't override existing accept header declared by user
+        if (method !== "GET" && method !== "HEAD") {
+            headers["content-type"] || headers["Content-Type"] || (headers["Content-Type"] = "application/json") //Don't override existing accept header declared by user
+            body = JSON.stringify(options.json === true ? body : options.json)
+        }
+    }
+
+    xhr.onreadystatechange = readystatechange
+    xhr.onload = loadFunc
+    xhr.onerror = errorFunc
+    // IE9 must have onprogress be set to a unique function.
+    xhr.onprogress = function () {
+        // IE must die
+    }
+    xhr.onabort = function(){
+        aborted = true;
+    }
+    xhr.ontimeout = errorFunc
+    xhr.open(method, uri, !sync, options.username, options.password)
+    //has to be after open
+    if(!sync) {
+        xhr.withCredentials = !!options.withCredentials
+    }
+    // Cannot set timeout with sync request
+    // not setting timeout on the xhr object, because of old webkits etc. not handling that correctly
+    // both npm's request and jquery 1.x use this kind of timeout, so this is being consistent
+    if (!sync && options.timeout > 0 ) {
+        timeoutTimer = setTimeout(function(){
+            if (aborted) return
+            aborted = true//IE9 may still call readystatechange
+            xhr.abort("timeout")
+            var e = new Error("XMLHttpRequest timeout")
+            e.code = "ETIMEDOUT"
+            errorFunc(e)
+        }, options.timeout )
+    }
+
+    if (xhr.setRequestHeader) {
+        for(key in headers){
+            if(headers.hasOwnProperty(key)){
+                xhr.setRequestHeader(key, headers[key])
+            }
+        }
+    } else if (options.headers && !isEmpty(options.headers)) {
+        throw new Error("Headers cannot be set on an XDomainRequest object")
+    }
+
+    if ("responseType" in options) {
+        xhr.responseType = options.responseType
+    }
+
+    if ("beforeSend" in options &&
+        typeof options.beforeSend === "function"
+    ) {
+        options.beforeSend(xhr)
+    }
+
+    // Microsoft Edge browser sends "undefined" when send is called with undefined value.
+    // XMLHttpRequest spec says to pass null as body to indicate no body
+    // See https://github.com/naugtur/xhr/issues/100.
+    xhr.send(body || null)
+
+    return xhr
+
+
+}
+
+function getXml(xhr) {
+    // xhr.responseXML will throw Exception "InvalidStateError" or "DOMException"
+    // See https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseXML.
+    try {
+        if (xhr.responseType === "document") {
+            return xhr.responseXML
+        }
+        var firefoxBugTakenEffect = xhr.responseXML && xhr.responseXML.documentElement.nodeName === "parsererror"
+        if (xhr.responseType === "" && !firefoxBugTakenEffect) {
+            return xhr.responseXML
+        }
+    } catch (e) {}
+
+    return null
+}
+
+function noop() {}
+
+},{"global/window":316,"is-function":341,"parse-headers":409,"xtend":547}],547:[function(require,module,exports){
 arguments[4][192][0].apply(exports,arguments)
 },{"dup":192}],548:[function(require,module,exports){
 (function (global,Buffer){
@@ -70963,7 +70963,7 @@ if (typeof localStorage === 'undefined') {
 module.exports = Accounts;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"./web3-hls-formatters.js":549,"any-promise":200,"buffer":57,"crypto":67,"crypto-browserify":257,"eth-lib/lib/account":291,"eth-lib/lib/bytes":293,"eth-lib/lib/hash":294,"eth-lib/lib/nat":295,"eth-lib/lib/rlp":296,"merkle-patricia-tree":387,"scrypt.js":441,"underscore":469,"uuid":473,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-utils":532}],549:[function(require,module,exports){
+},{"./web3-hls-formatters.js":549,"any-promise":200,"buffer":57,"crypto":67,"crypto-browserify":257,"eth-lib/lib/account":291,"eth-lib/lib/bytes":293,"eth-lib/lib/hash":294,"eth-lib/lib/nat":295,"eth-lib/lib/rlp":296,"merkle-patricia-tree":387,"scrypt.js":441,"underscore":469,"uuid":473,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-utils":529}],549:[function(require,module,exports){
 "use strict";
 
 
@@ -71199,7 +71199,7 @@ module.exports = {
     InputBlockFormatter: InputBlockFormatter,
     outputConnectedNodesFormatter: outputConnectedNodesFormatter
 };
-},{"underscore":469,"web3-core-helpers":483,"web3-eth-iban":514,"web3-utils":532}],550:[function(require,module,exports){
+},{"underscore":469,"web3-core-helpers":483,"web3-eth-iban":514,"web3-utils":529}],550:[function(require,module,exports){
  
 /*
  This file is part of web3.js.
@@ -71629,4 +71629,4 @@ core.addProviders(Hls);
 module.exports = Hls;
 
 
-},{"./getNetworkType.js":193,"./web3-hls-accounts.js":548,"./web3-hls-formatters.js":549,"underscore":469,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-core-subscriptions":493,"web3-eth-abi":498,"web3-eth-contract":504,"web3-eth-ens":509,"web3-eth-iban":514,"web3-eth-personal":515,"web3-net":519,"web3-utils":532}]},{},[3]);
+},{"./getNetworkType.js":193,"./web3-hls-accounts.js":548,"./web3-hls-formatters.js":549,"underscore":469,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-core-subscriptions":493,"web3-eth-abi":498,"web3-eth-contract":504,"web3-eth-ens":509,"web3-eth-iban":514,"web3-eth-personal":515,"web3-net":519,"web3-utils":529}]},{},[3]);

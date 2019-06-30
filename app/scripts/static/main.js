@@ -130,6 +130,8 @@ $( document ).ready(function() {
         popup("Address copied to clipboard");
     });
 
+    var popup_content = document.getElementById("popup_content_frontpage_warning").innerHTML;
+    popup(popup_content, width=900);
 });
 
 //
