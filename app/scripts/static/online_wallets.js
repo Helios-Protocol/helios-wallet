@@ -191,6 +191,7 @@ $( document ).ready(function() {
         reader.onload = function(e) {
             var json_account = reader.result;
             try {
+                json_account = fixMEWWalletJSON(json_account);
                 var new_wallet = web3.eth.accounts.decrypt(JSON.parse(json_account), keystore_password)
             }catch(err){
                 popup('Incorrect keystore password');
