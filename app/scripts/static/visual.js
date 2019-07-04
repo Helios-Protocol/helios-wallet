@@ -246,6 +246,13 @@ function positionPopup(){
     }
     var popup_top = scroll + (windowHeight-popupHeight)/2;
     var loader_top = scroll + (windowHeight-loaderHeight)/2;
+
+    if(popup_top <= 50){
+        popup_top = 50;
+    }
+    if(loader_top <= 50){
+        loader_top = 50;
+    }
     $('#popup_container').css('top', popup_top);
     $('#loader_container').css('top', loader_top);
 
