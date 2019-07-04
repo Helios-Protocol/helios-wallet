@@ -8,6 +8,7 @@ $( document ).ready(function() {
         }else{
             $(this).addClass('filled')
         }
+        updateInputLabels();
     });
 
 
@@ -17,6 +18,7 @@ $( document ).ready(function() {
         }else{
             $(this).addClass('filled')
         }
+        updateInputLabels();
     });
 
     $('#send_transaction_advanced_options_link').click(function(){
@@ -58,6 +60,10 @@ $( document ).ready(function() {
     });
 
 
+    // $('body').on('change', 'input, textarea', function(e) {
+    //     updateInputLabels();
+    // });
+
     $('body').on('click', function(e){
         updateInputLabels();
     });
@@ -78,13 +84,17 @@ $( document ).ready(function() {
     });
 
      $('input').on('animationstart', function(e) {
-        // Focus the input element after clicking on the label so that the user can start typing right away
-        $(this).siblings('.input__label').addClass('input__label--active');
+         // Focus the input element after clicking on the label so that the user can start typing right away
+         if($(this).val() !== "") {
+             $(this).siblings('.input__label').addClass('input__label--active');
+         }
     });
 
      $('input').on('transitionstart', function(e) {
         // Focus the input element after clicking on the label so that the user can start typing right away
-        $(this).siblings('.input__label').addClass('input__label--active');
+         if($(this).val() !== "") {
+             $(this).siblings('.input__label').addClass('input__label--active');
+         }
     });
 
 
@@ -97,10 +107,10 @@ function updateInputLabels(){
         if($(this).is(":focus")) {
             return;
         }
-
-        if(!$(this).val()) {
+        if(!$(this).val() || $(this).val() === "") {
             $(this).siblings('.input__label').removeClass('input__label--active');
         }else{
+
             $(this).siblings('.input__label').addClass('input__label--active');
         }
     })

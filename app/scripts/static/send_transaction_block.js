@@ -188,12 +188,11 @@ function add_transaction_to_block_from_form(){
 
     pending_send_transactions.push(transaction);
 
-    refresh_pending_transaction_table()
+    refresh_pending_transaction_table();
 
     $('#input_amount').val("").trigger("change");
     $('#input_to').val("").trigger("change");
-    updateInputLabels();
-
+    //updateInputLabels();
     return true;
 
 }
