@@ -93,9 +93,9 @@ $( document ).ready(function() {
                 return
             }
 
-            $('#load_offline_wallet_from_keystore_file_input').val("");
+            $('#load_offline_wallet_from_keystore_file_input').val("").trigger("change");
             $('#load_offline_wallet_from_keystore_fake_file_input').text("Select keystore file");
-            $('#load_offline_wallet_from_keystore_password').val("");
+            $('#load_offline_wallet_from_keystore_password').val("").trigger("change");
             addOfflineWallet(new_wallet);
             refreshDashboard();
             popup("The new wallet has been loaded and added to offline wallets on the top menu.");
@@ -103,6 +103,50 @@ $( document ).ready(function() {
         }
 
         reader.readAsText(keystore_file);
+
+    });
+
+    $('#load_offline_wallet_private_key_form').submit(function (e) {
+        e.preventDefault();
+        console.log("loading new wallet from private key")
+        var privateKey = $("#load_offline_wallet_from_private_key").val();
+
+        if(privateKey === '' || privateKey === undefined){
+            popup("You must enter a private key to be loaded");
+            return;
+        }
+        if(!web3.utils.isHexStrict(privateKey)){
+            // Try adding the 0x and see if it passes then.
+            privateKey = "0x" + privateKey;
+            if(!web3.utils.isHexStrict(privateKey)){
+                // If it still fails, then it is malformed
+                popup('Private key appears to be incorrectly formatted.');
+                return;
+            }
+        }
+
+        if(!isPrivateKey(privateKey)){
+            popup('Private key appears to be incorrectly formatted.');
+            return;
+        }
+
+        try {
+            var new_wallet = web3.eth.accounts.privateKeyToAccount(privateKey);
+        }catch(err){
+            popup('Private key appears to be incorrectly formatted.');
+            return;
+        }
+
+        if(new_wallet.address in available_offline_accounts){
+            popup("You have already added a wallet with this address to your offline wallets.")
+            return
+        }
+
+        $('#load_offline_wallet_from_private_key').val("").trigger("change");
+        addOfflineWallet(new_wallet);
+        refreshDashboard();
+        popup("The new wallet has been loaded and added to offline wallets on the top menu.");
+        console.log("private key added")
 
     });
 

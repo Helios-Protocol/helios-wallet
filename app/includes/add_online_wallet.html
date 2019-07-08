@@ -30,7 +30,7 @@
 
     <div class='block_2_wide'>
         <div class='block_title'>
-            Add existing wallet
+            Add existing wallet from saved keystore file
         </div>
         <div class='block_content_container'>
 
@@ -65,6 +65,41 @@
                     <div class='required_star'>*</div>
                     <label class='input__label'>Keystore password</label>
                     <input id="load_online_wallet_from_keystore_password" class='fillable_input' name='add_online_wallet_keystore_password' type="password" autocomplete="off">
+                </div>
+                <input type="submit" value="Load wallet">
+                <div class='clear_both'></div>
+            </form>
+        </div>
+    </div>
+
+    <div class='block_2_wide'>
+        <div class='block_title'>
+            Add existing wallet from private key
+        </div>
+        <div class='block_content_container'>
+
+            <form id="load_online_wallet_private_key_form">
+                <div class="line_separater">
+                    <div class='input_line_container'>
+                        <div class='required_star'>*</div>
+                        <label class='input__label'>Your account username</label>
+                        <input id='load_online_wallet_from_private_key_username' class='fillable_input' name='add_online_wallet_username' type="text"  autocomplete="account_username">
+                    </div>
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Your account password</label>
+                    <input id='load_online_wallet_from_private_key_password' class='fillable_input' type="password" autocomplete="account_password">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Wallet name</label>
+                    <input id='load_online_wallet_from_private_key_name' class='fillable_input' type="text" autocomplete="off">
+                </div>
+                <div class='input_line_container'>
+                    <div class='required_star'>*</div>
+                    <label class='input__label'>Private Key</label>
+                    <input id="load_online_wallet_from_private_key" class='fillable_input' type="password" autocomplete="private_key">
                 </div>
                 <input type="submit" value="Load wallet">
                 <div class='clear_both'></div>

@@ -235,10 +235,89 @@ $( document ).ready(function() {
         });
 
 
+    });
+
+
+    $('#load_online_wallet_private_key_form').submit(function (e) {
+        e.preventDefault();
+        console.log("loading wallet from private key")
+        loaderPopup();
+        var password = $("#load_online_wallet_from_private_key_password").val();
+        var username = $("#load_online_wallet_from_private_key_username").val();
+        var wallet_name = $("#load_online_wallet_from_private_key_name").val();
+        if(!(validateInputs(username, 'username') === true)){
+            popup(validateInputs(username, 'username'));
+            return;
+        }
+        if(!(validateInputs(wallet_name, 'wallet_name') === true)){
+            popup(validateInputs(wallet_name, 'wallet_name'));
+            return;
+        }
+
+        var privateKey = $("#load_online_wallet_from_private_key").val();
+
+        if(privateKey === '' || privateKey === undefined){
+            popup("You must enter a private key to be loaded");
+            return;
+        }
+        if(!web3.utils.isHexStrict(privateKey)){
+            // Try adding the 0x and see if it passes then.
+            privateKey = "0x" + privateKey;
+            if(!web3.utils.isHexStrict(privateKey)){
+                // If it still fails, then it is malformed
+                popup('Private key appears to be incorrectly formatted.');
+                return;
+            }
+        }
+
+        if(!isPrivateKey(privateKey)){
+            popup('Private key appears to be incorrectly formatted.');
+            return;
+        }
+
+        try {
+            var new_wallet = web3.eth.accounts.privateKeyToAccount(privateKey);
+        }catch(err){
+            popup('Private key appears to be incorrectly formatted.');
+            return;
+        }
+
+        if(new_wallet.address in available_online_accounts){
+            popup("You have already added a wallet with this address to your online wallets.")
+            return
+        }
+        var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, password);
+
+        //Need to sign in to confirm their username and password is correct before encrypting the keystore.
+        server.signIn(username, password)
+            .then(function(response){
+                if(response !== false && "success" in response) {
+                    server.addOnlineWallet(keystore, wallet_name)
+                        .then(function(response2){
+
+
+                            $('#load_online_wallet_from_private_key_username').val("").trigger("change");
+                            $('#load_online_wallet_from_private_key_name').val("").trigger("change");
+                            $('#load_online_wallet_from_private_key_password').val("").trigger("change");
+                            $('#load_online_wallet_from_private_key').val("").trigger("change");
+
+
+                            addOnlineWallet(new_wallet, response2['id'], wallet_name);
+                            refreshDashboard();
+                            updateInputLabels();
+                            popup("The new wallet has been added.");
+                        });
+                }else{
+                    popup("The username and password for your account that you entered didn't match. Please type the username and password you use to log in to your account.")
+                }
+            });
+
 
 
 
     });
+
+
 
 });
 

@@ -143,3 +143,12 @@ function validateEmail(email) {
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
+
+function isPrivateKey(privateKey) {
+    // check if it has the basic requirements of a private key
+    if (!/^(0x)?[0-9a-f]{64}$/i.test(privateKey)) {
+        return false;
+        // If it's ALL lowercase or ALL upppercase
+    }
+    return true
+}
