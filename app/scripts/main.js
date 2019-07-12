@@ -23,8 +23,13 @@ var KeystoreServer = HeliosUtils.KeystoreServer;
 // ];
 
 var availableNodes = [
-    "wss://bootnode.heliosprotocol.io:30304"
+    "wss://bootnode.heliosprotocol.io:30304",
+    "wss://bootnode2.heliosprotocol.io:30304"
 ];
+
+// var availableNodes = [
+//     "wss://bootnode2.heliosprotocol.io:30304"
+// ];
 
 var connectionMaintainer = new ConnectionMaintainer(helios_web3, availableNodes);
 connectionMaintainer.startNetworkConnectionMaintainerLoop();

@@ -58,6 +58,124 @@ $( document ).ready(function() {
     // web3.hls.accounts.wallet.add(account);
     //testServer();
 
+    //
+    // RPC testing stuff
+    //
+
+    // testAccount = web3.hls.accounts.privateKeyToAccount('0x6edbbdf4e1a6e415b29444d38675364f67ae9c5a6192d3d755043f4b61e73cbb');
+    // web3.hls.accounts.wallet.add(testAccount);
+    //
+    // console.log("RPC test start");
+    // web3.hls.getProtocolVersion()
+    //     .then(function(result){
+    //         console.log("protocolVersion");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getBlockByHash('0x70b6dff94048c6e79deac2055d7d69d736b2f21f2fbf244eb74b645222c02ea6')
+    //     .then(function(result){
+    //         console.log("getBlockByHash with reward bundle, no transactions");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getBlockByHash('0xc7ecd5fbd7f7cbfd6015cc7df85f4602ce73578f9d3f6d5bee5c55836f746eed')
+    //     .then(function(result){
+    //         console.log("getBlockByHash, no transactions");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getBlockByHash('0xc7ecd5fbd7f7cbfd6015cc7df85f4602ce73578f9d3f6d5bee5c55836f746eed', true)
+    //     .then(function(result){
+    //         console.log("getBlockByHash, with transactions");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getBlockByNumber(2,'0x88C2d0707d24e09B23b24D011E9f7d3EfC3cA4cD')
+    //     .then(function(result){
+    //         console.log("getBlockByNumber, no transactions");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getNewestBlocks(5)
+    //     .then(function(result){
+    //         console.log("getNewestBlocks(5), no transactions");
+    //         console.log(result);
+    //     });
+    // web3.hls.getNewestBlocks(5, 0, '0xb808a42cb3e4028782e6dcb611844210d68d5a1e427bed04e999d5e3b5774d0b')
+    //     .then(function(result){
+    //         console.log("getNewestBlocks(5, 0, '0xb808a42cb3e4028782e6dcb611844210d68d5a1e427bed04e999d5e3b5774d0b'), no transactions");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getNewestBlocks(4, 2, undefined, "0x57D46695F7F3418A60EF3651b8cc3294F512Da30")
+    //     .then(function(result){
+    //         console.log("getNewestBlocks(2, 2, undefined, \"0x57D46695F7F3418A60EF3651b8cc3294F512Da30\"), no transactions");
+    //         console.log(result);
+    //     });
+    // web3.hls.getNewestBlocks(4, 0, undefined, "0x57D46695F7F3418A60EF3651b8cc3294F512Da30")
+    //     .then(function(result){
+    //         console.log("getNewestBlocks(2, 0, undefined, \"0x57D46695F7F3418A60EF3651b8cc3294F512Da30\"), no transactions");
+    //         console.log(result);
+    //     });
+    // web3.hls.getBlockNumber("0x57D46695F7F3418A60EF3651b8cc3294F512Da30")
+    //     .then(function(result){
+    //         console.log("getBlockNumber(\"0x57D46695F7F3418A60EF3651b8cc3294F512Da30\")");
+    //         console.log(result);
+    //     });
+    // web3.hls.getGasPrice()
+    //     .then(function(result){
+    //         console.log("getGasPrice");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getTransactionReceipt("0x69cf5f0d6eb9d3bde0dcdd5398193a7bbe8dbc9d7239ae001963348db31f02e7")
+    //     .then(function(result){
+    //         console.log("web3.hls.getTransactionReceipt(\"0x69cf5f0d6eb9d3bde0dcdd5398193a7bbe8dbc9d7239ae001963348db31f02e7\")");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getTransactionByHash("0x69cf5f0d6eb9d3bde0dcdd5398193a7bbe8dbc9d7239ae001963348db31f02e7")
+    //     .then(function(result){
+    //         console.log("web3.hls.getTransactionByHash(\"0x69cf5f0d6eb9d3bde0dcdd5398193a7bbe8dbc9d7239ae001963348db31f02e7\")");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getBalance("0x4380f6759D696C06C03c90A32ACA0cb59C1A6bB6", 0)
+    //     .then(function(result){
+    //         console.log("web3.hls.getBalance(\"0x4380f6759D696C06C03c90A32ACA0cb59C1A6bB6\", 0)");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getReceivableTransactions("0x88C2d0707d24e09B23b24D011E9f7d3EfC3cA4cD")
+    //     .then(function(result){
+    //         console.log("web3.hls.getReceivableTransactions(\"0x88C2d0707d24e09B23b24D011E9f7d3EfC3cA4cD\")");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getConnectedNodes()
+    //     .then(function(result){
+    //         console.log("web3.hls.getConnectedNodes()");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getHistoricalGasPrice()
+    //     .then(function(result){
+    //         console.log("web3.hls.getHistoricalGasPrice()");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getApproximateHistoricalTPC()
+    //     .then(function(result){
+    //         console.log("web3.hls.getApproximateHistoricalTPC()");
+    //         console.log(result);
+    //     });
+    //
+    // web3.hls.getApproximateHistoricalNetworkTPCCapability()
+    //     .then(function(result){
+    //         console.log("web3.hls.getApproximateHistoricalNetworkTPCCapability()");
+    //         console.log(result);
+    //     });
+
     calculate_estimated_tx_fee_loop();
 
     $('body').on('click', '#logout', function(e) {

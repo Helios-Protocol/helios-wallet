@@ -122,8 +122,13 @@ var KeystoreServer = HeliosUtils.KeystoreServer;
 // ];
 
 var availableNodes = [
-    "wss://bootnode.heliosprotocol.io:30304"
+    "wss://bootnode.heliosprotocol.io:30304",
+    "wss://bootnode2.heliosprotocol.io:30304"
 ];
+
+// var availableNodes = [
+//     "wss://bootnode2.heliosprotocol.io:30304"
+// ];
 
 var connectionMaintainer = new ConnectionMaintainer(helios_web3, availableNodes);
 connectionMaintainer.startNetworkConnectionMaintainerLoop();
@@ -70371,7 +70376,9 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, ca
         if (isNot(args[0]) || isNot(args[1]) || isNot(args[2])) {
             throw new Error('One of the values "chainId", "gasPrice", or "nonce" couldn\'t be fetched: '+ JSON.stringify(args));
         }
-        return signed(_.extend(tx, {chainId: args[0], gasPrice: args[1], nonce: args[2]}));
+        return signed(_.extend(tx, {chainId: args[0], gasPrice: args[1], nonce: args[2]}))
+    }).catch(function(error){
+        return Promise.reject(error);
     });
 };
 
@@ -70489,12 +70496,15 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
 
                     signed_transactions.push(signed_tx);
                     itemsProcessed++;
-                    if(itemsProcessed == transactions.length){
+                    if(itemsProcessed === transactions.length){
                         resolve(signed_transactions);
                     }
                  })
+                .catch(function(error){
+                    reject(error);
+                });
             })
-            if(itemsProcessed == transactions.length){
+            if(itemsProcessed === transactions.length){
                 resolve(signed_transactions);
             }
 
@@ -70541,6 +70551,9 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
                 var hash = Hash.keccak256(RLP.encode(parts_to_encode));
                 resolve(hash);
             })
+            .catch(function(error){
+                reject(error)
+            });
         })
      }
 
@@ -70602,9 +70615,6 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
                 var send_tx_root = args[0];
                 var receive_tx_root = args[1];
                 var reward_bundle_hash = args[2];
-                console.log('test');
-                console.log(reward_bundle_hash);
-                console.log(total_reward_amount);
                 var timestamp = Math.floor(Date.now() / 1000);
                 console.log("Signing block header with timestamp");
                 console.log(timestamp);
@@ -70653,9 +70663,15 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
                     return result;
 
                 });
-            });
+            })
+            .catch(function(error){
+                return Promise.reject(error);
+            })
         });
-    });
+    })
+    .catch(function(error){
+        return Promise.reject(error);
+    })
 
 };
 
@@ -71393,10 +71409,6 @@ var Hls = function Hls() {
             call: 'hls_ping'
         }),
         new Method({
-            name: 'test',
-            call: 'hls_test'
-        }),
-        new Method({
             name: 'getProtocolVersion',
             call: 'eth_protocolVersion',
             params: 0
@@ -71542,7 +71554,12 @@ Hls.prototype.sendTransaction = function sendTransaction(tx) {
 
         return Promise.reject(error);
     }
-    var account = getAccountFromWallet(tx.from, _this.accounts);
+    try{
+        var account = getAccountFromWallet(tx.from, _this.accounts);
+    }catch(error){
+        var err = new Error('Error loading account from wallet:' +error);
+        return Promise.reject(err);
+    }
     if (account && account.privateKey) {
 
         return Promise.all([
@@ -71578,17 +71595,23 @@ Hls.prototype.sendTransactions = function sendTransactions(txs) {
 
     //make sure all the transactions are from the same wallet, and remove the from field
     var from = txs[0].from;
-    txs.forEach(function(tx, i){
+    for (var i = 0; i < txs.length; i++) {
+        var tx = txs[i];
         if(tx.from != from){
             error = new Error('When sending multiple transactions at once, they must be from the same wallet');
 
             return Promise.reject(error);
         }
         txs[i] = _.omit(txs[i], 'from');
-    })
+    }
 
 
-    var account = getAccountFromWallet(from, _this.accounts);
+    try {
+        var account = getAccountFromWallet(from, _this.accounts);
+    }catch(error){
+        var err = new Error('Error loading account from wallet:' +error);
+        return Promise.reject(err);
+    }
     if (account && account.privateKey) {
 
         return Promise.all([
