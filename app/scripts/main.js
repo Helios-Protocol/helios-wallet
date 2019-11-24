@@ -22,10 +22,18 @@ var KeystoreServer = HeliosUtils.KeystoreServer;
 //     "ws://127.0.0.1:30304",
 // ];
 
-var availableNodes = [
-    "wss://bootnode.heliosprotocol.io:30304",
-    "wss://bootnode2.heliosprotocol.io:30304"
-];
+var availableNodes = {
+    1: [
+        "wss://bootnode.heliosprotocol.io:30304",
+        "wss://bootnode2.heliosprotocol.io:30304",
+        "wss://bootnode3.heliosprotocol.io:30304",
+        "wss://masternode1.heliosprotocol.io:30304"
+    ],
+    42: [
+        "wss://hypothesis1.heliosprotocol.io:30304"
+    ]
+};
+
 
 // var availableNodes = [
 //     "wss://bootnode2.heliosprotocol.io:30304"

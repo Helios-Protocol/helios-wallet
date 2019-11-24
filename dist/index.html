@@ -7,28 +7,28 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
-    <script src="js/helios-wallet-master.js?version=13"></script>
-    <script src="js/send_transaction_block.js?version=13"></script>
-    <script src="js/transaction_history_block.js?version=13"></script>
-    <script src="js/frontpage.js?version=13"></script>
-    <script src="js/historical_gas_price_block.js?version=13"></script>
-    <script src="js/incoming_transactions_block.js?version=13"></script>
-    <script src="js/offline_wallets.js?version=13"></script>
-    <script src="js/online_wallets.js?version=13"></script>
-    <script src="js/contacts.js?version=13"></script>
-    <script src="js/utils.js?version=13"></script>
-    <script src="js/visual.js?version=13"></script>
-    <script src="js/main.js?version=13"></script>
-    <script src="js/menu.js?version=13"></script>
-    <script src="js/custom_select.js?version=13"></script>
-    <script src="js/autocomplete.js?version=13"></script>
-    <script src="js/two_factor_authentication.js?version=13"></script>
+    <script src="js/helios-wallet-master.js?version=15"></script>
+    <script src="js/send_transaction_block.js?version=15"></script>
+    <script src="js/transaction_history_block.js?version=15"></script>
+    <script src="js/frontpage.js?version=15"></script>
+    <script src="js/historical_gas_price_block.js?version=15"></script>
+    <script src="js/incoming_transactions_block.js?version=15"></script>
+    <script src="js/offline_wallets.js?version=15"></script>
+    <script src="js/online_wallets.js?version=15"></script>
+    <script src="js/contacts.js?version=15"></script>
+    <script src="js/utils.js?version=15"></script>
+    <script src="js/visual.js?version=15"></script>
+    <script src="js/main.js?version=15"></script>
+    <script src="js/menu.js?version=15"></script>
+    <script src="js/custom_select.js?version=15"></script>
+    <script src="js/autocomplete.js?version=15"></script>
+    <script src="js/two_factor_authentication.js?version=15"></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:200,300,300i,400,400i,500,600" rel="stylesheet">
-    <link rel="stylesheet" href="css/menu.css?version=13">
-    <link rel="stylesheet" href="css/main.css?version=13">
+    <link rel="stylesheet" href="css/menu.css?version=15">
+    <link rel="stylesheet" href="css/main.css?version=15">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#1f6370" />
@@ -337,18 +337,36 @@
 
     <div class='block_1_wide'>
         <div class='block_title'>
-            Info
+            Network Connection
         </div>
         <div class='block_content_container'>
             <div>
-                <img src='images/x.png' id='connection_status_icon' class='block_1_wide_left_icon'><div id='connection_status' class='block_1_wide_right_text'>Connecting to a node.</div>
-
-                <div class='line_separater'>
-                    <img src='images/wallet_icon.png' class='block_1_wide_left_icon'>
-                    <img src='images/copy.png' class='copy_icon copy copy_icon_right sending_account_copy' data-copy="" alt="Copy" title="Copy Address">
-                    <div id='account_status' class='block_1_wide_right_text copy_spacing_right'></div>
-
+                <div class="custom-select" id="network_id_select">
+                    <select class="network_id">
+                        <option value="1">Mainnet</option>
+                        <option value="42">Hypothesis Testnet</option>
+                    </select>
                 </div>
+                <div class='line_separater'>
+                    <img src='images/x.png' id='connection_status_icon' class='block_1_wide_left_icon'><div id='connection_status' class='block_1_wide_right_text'>Connecting to a node.</div>
+
+                    <div class='clear_both'></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class='block_1_wide'>
+        <div class='block_title'>
+            Loaded Wallet Info
+        </div>
+        <div class='block_content_container'>
+            <div>
+                <img src='images/wallet_icon.png' class='block_1_wide_left_icon'>
+                <img src='images/copy.png' class='copy_icon copy copy_icon_right sending_account_copy' data-copy="" alt="Copy" title="Copy Address">
+                <div id='account_status' class='block_1_wide_right_text copy_spacing_right'></div>
+
 
                 <div class='clear_both'></div>
             </div>

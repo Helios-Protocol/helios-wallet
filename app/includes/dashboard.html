@@ -68,18 +68,36 @@
 
     <div class='block_1_wide'>
         <div class='block_title'>
-            Info
+            Network Connection
         </div>
         <div class='block_content_container'>
             <div>
-                <img src='images/x.png' id='connection_status_icon' class='block_1_wide_left_icon'><div id='connection_status' class='block_1_wide_right_text'>Connecting to a node.</div>
-
-                <div class='line_separater'>
-                    <img src='images/wallet_icon.png' class='block_1_wide_left_icon'>
-                    <img src='images/copy.png' class='copy_icon copy copy_icon_right sending_account_copy' data-copy="" alt="Copy" title="Copy Address">
-                    <div id='account_status' class='block_1_wide_right_text copy_spacing_right'></div>
-
+                <div class="custom-select" id="network_id_select">
+                    <select class="network_id">
+                        <option value="1">Mainnet</option>
+                        <option value="42">Hypothesis Testnet</option>
+                    </select>
                 </div>
+                <div class='line_separater'>
+                    <img src='images/x.png' id='connection_status_icon' class='block_1_wide_left_icon'><div id='connection_status' class='block_1_wide_right_text'>Connecting to a node.</div>
+
+                    <div class='clear_both'></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class='block_1_wide'>
+        <div class='block_title'>
+            Loaded Wallet Info
+        </div>
+        <div class='block_content_container'>
+            <div>
+                <img src='images/wallet_icon.png' class='block_1_wide_left_icon'>
+                <img src='images/copy.png' class='copy_icon copy copy_icon_right sending_account_copy' data-copy="" alt="Copy" title="Copy Address">
+                <div id='account_status' class='block_1_wide_right_text copy_spacing_right'></div>
+
 
                 <div class='clear_both'></div>
             </div>

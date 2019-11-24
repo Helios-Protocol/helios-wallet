@@ -250,6 +250,15 @@ $( document ).ready(function() {
 
     var popup_content = document.getElementById("popup_content_frontpage_warning").innerHTML;
     popup(popup_content, width=900);
+
+    $('#network_id_select').on('click',function(){
+        var selected_network_id = $('select.network_id').children("option:selected").val();
+        if(connectionMaintainer.networkId !== selected_network_id){
+            console.log("changing network id to "+selected_network_id);
+            set_connection_status("Connecting to network with id "+selected_network_id, false)
+            connectionMaintainer.setNetworkIdAndReconnect(parseInt(selected_network_id));
+        }
+    });
 });
 
 //
