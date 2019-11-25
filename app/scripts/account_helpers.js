@@ -21,6 +21,7 @@ var get_all_transactions_from_account = async function get_all_transactions_from
         console.log("Getting all transactions starting at block number "+start_block_number);
     }catch(err) {
         console.log('error')
+        console.log(err)
         return err
     }
     var output = [];
