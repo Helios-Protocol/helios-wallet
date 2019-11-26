@@ -30136,7 +30136,7 @@ core.addProviders(Web3);
 module.exports = Web3;
 
 
-},{"./web3-hls.js":550,"web3-bzz":479,"web3-core":496,"web3-eth":518,"web3-eth-personal":515,"web3-net":519,"web3-shh":528,"web3-utils":532}],195:[function(require,module,exports){
+},{"./web3-hls.js":551,"web3-bzz":479,"web3-core":496,"web3-eth":518,"web3-eth-personal":515,"web3-net":519,"web3-shh":528,"web3-utils":532}],195:[function(require,module,exports){
 (function (process){
 /* Copyright (c) 2017 Rod Vagg, MIT License */
 
@@ -70215,6 +70215,7 @@ var helpers = require('web3-core-helpers');
 var Trie = require('merkle-patricia-tree');
 
 var hls_formatters = require('./web3-hls-formatters.js');
+var hlsConstants = require('./web3-hls-constants.js');
 
 var isNot = function(value) {
     return (_.isUndefined(value) || _.isNull(value));
@@ -70234,6 +70235,14 @@ var makeEven = function (hex) {
     return hex;
 };
 
+var getTransactionType = function (networkId, txTimestamp){
+    var photonTimestamp = hlsConstants.getPhotonTimestamp(networkId);
+    if(txTimestamp >= photonTimestamp){
+        return 1;
+    }else{
+        return 0;
+    }
+}
 
 var Accounts = function Accounts() {
     var _this = this;
@@ -70343,7 +70352,7 @@ Accounts.prototype.privateKeyToAccount = function privateKeyToAccount(privateKey
 
 
 
-Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, callback) {
+Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, blockTimestamp, callback) {
     var _this = this,
         error = false,
         result;
@@ -70385,36 +70394,81 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, ca
             transaction.chainId = utils.numberToHex(tx.chainId);
             transaction.nonce = utils.numberToHex(tx.nonce);
 
-            var rlpEncoded = RLP.encode([
-                Bytes.fromNat(transaction.nonce),
-                Bytes.fromNat(transaction.gasPrice),
-                Bytes.fromNat(transaction.gas),
-                transaction.to.toLowerCase(),
-                Bytes.fromNat(transaction.value),
-                transaction.data,
-                Bytes.fromNat(transaction.chainId || "0x1"),
-                "0x",
-                "0x"]);
+            var txType = getTransactionType(tx.chainId, blockTimestamp);
+            if(txType == 0){
+                var numTxRLPParams = 6
+                // Pre Photon type tx
+                var rlpEncoded = RLP.encode([
+                    Bytes.fromNat(transaction.nonce),
+                    Bytes.fromNat(transaction.gasPrice),
+                    Bytes.fromNat(transaction.gas),
+                    transaction.to.toLowerCase(),
+                    Bytes.fromNat(transaction.value),
+                    transaction.data,
+                    Bytes.fromNat(transaction.chainId || "0x1"),
+                    "0x",
+                    "0x"]);
+
+            }else if(txType == 1){
+                // Post Photon type tx
+                var numTxRLPParams = 11
+
+                transaction.caller = tx.caller || '0x';
+                transaction.origin = tx.origin || '0x';
+                transaction.codeAddress = tx.codeAddress || '0x';
+                transaction.createAddress = tx.createAddress || '0x';
+                transaction.executeOnSend = Bytes.fromNat(tx.executeOnSend ? '0x0' : '0x1');
+
+                console.log('test2')
+                console.log(transaction.caller)
+                console.log(transaction.origin)
+                console.log(transaction.codeAddress)
+                console.log(transaction.createAddress)
+                console.log(transaction.executeOnSend)
+
+                var rlpEncoded = RLP.encode([
+                    Bytes.fromNat(transaction.nonce),
+                    Bytes.fromNat(transaction.gasPrice),
+                    Bytes.fromNat(transaction.gas),
+                    transaction.to.toLowerCase(),
+                    Bytes.fromNat(transaction.value),
+                    transaction.data,
+                    transaction.caller.toLowerCase(),
+                    transaction.origin.toLowerCase(),
+                    transaction.codeAddress.toLowerCase(),
+                    transaction.createAddress.toLowerCase(),
+                    transaction.executeOnSend,
+                    Bytes.fromNat(transaction.chainId || "0x1"),
+                    "0x",
+                    "0x"]);
+            }
+
+
 
 
             var hash = Hash.keccak256(rlpEncoded);
 
             var signature = Account.makeSigner(Nat.toNumber(transaction.chainId || "0x1") * 2 + 35)(Hash.keccak256(rlpEncoded), privateKey);
 
-            var rawTx = RLP.decode(rlpEncoded).slice(0, 6).concat(Account.decodeSignature(signature));
+            var rawTx = RLP.decode(rlpEncoded).slice(0, numTxRLPParams).concat(Account.decodeSignature(signature));
 
-            rawTx[6] = makeEven(trimLeadingZero(rawTx[6]));
-            rawTx[7] = makeEven(trimLeadingZero(rawTx[7]));
-            rawTx[8] = makeEven(trimLeadingZero(rawTx[8]));
+
+
+            rawTx[numTxRLPParams] = makeEven(trimLeadingZero(rawTx[numTxRLPParams]));
+            rawTx[numTxRLPParams+1] = makeEven(trimLeadingZero(rawTx[numTxRLPParams+1]));
+            rawTx[numTxRLPParams+2] = makeEven(trimLeadingZero(rawTx[numTxRLPParams+2]));
 
             var rawTransaction = RLP.encode(rawTx);
+
+            console.log('test3');
+            console.log(rawTransaction);
 
             var values = RLP.decode(rawTransaction);
             result = {
                 messageHash: hash,
-                v: trimLeadingZero(values[6]),
-                r: trimLeadingZero(values[7]),
-                s: trimLeadingZero(values[8]),
+                v: trimLeadingZero(values[numTxRLPParams]),
+                r: trimLeadingZero(values[numTxRLPParams+1]),
+                s: trimLeadingZero(values[numTxRLPParams+2]),
                 rawTransaction: rawTransaction
             };
 
@@ -70442,6 +70496,7 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, ca
         if (isNot(args[0]) || isNot(args[1]) || isNot(args[2])) {
             throw new Error('One of the values "chainId", "gasPrice", or "nonce" couldn\'t be fetched: '+ JSON.stringify(args));
         }
+        console.log("chainId = " + args[0] + ", gasPrice = " + args[1] + ", nonce = " + args[2])
         return signed(_.extend(tx, {chainId: args[0], gasPrice: args[1], nonce: args[2]}))
     }).catch(function(error){
         return Promise.reject(error);
@@ -70546,6 +70601,7 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
 
     var transactions = txs || [];
     var chainId = 1;
+    var timestamp = Math.floor(Date.now() / 1000);
 
     if (transactions.length > 0){
         chainId = transactions[0].chainId;
@@ -70557,7 +70613,7 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
             var signed_transactions = []
             var itemsProcessed = 0;
             transactions.forEach(function(tx, i) {
-                _this.signTransaction(tx, privateKey)
+                _this.signTransaction(tx, privateKey, timestamp)
                 .then(function(signed_tx){
 
                     signed_transactions.push(signed_tx);
@@ -70681,7 +70737,6 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
                 var send_tx_root = args[0];
                 var receive_tx_root = args[1];
                 var reward_bundle_hash = args[2];
-                var timestamp = Math.floor(Date.now() / 1000);
                 console.log("Signing block header with timestamp");
                 console.log(timestamp);
                 var header = {
@@ -70718,6 +70773,7 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
                         d_txs,
                         d_r_txs,
                         RLP.decode(reward_bundle_encoded)]);
+
 
                     result = {
                         messageHash: signed_header.messageHash,
@@ -71054,7 +71110,26 @@ if (typeof localStorage === 'undefined') {
 module.exports = Accounts;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"./web3-hls-formatters.js":549,"any-promise":200,"buffer":67,"crypto":76,"crypto-browserify":257,"eth-lib/lib/account":291,"eth-lib/lib/bytes":293,"eth-lib/lib/hash":294,"eth-lib/lib/nat":295,"eth-lib/lib/rlp":296,"merkle-patricia-tree":387,"scrypt.js":441,"underscore":469,"uuid":473,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-utils":532}],549:[function(require,module,exports){
+},{"./web3-hls-constants.js":549,"./web3-hls-formatters.js":550,"any-promise":200,"buffer":67,"crypto":76,"crypto-browserify":257,"eth-lib/lib/account":291,"eth-lib/lib/bytes":293,"eth-lib/lib/hash":294,"eth-lib/lib/nat":295,"eth-lib/lib/rlp":296,"merkle-patricia-tree":387,"scrypt.js":441,"underscore":469,"uuid":473,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-utils":532}],549:[function(require,module,exports){
+"use strict";
+
+
+var getPhotonTimestamp = function (networkId) {
+    if(parseInt(networkId) === 1){
+        // Mainnet
+        return 9566516221;
+    }else if(parseInt(networkId) === 42){
+        // Hypothesis Testnet
+        return 9574737165;
+    }
+
+};
+
+module.exports = {
+    getPhotonTimestamp: getPhotonTimestamp,
+};
+
+},{}],550:[function(require,module,exports){
 "use strict";
 
 
@@ -71106,6 +71181,35 @@ var outputSendTransactionFormatter = function (tx){
 
     tx.gasUsed = formatter.outputBigNumberFormatter(tx.gasUsed);
     tx.isReceive = Boolean(parseInt(tx.isReceive));
+
+    // Photon fork
+    if(tx.caller && utils.isAddress(tx.caller)){
+        tx.caller = utils.toChecksumAddress(tx.caller);
+    } else {
+        tx.caller = null; // set to `null` if invalid address
+    }
+
+    if(tx.origin && utils.isAddress(tx.origin)){
+        tx.origin = utils.toChecksumAddress(tx.origin);
+    } else {
+        tx.origin = null; // set to `null` if invalid address
+    }
+
+    if(tx.codeAddress && utils.isAddress(tx.codeAddress)){
+        tx.codeAddress = utils.toChecksumAddress(tx.codeAddress);
+    } else {
+        tx.codeAddress = null; // set to `null` if invalid address
+    }
+
+    if(tx.createAddress && utils.isAddress(tx.createAddress)){
+        tx.createAddress = utils.toChecksumAddress(tx.createAddress);
+    } else {
+        tx.createAddress = null; // set to `null` if invalid address
+    }
+
+    if(tx.executeOnSend) {
+        tx.executeOnSend = Boolean(parseInt(tx.executeOnSend));
+    }
 
     return tx;
 };
@@ -71290,7 +71394,7 @@ module.exports = {
     InputBlockFormatter: InputBlockFormatter,
     outputConnectedNodesFormatter: outputConnectedNodesFormatter
 };
-},{"underscore":469,"web3-core-helpers":483,"web3-eth-iban":514,"web3-utils":532}],550:[function(require,module,exports){
+},{"underscore":469,"web3-core-helpers":483,"web3-eth-iban":514,"web3-utils":532}],551:[function(require,module,exports){
  
 /*
  This file is part of web3.js.
@@ -71727,4 +71831,4 @@ core.addProviders(Hls);
 module.exports = Hls;
 
 
-},{"./getNetworkType.js":193,"./web3-hls-accounts.js":548,"./web3-hls-formatters.js":549,"underscore":469,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-core-subscriptions":493,"web3-eth-abi":498,"web3-eth-contract":504,"web3-eth-ens":509,"web3-eth-iban":514,"web3-eth-personal":515,"web3-net":519,"web3-utils":532}]},{},[14]);
+},{"./getNetworkType.js":193,"./web3-hls-accounts.js":548,"./web3-hls-formatters.js":550,"underscore":469,"web3-core":496,"web3-core-helpers":483,"web3-core-method":485,"web3-core-subscriptions":493,"web3-eth-abi":498,"web3-eth-contract":504,"web3-eth-ens":509,"web3-eth-iban":514,"web3-eth-personal":515,"web3-net":519,"web3-utils":532}]},{},[14]);

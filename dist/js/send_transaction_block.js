@@ -116,6 +116,7 @@ $( document ).ready(function() {
         .catch(function(error){
             var error_message = getNodeMessageFromError(error);
             popup("Error when sending block: "+error_message);
+            throw error;
 
         });
 
@@ -183,7 +184,6 @@ function add_transaction_to_block_from_form(){
                     value: amount,
                     gas: total_gas.toString(),
                     gasPrice: gas_price,
-                    chainId: 1
                 }
 
     pending_send_transactions.push(transaction);
