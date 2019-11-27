@@ -27,7 +27,7 @@ networkIDToName = {
 }
 
 class ConnectionMaintainer {
-    constructor(web3, availableNodes, disconnectedLoopPeriod, connectedLoopPeriod) {
+    constructor(web3, availableNodes, connectionFailureRetryPeriod) {
         this.networkId = 1;
         this.wasConnected = false;
         this.availableNodes = availableNodes
@@ -36,17 +36,12 @@ class ConnectionMaintainer {
         this.WSConnectTimeout = 5000;
 
         //The period of time between each retry when we are disconnected.
-        if(disconnectedLoopPeriod === undefined){
-            disconnectedLoopPeriod = 5000;
+        if(connectionFailureRetryPeriod === undefined){
+            connectionFailureRetryPeriod = 10000;
         }
-        this.disconnectedLoopPeriod = disconnectedLoopPeriod
+        this.connectionFailureRetryPeriod = connectionFailureRetryPeriod
 
-        //The period of time between checking the connection status, and possibly retrying connection,
-        // when we are connected to a node
-        if(connectedLoopPeriod === undefined){
-            connectedLoopPeriod = 10000;
-        }
-        this.connectedLoopPeriod = connectedLoopPeriod
+
 
         this.status = "Connecting to network";
     }
@@ -92,14 +87,6 @@ class ConnectionMaintainer {
         }
     }
 
-    setCurrentStatus(isConnected) {
-        if(isConnected){
-            this.setStatus('Connected to node ' + this.web3.currentProvider.connection.url + " on " + networkIDToName[this.networkId]);
-        }
-        else{
-            this.setStatus('Not connected. The selected network is undergoing maintenance.');
-        }
-    }
 
     startNetworkConnectionMaintainerLoop(){
         this.connectToNetwork();
@@ -112,10 +99,24 @@ class ConnectionMaintainer {
             console.log("Already connected to network. Doing nothing.");
         }else{
             console.log("No active connection found. Starting new one.");
-            var isConnected = await this.connectToFirstAvailableNode();
-            this.setCurrentStatus(isConnected);
-            if(this.connectedCallback !== undefined){
-                this.connectedCallback();
+            try {
+                var isConnected = await this.connectToFirstAvailableNode();
+                if (isConnected) {
+                    // We connected.
+                    this.setStatus('Connected to node ' + this.web3.currentProvider.connection.url + " on " + networkIDToName[this.networkId]);
+                    if (this.connectedCallback !== undefined) {
+                        this.connectedCallback();
+                    }
+                } else {
+                    // No nodes responded.
+                    this.setStatus('Connection failure. Will retry in ' + this.connectionFailureRetryPeriod / 1000 + ' seconds.');
+                    await sleep(this.connectionFailureRetryPeriod);
+                    this.connectToNetwork();
+                }
+            }catch(err) {
+                // Probably caused by no nodes with this netowork id
+                console.log("Error when connecting to first available node: " + err);
+                this.setStatus('Connection failure.');
             }
         }
     }
@@ -145,8 +146,7 @@ class ConnectionMaintainer {
             }
             return false;
         }else{
-            console.log("No nodes found with network id " + this.networkId);
-            return false;
+            throw "No nodes found with network id " + this.networkId;
         }
 
     }
@@ -71120,7 +71120,7 @@ var getPhotonTimestamp = function (networkId) {
         return 9566516221;
     }else if(parseInt(networkId) === 42){
         // Hypothesis Testnet
-        return 9574737165;
+        return 1574813354;
     }
 
 };

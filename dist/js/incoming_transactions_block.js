@@ -32,8 +32,10 @@ $( document ).ready(function() {
 });
 
 async function receiveAnyIncomingTransactions(wallet_address, notify_if_none){
+    console.log("Getting receivable transactions")
     return web3.hls.getReceivableTransactions(wallet_address)
     .then(function (receivableTxs) {
+        console.log('Finished getting receivable transactions')
         if (receivableTxs.length > 0) {
             return sendRewardBlock(wallet_address)
             .then(function (res) {
