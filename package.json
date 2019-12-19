@@ -17,7 +17,7 @@
     "gulp-notify": "^3.2.0",
     "helios-utils": "^0.1.1",
     "helios-web3": "^0.1.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "jsdom": "^13.2.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
