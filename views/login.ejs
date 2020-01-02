@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                '../../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TAGCODE');</script>
+    <!-- End Google Tag Manager -->
+    <title>Helios - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <!-- External CSS libraries -->
+    <link type="text/css" rel="stylesheet" href="login_assets/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="login_assets/fonts/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="login_assets/fonts/flaticon/font/flaticon.css">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="login_assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPoppins:400,500,700,800,900%7CRoboto:100,300,400,400i,500,700">
+
+    <!-- Custom Stylesheet -->
+    <link type="text/css" rel="stylesheet" href="login_assets/css/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="login_assets/css/skins/default.css">
+
+</head>
+
+<body id="top">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TAGCODE" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="page_loader"></div>
+
+    <!-- Login start -->
+    <div class="login-7 tab-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-pad-0 bg-img none-992">
+                    <div class="logo">
+                        <a href="https://heliosprotocol.io/">
+                            <img src="login_assets/img/logos/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="informeson">
+                        <h3 class="fw-2 ls-1">Welcome to Helios Protocol Wallet</h3>
+                        <p class="">DON'T HAVE AN ACCOUNT ?</p>
+                        <a href="register" class="btn-theme">Create an account</a>
+                        <p class="mt-5">ADVANCED OPTIONS</p>
+                        <a href="#" class="btn-theme">Local wallet mode</a>
+                        <a href="" class="btn-theme" data-toggle="modal" data-target=".bd-example-modal-lg">POP-UP</a>
+                    </div>
+                    <div class="social-box">
+                        <p class="fw-4 ls-4 fs-11 helios_color">© COPYRIGHT 2020</p>
+                        <p class="fw-4 ls-2 fs-12 helios_color">HELIOS BLOCKCHAIN TECHNOLOGIES LTD.</p>
+                    </div>
+                </div>
+                <div class="none-min-992 mobile_logo col-sm-12">
+                    <div class="">
+                        <a href="#">
+                            <img src="login_assets/img/logos/logo.png" alt="logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-pad-0 bg-color-7">
+                    <div class="login-inner-form ">
+                        <div class="details">
+                            <div class="logo-2">
+                                <a href="https://heliosprotocol.io/">
+                                    <img src="login_assets/img/logos/logo.png" class="logo" alt="logo">
+                                </a>
+                            </div>
+                            <h3>Login into your account</h3>
+                            <form action="/logindata" method="POST">
+                                <div class="form-group">
+                                    <input type="text" name="Username" class="input-text username"
+                                        placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="Password" class="input-text password"
+                                        placeholder="Password">
+                                </div>
+                                <div class="error"></div>
+                                <div class="form-group float-left">
+                                    <button type="submit" class="btn-md btn-theme sublogin">Login</button>
+                                    <!-- <a href="2fa.html" type="submit" class="btn-md btn-theme">Login</a> -->
+                                </div>
+                                <div>
+                                    <p class="none-2">Don't have an account? <a href="register" class="thembo"> Register
+                                            here</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login end -->
+    <!-- Large modal Start-->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fw-4 fs-15 ls-2" id="myLargeModalLabel">IMPORTANT WARNINGS ❗️</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body pop_up_warning">
+                    <p>BY USING THIS SOFTWARE, YOU AGREE TO EVERYTHING BELOW.</p>
+                    <h3>What is an online wallet, and why is there a login?:</h3>
+                    <p>We provide a service where we store your encrypted keystores in our secure online database for
+                        your convenience. Your keystrokes are all encrypted and decrypted clientside (on your computer),
+                        and are transmitted to our database already encrypted. Therefore, we can't access your private
+                        keys or change your password. It is extremely important that you back up all Keystore files and
+                        do not rely on any third party, including us, to keep it forever. Use our online wallet option
+                        for convenience only.</p>
+                    <h3>We are not like an exchange account:</h3>
+                    <p>Because we don't have access to your private keys, we cannot help you if you lose your password,
+                        or lose your private key. Back up your passwords and keystores in multiple locations.</p>
+                    <h3>What if I don't want to create an online account?:</h3>
+                    <p>Simply click the "Local wallet mode" at the sign-in page, and you can manually load your wallets
+                        from a local source without sending any data to our servers.</p>
+                    <h3>Always backup your keys:</h3>
+                    <p>Helios' wallet is not a bank. You do not create an account or give us your funds to hold onto. We
+                        can't access your funds. When interacting with the blockchain, no data leaves your computer /
+                        your browser. We make it easy for you to create, save, and access your information and interact
+                        with the helios blockchain.</p>
+                    <h3>We are not responsible for any loss:</h3>
+                    <p>Helios wallet and some of the underlying Javascript libraries we use are under active
+                        development. While we have thoroughly tested & tens of thousands of wallets have been
+                        successfully created by people all over the globe, there is always the possibility something
+                        unexpected happens that causes your funds to be lost. Please do not invest more than you are
+                        willing to lose, and please be careful.</p>
+                    <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+                        NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+                        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+                        DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Large modal End-->
+    <!-- External JS libraries -->
+    <script src="login_assets/js/jquery-2.2.0.min.js"></script>
+    <script src="login_assets/js/popper.min.js"></script>
+    <script src="login_assets/js/bootstrap.min.js"></script>
+    <!-- Custom JS Script -->
+    <script>
+        $(document).ready(function () {
+            $(".sublogin").on("click", function (e) {
+                e.preventDefault();
+                var username = $(".username").val();
+                var password = $(".password").val();
+                var error = new Array();
+                if (username == "") {
+                    error.push("Username should not be blank.");
+                } else if (password == "") {
+                    error.push("Password should not be blank.");
+                }
+                if (error.length > 0) {
+                    $('.preloader').hide();
+                    var html = '';
+                    $.each(error, function (key, value) {
+                        html += value;
+                    });
+                    $(".error").show().addClass("text-danger").text(html);
+                } else {
+                    $(".error").hide().text('');
+                    $(this).text("Loading...")
+                    $.ajax({
+                        type: "POST",
+                        url: "/logindata",
+                        data: { username: username, password: password },
+                        success: function (data) {
+                            console.log(data);
+                            if (data.status == "success") {
+                                window.location.href = '/dashboard';
+                            } else {
+                                $(".error").show().addClass("text-danger").text(data.data);
+                                $(".sublogin").text("Login");
+                            }
+
+                        },
+                        error: function (data) {
+                            $(".sublogin").text("Login");
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>

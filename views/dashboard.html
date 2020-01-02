@@ -1,0 +1,1475 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Helios Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="An infinitely scalable cryptocurrency and smart contract platform based on fully parallelized concurrent blockchains. The Helios platform is designed from the ground up to be futureproof with secure, high speed, and low fee transactions, and to enable truly decentralized and democratic applications." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <!-- plugins -->
+    <link href="assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    <link href="assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- Topbar Start -->
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
+            <div class="container-fluid">
+                <!--Logo Start-->
+                <a href="layouts-dark.html" class="navbar-brand mr-0 mr-md-2 logo">
+                    <span class="logo-lg">
+                        <img src="assets/images/logo.png" alt="" height="40" />
+                    </span>
+                    <span class="logo-sm">
+                        <img src="assets/images/helios_logo_solo.png" alt="" height="35">
+                    </span>
+                </a>
+                <!--Logo End-->
+                <!--Menu Icon Start-->
+                <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+                    <li class="">
+                        <button class="button-menu-mobile open-left">
+                            <i data-feather="menu" class="menu-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+                <!--Menu Icon End-->
+                <!--Right List Start-->
+                <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+                    <li class="dropdown d-lg-block" data-toggle="tooltip" data-placement="left" title="Check Your Mail">
+                        <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </a>
+                    </li>
+                    <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left"
+                        title="8 new unread notifications">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                           aria-expanded="false">
+                            <i data-feather="bell"></i>
+                            <span class="noti-icon-badge"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title border-bottom">
+                                <h5 class="m-0 font-size-16">
+                                    <span class="float-right">
+                                        <a href="#" class="text-dark">
+                                            <small>Clear All</small>
+                                        </a>
+                                    </span>Notification
+                                </h5>
+                            </div>
+                            <div class="slimscroll noti-scroll">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon bg-primary"><i class="uil uil-user-plus"></i></div>
+                                    <p class="notify-details">
+                                        New user registered.<small class="text-muted">5 hours ago</small>
+                                    </p>
+                                </a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon">
+                                        <img src="assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle" alt="" />
+                                    </div>
+                                    <p class="notify-details">Karen Robinson</p>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>Wow ! this admin looks good and awesome design</small>
+                                    </p>
+                                </a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon">
+                                        <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
+                                    </div>
+                                    <p class="notify-details">Cristina Pride</p>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>Hi, How are you? What about our next meeting</small>
+                                    </p>
+                                </a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom active">
+                                    <div class="notify-icon bg-success"><i class="uil uil-comment-message"></i> </div>
+                                    <p class="notify-details">
+                                        Jaclyn Brunswick commented on Dashboard<small class="text-muted">
+                                            1
+                                            min
+                                            ago
+                                        </small>
+                                    </p>
+                                </a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon bg-danger"><i class="uil uil-comment-message"></i></div>
+                                    <p class="notify-details">
+                                        Caleb Flakelar commented on Admin<small class="text-muted">
+                                            4 days
+                                            ago
+                                        </small>
+                                    </p>
+                                </a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-primary">
+                                        <i class="uil uil-heart"></i>
+                                    </div>
+                                    <p class="notify-details">
+                                        Carlos Crouch liked
+                                        <b>Admin</b>
+                                        <small class="text-muted">13 days ago</small>
+                                    </p>
+                                </a>
+                            </div>
+                            <!-- All-->
+                            <a href="javascript:void(0);"
+                               class="dropdown-item text-center text-primary notify-item notify-all border-top">
+                                View all
+                                <i class="fi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="d-sm-block d-none dropdown notification-list align-self-center">
+                        <a class="nav-link dropdown-toggle nav-user mr-0">
+                            <div class="media user-profile">
+                                <img src="assets/images/users/avatar-7.jpg" alt="user-image" class="rounded-circle align-self-center" />
+                                <div class="media-body text-left align-self-center">
+                                    <p class="ml-2 my-0 text-white ls-1">
+                                        <span>Raj Ladumor</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="d-sm-block align-self-center">
+                        <div class="btn-group mr-1">
+                            <button type="button" class="btn btn-network dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mainnet <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></i></button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Mainnet</a>
+                                <a class="dropdown-item" href="#">Hypothesis Testnet</a>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="dropdown notification-list" data-toggle="tooltip" data-placement="left" title="Settings">
+                        <a href="javascript:void(0);" class="nav-link right-bar-toggle">
+                            <i data-feather="settings"></i>
+                        </a>
+                    </li>-->
+                </ul>
+                <!--Right List End-->
+            </div>
+        </div>
+        <!--Topbar End-->
+        <!--Left Sidebar Start-->
+        <div class="left-side-menu">
+            <div class="sidebar-content">
+                <!--- Sidemenu -->
+                <div id="sidebar-menu" class="slimscroll-menu">
+                    <ul class="metismenu" id="menu-bar">
+                        <!--<li class="menu-title">Navigation</li>-->
+                        <li>
+                            <a href="dashboard.html">
+                                <img src="assets/icon/menu1.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Dashboard </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="transactions.html">
+                                <img src="assets/icon/menu2.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Transactions </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Local Wallets </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/icon/menu4.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Online Wallets </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/icon/menu5.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Contact List </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/icon/menu6.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Account </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/icon/menu7.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Setting </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Logout </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!--Left Sidebar End-->
+        <!--Wallet Page Start-->
+        <div class="content-page">
+            <div class="content">
+                <!--Main Start-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!--Left Section Start-->
+                        <div class="col-lg-8 order-2 order-sm-1">
+                            <!--Top heading Start-->
+                            <div class="row page-title align-items-center d-none d-sm-block">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Helios Wallet</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--Top heading Start-->
+                            <div class="row page-title-1 align-items-center d-sm-none d-md-none">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Helios Wallet</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--Balance Start-->
+                            <div class="row">
+                                <div class="col-md-12 col-xl-12">
+                                    <div class="card">
+                                        <div class="card-body p-0">
+                                            <div class="media p-4 row">
+                                                <div class="balance-sec-1 align-self-center col-md-5 col-sm-12">
+                                                    <div class="">
+                                                        <img src="assets/images/helios_logo_solo.png" class="avatar rounded mr-4 align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="hls-balance">
+                                                        <h2 class="mb-0">5000.00 HLS</h2>
+                                                        <span class="text-down font-size-13 fw-3 letter-spacing-1">
+                                                            Your Helios Balance
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3 m-auto col-md-6 col-sm-12 hls-address">
+                                                    <label>Ladumorraj's First Helios Wallet Address</label>
+                                                    <div id="component-colorpicker" class="input-group" title="Using format option">
+                                                        <input type="text" class="form-control input-lg" value="3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" disabled>
+                                                        <span class="input-group-append">
+                                                            <span class="input-group-text colorpicker-input-addon"><i class="uil uil-copy"></i></span>
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Balance End-->
+                            <!--Top heading Start-->
+                            <div class="row page-title-1 align-items-center">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Send Token</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--Send Token Start-->
+                            <div class="row">
+                                <div class="col-md-12 col-xl-12">
+                                    <div class="card">
+                                        <div class="card-body p-0">
+                                            <div class="media p-4 row">
+                                                <!--Amount Start-->
+                                                <div class="form-group mb-3 col-md-4 col-sm-12 hls-address">
+                                                    <label>Amount</label>
+                                                    <div id="component-colorpicker" class="input-group" title="Using format option">
+                                                        <input type="text" class="form-control input-lg text-down ls-1" placeholder="Enter Amount" value="200.021">
+                                                        <span class="input-group-append">
+                                                            <span class="input-group-text colorpicker-input-addon">HLS</span>
+                                                        </span>
+                                                    </div>
+                                                    <p class="font-size-11 mt-1">Estimated fee per tx: 0.000063 or 0%</p>
+                                                </div>
+                                                <!--Amount End-->
+                                                <!--Address Start-->
+                                                <div class="form-group mb-3 col-md-8 col-sm-12 hls-address">
+                                                    <label>Recipient Address</label>
+                                                    <div id="component-colorpicker" class="input-group" title="Using format option">
+                                                        <input type="text" class="form-control input-lg text-down ls-1" placeholder="Enter Recipient Address" value="3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5">
+                                                    </div>
+                                                </div>
+                                                <!--Address End-->
+                                                <!--Advanced Options Start-->
+                                                <div class="form-group col-md-8 col-sm-12 hls-address align-self-center">
+                                                    <!--Dropdown Button Start-->
+                                                    <div class="accordion custom-accordionwitharrow" id="advance_option">
+                                                        <div class="mb-1 shadow-none">
+                                                            <a href="#" class="collapsed" data-toggle="collapse"
+                                                               data-target="#advancecollapse" aria-expanded="false"
+                                                               aria-controls="advancecollapse">
+                                                                <h5 class="m-0 text-white advance_heading">
+                                                                    ADVANCED OPTIONS <i class="uil uil-angle-down accordion-arrow"></i>
+                                                                </h5>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <!--Dropdown Button End-->
+                                                </div>
+                                                <!--Advanced Options End-->
+                                                <!--Send Button Start-->
+                                                <!--<div class="form-group mb-3 col-md-3 col-sm-12 hls-address">
+                                                    <button type="button" class="btn btn-send-transaction">Send</button>
+                                                </div>-->
+                                                <!--Send Button End-->
+                                                <!--Dropdown Action Start-->
+                                                <div id="advancecollapse" class="collapse col-12" aria-labelledby="headingTwo"
+                                                     data-parent="#advance_option">
+                                                    <div class="row">
+                                                        <div class="form-group mb-3 col-md-6 col-sm-12 text-white hls-address">
+                                                            <label for="validationCustom01">Gas Price</label>
+                                                            <input type="text" class="form-control text-down ls-1" id="validationCustom01" placeholder="Enter Gas Price" value="30">
+                                                        </div>
+                                                        <div class="form-group mb-3 col-md-6 col-sm-12 text-white hls-address">
+                                                            <label for="validationCustom01">Max. Allowed Gas</label>
+                                                            <input type="text" class="form-control text-down ls-1" id="validationCustom01" placeholder="Enter Maximum Allowed Gas" value="88,00000">
+                                                        </div>
+                                                        <!--<div class="form-group mb-3 col-md-4 col-sm-12 hls-address align-self-end">
+                                                            <button type="button" class="btn btn-send-block-transaction">Add transaction to block</button>
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown Action End-->
+                                                <div class="form-group mb-3 col-md-4 col-sm-12 hls-address btn_add_block">
+                                                    <button type="button" class="btn btn-send-transaction" data-toggle="modal" data-target="#modal-transaction-confirm">Add transaction to block</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Send Token End-->
+                            <!--Top heading Division Start-->
+                            <div class="row page-title-1 align-items-center">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Transaction</h4>
+                                </div>
+                            </div>
+                            <!--Top heading Division End-->
+                            <!--Transaction Division Start-->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div>
+                                        <!--List Start-->
+                                        <ul class="nav transaction_list">
+                                            <li class="nav-item">
+                                                <a href="#all_transaction" data-toggle="tab" aria-expanded="false"
+                                                   class="nav-link active transaction_list">
+                                                    <span class="d-sm-block">ALL</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#sent_transaction" data-toggle="tab" aria-expanded="true"
+                                                   class="nav-link transaction_list">
+                                                    <span class="d-sm-block">SEND</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#receive_transaction" data-toggle="tab" aria-expanded="false"
+                                                   class="nav-link transaction_list">
+                                                    <span class="d-sm-block">RECEIVE</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!--List End-->
+                                        <!--Transaction Start-->
+                                        <div class="tab-content">
+                                            <!--All Transaction Start-->
+                                            <div class="tab-pane table-responsive mt-4 show active" id="all_transaction">
+                                                <h5 class="card-title mt-0 mb-3 header-title-transaction text-helios">All Transaction</h5>
+                                                <!--All One Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#alltrancollapseone" aria-expanded="true"
+                                                     aria-controls="alltrancollapseone" id="all_tran_1">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/send.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Sent</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Sent to:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="sent_color">- 50.00 $ </p>
+                                                        <p class="sent_color">- 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--All One Start-->
+                                                <!--Dropdown 1 Start-->
+                                                <div id="alltrancollapseone" class="collapse col-12 dropdown-transaction show" aria-labelledby="headingTwo" data-parent="#all_tran_1">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 1 End-->
+                                                <!--All Two Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#alltrancollapsetwo" aria-expanded="false"
+                                                     aria-controls="alltrancollapsetwo" id="all_tran_2">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/send.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Sent</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Sent to:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="sent_color">- 50.00 $ </p>
+                                                        <p class="sent_color">- 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--All Two End-->
+                                                <!--Dropdown 2 Start-->
+                                                <div id="alltrancollapsetwo" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#all_tran_2">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 2 End-->
+                                                <!--All Three Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#alltrancollapsethree" aria-expanded="false"
+                                                     aria-controls="alltrancollapsethree" id="all_tran_3">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/receive.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Received</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Receive From:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="receive_color">+ 50.00 $ </p>
+                                                        <p class="receive_color">+ 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--All Three End-->
+                                                <!--Dropdown 3 Start-->
+                                                <div id="alltrancollapsethree" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#all_tran_3">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 3 End-->
+                                                <!--All Four Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#alltrancollapsefour" aria-expanded="false"
+                                                     aria-controls="alltrancollapsefour" id="all_tran_4">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/receive.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Received</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Receive From:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="receive_color">+ 50.00 $ </p>
+                                                        <p class="receive_color">+ 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--All Four End-->
+                                                <!--Dropdown 4 Start-->
+                                                <div id="alltrancollapsefour" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#all_tran_4">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 4 End-->
+                                                <!--All Five Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#alltrancollapsefive" aria-expanded="false"
+                                                     aria-controls="alltrancollapsefive" id="all_tran_5">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/receive.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Received</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Receive From:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="receive_color">+ 50.00 $ </p>
+                                                        <p class="receive_color">+ 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--All Five End-->
+                                                <!--Dropdown 5 Start-->
+                                                <div id="alltrancollapsefive" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#all_tran_5">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 5 End-->
+                                            </div>
+                                            <!--All Transaction End-->
+                                            <!--Send Transaction Start-->
+                                            <div class="tab-pane table-responsive mt-4" id="sent_transaction">
+                                                <h5 class="card-title mt-0 mb-3 header-title-transaction text-helios">Send Transaction</h5>
+                                                <!--Send One Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#sendtrancollapseone" aria-expanded="false"
+                                                     aria-controls="sendtrancollapseone" id="send_tran_1">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/send.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Sent</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Sent to:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="sent_color">- 50.00 $ </p>
+                                                        <p class="sent_color">- 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Send One Start-->
+                                                <!--Dropdown 1 Start-->
+                                                <div id="sendtrancollapseone" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#send_tran_1">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 1 End-->
+                                                <!--Send Two Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#sendtrancollapsetwo" aria-expanded="false"
+                                                     aria-controls="sendtrancollapsetwo" id="send_tran_2">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/send.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Sent</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Sent to:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="sent_color">- 50.00 $ </p>
+                                                        <p class="sent_color">- 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Send Two End-->
+                                                <!--Dropdown 2 Start-->
+                                                <div id="sendtrancollapsetwo" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#send_tran_2">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 2 End-->
+                                                <!--Send Three Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#sendtrancollapsethree" aria-expanded="false"
+                                                     aria-controls="sendtrancollapsethree" id="send_tran_3">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/send.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Sent</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Sent to:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="sent_color">- 50.00 $ </p>
+                                                        <p class="sent_color">- 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Send Three End-->
+                                                <!--Dropdown 3 Start-->
+                                                <div id="sendtrancollapsethree" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#send_tran_3">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 3 End-->
+                                                <!--Send Four Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#sendtrancollapsefour" aria-expanded="false"
+                                                     aria-controls="sendtrancollapsefour" id="send_tran_4">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/send.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Sent</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Sent to:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="sent_color">- 50.00 $ </p>
+                                                        <p class="sent_color">- 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Send Four End-->
+                                                <!--Dropdown 4 Start-->
+                                                <div id="sendtrancollapsefour" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#send_tran_4">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 4 End-->
+                                                <!--Send Five Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#sendtrancollapsefive" aria-expanded="false"
+                                                     aria-controls="sendtrancollapsefive" id="send_tran_5">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/send.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Sent</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Sent to:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="sent_color">- 50.00 $ </p>
+                                                        <p class="sent_color">- 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Send Five Start-->
+                                                <!--Dropdown 5 Start-->
+                                                <div id="sendtrancollapsefive" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#send_tran_5">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 5 End-->
+                                            </div>
+                                            <!--Send Transaction End-->
+                                            <!--Receive Transaction Start-->
+                                            <div class="tab-pane table-responsive mt-4" id="receive_transaction">
+                                                <h5 class="card-title mt-0 mb-3 header-title-transaction text-helios ">Receive Transaction</h5>
+                                                <!--Receive One Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#receivetrancollapseone" aria-expanded="false"
+                                                     aria-controls="receivetrancollapseone" id="receive_tran_1">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/receive.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Received</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Receive From:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="receive_color">+ 50.00 $ </p>
+                                                        <p class="receive_color">+ 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Receive One End-->
+                                                <!--Dropdown 1 Start-->
+                                                <div id="receivetrancollapseone" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#receive_tran_1">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 1 End-->
+                                                <!--Receive Two Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#receivetrancollapsetwo" aria-expanded="false"
+                                                     aria-controls="receivetrancollapsetwo" id="receive_tran_2">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/receive.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Received</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Receive From:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="receive_color">+ 50.00 $ </p>
+                                                        <p class="receive_color">+ 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Receive Two End-->
+                                                <!--Dropdown 2 Start-->
+                                                <div id="receivetrancollapsetwo" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#receive_tran_2">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 2 End-->
+                                                <!--Receive Three Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#receivetrancollapsethree" aria-expanded="false"
+                                                     aria-controls="receivetrancollapsethree" id="receive_tran_3">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/receive.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Received</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Receive From:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="receive_color">+ 50.00 $ </p>
+                                                        <p class="receive_color">+ 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Receive Three End-->
+                                                <!--Dropdown 3 Start-->
+                                                <div id="receivetrancollapsethree" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#receive_tran_3">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 3 End-->
+                                                <!--Receive Four Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#receivetrancollapsefour" aria-expanded="false"
+                                                     aria-controls="receivetrancollapsefour" id="receive_tran_4">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/receive.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Received</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Receive From:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="receive_color">+ 50.00 $ </p>
+                                                        <p class="receive_color">+ 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Receive Four End-->
+                                                <!--Dropdown 4 Start-->
+                                                <div id="receivetrancollapsefour" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#receive_tran_4">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 4 End-->
+                                                <!--Receive Five Start-->
+                                                <div class="d-flex transaction_div collapsed" data-toggle="collapse"
+                                                     data-target="#receivetrancollapsefive" aria-expanded="false"
+                                                     aria-controls="receivetrancollapsefive" id="receive_tran_5">
+                                                    <div class="mr-3 table_data_1">
+                                                        <img src="assets/icon/receive.png" class="avatar_select rounded align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="mr-3 table_data_2">
+                                                        <p>Received</p>
+                                                        <p>15:34, 12 Oct 2019</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_3">
+                                                        <img src="assets/images/logo.png" alt="" class="tran_logo_img">
+                                                    </div>
+                                                    <div class="mr-3 table_data_4">
+                                                        <p>Receive From:</p>
+                                                        <p>3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                    </div>
+                                                    <div class="mr-3 table_data_5">
+                                                        <p class="receive_color">+ 50.00 $ </p>
+                                                        <p class="receive_color">+ 55045.000 HLS</p>
+                                                    </div>
+                                                    <div class="align-self-center">
+                                                        <button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <!--Receive Five End-->
+                                                <!--Dropdown 5 Start-->
+                                                <div id="receivetrancollapsefive" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#receive_tran_5">
+                                                    <div class="row">
+                                                        <div class="col-12"><h1>Transaction Details</h1></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>Token Name:</strong> Helios Protocol (HRS)</p>
+                                                            <p><strong>Amount:</strong> $ 50.00 = 55045.000 HLS</p>
+                                                            <p><strong>Date:</strong><span> December 3, 2019, 10:52:18 AM GMT +5.30</span></p>
+                                                            <p><strong>Fees:</strong> 0</p>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <p><strong>From:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>To:</strong> 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</p>
+                                                            <p><strong>Block Number:</strong> 3</p>
+                                                            <p><strong>Block Final Balance:</strong> 19166.667</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Dropdown 5 End-->
+                                            </div>
+                                            <!--Receive Transaction End-->
+                                        </div>
+                                        <!--Transaction End-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Transaction Division End-->
+                            <!--Top heading Start-->
+                            <div class="row page-title-1 align-items-center d-md-none d-sm-none">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Tweets</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--News Section Start-->
+                            <div class="row d-md-none d-sm-none">
+                                <div class="col-xl-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="twitter_news">
+                                                <a class="twitter-timeline" data-theme="dark" data-dnt="true" data-chrome="#3b414f" href="https://twitter.com/HeliosPlatform?ref_src=twsrc%5Etfw">HeliosPlatform</a>
+                                                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                            </div>
+                                            <!--<div class="row no-gutters align-items-center mb-3">
+                                                <div class="col-md-5">
+                                                    <img src="assets/images/small/img-6.jpg" class="card-img" alt="...">
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="card-body">
+                                                        <p class="card-text font-size-15 fw-3 text-white">Korea moves to limit crytpo mining chips imports.</p>
+                                                        <p class="card-text"><small class="text-down">19:54, 20 Oct 2019</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            <!--<div class="row no-gutters align-items-center">
+                                                <div class="col-md-5">
+                                                    <img src="assets/images/small/img-6.jpg" class="card-img" alt="...">
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="card-body">
+                                                        <p class="card-text font-size-15 fw-3 text-white">Korea moves to limit crytpo mining chips imports.</p>
+                                                        <p class="card-text"><small class="text-down">19:54, 20 Oct 2019</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--News Section End-->
+                        </div>
+                        <!--Left Section End-->
+                        <!--Right Section Start-->
+                        <div class="col-lg-4 order-1 order-sm-2">
+                            <!--Top heading Start-->
+                            <div class="row page-title align-items-center d-none d-sm-block">
+                                <div class="col-sm-12 col-xl-12">
+                                    <h4 class="mb-1 mt-0">NETWORK CONNECTION</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--Mobile Top heading Start-->
+                            <div class="row page-title align-items-center d-sm-none">
+                                <div class="col-sm-12 col-xl-12">
+                                    <h4 class="mb-1 mt-0">NETWORK CONNECTION & GAS PRICE</h4>
+                                </div>
+                            </div>
+                            <!--Mobile Top heading End-->
+                            <!--New Connection Start-->
+                            <div class="row">
+                                <div class="col-6 col-md-12 col-sm-12 h-100">
+                                    <div class="card">
+                                        <div class="card-body p-0">
+                                            <div class="network_connection px-3 py-4">
+                                                <!--<i class="uil uil-check-circle align-self-center mr-4 font-size-13"></i>-->
+                                                <div class="align-self-center network_connection_img">
+                                                    <img src="assets/icon/node.png" class="avatar rounded align-self-center" alt="Helios">
+                                                </div>
+                                                <div class="network_connection_content">
+                                                    <h4 class="mb-1 text-white">Connection to node</h4>
+                                                    <span class="text-down">wss://hypothesis1.helihypothesis1.heliospr</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Mobile Max Gas Start-->
+                                <div class="d-lg-none d-md-none d-sm-none col-6 h-100">
+                                    <div class="card">
+                                        <div class="card-body p-0">
+                                            <div class="network_connection px-3 py-4">
+                                                <!--<i class="uil uil-check-circle align-self-center mr-4 font-size-13"></i>-->
+                                                <div class="align-self-center network_connection_img">
+                                                    <img src="assets/icon/gas.png" class="avatar rounded align-self-center" alt="Helios">
+                                                </div>
+                                                <div class="safe_min_gas">
+                                                    <h4 class="mb-1 text-white">2</h4>
+                                                    <span class="font-size-11 text-down">SAFE MINIMUN GAS PRICE</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Mobile Max Gas End-->
+                                <!--Mobile Incoming Transaction Start-->
+                                <div class="col-xl-12 d-lg-none d-md-none d-sm-none">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <div class="align-self-center mr-3">
+                                                    <img src="assets/icon/incoming.png" class="avatar rounded align-self-center" alt="Helios">
+                                                </div>
+                                                <div class="check-now-heading">
+                                                    <h5 class="mb-0 text-white">Incoming Transaction</h5>
+                                                    <p class="text-down fw-3">If you are expecting to receive a transaction, click this button to check and process it.</p>
+                                                    <button type="button" class="btn btn-check-now btn-sm mr-1">CHECK NOW</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Mobile Incoming Transaction End-->
+                            </div>
+                            <!--New Connection End-->
+                            <!--Top heading Start-->
+                            <div class="row page-title-1 align-items-center">
+                                <div class="col-sm-12 col-xl-12">
+                                    <h4 class="mb-1 mt-0">TOKEN SELECTION</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--Token Selection Start-->
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="token_selection">
+                                                <div><img src="assets/images/coin_logo/helios_logo_solo.png" class="avatar_select rounded mr-3 align-self-center" alt="Helios"><span class="token_name">Helios</span></div>
+                                                <div class="token_value"><span>200.2200 HLS</span></div>
+                                            </div>
+                                            <!--Token Dropdown Start-->
+                                            <div id="tokencollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#token_select">
+                                                <div class="token_selection">
+                                                    <div><img src="assets/images/coin_logo/helios_logo_solo.png" class="avatar_select rounded mr-3 align-self-center" alt="Helios"><span class="token_name">Ethereum</span></div>
+                                                    <div class="token_value"><span>1.22 ETH</span></div>
+                                                </div>
+                                                <div class="token_selection">
+                                                    <div><img src="assets/images/helios_logo_solo.png" class="avatar_select rounded mr-3 align-self-center" alt="Helios"><span class="token_name">Bitcoin</span></div>
+                                                    <div class="token_value"><span>0.5586 BTC</span></div>
+                                                </div>
+                                                <div class="token_selection">
+                                                    <div><img src="assets/images/helios_logo_solo.png" class="avatar_select rounded mr-3 align-self-center" alt="Helios"><span class="token_name">BitTorrent</span></div>
+                                                    <div class="token_value"><span>500064 BTT</span></div>
+                                                </div>
+                                                <div class="token_selection">
+                                                    <div><img src="assets/images/helios_logo_solo.png" class="avatar_select rounded mr-3 align-self-center" alt="Helios"><span class="token_name">Tron</span></div>
+                                                    <div class="token_value"><span>25446 TRX</span></div>
+                                                </div>
+                                                <div class="token_selection">
+                                                    <div><img src="assets/images/helios_logo_solo.png" class="avatar_select rounded mr-3 align-self-center" alt="Helios"><span class="token_name">Bitcoin Cash</span></div>
+                                                    <div class="token_value"><span>1.02 BCH</span></div>
+                                                </div>
+                                            </div>
+                                            <!--Token Dropdown End-->
+                                            <div class="token_selection_btns w-100">
+                                                <button type="button" class="btn btn-token-selection-1 collapsed" data-toggle="collapse"
+                                                        data-target="#tokencollapse" aria-expanded="false"
+                                                        aria-controls="tokencollapse" id="token_select">
+                                                    Show all tokens
+                                                </button>
+                                                <button type="button" class="btn btn-token-selection-2">Add custom tokens</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Token Selection End-->
+                            <!--Two Section Start-->
+                            <div class="row">
+                                <div class="col-xl-12 d-sm-block d-none">
+                                    <div class="card">
+                                        <div class="card-body p-0">
+                                            <div class="media px-3 py-4">
+                                                <!--<i class="uil uil-check-circle align-self-center mr-4 font-size-13"></i>-->
+                                                <div class="align-self-center mr-3">
+                                                    <img src="assets/icon/gas.png" class="avatar rounded align-self-center" alt="Helios">
+                                                </div>
+                                                <div class="">
+                                                    <h4 class="mt-0 mb-1 font-size-18 text-white">2</h4>
+                                                    <span class="font-size-11 text-down">SAFE MINIMUN GAS PRICE</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 d-sm-block d-none">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="text-center mt-3 mb-3">
+                                                <div class="align-self-center check-now-heading">
+                                                    <img src="assets/icon/incoming.png" class="avatar rounded align-self-center" alt="Helios">
+                                                    <h5 class="mt-3 mb-0 text-white">Incoming Transaction</h5>
+                                                    <p class="text-down fw-3 mt-2 mb-4">If you are expecting to receive a transaction, click this button to check and process it.</p>
+                                                    <button type="button" class="btn btn-check-now btn-sm mr-1">CHECK NOW</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Two Section End-->
+                            <!--Top heading Start-->
+                            <div class="row page-title-1 align-items-center d-none d-sm-block">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Tweets</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--News Section Start-->
+                            <div class="row d-none d-sm-block">
+                                <div class="col-xl-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="twitter_news">
+                                                <a class="twitter-timeline" data-theme="dark" data-dnt="true" data-chrome="#3b414f" href="https://twitter.com/HeliosPlatform?ref_src=twsrc%5Etfw">HeliosPlatform</a>
+                                                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                            </div>
+                                            <!--<div class="row no-gutters align-items-center mb-3">
+                                                <div class="col-md-5">
+                                                    <img src="assets/images/small/img-6.jpg" class="card-img" alt="...">
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="card-body">
+                                                        <p class="card-text font-size-15 fw-3 text-white">Korea moves to limit crytpo mining chips imports.</p>
+                                                        <p class="card-text"><small class="text-down">19:54, 20 Oct 2019</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            <!--<div class="row no-gutters align-items-center">
+                                                <div class="col-md-5">
+                                                    <img src="assets/images/small/img-6.jpg" class="card-img" alt="...">
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="card-body">
+                                                        <p class="card-text font-size-15 fw-3 text-white">Korea moves to limit crytpo mining chips imports.</p>
+                                                        <p class="card-text"><small class="text-down">19:54, 20 Oct 2019</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--News Section End-->
+                        </div>
+                        <!--Right Section End-->
+                        <!--Footer Start-->
+                        <footer class="footer">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 font-size-11 text-white">
+                                        Helios Wallet 0.2
+                                    </div>
+                                    <div class="col-12 font-size-12 text-white">
+                                        &copy; COPYRIGHT 2019. HELIOS BLOCKCHAIN TECHNOLOGIES LTD. ALL RIGHTS RESERVED.
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                        <!--Footer End-->
+                    </div>
+                    <!--Main End-->
+                </div>
+            </div>
+            <!--Wallet Page End-->
+            <!-- END wrapper -->
+            <!-- Right Sidebar -->
+            <div class="right-bar">
+                <div class="rightbar-title">
+                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                        <i data-feather="x-circle"></i>
+                    </a>
+                    <h5 class="m-0">Customization</h5>
+                </div>
+
+                <div class="slimscroll-menu">
+
+                    <h5 class="font-size-16 pl-3 mt-4">Choose Variation</h5>
+                    <div class="p-3">
+                        <h6>Default</h6>
+                        <a href="index.html"><img src="assets/images/layouts/vertical.jpg" alt="vertical" class="img-thumbnail demo-img" /></a>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h6>Top Nav</h6>
+                        <a href="layouts-horizontal.html"><img src="assets/images/layouts/horizontal.jpg" alt="horizontal" class="img-thumbnail demo-img" /></a>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h6>Dark Side Nav</h6>
+                        <a href="layouts-dark-sidebar.html"><img src="assets/images/layouts/vertical-dark-sidebar.jpg" alt="dark sidenav" class="img-thumbnail demo-img" /></a>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h6>Condensed Side Nav</h6>
+                        <a href="layouts-dark-sidebar.html"><img src="assets/images/layouts/vertical-condensed.jpg" alt="condensed" class="img-thumbnail demo-img" /></a>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h6>Fixed Width (Boxed)</h6>
+                        <a href="layouts-boxed.html">
+                            <img src="assets/images/layouts/boxed.jpg" alt="boxed"
+                                 class="img-thumbnail demo-img" />
+                        </a>
+                    </div>
+                </div> <!-- end slimscroll-menu-->
+            </div>
+            <!-- /Right-bar -->
+            <!-- Right bar overlay-->
+            <div class="rightbar-overlay"></div>
+        </div>
+    </div>
+    <!--Modal Start-->
+    <!--Confirm Pop-up Start-->
+    <div class="modal fade" id="modal-transaction-confirm" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-white">
+
+                <div class="modal-body text-center tran_confirm_modal">
+                    <div class="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" color="#71cf4e" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up-circle mb-2 mt-2"><circle cx="12" cy="12" r="10"></circle><polyline points="16 12 12 8 8 12"></polyline><line x1="12" y1="16" x2="12" y2="8"></line></svg>
+                    <h4 class="mt-2 mb-4">Review & Confirm</h4>
+                    <div class="confirm_modal_content">
+                        <p class="mb-0"><span class="ls-1 fw-5">Amount:</span> <span class="ls-1 float-right">5000 HLS</span></p>
+                        <p class="mb-0"><span class="ls-1 fw-5">Receptionist Address:</span> <span class="ls-1 float-right">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</span></p>
+                        <p class="mb-0"><span class="ls-1 fw-5">Gas:</span> <span class="ls-1 float-right">300</span></p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-outline-green btn-rounded width-md" data-dismiss="modal">Confirm</a>
+                    </div>
+                    <p class="w-75 mx-auto mt-3">Sending funds to someone you don't know ? <br /> Helios transfer are non-reversible.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Confirm Pop-up End-->
+    <!--Modal End-->
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="assets/libs/moment/moment.min.js"></script>
+    <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- page js -->
+    <script src="assets/js/pages/dashboard.init.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.min.js"></script>
+
+
+</body>
+</html>
