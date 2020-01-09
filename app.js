@@ -1,74 +1,147 @@
-var express = require("express");
-var app = express();
-var http = require("http").Server(app).listen(8001);
-var io = require('socket.io')(http);
-const path = require('path');
-const routers = require('./Router/router');
-const bodyparser = require('body-parser');
-var Promise = require('promise');
-var async = require('async');
+const http = require("http");
+const url = require("url");
+const fs = require("fs");
+// var path = require('path');
+var NodeSession = require('node-session');
+session = new NodeSession({ secret: 'Q3UBzdH9GEfiRCTKbi5MTPyChpzXLsTD' });
+var web3_main = require("./web3.js");
+var HeliosUtils = require('helios-utils');
+const { parse } = require('querystring');
+var helios_web3 = web3_main.web3;
+var ConnectionMaintainer = HeliosUtils.ConnectionMaintainer;
+var getNodeMessageFromError = HeliosUtils.getNodeMessageFromError;
+var KeystoreServer = HeliosUtils.KeystoreServer;
+var availableNodes = [
+  "wss://bootnode.heliosprotocol.io:30304",
+  "wss://bootnode2.heliosprotocol.io:30304",
+  "wss://bootnode3.heliosprotocol.io:30304",
+  "wss://masternode1.heliosprotocol.io:30304"
+];
+var connectionMaintainer = new ConnectionMaintainer(helios_web3, availableNodes);
+connectionMaintainer.startNetworkConnectionMaintainerLoop();
 
-var request = require('request');
-var sessions = require('express-session');
-var multer = require('multer');
+var onlineKeystoreServerUrl = 'https://heliosprotocol.io/wallet-serverside/';
 
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(sessions({
-    secret: 'poussixthetruefighteroftheparadise',
-    saveUninitialized: true,
-    resave: true
-}));
-app.use("/assets", express.static("./assets"));
-app.use("/login_assets", express.static("./login_assets"));
+var server = new KeystoreServer(onlineKeystoreServerUrl);
 
+http.createServer(async function (request, response, next) {
+  var parsedURL = url.parse(request.url, true);
+  var filePath = parsedURL.pathname;
+  let qs = parsedURL.query;
+  let headers = request.headers;
+  let method = request.method.toLowerCase();
+  let body = '';
+  request.on("data", chunk => {
+    body += chunk;
+  });
+  request.on("end", function () {
+    //we will use the standardized version of the path
+    let route =
+      typeof routes[filePath] !== "undefined" ? routes[filePath] : routes[""];
+    let data = {
+      path: filePath,
+      queryString: qs,
+      headers: headers,
+      method: method,
+      bodyi: body
+    };
+    route(data, request, response);
+  });
 
-app.set('view engine', 'ejs');
-// app.engine('html', require('ejs').renderFile);
-app.set('views', path.join(__dirname, 'views'));
+}).listen(1234, function () {
+  console.log("Listening on port 1234");
+});
+let routes = {
+  "/login": function (data, req, res) {
+    var bodys = parse(data.bodyi);
+    server.signIn(bodys.username, bodys.password, "")
+      .then(function (res1) {
+        if (res1 !== false && "success" in res1) {
+          session.mid = res1.keystores[0].id;
+          res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+          res.end('Yes');
+        } else if(res1 !== false && res1.error == '4000' ){
+          session.username = bodys.username;
+          session.password = bodys.password;
+          res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+          res.end('2fa');
+        } else {
+          res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+          res.end(res1.error_description);
+        }
 
-var memeberid = 0;
-var ip;
-app.get("/", routers);
-app.get("/dashboard", routers);
-app.get("/transactions", routers);
-app.get("/login", routers);
-app.post("/logindata", routers);
-app.get("/2fa", routers);
-app.get("/register", routers);
-app.get("/logour", routers);
-// app.post("/logindata",function(req,res,next){
-//     e.preventDefault();
-//     var username = req.body.mno;
-//     var password = req.body.mno;
-//     var tfa_code = $('#input_sign_in_two_factor_authentication').val();
-//     // if(!(validateInputs(username, 'username') === true)){
-//     //     popup(validateInputs(username, 'username'));
-//     //     return;
-//     // }
-//     // if(!(validateInputs(tfa_code, 'two_factor_code') === true)){
-//     //     popup(validateInputs(tfa_code, 'two_factor_code'));
-//     //     return;
-//     // }
+      });
+  },
+  "/logout": function (data, req, res) {
+    session.mid = null;
+    res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+    res.end('Yes');
+  },
+  "/checklogin": function (data, req, res) {
+    console.log(session.mid);
+    if(session.mid > 0){
+      res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+      res.end('Yes');
+    }else{
+      res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+      res.end('No');
+    }
+  },
+  "/2fa": function (data, req, res) {
+    if(session.username != null && session.username != null){
+      var bodys = parse(data.bodyi);
+      server.signIn(session.username, session.password, String(bodys.fa))
+        .then(function (res1) {
+          if (res1 !== false && "success" in res1) {
+            session.mid = res1.keystores[0].id;
+            session.username = null;
+            session.password = null;
+            res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+            res.end('Yes');
+          } else if(res1 !== false && res1.error == '4000' ){
+            
+            res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+            res.end(res1.error_description);
+          } else {
+            res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+            res.end(res1.error_description);
+          }
 
-//     loaderPopup();
-//     server.signIn(username, password, tfa_code)
-//     .then(function(response){
-//         if(response !== false && "success" in response) {
-//             //success
-//             set_username_status(username);
-//             var online_keystores = response['keystores'];
-//             populateOnlineKeystores(online_keystores, password);
-//             close_popup();
-//             switchToPage('main_page');
-//             var tfa_enabled = (response['2fa_enabled'] === 'true');
-//             set_two_factor_authentication_status(tfa_enabled);
-//             afterLoginInit();
-//         }else{
-//             //fail
-//             var popup_content = "Oops, something went wrong:<br><br>" + response['error_description'];
-//             popup(popup_content, 500);
-//         }
-//     });
-// });
-app.get('*', routers);
+        });
+    }else{
+      res.writeHead(200, { 'Content-Type': 'application/json','Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE' });
+      res.end('No');
+    }
+
+  },
+  "": function (data, req, res) { 
+    // fs.readFile('./login.html', function (error, content) {
+    //   if (error) {
+    //     if (error.code == 'ENOENT') {
+    //       fs.readFile('./' + filePath + '.html', function (error, content) {
+    //         res.writeHead(404, { 'Content-Type': 'text/html' });
+    //         res.end(content, 'utf-8');
+    //       });
+    //     }
+    //     else {
+    //       res.writeHead(500);
+    //       res.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
+    //     }
+    //   }
+    //   else {
+    //     res.writeHead(200, { 'Content-Type': 'text/html' });
+    //     res.end(content, 'utf-8');
+    //   }
+    // });
+  }
+};
