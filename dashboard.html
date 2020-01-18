@@ -15,8 +15,14 @@
     <link href="assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/css/alertify.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
+    <script src="./dist/alertify.js"></script>
+    <script src="./dist/alertify.min.js"></script>
+    <script src="./dist/js/helios-wallet-master.js"></script>
+    <script src="./dist/js/helios_web3.js"></script>
 </head>
-<body>
+<body onload="checkCookie()">
     <!-- Begin page -->
     <div id="wrapper">
         <!-- Topbar Start -->
@@ -187,25 +193,34 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="local_wallet.html">
                                 <img src="assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Local Wallets </span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="javascript: void(0);">
                                 <img src="assets/icon/menu4.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Online Wallets </span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <ul class="nav-second-level sub_menu" aria-expanded="false">
+                                <li>
+                                    <a href="existing_online_wallet.html">Existing Wallet</a>
+                                </li>
+                                <li>
+                                    <a href="add_online_wallet.html">Add New Wallet</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="contact_list.html">
                                 <img src="assets/icon/menu5.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Contact List </span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="account_setting.html">
                                 <img src="assets/icon/menu6.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Account </span>
                             </a>
@@ -217,7 +232,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" id="logout">
+                            <a href="" class="logout" >
                                 <img src="assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Logout </span>
                             </a>
@@ -247,16 +262,9 @@
                                 </div>
                             </div>
                             <!--Top heading End-->
-                            <!--Top heading Start-->
-                            <div class="row page-title-1 align-items-center d-sm-none d-md-none">
-                                <div class="col-sm-4 col-xl-6">
-                                    <h4 class="mb-1 mt-0">Helios Wallet</h4>
-                                </div>
-                            </div>
-                            <!--Top heading End-->
                             <!--Balance Start-->
                             <div class="row">
-                                <div class="col-md-12 col-xl-12">
+                                <div class="col-md-12 col-xl-12 d-sm-block d-none">
                                     <div class="card">
                                         <div class="card-body p-0">
                                             <div class="media p-4 row">
@@ -279,7 +287,6 @@
                                                             <span class="input-group-text colorpicker-input-addon"><i class="uil uil-copy"></i></span>
                                                         </span>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -1163,6 +1170,52 @@
                         <!--Right Section Start-->
                         <div class="col-lg-4 order-1 order-sm-2">
                             <!--Top heading Start-->
+                            <div class="row page-title align-items-center d-none">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Helios Wallet</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--Top heading Start-->
+                            <div class="row page-title align-items-center d-sm-none d-md-none">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Helios Wallet</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--Balance Start-->
+                            <div class="row">
+                                <div class="col-md-12 col-xl-12 d-sm-none d-md-none">
+                                    <div class="card">
+                                        <div class="card-body p-0">
+                                            <div class="media p-4 row">
+                                                <div class="balance-sec-1 align-self-center col-md-5 col-sm-12">
+                                                    <div class="">
+                                                        <img src="assets/images/helios_logo_solo.png" class="avatar rounded mr-4 align-self-center" alt="Helios">
+                                                    </div>
+                                                    <div class="hls-balance">
+                                                        <h2 class="mb-0">5000.00 HLS</h2>
+                                                        <span class="text-down font-size-13 fw-3 letter-spacing-1">
+                                                            Your Helios Balance
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3 m-auto col-md-6 col-sm-12 hls-address">
+                                                    <label>Ladumorraj's First Helios Wallet Address</label>
+                                                    <div id="component-colorpicker" class="input-group" title="Using format option">
+                                                        <input type="text" class="form-control input-lg" value="3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" disabled>
+                                                        <span class="input-group-append">
+                                                            <span class="input-group-text colorpicker-input-addon"><i class="uil uil-copy"></i></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Balance End-->
+                            <!--Top heading Start-->
                             <div class="row page-title align-items-center d-none d-sm-block">
                                 <div class="col-sm-12 col-xl-12">
                                     <h4 class="mb-1 mt-0">NETWORK CONNECTION</h4>
@@ -1170,7 +1223,7 @@
                             </div>
                             <!--Top heading End-->
                             <!--Mobile Top heading Start-->
-                            <div class="row page-title align-items-center d-sm-none">
+                            <div class="row page-title-1 align-items-center d-sm-none">
                                 <div class="col-sm-12 col-xl-12">
                                     <h4 class="mb-1 mt-0">NETWORK CONNECTION & GAS PRICE</h4>
                                 </div>
@@ -1371,10 +1424,10 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 font-size-11 text-white">
-                                        Helios Wallet 0.2
+                                        Helios Wallet Version 0.2
                                     </div>
                                     <div class="col-12 font-size-12 text-white">
-                                        &copy; COPYRIGHT 2019. HELIOS BLOCKCHAIN TECHNOLOGIES LTD. ALL RIGHTS RESERVED.
+                                        &copy; COPYRIGHT 2020. HELIOS BLOCKCHAIN TECHNOLOGIES LTD. ALL RIGHTS RESERVED.
                                     </div>
                                 </div>
                             </div>
@@ -1433,29 +1486,73 @@
     <div class="modal fade" id="modal-transaction-confirm" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-white">
-
                 <div class="modal-body text-center tran_confirm_modal">
                     <div class="">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" color="#71cf4e" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up-circle mb-2 mt-2"><circle cx="12" cy="12" r="10"></circle><polyline points="16 12 12 8 8 12"></polyline><line x1="12" y1="16" x2="12" y2="8"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" color="#71cf4e" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up-circle mb-2 mt-2"><circle cx="12" cy="12" r="10"></circle><polyline points="16 12 12 8 8 12"></polyline><line x1="12" y1="16" x2="12" y2="8"></line></svg>
                     <h4 class="mt-2 mb-4">Review & Confirm</h4>
                     <div class="confirm_modal_content">
-                        <p class="mb-0"><span class="ls-1 fw-5">Amount:</span> <span class="ls-1 float-right">5000 HLS</span></p>
-                        <p class="mb-0"><span class="ls-1 fw-5">Receptionist Address:</span> <span class="ls-1 float-right">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</span></p>
-                        <p class="mb-0"><span class="ls-1 fw-5">Gas:</span> <span class="ls-1 float-right">300</span></p>
+                        <p class="mb-0"><span class="fw-5">Amount:</span> <span class="ls-1 float-right">5000 HLS</span></p>
+                        <p class="mb-0"><span class="fw-5">Receptionist Address:</span> <span class="float-right">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</span></p>
+                        <p class="mb-0"><span class="fw-5">Gas:</span> <span class="ls-1 float-right">300</span></p>
                     </div>
                     <div class="mt-4">
-                        <a href="#" class="btn btn-outline-green btn-rounded width-md" data-dismiss="modal">Confirm</a>
+                        <a href="#" class="btn btn-outline-green btn-rounded width-md" data-toggle="modal" data-target="#modal-transaction-success" data-dismiss="modal">Confirm 1</a>
                     </div>
-                    <p class="w-75 mx-auto mt-3">Sending funds to someone you don't know ? <br /> Helios transfer are non-reversible.</p>
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-outline-green btn-rounded width-md" data-toggle="modal" data-target="#modal-transaction-failed" data-dismiss="modal">Confirm 2</a>
+                    </div>
+                    <p class="w-75 mx-auto mt-3 tran_confirm_modal_notice">Sending funds to someone you don't know ? <br /> Helios transfer are non-reversible.</p>
                 </div>
             </div>
         </div>
     </div>
     <!--Confirm Pop-up End-->
+    <!--Success Pop-up Start-->
+    <div class="modal fade modal_success" id="modal-transaction-success" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content bg-white">
+                <div class="modal-body text-center tran_success_modal">
+                    <!--<div class="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>-->
+                    <i class="uil uil-check"></i>
+                    <h4 class="mt-4 mb-2">Success !!</h4>
+                    <p class="w-75 mx-auto tran_success_modal_note">Your transaction process has been successful.</p>
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-outline-done btn-rounded width-md" data-dismiss="modal"> Okay !</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Success Pop-up End-->
+    <!--Failed Pop-up Start-->
+    <div class="modal fade modal_success" id="modal-transaction-failed" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content bg-white">
+                <div class="modal-body text-center tran_failed_modal">
+                    <!--<div class="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>-->
+                    <i class="uil uil-multiply"></i>
+                    <h4 class="mt-4 mb-2">Transaction Failed</h4>
+                    <p class="w-75 mx-auto tran_success_modal_note">Your transaction has been declined.</p>
+                    <div class="mt-2">
+                        <a href="#" class="btn btn-outline-done btn-rounded width-md" data-dismiss="modal"> Retry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Failed Pop-up End-->
     <!--Modal End-->
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
@@ -1469,44 +1566,16 @@
 
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
+    <script src="./dist/jquery.cookie.js"></script>
+    <script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.mjs"
+></script>
+    <script src="dist/main.js"></script>
+
     <script>
-        $(document).ready(function () {
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:1234/checklogin",
-                data: {},
-                dataType: "text",
-                success: function (data) {
-                    if(data == 'No'){
-                        window.location.href = './login.html';
-                    }
-                },
-                error: function (data) {
-                    alert("error");
-                }
-            });
-            $("#logout").on("click", function (e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost:1234/logout",
-                    data: {},
-                    dataType: "text",
-                    success: function (data) {
-                        if(data == 'Yes'){
-                            window.location.href = './login.html';
-                        }else{
-                            alert("error");
-                        }
-                    },
-                    error: function (data) {
-                        alert("error");
-                    }
-                });
-
-            });
-        });
+        
+        
     </script>
-
 </body>
 </html>

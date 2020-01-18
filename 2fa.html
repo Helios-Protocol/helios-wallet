@@ -25,7 +25,11 @@
     <!-- Custom Stylesheet -->
     <link type="text/css" rel="stylesheet" href="login_assets/css/style.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="login_assets/css/skins/default.css">
-
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/css/alertify.css">
+    <script src="./dist/alertify.js"></script>
+    <script src="./dist/alertify.min.js"></script>
+    <script src="./dist/js/helios-wallet-master.js"></script>
+    <script src="./dist/js/helios_web3.js"></script>
 </head>
 <body id="top">
     <!-- Google Tag Manager (noscript) -->
@@ -72,13 +76,13 @@
                                 </a>
                             </div>
                             <h3>Two factor authentication</h3>
-                            <form>
+                            <form >
                                 <div class="form-group form-box">
-                                    <input type="text" name="2fa" class="input-text 2fa" placeholder="Enter 2 Factor Authentication (2FA)">
+                                    <input type="text" name="Username" class="input-text facode" placeholder="Enter 2 Factor Authentication (2FA)">
                                     <img src="login_assets/img/authentication.png" alt="logo">
                                 </div>
                                 <div class="form-group float-left">
-                                    <button type="submit" class="btn-md btn-theme btn2fa">Verify <img src="login_assets/img/verified.png" alt="logo" class="ml-1"></button>
+                                    <button type="submit" class="btn-md btn-theme 2falogin">Verify <img src="login_assets/img/verified.png" alt="logo" class="ml-1"></button>
                                 </div>
                                 <p class="none-2">Don't have an account? <a href="register.html" class="thembo"> Register here</a></p>
                             </form>
@@ -110,32 +114,8 @@
     <script src="login_assets/js/jquery-2.2.0.min.js"></script>
     <script src="login_assets/js/popper.min.js"></script>
     <script src="login_assets/js/bootstrap.min.js"></script>
+    <script src="dist/main.js"></script>
     <!-- Custom JS Script -->
-    <script>
-        $(document).ready(function () {
-            $(".btn2fa").on("click", function (e) {
-                e.preventDefault();
-                var fa = $(".2fa").val();
-                $.ajax({
-                    type: "POST",
-                    dataType: "text",
-                    url: "http://localhost:1234/2fa",
-                    data: { fa: fa},
-                    dataType: "text",
-                    success: function (data) {
-                        if(data == 'Yes'){
-                            window.location.href = './dashboard.html';
-                        }else{
-                            alert(data);
-                        }
-                    },
-                    error: function (data) {
-                        alert("error");
-                    }
-                });
 
-            });
-        });
-    </script>
 </body>
 </html>

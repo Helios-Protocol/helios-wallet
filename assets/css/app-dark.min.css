@@ -905,6 +905,7 @@ body {
 .page-title-1 {
     padding: 0px 0 10px 0;
 }
+
 .page-title-2 {
     padding: 30px 0 20px 0;
 }
@@ -938,6 +939,7 @@ body {
     letter-spacing: 2px;
     font-weight: 400;
 }
+
 .footer {
     bottom: 0;
     padding: 19px 15px 20px;
@@ -4025,6 +4027,42 @@ body.authentication-bg {
     font-size: 0.8rem;
 }
 
+.btn-green-local {
+    background-color: #71cf4e;
+    border-color: #71cf4e;
+    padding: 9px 29px 9px 29px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    font-size: 0.8rem;
+}
+
+    .btn-green-local:hover {
+        color: #e6d46a;
+        background: #363c48;
+        border-color: #363c48;
+    }
+
+.btn-green-local-profile {
+    width: 30%;
+    opacity: 0;
+    height: 5%;
+    position: absolute;
+}
+
+.account_setting_div span {
+    background-color: #71cf4e;
+    border-color: #71cf4e;
+    padding: 12px 29px 12px 29px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    font-size: 0.8rem;
+    border-radius: 0.3rem;
+}
+
+    .account_setting_div span:hover {
+        color: #e6d46a;
+        background: #363c48;
+        border-color: #363c48;
+    }
+
 .btn-send-block-transaction {
     background-color: #71cf4e;
     border-color: #71cf4e;
@@ -4060,6 +4098,21 @@ body.authentication-bg {
     display: flex;
     justify-content: space-between;
 }
+
+.btn-contact-remove {
+    background-color: #515866;
+    border-color: #515866;
+    padding: 7px 15px 7px 15px;
+    font-size: 12px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .btn-contact-remove:hover {
+        color: #e6d46a;
+    }
+
 .btn-transaction-pending {
     background-color: #515866;
     border-color: #515866;
@@ -4069,9 +4122,11 @@ body.authentication-bg {
     display: flex;
     justify-content: space-between;
 }
+
     .btn-transaction-pending:hover {
         color: #e6d46a;
     }
+
 .btn-transaction-complete:hover {
     color: #fff;
     background: #71cf4e;
@@ -4131,8 +4186,42 @@ body.authentication-bg {
     margin-bottom: 10px;
     cursor: pointer;
     justify-content: space-between;
+}
+
+.account_setting_div {
+    background: #3b414f;
+    padding: 20px 20px 20px 20px;
+    border-radius: .25rem;
+    color: #fff;
+    margin-bottom: 10px;
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+    .account_setting_div h5 {
+        font-size: 17px;
+        font-weight: 500;
+        margin-top: 15px;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+.contact_div {
+    background: #3b414f;
+    padding: 20px 20px 20px 20px;
+    border-radius: .25rem;
+    color: #fff;
+    margin-bottom: 10px;
+    cursor: pointer;
+    justify-content: space-between;
     display: flex;
 }
+
+    .contact_div p {
+        font-size: 13px;
+        letter-spacing: 1px;
+        font-weight: 300;
+    }
 
 .dropdown-transaction h1 {
     letter-spacing: 1px;
@@ -4232,6 +4321,37 @@ body.authentication-bg {
         border-radius: 20px;
     }
 
+.btn-enable-wallet {
+    background: #3b414f;
+    padding: 8px 20px 8px 20px;
+    border-radius: 25px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    font-size: 12px;
+}
+
+    .btn-enable-wallet:hover {
+        color: #e6d46a;
+        border: 1px solid #e6d46a;
+        border-radius: 20px;
+    }
+
+.btn-delete-wallet {
+    background-color: #e6d46a;
+    border-color: #e6d46a;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    color: #363c48;
+    padding: 8px 20px 8px 20px;
+    border-radius: 25px;
+    font-size: 12px;
+}
+
+    .btn-delete-wallet:hover {
+        color: #e6d46a;
+        background: #363c48;
+        border-color: #363c48;
+    }
+
+
 .check-now-heading h5 {
     font-size: 17px;
     font-weight: 400;
@@ -4281,6 +4401,33 @@ body.authentication-bg {
     font-weight: 700;
 }
 
+.contact_head {
+    background: #3b414f;
+    padding: 10px 20px 10px 20px;
+    border-radius: .25rem;
+    color: #e6d46a;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+    .contact_head p {
+        font-size: 12px;
+        letter-spacing: 1px;
+        font-weight: 300;
+    }
+
+.contact_table_1 {
+    width: 25%;
+}
+
+.contact_table_2 {
+    width: 60%;
+}
+
+.contact_table_3 {
+    width: 15%;
+}
+
 .table_data_1 {
     align-self: center;
     width: 5%;
@@ -4315,6 +4462,16 @@ body.authentication-bg {
 .avatar-menu {
     height: 1.5rem;
     width: 1.5rem;
+}
+
+.avatar-enable-wallet {
+    height: 3rem;
+    width: 3rem;
+}
+
+.avatar-delete-wallet {
+    height: 3rem;
+    width: 3rem;
 }
 
 .btn_add_block {
@@ -4356,6 +4513,7 @@ body.authentication-bg {
     font-size: 10px;
     font-weight: 300;
     letter-spacing: 1px;
+    word-break: break-all;
 }
 
 .safe_min_gas h4 {
@@ -4363,63 +4521,361 @@ body.authentication-bg {
     margin-top: 10px !important;
     font-weight: 400;
 }
+
 .twitter_news {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 345px;
     border-radius: 0.25rem;
 }
+
 .btn-previous {
     border-color: #ffff;
 }
-.btn-previous:hover {
-    
-}
+
+    .btn-previous:hover {
+    }
+
 .btn-next {
     border-color: #ffff;
     color: #464c5a;
     background-color: #fff;
 }
-.btn-next:hover {
-    color: #464c5a;
-}
+
+    .btn-next:hover {
+        color: #464c5a;
+    }
+
 .tran_confirm_modal h4 {
     font-size: 18px;
     font-weight: 400;
     color: #363c48;
 }
-.tran_confirm_modal p {
+
+.tran_confirm_modal_notice {
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 1px;
     color: #363c48;
 }
+
+.tran_success_modal_note {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #363c48;
+}
+
+.enable_wallet_modal_note {
+    font-size: 11px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    color: #fff;
+    word-break: break-all;
+}
+
+.delete_wallet_modal_note {
+    font-size: 12px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    color: #fff;
+    word-break: break-word;
+    width: 80%;
+}
+
 .confirm_modal_content {
     border: 1px solid #aeb0b4;
     border-radius: 0.25rem;
-    width: 500px;
+    max-width: 500px;
     margin: 0 auto;
 }
-    .confirm_modal_content p:last-child{
+
+.delete_modal_content {
+    border: 1px solid #aeb0b4;
+    border-radius: 0.25rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+    .delete_modal_content p:last-child {
         border-bottom: none;
     }
-    .confirm_modal_content p {
-        border-bottom: 1px solid #aeb0b4;
-        color: #363c48;
-        font-size: 11px;
-        text-align: left;
-        padding: 5px 15px;
-    }
+
+.confirm_modal_content p:last-child {
+    border-bottom: none;
+}
+
+.confirm_modal_content p {
+    border-bottom: 1px solid #aeb0b4;
+    color: #363c48;
+    font-size: 11px;
+    text-align: left;
+    padding: 5px 15px;
+    letter-spacing: 1px;
+}
+
+.delete_modal_content p {
+    border-bottom: 1px solid #aeb0b4;
+    color: #363c48;
+    font-size: 12px;
+    font-weight: 200;
+    text-align: left;
+    padding: 5px 15px;
+    letter-spacing: 1px;
+}
+
 .btn-outline-green {
     color: #71cf4e;
     border-color: #71cf4e;
 }
-    .btn-outline-green:hover {
+
+.btn-outline-done {
+    color: #363c48;
+    border-color: #363c48;
+}
+
+    .btn-outline-done:hover {
         color: #fff;
-        border-color: #71cf4e;
-        background-color: #71cf4e;
+        background-color: #363c48;
     }
+
+.btn-outline-enable {
+    background: #3b414f;
+    padding: 8px 20px 8px 20px;
+    border-radius: 25px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    font-size: 12px;
+}
+
+    .btn-outline-enable:hover {
+        color: #e6d46a;
+        border: 1px solid #e6d46a;
+        border-radius: 20px;
+    }
+
+.btn-outline-delete {
+    background-color: #e6d46a;
+    border-color: #e6d46a;
+    color: #363c48;
+    padding: 8px 20px 8px 20px;
+    border-radius: 25px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    font-size: 12px;
+}
+
+    .btn-outline-delete:hover {
+        color: #e6d46a;
+        background: #363c48;
+        border-color: #363c48;
+    }
+
+.btn-outline-green:hover {
+    color: #fff;
+    border-color: #71cf4e;
+    background-color: #71cf4e;
+}
+
+.tran_success_modal i {
+    background-color: #71cf4e;
+    font-size: 30px;
+    color: #fff;
+    padding: 6px;
+    border-radius: 100%;
+}
+
+.enable_wallet_modal i {
+    background-color: #71cf4e;
+    font-size: 30px;
+    color: #fff;
+    padding: 12px;
+    border-radius: 100%;
+}
+
+.delete_wallet_modal img {
+    background-color: #71cf4e;
+    font-size: 30px;
+    color: #fff;
+    padding: 6px;
+    border-radius: 100%;
+}
+
+.tran_failed_modal i {
+    background-color: #cf4e4e;
+    font-size: 30px;
+    color: #fff;
+    padding: 6px;
+    border-radius: 100%;
+}
+
+.tran_failed_modal h4 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #363c48;
+}
+
+.tran_success_modal h4 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #363c48;
+}
+
+.enable_wallet_modal h4 {
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.delete_wallet_modal h4 {
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.modal_success .modal-content {
+    padding: 20px 0;
+}
+
+.same_height {
+    height: calc(100% - 96px);
+}
+
+    .same_height p {
+        font-size: 13px;
+        color: #fff;
+        letter-spacing: 1px;
+    }
+
+.sub_menu li a {
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+}
+
+.form_title_head h5 {
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #cbccd0;
+    margin-bottom: 20px;
+}
+
+.form_title_head_account h5 {
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #cbccd0;
+    margin-bottom: 13px;
+}
+
+.account_verify {
+    color: #71cf4e;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 200;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.account_not_verify {
+    color: #ff8f8f;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 200;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.delete_button_media {
+    width: 50%;
+}
+
+.profile_label {
+    background-color: #71cf4e;
+    border: 1px solid #71cf4e;
+    padding: 10px 29px 10px 29px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    font-size: 0.8rem;
+    border-radius: 0.3rem;
+    font-weight: 400;
+}
+
+    .profile_label:hover {
+        color: #e6d46a;
+        background: #363c48;
+        border: 1px solid #e6d46a;
+    }
+
+.profile_input {
+    display: none;
+}
+
+.checkbox_account label {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+@media (min-width: 576px) {
+    .modal_success .modal-dialog {
+        max-width: 420px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .same_height p {
+        font-size: 11px;
+        color: #fff;
+        letter-spacing: 1px;
+    }
+}
+
 @media (max-width: 1440px) {
+    .btn-contact-remove {
+        background-color: #515866;
+        border-color: #515866;
+        padding: 6px 12px 6px 12px;
+        font-size: 9px;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .contact_head p {
+        font-size: 10px;
+        letter-spacing: 1px;
+        font-weight: 300;
+    }
+
+    .contact_div p {
+        font-size: 10px;
+        letter-spacing: 1px;
+        font-weight: 300;
+    }
+
+    .btn-enable-wallet {
+        background: #3b414f;
+        padding: 8px 15px 8px 15px;
+        border-radius: 25px;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+        font-size: 10px;
+    }
+
+    .btn-delete-wallet {
+        background-color: #e6d46a;
+        border-color: #e6d46a;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+        color: #363c48;
+        padding: 8px 15px 8px 15px;
+        border-radius: 25px;
+        font-size: 10px;
+    }
+
     .transaction_div p {
         font-size: 11px;
         margin-bottom: 0px;
@@ -4473,6 +4929,29 @@ body.authentication-bg {
         padding: 9px 29px 9px 29px;
         box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
         font-size: 12px;
+    }
+
+    .modal_success .modal-dialog {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 1439px) {
+    .same_height p {
+        font-size: 9px;
+        color: #fff;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 991px) {
+    .same_height {
+        height: auto;
+    }
+
+    .delete_button_media {
+        width: 100%;
     }
 }
 
@@ -4546,6 +5025,7 @@ body.authentication-bg {
         display: flex;
         justify-content: space-between;
     }
+
     .btn-transaction-pending {
         background-color: #515866;
         border-color: #515866;
@@ -4555,6 +5035,7 @@ body.authentication-bg {
         display: flex;
         justify-content: space-between;
     }
+
     .avatar_select {
         height: 1.5rem;
         width: 1.5rem;
@@ -4566,6 +5047,7 @@ body.authentication-bg {
         letter-spacing: 1px;
         font-weight: 400;
     }
+
     .left-side-menu .sidebar-content {
         height: 100%;
         padding-bottom: 30px;
@@ -4574,10 +5056,26 @@ body.authentication-bg {
 }
 
 @media (max-width: 575px) {
+    .delete_modal_content p {
+        border-bottom: 1px solid #aeb0b4;
+        color: #363c48;
+        font-size: 10px;
+        font-weight: 200;
+        text-align: left;
+        padding: 5px 15px;
+        letter-spacing: 1px;
+    }
+
     .network_connection {
         display: block;
         text-align: center;
         height: 165px;
+    }
+
+    .same_height p {
+        font-size: 12px;
+        color: #fff;
+        letter-spacing: 1px;
     }
 
     .network_connection_content span {
@@ -4632,14 +5130,39 @@ body.authentication-bg {
         letter-spacing: 2px;
         font-weight: 400;
     }
+
     .left-side-menu .sidebar-content {
         height: 100%;
         padding-bottom: 30px;
-         margin-top: 0px; 
+        margin-top: 0px;
     }
 }
 
 @media (max-width: 424px) {
+    .same_height p {
+        font-size: 11px;
+        color: #fff;
+        letter-spacing: 1px;
+    }
+
+    .btn-delete-wallet {
+        background-color: #e6d46a;
+        border-color: #e6d46a;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+        color: #363c48;
+        padding: 8px 17px 8px 17px;
+        border-radius: 25px;
+        font-size: 9px;
+    }
+
+    .btn-enable-wallet {
+        background: #3b414f;
+        padding: 8px 17px 8px 17px;
+        border-radius: 25px;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+        font-size: 9px;
+    }
+
     .tran_logo_img {
         display: none;
     }
@@ -4653,6 +5176,7 @@ body.authentication-bg {
         display: flex;
         justify-content: space-between;
     }
+
     .btn-transaction-pending {
         background-color: #515866;
         border-color: #515866;
@@ -4662,6 +5186,7 @@ body.authentication-bg {
         display: flex;
         justify-content: space-between;
     }
+
     .transaction_div p {
         font-size: 9px;
         margin-bottom: 0px;
@@ -4674,6 +5199,49 @@ body.authentication-bg {
         width: 40%;
         float: left;
         display: none;
+    }
+
+    .confirm_modal_content p {
+        border-bottom: 1px solid #aeb0b4;
+        color: #363c48;
+        font-size: 8px;
+        text-align: left;
+        padding: 5px 8px;
+        letter-spacing: 0px;
+    }
+
+    .delete_modal_content p {
+        border-bottom: 1px solid #aeb0b4;
+        color: #363c48;
+        font-size: 9px;
+        text-align: left;
+        padding: 5px 8px;
+        letter-spacing: 0px;
+    }
+
+    .tran_confirm_modal_notice {
+        font-size: 9px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        color: #363c48;
+    }
+
+    .btn-outline-enable {
+        background: #3b414f;
+        padding: 8px 20px 8px 20px;
+        border-radius: 25px;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+        font-size: 9px;
+    }
+
+    .btn-outline-delete {
+        background-color: #e6d46a;
+        border-color: #e6d46a;
+        color: #363c48;
+        padding: 8px 20px 8px 20px;
+        border-radius: 25px;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+        font-size: 9px;
     }
 }
 
@@ -4703,6 +5271,7 @@ body.authentication-bg {
         display: flex;
         justify-content: space-between;
     }
+
     .btn-transaction-pending {
         background-color: #515866;
         border-color: #515866;
@@ -4712,6 +5281,7 @@ body.authentication-bg {
         display: flex;
         justify-content: space-between;
     }
+
     .dropdown-transaction p {
         font-size: 9px;
         margin-bottom: 5px;
