@@ -7,13 +7,13 @@ function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    var a= document.cookie;
-    alert(a);
-  }
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;Secure";
+    var a=getCookie('username');
+    //alert(a);
+}
 function getCookie(cname) {
     var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
+    var decodedCookie = document.cookie;
     var ca = decodedCookie.split(';');
     for(var i = 0; i <ca.length; i++) {
       var c = ca[i];
@@ -26,61 +26,121 @@ function getCookie(cname) {
     }
     return "";
 }
-
-
-
 $(document).on("click",".btnlogin",function(e){
     e.preventDefault();
     var username = $(".username").val();
     var password = $(".password").val();
-    
-    server.signIn(username, password, "")
-    .then(function(response){
-        if(response !== false && "success" in response) {
-           // $.cookie("username", "sagar", '100');
-            //Cookies.set('username',username);
-            //setCookie("username",username,365);
-           // document.cookie = 'cross-site-cookie=bar; SameSite=None';
-            //document.cookie = "username="+ username;
-            window.location.href = "./dashboard.html";
-        }else{
-            if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
-                localStorage.setItem("username", username);
-                localStorage.setItem("password", password);
-                window.location.href = "./2fa.html";
-            }else  if(response.error == "2010" && response.error_description == "Invalid username or password."){
-                $(".username").val('');
-                $(".password").val('');
-                alertify.error(response.error_description);
-                
+    if(username == ""){
+        alertify.error("Username should not blank.");
+    }else if(password == ""){
+        alertify.error("Password should not blank.");
+    }else{
+        server.signIn(username, password, "")
+        .then(function(response){
+            console.log(response);
+            if(response !== false && "success" in response) {
+                setCookie("username",username,365);
+                window.location.href = "./dashboard.html";
             }else{
-                alertify.error("HTTP Request Error");
+                if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
+                    window.location.href = "./2fa.html";
+                }else  if(response.error_description == "Invalid username or password."){
+                    $(".username").val('');
+                    $(".password").val('');
+                    alertify.error(response.error_description);
+                    
+                }else{
+                    alertify.error("HTTP Request Error");
+                }
+                
             }
-            
-        }
-    });
+        });
+    }
 });
 $(document).on("click",".2falogin",function(e){
     e.preventDefault();
     var username = localStorage.getItem("username");
     var facode = $(".facode").val();
     var password = localStorage.getItem("password");
-    
-    server.signIn(username, password, facode)
-    .then(function(response){
-        if(response !== false && "success" in response) {
-            window.location.href = "./dashboard.html";
-        }else{
-            if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
-                alertify.error(response.error_description);
-            }else  if(response.error == "2010" && response.error_description == "Invalid username or password."){
-                alertify.error(response.error_description);
+    if(facode == ""){
+        alertify.error("2fa should not blank.");
+    }else{
+        server.signIn(username, password, facode)
+        .then(function(response){
+            if(response !== false && "success" in response) {
+                window.location.href = "./dashboard.html";
             }else{
-                alertify.error("HTTP Request Error");
+                if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
+                    alertify.error(response.error_description);
+                }else  if(response.error == "2010" && response.error_description == "Invalid username or password."){
+                    alertify.error(response.error_description);
+                }else{
+                    alertify.error("HTTP Request Error");
+                }
+                
             }
-            
-        }
-    });
+        });
+    }
+});
+$(document).on("click",".btnreg",function(e){
+    e.preventDefault();
+    var username = $(".username").val();
+    var email = $(".email").val();
+    var password = $(".password").val();
+    var cpassword = $(".cpassword").val();
+    var check = $("#rememberMe").is(":checked");
+    if(username == ""){
+        alertify.error("Username should not blank.");
+    }else if(email == ""){
+        alertify.error("Email should not blank.");
+    }else if(password == ""){
+        alertify.error("Password should not blank.");
+    }else if(password !== cpassword){
+        alertify.error("Confirm password and password should not match.");
+    }else if (check == false) {
+        alertify.error("Please select terms of use.");
+    }else{
+        var new_wallet = web3.eth.accounts.create();
+        var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, password);
+        server.newUser(username, email, password, keystore)
+            .then(function(response){
+            if(response !== false && "success" in response) {
+                if(response !== false && "success" in response) {
+                    setCookie("username",username,365);
+                    window.location.href = "./dashboard.html";
+                }else{
+                    if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
+                        localStorage.setItem("username", username);
+                        localStorage.setItem("password", password);
+                        window.location.href = "./2fa.html";
+                    }else if(response.error_description != ""){
+                        $(".username").val('');
+                        $(".password").val('');
+                        alertify.error(response.error_description);
+                    }else{
+                        alertify.error("HTTP Request Error");
+                    }
+                }
+            }else{
+                if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
+                    window.location.href = "./2fa.html";
+                }else if(response.error_description){
+                    $(".username").val('');
+                    $(".email").val('');
+                    $(".password").val('');
+                    $(".cpassword").val('');
+                    alertify.error(response.error_description);
+                    
+                }else{
+                    alertify.error("HTTP Request Error");
+                }
+            }
+        });
+    }
 });
 $(document).on("click",".logout",function(e){
     e.preventDefault();

@@ -15,14 +15,14 @@
     <link href="assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/css/alertify.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/alertify.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
     <script src="./dist/alertify.js"></script>
     <script src="./dist/alertify.min.js"></script>
     <script src="./dist/js/helios-wallet-master.js"></script>
     <script src="./dist/js/helios_web3.js"></script>
 </head>
-<body onload="checkCookie()">
+<body >
     <!-- Begin page -->
     <div id="wrapper">
         <!-- Topbar Start -->
@@ -1574,7 +1574,25 @@
     <script src="dist/main.js"></script>
 
     <script>
-        
+        $(document).ready(function(){
+            var a = getCookie('username');
+            console.log(a);
+        });
+        function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+} 
         
     </script>
 </body>
