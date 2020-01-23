@@ -30,14 +30,29 @@
     <link type="text/css" rel="stylesheet" href="login_assets/css/style.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="login_assets/css/skins/default.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/alertify.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
-    
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
     <script src="./dist/alertify.js"></script>
     <script src="./dist/alertify.min.js"></script>
     <script src="./dist/js/helios-wallet-master.js"></script>
     <script src="./dist/js/helios_web3.js"></script>
+    <!-- <script src="./dist/js/send_transaction_block.js?version=16"></script>
+    <script src="./dist/js/transaction_history_block.js?version=16"></script>
+    <script src="./dist/js/frontpage.js?version=16"></script>
+    <script src="./dist/js/historical_gas_price_block.js?version=16"></script>
+    <script src="./dist/js/incoming_transactions_block.js?version=16"></script>
+    <script src="./dist/js/offline_wallets.js?version=16"></script>
+    <script src="./dist/js/online_wallets.js?version=16"></script>
+    <script src="./dist/js/contacts.js?version=16"></script>
+    <script src="./dist/js/utils.js?version=16"></script>
+    <script src="./dist/js/visual.js?version=16"></script>
+    <script src="./dist/js/main.js?version=16"></script>
+    <script src="./dist/js/menu.js?version=16"></script>
+    <script src="./dist/js/custom_select.js?version=16"></script>
+    <script src="./dist/js/autocomplete.js?version=16"></script>
+    <script src="./dist/js/two_factor_authentication.js?version=16"></script> -->
 </head>
-<body id="top">
+<body id="top" ng-app="loginApp" ng-controller="loginController">
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TAGCODE"
@@ -85,17 +100,18 @@
                                 </a>
                             </div>
                             <h3>Login into your account</h3>
-                            <form >
+                            <form ng-submit="submitLoginForm()" method="POST">
                                 <div class="form-group form-box">
-                                    <input type="text" name="Username" class="input-text username" placeholder="Username">
+                                    <input type="text" name="Username" class="input-text username" ng-model="user.username" placeholder="Username" required>
                                     <img src="login_assets/img/user.png" alt="logo">
                                 </div>
                                 <div class="form-group form-box">
-                                    <input type="Password" name="Password" class="input-text password" placeholder="Password">
+                                    <input type="Password" name="Password" class="input-text password" ng-model="user.password" placeholder="Password" required>
                                     <img src="login_assets/img/password.png" alt="logo">
                                 </div>
                                 <div class="form-group float-left">
-                                    <a  type="submit" class="btn-md btn-theme btnlogin">Login <img src="login_assets/img/right-arrow.png" alt="logo" class="ml-1"></a>
+                                    <!-- <input type="submit" value="Submit" />  -->
+                                    <button  type="submit" class="btn-md btn-theme">Login <img src="login_assets/img/right-arrow.png" alt="logo" class="ml-1"></button>
                                 </div>
                                 <div>
                                     <p class="none-2">Don't have an account? <a href="register.html" class="thembo"> Register here</a></p>
@@ -144,6 +160,24 @@
     
     <script src="dist/main.js"></script>
     <!-- Custom JS Script -->
+    <!-- <script>
+        //1. create app module 
+        var loginApp = angular.module('loginApp', []);
+
+        //2. create controller
+        loginApp.controller("loginController", function ($scope, $http) {
+            $scope.submitLoginForm = function () {
+               
+                console.log($scope.student.username);
+                // send $http request to save student
+            };
+
+            //6. create resetForm() function. This will be called on Reset button click.  
+            $scope.resetForm = function () {
+                $scope.student = angular.copy($scope.OriginalStudent);
+            };
+    });
+    </script>  -->
 
 </body>
 </html>

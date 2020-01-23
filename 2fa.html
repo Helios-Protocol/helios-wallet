@@ -2,11 +2,11 @@
 <html lang="zxx">
 <head>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TAGCODE');</script>
+    })(window,document,'script','dataLayer','GTM-TAGCODE');</script> -->
     <!-- End Google Tag Manager -->
     <title>Helios - 2FA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,12 +26,15 @@
     <link type="text/css" rel="stylesheet" href="login_assets/css/style.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="login_assets/css/skins/default.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/alertify.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
     <script src="./dist/alertify.js"></script>
     <script src="./dist/alertify.min.js"></script>
     <script src="./dist/js/helios-wallet-master.js"></script>
     <script src="./dist/js/helios_web3.js"></script>
+    <!-- <script src="./dist/js/online_wallets.js"></script>
+    <script src="./dist/js/main.js"></script> -->
 </head>
-<body id="top">
+<body id="top" ng-app="2faApp" ng-controller="2faController">
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TAGCODE"
@@ -76,13 +79,13 @@
                                 </a>
                             </div>
                             <h3>Two factor authentication</h3>
-                            <form >
+                            <form ng-submit="submit2faForm()" method="POST">
                                 <div class="form-group form-box">
-                                    <input type="text" name="Username" class="input-text facode" placeholder="Enter 2 Factor Authentication (2FA)">
+                                    <input type="text" name="Username" class="input-text facode" ng-model="user.fa" placeholder="Enter 2 Factor Authentication (2FA)">
                                     <img src="login_assets/img/authentication.png" alt="logo">
                                 </div>
                                 <div class="form-group float-left">
-                                    <button type="submit" class="btn-md btn-theme 2falogin">Verify <img src="login_assets/img/verified.png" alt="logo" class="ml-1"></button>
+                                    <button type="submit" class="btn-md btn-theme">Verify <img src="login_assets/img/verified.png" alt="logo" class="ml-1"></button>
                                 </div>
                                 <p class="none-2">Don't have an account? <a href="register.html" class="thembo"> Register here</a></p>
                             </form>

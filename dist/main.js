@@ -1,146 +1,137 @@
-// document.head.appendChild('<script type="text/javascript" src="./dist/helios_js/helios_web3.js" ></script>');
-// document.head.appendChild('<script type="text/javascript" src="./dist/helios_js/helios-wallet-master.js" ></script>');
-// var imported = document.createElement('script');
-// imported.src = './dist/helios_js';
-// document.head.appendChild(imported);
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;Secure";
-    var a=getCookie('username');
-    //alert(a);
-}
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = document.cookie;
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-}
-$(document).on("click",".btnlogin",function(e){
-    e.preventDefault();
-    var username = $(".username").val();
-    var password = $(".password").val();
-    if(username == ""){
-        alertify.error("Username should not blank.");
-    }else if(password == ""){
-        alertify.error("Password should not blank.");
-    }else{
-        server.signIn(username, password, "")
-        .then(function(response){
-            console.log(response);
-            if(response !== false && "success" in response) {
-                setCookie("username",username,365);
-                window.location.href = "./dashboard.html";
-            }else{
-                if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
-                    localStorage.setItem("username", username);
-                    localStorage.setItem("password", password);
-                    window.location.href = "./2fa.html";
-                }else  if(response.error_description == "Invalid username or password."){
-                    $(".username").val('');
-                    $(".password").val('');
-                    alertify.error(response.error_description);
-                    
-                }else{
-                    alertify.error("HTTP Request Error");
-                }
-                
-            }
-        });
-    }
-});
-$(document).on("click",".2falogin",function(e){
-    e.preventDefault();
-    var username = localStorage.getItem("username");
-    var facode = $(".facode").val();
-    var password = localStorage.getItem("password");
-    if(facode == ""){
-        alertify.error("2fa should not blank.");
-    }else{
-        server.signIn(username, password, facode)
-        .then(function(response){
-            if(response !== false && "success" in response) {
-                window.location.href = "./dashboard.html";
-            }else{
-                if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
-                    alertify.error(response.error_description);
-                }else  if(response.error == "2010" && response.error_description == "Invalid username or password."){
-                    alertify.error(response.error_description);
-                }else{
-                    alertify.error("HTTP Request Error");
-                }
-                
-            }
-        });
-    }
-});
-$(document).on("click",".btnreg",function(e){
-    e.preventDefault();
-    var username = $(".username").val();
-    var email = $(".email").val();
-    var password = $(".password").val();
-    var cpassword = $(".cpassword").val();
-    var check = $("#rememberMe").is(":checked");
-    if(username == ""){
-        alertify.error("Username should not blank.");
-    }else if(email == ""){
-        alertify.error("Email should not blank.");
-    }else if(password == ""){
-        alertify.error("Password should not blank.");
-    }else if(password !== cpassword){
-        alertify.error("Confirm password and password should not match.");
-    }else if (check == false) {
-        alertify.error("Please select terms of use.");
-    }else{
-        var new_wallet = web3.eth.accounts.create();
-        var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, password);
-        server.newUser(username, email, password, keystore)
+var loginApp = angular.module('loginApp', []);
+loginApp.controller("loginController", function ($scope, $http) {
+    $scope.submitLoginForm = function () {
+        $scope.username = $scope.user.username;
+        $scope.password = $scope.user.password;
+        if($scope.username == ""){
+            alertify.error("Username cannot be left blank.");
+        }else if($scope.password == ""){
+            alertify.error("Password cannot be left blank.");
+        }else{
+            server.signIn($scope.username, $scope.password, "")
             .then(function(response){
-            if(response !== false && "success" in response) {
                 if(response !== false && "success" in response) {
-                    setCookie("username",username,365);
+                    sessionStorage.setItem("username", $scope.username);
+                    sessionStorage.setItem("password", $scope.password);
+                    var online_keystores = response['keystores'];
+                    sessionStorage.setItem("online_keystores", online_keystores);
                     window.location.href = "./dashboard.html";
                 }else{
                     if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
-                        localStorage.setItem("username", username);
-                        localStorage.setItem("password", password);
+                        sessionStorage.setItem("username", $scope.username);
+                        sessionStorage.setItem("password", $scope.password);
                         window.location.href = "./2fa.html";
-                    }else if(response.error_description != ""){
-                        $(".username").val('');
-                        $(".password").val('');
+                    }else if(response.error_description == "Invalid username or password."){
+                        $scope.user.username = '';
+                        $scope.user.password = '';
                         alertify.error(response.error_description);
                     }else{
                         alertify.error("HTTP Request Error");
                     }
-                }
-            }else{
-                if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
-                    localStorage.setItem("username", username);
-                    localStorage.setItem("password", password);
-                    window.location.href = "./2fa.html";
-                }else if(response.error_description){
-                    $(".username").val('');
-                    $(".email").val('');
-                    $(".password").val('');
-                    $(".cpassword").val('');
-                    alertify.error(response.error_description);
                     
-                }else{
-                    alertify.error("HTTP Request Error");
                 }
-            }
-        });
-    }
+            });
+        }
+    };
+});
+var registerApp = angular.module('registerApp', []);
+registerApp.controller("registerController", function ($scope, $http) {
+
+    $scope.submitRegisterForm = function () {
+        
+        $scope.username = $scope.user.username;
+        $scope.email = $scope.user.email;
+        $scope.password = $scope.user.password;
+        $scope.cpassword = $scope.user.cpassword;
+        if($scope.username == ""){
+            alertify.error("Username should not blank.");
+        }else if($scope.email == ""){
+            alertify.error("Email should not blank.");
+        }else if($scope.password == ""){
+            alertify.error("Password should not blank.");
+        }else if($scope.password !== $scope.cpassword){
+            alertify.error("Confirm password and password should not match.");
+        }else{
+            var new_wallet = web3.eth.accounts.create();
+            var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, $scope.password);
+            server.newUser($scope.username, $scope.email, $scope.password, $scope.keystore)
+                .then(function(response){
+                if(response !== false && "success" in response) {
+                    if(response !== false && "success" in response) {
+                        setCookie("username",$scope.username,365);
+                        window.location.href = "./dashboard.html";
+                    }else{
+                        if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
+                            sessionStorage.setItem("username", $scope.username);
+                            sessionStorage.setItem("password", $scope.password);
+                            window.location.href = "./2fa.html";
+                        }else if(response.error_description != ""){
+                            $scope.user.username = '';
+                            $scope.user.password = '';
+                            alertify.error(response.error_description);
+                        }else{
+                            alertify.error("HTTP Request Error");
+                        }
+                    }
+                }else{
+                    if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
+                        sessionStorage.setItem("username", $scope.username);
+                        sessionStorage.setItem("password", $scope.password);
+                        window.location.href = "./2fa.html";
+                    }else if(response.error_description){
+                        $scope.user.username = '';
+                        $scope.user.email = '';
+                        $scope.user.password = '';
+                        $scope.user.cpassword = '';
+                        alertify.error(response.error_description);
+                        
+                    }else{
+                        alertify.error("HTTP Request Error");
+                    }
+                }
+            });
+        }
+    };
+    $scope.resetForm = function () {
+        $scope.student = angular.copy($scope.OriginalStudent);
+    };
+});
+var faApp = angular.module('2faApp', []);
+faApp.controller("2faController", function ($scope, $http) {
+    $scope.submit2faForm = function () {
+        $scope.fa = $scope.user.fa;
+        $scope.username = sessionStorage.getItem("username");
+        $scope.password = sessionStorage.getItem("password");
+        if($scope.fa == ""){
+            alertify.error("2fa should not blank.");
+        }else{
+            server.signIn($scope.username, $scope.password, $scope.fa)
+            .then(function(response){
+                if(response !== false && "success" in response) {
+                    sessionStorage.setItem("username", $scope.username);
+                    sessionStorage.setItem("password", $scope.password);
+                    var online_keystores = response['keystores'];
+                    sessionStorage.setItem("online_keystores", online_keystores);
+                    window.location.href = "./dashboard.html";
+                }else{
+                    if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
+                        $scope.user.fa = '';
+                        alertify.error(response.error_description);
+                    }else  if(response.error == "2010" && response.error_description == "Invalid username or password."){
+                        $scope.user.fa = '';
+                        alertify.error(response.error_description);
+                    }else{
+                        alertify.error("HTTP Request Error");
+                    }
+                    
+                }
+            });
+        }
+    };
+});
+var dashboardApp = angular.module('dashboardApp', []);
+dashboardApp.controller("dashboardController", function ($scope, $http) {
+    $scope.username = sessionStorage.getItem("username");
 });
 $(document).on("click",".logout",function(e){
     e.preventDefault();

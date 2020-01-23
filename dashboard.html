@@ -16,14 +16,17 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/alertify.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
     <script src="./dist/alertify.js"></script>
     <script src="./dist/alertify.min.js"></script>
     <script src="./dist/js/helios-wallet-master.js"></script>
     <script src="./dist/js/helios_web3.js"></script>
+    <!-- <script src="./dist/js/online_wallets.js"></script>
+    <script src="./dist/js/main.js"></script> -->
 </head>
-<body >
+<body ng-app="dashboardApp" ng-controller="dashboardController">
     <!-- Begin page -->
+    <div ></div>
     <div id="wrapper">
         <!-- Topbar Start -->
         <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
@@ -148,7 +151,7 @@
                                 <img src="assets/images/users/avatar-7.jpg" alt="user-image" class="rounded-circle align-self-center" />
                                 <div class="media-body text-left align-self-center">
                                     <p class="ml-2 my-0 text-white ls-1">
-                                        <span>Raj Ladumor</span>
+                                        <span>{{username}}</span>
                                     </p>
                                 </div>
                             </div>
@@ -232,7 +235,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="" class="logout" >
+                            <a href="" class="logout">
                                 <img src="assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Logout </span>
                             </a>
@@ -1562,38 +1565,23 @@
     <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
 
     <!-- page js -->
-    <script src="assets/js/pages/dashboard.init.js"></script>
+    <!-- <script src="assets/js/pages/dashboard.init.js"></script> -->
 
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
     <script src="./dist/jquery.cookie.js"></script>
-    <script
-  type="module"
-  src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.mjs"
-></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.mjs"></script>
     <script src="dist/main.js"></script>
-
-    <script>
+    <!-- <script>
         $(document).ready(function(){
-            var a = getCookie('username');
-            console.log(a);
+           // set_username_status(localStorage.getItem("username"));
+            var online_keystores = localStorage.getItem('keystores');
+            localStorage.setItem("keystores", online_keystores);
+            console.log(online_keystores);
+            populateOnlineKeystores(online_keystores, password);
+
+            afterLoginInit();
         });
-        function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-} 
-        
-    </script>
+    </script> -->
 </body>
 </html>

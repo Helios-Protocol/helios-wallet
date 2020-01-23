@@ -67,12 +67,12 @@ class ConnectionMaintainer {
     }
 
     setNetworkIdAndReconnect(networkId){
-        console.log('Setting networkId to '+networkId);
+        //console.log('Setting networkId to '+networkId);
         this.networkId = networkId;
 
         if(this.isConnected()) {
             // Disconnect from node, and then the onClose will be called, automatically reconnecting with new network id.
-            console.log("Disconnecting from current node.")
+            //console.log("Disconnecting from current node.")
             this.web3.currentProvider.disconnect();
         }else{
             this.connectToNetwork();
@@ -81,7 +81,7 @@ class ConnectionMaintainer {
 
     setStatus(status){
         this.status = status;
-        console.log(status);
+        //console.log(status);
         if(!(this.statusCallback === undefined)){
             this.statusCallback(status, this.isConnected());
         }
@@ -94,11 +94,11 @@ class ConnectionMaintainer {
 
 
     async connectToNetwork(){
-        console.log("Initiating connection to network");
+        //console.log("Initiating connection to network");
         if(this.isConnected()) {
-            console.log("Already connected to network. Doing nothing.");
+            //console.log("Already connected to network. Doing nothing.");
         }else{
-            console.log("No active connection found. Starting new one.");
+           // console.log("No active connection found. Starting new one.");
             try {
                 var isConnected = await this.connectToFirstAvailableNode();
                 if (isConnected) {
@@ -115,7 +115,7 @@ class ConnectionMaintainer {
                 }
             }catch(err) {
                 // Probably caused by no nodes with this netowork id
-                console.log("Error when connecting to first available node: " + err);
+                //console.log("Error when connecting to first available node: " + err);
                 this.setStatus('Connection failure.');
             }
         }
@@ -129,18 +129,18 @@ class ConnectionMaintainer {
                 try {
                     var newProvider = await this.connectToWebsocketProvider(API_address);
                     this.web3.setProvider(newProvider);
-                    console.log("Successfully connected to " + API_address);
+                    //console.log("Successfully connected to " + API_address);
 
                     // Set close callback. Tell it to reconnect to network with first available node.
                     newProvider.on('end', function(){
-                        console.log("Provider closed. Reconnecting to network");
+                        //console.log("Provider closed. Reconnecting to network");
                         _this.connectToNetwork();
                     })
 
                     return true;
 
                 } catch(err) {
-                    console.log("Failed to connect to node " + API_address);
+                    //console.log("Failed to connect to node " + API_address);
                 }
 
             }
@@ -153,13 +153,13 @@ class ConnectionMaintainer {
 
     connectToWebsocketProvider(API_address) {
         return new Promise((resolve, reject) => {
-            console.log("Connecting to node " + API_address);
+            //console.log("Connecting to node " + API_address);
             var newProvider = new this.web3.providers.WebsocketProvider(API_address)
 
             // Add timeout
             var timeout = setTimeout(function(){
                 // Cancel the connection
-                console.log("Timeout on connection for "+ API_address);
+                //console.log("Timeout on connection for "+ API_address);
                 newProvider.disconnect();
                 reject();
             }, this.WSConnectTimeout);
@@ -167,7 +167,7 @@ class ConnectionMaintainer {
             // Add connected callback
             newProvider.on('connect', function(){
                 clearTimeout(timeout);
-                console.log("onOpen event fired for "+ API_address);
+                //console.log("onOpen event fired for "+ API_address);
                 resolve(newProvider);
             })
 
@@ -3901,8 +3901,8 @@ class Server {
             } catch(e) {
                 return this.error('Malformed JSON Response', [res.status, res.text]);
             }
-            console.log("Successful response from server")
-            console.log(json_response);
+            //console.log("Successful response from server")
+            //console.log(json_response);
             if('session_hash' in json_response){
                 this.saveSession(json_response['session_hash']);
             }
@@ -3910,7 +3910,7 @@ class Server {
             if('error' in json_response){
                 if(json_response['error'] == 2020){
                     if(typeof window.logout !== 'undefined' && typeof window.popup !== 'undefined'){
-                        console.log("Session expired");
+                        //console.log("Session expired");
                         window.logout();
                         window.popup("Your session has expired. Please log in again to continue.");
                     }

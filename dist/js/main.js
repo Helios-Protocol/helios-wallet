@@ -47,7 +47,7 @@ $( document ).ready(function() {
     // }
 
     //server.newUser("username", undefined, "password");
-    connectionMaintainer.setStatusCallback(set_connection_status);
+    connectionMaintainer.setStatusCallback(1);
 
 
     //testing
