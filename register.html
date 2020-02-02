@@ -2,40 +2,31 @@
 <html lang="zxx">
 <head>
     <!-- Google Tag Manager -->
-    <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TAGCODE');</script> -->
+    
     <!-- End Google Tag Manager -->
     <title>Helios - Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
-    <link type="text/css" rel="stylesheet" href="login_assets/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="login_assets/fonts/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="login_assets/fonts/flaticon/font/flaticon.css">
+    <link type="text/css" rel="stylesheet" href="dist/login_assets/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="dist/login_assets/fonts/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="dist/login_assets/fonts/flaticon/font/flaticon.css">
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" href="login_assets/img/favicon.ico" type="image/x-icon" >
+    <link rel="shortcut icon" href="dist/login_assets/img/favicon.ico" type="image/x-icon" >
 
     <!-- Google fonts -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPoppins:400,500,700,800,900%7CRoboto:100,300,400,400i,500,700">
 
     <!-- Custom Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="login_assets/css/style.css">
-    <link rel="stylesheet" type="text/css" id="style_sheet" href="login_assets/css/skins/default.css">
-    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/alertify.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
-    
-    <script src="./dist/alertify.js"></script>
-    <script src="./dist/alertify.min.js"></script>
-    <script src="./dist/js/helios-wallet-master.js"></script>
-    <script src="./dist/js/helios_web3.js"></script>
-    <!-- <script src="./dist/js/online_wallets.js"></script>
-    <script src="./dist/js/main.js"></script> -->
+    <link type="text/css" rel="stylesheet" href="dist/login_assets/css/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/login_assets/css/skins/default.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/js/alertify.css">
+    <script src="dist/js/alertify.js"></script>
+    <script src="dist/js/frontpage.js"></script>
 </head>
-<body id="top" ng-app="registerApp" ng-controller="registerController" >
+<body id="top">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TAGCODE"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -49,13 +40,13 @@
             <div class="col-xl-8 col-lg-8 col-md-12 col-pad-0 bg-img none-992">
                 <div class="logo">
                     <a href="https://heliosprotocol.io/">
-                        <img src="login_assets/img/logos/logo.png" alt="logo">
+                        <img src="dist/login_assets/img/logos/logo.png" alt="logo">
                     </a>
                 </div>
                 <div class="informeson">
                     <h3 class="fw-2 ls-1">Welcome to Helios Protocol Wallet</h3>
                     <p class="">ALREADY HAVE AN ACCOUNT ?</p>
-                    <a href="login.html" class="btn-theme-1"><img src="login_assets/img/login.png" alt="logo" class="mr-2"> Login to your account</a>
+                    <a href="login.html" class="btn-theme-1"><img src="dist/login_assets/img/login.png" alt="logo" class="mr-2"> Login to your account</a>
                 </div>
                 <div class="social-box">
                     <p class="fw-4 ls-4 fs-11 helios_color">© COPYRIGHT 2020</p>
@@ -65,7 +56,7 @@
             <div class="none-min-992 mobile_logo col-sm-12">
                 <div class="">
                     <a href="#">
-                        <img src="login_assets/img/logos/logo.png" alt="logo">
+                        <img src="dist/login_assets/img/logos/logo.png" alt="logo">
                     </a>
                 </div>
             </div>
@@ -74,38 +65,39 @@
                     <div class="details">
                         <div class="logo-2">
                             <a href="https://heliosprotocol.io/">
-                                <img src="login_assets/img/logos/logo.png" class="logo" alt="logo">
+                                <img src="dist/login_assets/img/logos/logo.png" class="logo" alt="logo">
                             </a>
                         </div>
-                        <h3>Create an account</h3>
-                        <form ng-submit="submitRegisterForm()" method="POST" name="registerForm">
+                        <div><h3>Create an account</h3></div>
+                        <form>
                             <div class="form-group form-box"> 
-                                <input type="text" name="username" class="input-text username" ng-model="user.username" placeholder="Username" required>
-                                <img src="login_assets/img/user.png" alt="logo">
+                                <input type="text" name="username" class="input-text username" placeholder="Username" required>
+                                <img src="dist/login_assets/img/user.png" alt="logo">
                             </div>
                             <div class="form-group form-box">
-                                <input type="email" name="email" class="input-text email" ng-model="user.email" placeholder="Email Address" required>
-                                <img src="login_assets/img/mail.png" alt="logo">
+                                <input type="email" name="email" class="input-text email"  placeholder="Email Address" required>
+                                <img src="dist/login_assets/img/mail.png" alt="logo">
                             </div>
                             <div class="form-group form-box">
-                                <input type="password" name="password" class="input-text password" ng-model="user.password" placeholder="Password" required>
-                                <img src="login_assets/img/password.png" alt="logo">
+                                <input type="password" name="password" class="input-text password" placeholder="Password" required>
+                                <img src="dist/login_assets/img/password.png" alt="logo">
                             </div>
                             <div class="form-group form-box mb-4">
-                                <input type="password" name="cpassword" class="input-text cpassword" ng-model="user.cpassword" placeholder="Repeat Password" required>
-                                <img src="login_assets/img/repeat_password.png" alt="logo">
+                                <input type="password" name="cpassword" class="input-text cpassword" placeholder="Repeat Password" required>
+                                <img src="dist/login_assets/img/repeat_password.png" alt="logo">
                             </div>
-                            <div class="checkbox clearfix">
-                                <div class="form-check checkbox-theme">
-                                    <input class="form-check-input" type="checkbox" value="" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">
-                                        I have read and agree to the <a href="https://heliosprotocol.io/terms_of_service.php">terms of use</a>
-                                    </label>
+                            <div class="form-group form-box">
+                                <div class="checkbox clearfix">
+                                    <div class="form-check checkbox-theme">
+                                        <input class="form-check-input" type="checkbox" value="" id="rememberMe" style="width: auto;">
+                                        <label class="form-check-label" for="rememberMe">
+                                            I have read and agree to the <a href="https://heliosprotocol.io/terms_of_service.php">terms of use</a>
+                                        </label>
+                                    </div>
                                 </div>
-                                <a href="forgot-password-9.html">Forgot Password</a>
                             </div>
                             <div class="form-group float-left">
-                                <button type="submit" class="btn-md btn-theme btnreg">Register <img src="login_assets/img/register.png" alt="logo" class="ml-1"></button>
+                                <button type="button" class="btn-md btn-theme btnreg">Register <img src="dist/login_assets/img/register.png" alt="logo" class="ml-1"></button>
                             </div>
                             <p class="none-2">Already have an account ?<a href="login.html" class="thembo">Login Here</a></p>
                         </form>
@@ -118,10 +110,12 @@
 <!-- Login 7 end -->
 
 <!-- External JS libraries -->
-<script src="login_assets/js/jquery-2.2.0.min.js"></script>
-<script src="login_assets/js/popper.min.js"></script>
-<script src="login_assets/js/bootstrap.min.js"></script>
-<script src="dist/main.js"></script>
+<script src="dist/login_assets/js/jquery-2.2.0.min.js"></script>
+<script src="dist/login_assets/js/popper.min.js"></script>
+<script src="dist/login_assets/js/bootstrap.min.js"></script>
+<script src="dist/js/script.js?version=16" ></script>
+    <script src="dist/js/main.js?version=16" ></script>
+    <script src="dist/js/frontpage.js?version=16" ></script>
 <!-- Custom JS Script -->
 
 </body>
