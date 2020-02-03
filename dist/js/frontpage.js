@@ -78,9 +78,8 @@ $(document).ready(function(){
                 if (response !== false && "success" in response) {
                     sessionStorage.setItem("username", username);
                     sessionStorage.setItem("password", password);
-                    var online_keystores = response['keystores'];
-                    populateOnlineKeystores(online_keystores, password);
-                    sessionStorage.setItem("online_keystores", online_keystores);
+                    var keystores = JSON.stringify(response['keystores']);
+                    sessionStorage.setItem("online_keystores", keystores);
                     window.location.href = "./dashboard.html";
                 } else {
                     if (response.error == "4000" && response.error_description == "Two factor authentication code mismatch.") {
@@ -116,8 +115,8 @@ $(document).ready(function(){
                 if(response !== false && "success" in response) {
                     sessionStorage.setItem("username", username);
                     sessionStorage.setItem("password", password);
-                    var online_keystores = response['keystores'];
-                    sessionStorage.setItem("online_keystores", online_keystores);
+                    var keystores = JSON.stringify(response['keystores']);
+                    sessionStorage.setItem("online_keystores", keystores);
                     window.location.href = "./dashboard.html";
                 }else{
                     if(response.error == "4000" && response.error_description == "Two factor authentication code mismatch."){
@@ -139,8 +138,6 @@ $(document).ready(function(){
         sessionStorage.removeItem("username");
         sessionStorage.removeItem("password");
         sessionStorage.removeItem("online_keystores");
-        
-       
     });
 });
 

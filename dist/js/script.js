@@ -3370,9 +3370,9 @@ function timestamp() {
 }
 
 
-// log is just a thin wrapper to console.log that prepends a timestamp
+// log is just a thin wrapper to //console.log that prepends a timestamp
 exports.log = function() {
-  //console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
+  ////console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
 };
 
 
@@ -22347,7 +22347,7 @@ function parseSignatureEvent(fragment) {
             case '':
                 break;
             default:
-                //console.log('unknown modifier: ' + modifier);
+                ////console.log('unknown modifier: ' + modifier);
         }
     });
     if (abi.name && !abi.name.match(regexIdentifier)) {
@@ -22396,7 +22396,7 @@ function parseSignatureFunction(fragment) {
             case '':
                 break;
             default:
-                //console.log('unknown modifier: ' + modifier);
+                ////console.log('unknown modifier: ' + modifier);
         }
     });
     // We have outputs
@@ -28878,7 +28878,7 @@ proto.insert = function(key, value) {
     }
   }
   //Rebalance tree using rotations
-  ////console.log("start insert", key, d_stack)
+  //////console.log("start insert", key, d_stack)
   for(var s=n_stack.length-1; s>1; --s) {
     var p = n_stack[s-1]
     var n = n_stack[s]
@@ -28890,13 +28890,13 @@ proto.insert = function(key, value) {
       if(p.left === n) {
         var y = pp.right
         if(y && y._color === RED) {
-          ////console.log("LLr")
+          //////console.log("LLr")
           p._color = BLACK
           pp.right = repaint(BLACK, y)
           pp._color = RED
           s -= 1
         } else {
-          ////console.log("LLb")
+          //////console.log("LLb")
           pp._color = RED
           pp.left = p.right
           p._color = BLACK
@@ -28918,13 +28918,13 @@ proto.insert = function(key, value) {
       } else {
         var y = pp.right
         if(y && y._color === RED) {
-          ////console.log("LRr")
+          //////console.log("LRr")
           p._color = BLACK
           pp.right = repaint(BLACK, y)
           pp._color = RED
           s -= 1
         } else {
-          ////console.log("LRb")
+          //////console.log("LRb")
           p.right = n.left
           pp._color = RED
           pp.left = n.right
@@ -28951,13 +28951,13 @@ proto.insert = function(key, value) {
       if(p.right === n) {
         var y = pp.left
         if(y && y._color === RED) {
-          ////console.log("RRr", y.key)
+          //////console.log("RRr", y.key)
           p._color = BLACK
           pp.left = repaint(BLACK, y)
           pp._color = RED
           s -= 1
         } else {
-          ////console.log("RRb")
+          //////console.log("RRb")
           pp._color = RED
           pp.right = p.left
           p._color = BLACK
@@ -28979,13 +28979,13 @@ proto.insert = function(key, value) {
       } else {
         var y = pp.left
         if(y && y._color === RED) {
-          ////console.log("RLr")
+          //////console.log("RLr")
           p._color = BLACK
           pp.left = repaint(BLACK, y)
           pp._color = RED
           s -= 1
         } else {
-          ////console.log("RLb")
+          //////console.log("RLb")
           p.left = n.right
           pp._color = RED
           pp.right = n.left
@@ -29327,13 +29327,13 @@ function fixDoubleBlack(stack) {
       n._color = BLACK
       return
     }
-    ////console.log("visit node:", n.key, i, stack[i].key, stack[i-1].key)
+    //////console.log("visit node:", n.key, i, stack[i].key, stack[i-1].key)
     p = stack[i-1]
     if(p.left === n) {
-      ////console.log("left child")
+      //////console.log("left child")
       s = p.right
       if(s.right && s.right._color === RED) {
-        ////console.log("case 1: right sibling child red")
+        //////console.log("case 1: right sibling child red")
         s = p.right = cloneNode(s)
         z = s.right = cloneNode(s.right)
         p.right = s.left
@@ -29356,7 +29356,7 @@ function fixDoubleBlack(stack) {
         stack[i-1] = s
         return
       } else if(s.left && s.left._color === RED) {
-        ////console.log("case 1: left sibling child red")
+        //////console.log("case 1: left sibling child red")
         s = p.right = cloneNode(s)
         z = s.left = cloneNode(s.left)
         p.right = z.left
@@ -29383,17 +29383,17 @@ function fixDoubleBlack(stack) {
       }
       if(s._color === BLACK) {
         if(p._color === RED) {
-          ////console.log("case 2: black sibling, red parent", p.right.value)
+          //////console.log("case 2: black sibling, red parent", p.right.value)
           p._color = BLACK
           p.right = repaint(RED, s)
           return
         } else {
-          ////console.log("case 2: black sibling, black parent", p.right.value)
+          //////console.log("case 2: black sibling, black parent", p.right.value)
           p.right = repaint(RED, s)
           continue  
         }
       } else {
-        ////console.log("case 3: red sibling")
+        //////console.log("case 3: red sibling")
         s = cloneNode(s)
         p.right = s.left
         s.left = p
@@ -29419,10 +29419,10 @@ function fixDoubleBlack(stack) {
         i = i+2
       }
     } else {
-      ////console.log("right child")
+      //////console.log("right child")
       s = p.left
       if(s.left && s.left._color === RED) {
-        ////console.log("case 1: left sibling child red", p.value, p._color)
+        //////console.log("case 1: left sibling child red", p.value, p._color)
         s = p.left = cloneNode(s)
         z = s.left = cloneNode(s.left)
         p.left = s.right
@@ -29445,7 +29445,7 @@ function fixDoubleBlack(stack) {
         stack[i-1] = s
         return
       } else if(s.right && s.right._color === RED) {
-        ////console.log("case 1: right sibling child red")
+        //////console.log("case 1: right sibling child red")
         s = p.left = cloneNode(s)
         z = s.right = cloneNode(s.right)
         p.left = z.right
@@ -29472,17 +29472,17 @@ function fixDoubleBlack(stack) {
       }
       if(s._color === BLACK) {
         if(p._color === RED) {
-          ////console.log("case 2: black sibling, red parent")
+          //////console.log("case 2: black sibling, red parent")
           p._color = BLACK
           p.left = repaint(RED, s)
           return
         } else {
-          ////console.log("case 2: black sibling, black parent")
+          //////console.log("case 2: black sibling, black parent")
           p.left = repaint(RED, s)
           continue  
         }
       } else {
-        ////console.log("case 3: red sibling")
+        //////console.log("case 3: red sibling")
         s = cloneNode(s)
         p.left = s.right
         s.right = p
@@ -29532,11 +29532,11 @@ iproto.remove = function() {
 
   //Get node
   n = cstack[cstack.length-1]
-  ////console.log("start remove: ", n.value)
+  //////console.log("start remove: ", n.value)
 
   //If not leaf, then swap with previous node
   if(n.left && n.right) {
-    ////console.log("moving to leaf")
+    //////console.log("moving to leaf")
 
     //First walk to previous leaf
     var split = cstack.length
@@ -29558,13 +29558,13 @@ iproto.remove = function() {
     }
     cstack[split-1].left = cstack[split]
   }
-  ////console.log("stack=", cstack.map(function(v) { return v.value }))
+  //////console.log("stack=", cstack.map(function(v) { return v.value }))
 
   //Remove leaf node
   n = cstack[cstack.length-1]
   if(n._color === RED) {
     //Easy case: removing red leaf
-    ////console.log("RED leaf")
+    //////console.log("RED leaf")
     var p = cstack[cstack.length-2]
     if(p.left === n) {
       p.left = null
@@ -29579,7 +29579,7 @@ iproto.remove = function() {
   } else {
     if(n.left || n.right) {
       //Second easy case:  Single child black parent
-      ////console.log("BLACK single child")
+      //////console.log("BLACK single child")
       if(n.left) {
         swapNode(n, n.left)
       } else if(n.right) {
@@ -29593,11 +29593,11 @@ iproto.remove = function() {
       return new RedBlackTree(this.tree._compare, cstack[0])
     } else if(cstack.length === 1) {
       //Third easy case: root
-      ////console.log("ROOT")
+      //////console.log("ROOT")
       return new RedBlackTree(this.tree._compare, null)
     } else {
       //Hard case: Repaint n, and then do some nasty stuff
-      ////console.log("BLACK leaf no children")
+      //////console.log("BLACK leaf no children")
       for(var i=0; i<cstack.length; ++i) {
         cstack[i]._count--
       }
@@ -31186,7 +31186,7 @@ class ConnectionMaintainer {
     }
 
     setConnectedCallback(connectedCallback) {
-        //console.log('setting connected callback');
+        ////console.log('setting connected callback');
         this.connectedCallback = connectedCallback;
         if (this.isConnected()) {
             this.connectedCallback();
@@ -31201,12 +31201,12 @@ class ConnectionMaintainer {
     }
 
     setNetworkIdAndReconnect(networkId){
-        //console.log('Setting networkId to '+networkId);
+        ////console.log('Setting networkId to '+networkId);
         this.networkId = networkId;
 
         if(this.isConnected()) {
             // Disconnect from node, and then the onClose will be called, automatically reconnecting with new network id.
-            //console.log("Disconnecting from current node.")
+            ////console.log("Disconnecting from current node.")
             this.web3.currentProvider.disconnect();
         }else{
             this.connectToNetwork();
@@ -31215,7 +31215,7 @@ class ConnectionMaintainer {
 
     setStatus(status){
         this.status = status;
-        //console.log(status);
+        ////console.log(status);
         if(!(this.statusCallback === undefined)){
             this.statusCallback(status, this.isConnected());
         }
@@ -31228,11 +31228,11 @@ class ConnectionMaintainer {
 
 
     async connectToNetwork(){
-        //console.log("Initiating connection to network");
+        ////console.log("Initiating connection to network");
         if(this.isConnected()) {
-            //console.log("Already connected to network. Doing nothing.");
+            ////console.log("Already connected to network. Doing nothing.");
         }else{
-            //console.log("No active connection found. Starting new one.");
+            ////console.log("No active connection found. Starting new one.");
             try {
                 var isConnected = await this.connectToFirstAvailableNode();
                 if (isConnected) {
@@ -31249,7 +31249,7 @@ class ConnectionMaintainer {
                 }
             }catch(err) {
                 // Probably caused by no nodes with this netowork id
-                //console.log("Error when connecting to first available node: " + err);
+                ////console.log("Error when connecting to first available node: " + err);
                 this.setStatus('Connection failure.');
             }
         }
@@ -31257,25 +31257,25 @@ class ConnectionMaintainer {
 
     async connectToFirstAvailableNode(){
         var _this = this;
-        //console.log("Connecting to nodes on network id "+ this.networkId);
+        ////console.log("Connecting to nodes on network id "+ this.networkId);
         if(this.networkId in this.availableNodes){
             for (var i = 0; i < this.availableNodes[this.networkId].length; i++) {
                 var API_address = this.availableNodes[this.networkId][i];
                 try {
                     var newProvider = await this.connectToWebsocketProvider(API_address);
                     this.web3.setProvider(newProvider);
-                    //console.log("Successfully connected to " + API_address);
+                    ////console.log("Successfully connected to " + API_address);
 
                     // Set close callback. Tell it to reconnect to network with first available node.
                     newProvider.on('end', function(){
-                        //console.log("Provider closed. Reconnecting to network");
+                        ////console.log("Provider closed. Reconnecting to network");
                         _this.connectToNetwork();
                     })
 
                     return true;
 
                 } catch(err) {
-                    //console.log("Failed to connect to node " + API_address);
+                    ////console.log("Failed to connect to node " + API_address);
                 }
 
             }
@@ -31288,13 +31288,13 @@ class ConnectionMaintainer {
 
     connectToWebsocketProvider(API_address) {
         return new Promise((resolve, reject) => {
-            //console.log("Connecting to node " + API_address);
+            ////console.log("Connecting to node " + API_address);
             var newProvider = new this.web3.providers.WebsocketProvider(API_address)
 
             // Add timeout
             var timeout = setTimeout(function(){
                 // Cancel the connection
-                //console.log("Timeout on connection for "+ API_address);
+                ////console.log("Timeout on connection for "+ API_address);
                 newProvider.disconnect();
                 reject();
             }, this.WSConnectTimeout);
@@ -31302,14 +31302,14 @@ class ConnectionMaintainer {
             // Add connected callback
             newProvider.on('connect', function(){
                 clearTimeout(timeout);
-                //console.log("onOpen event fired for "+ API_address);
+                ////console.log("onOpen event fired for "+ API_address);
                 resolve(newProvider);
             })
 
             // Check to make sure we havent already connected before we added the callback
             if(newProvider.connected){
                 clearTimeout(timeout);
-                //console.log("connected fired for "+ API_address);
+                ////console.log("connected fired for "+ API_address);
                 resolve(newProvider);
             }
         });
@@ -31368,15 +31368,15 @@ class Server {
         if(errorName === undefined){
             errorName = "unknown";
         }
-        //console.log("helios-wallet-serverside error "+errorName);
+        ////console.log("helios-wallet-serverside error "+errorName);
         if(!(extraData === undefined)){
-            console.log(extraData);
+            //console.log(extraData);
         }
         return {'error': true, 'error_description': errorName};
     }
 
     saveSession(session_hash, username){
-        //console.log('Saving session');
+        ////console.log('Saving session');
         if (typeof window !== 'undefined' && this.use_localStorage) {
             window.localStorage.setItem("session_hash", session_hash);
             if(!(username === undefined)) {
@@ -31411,7 +31411,7 @@ class Server {
     }
 
     async renewSession(){
-        //console.log("Renewing session");
+        ////console.log("Renewing session");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'renew_session', username: session['username'], session_hash: session['session_hash']};
@@ -31426,7 +31426,7 @@ class Server {
     }
 
     async getOnlineWallets(){
-        //console.log("Getting online wallets");
+        ////console.log("Getting online wallets");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'get_wallets', username: session['username'], session_hash: session['session_hash']};
@@ -31436,7 +31436,7 @@ class Server {
     }
 
     async addOnlineWallet(keystore, name){
-        //console.log("Adding online wallet");
+        ////console.log("Adding online wallet");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'add_keystore',
@@ -31450,7 +31450,7 @@ class Server {
     }
 
     async renameOnlineWallet(wallet_id, previous_wallet_name, new_wallet_name){
-        //console.log("Renaming online wallet");
+        ////console.log("Renaming online wallet");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'rename_keystore',
@@ -31465,7 +31465,7 @@ class Server {
     }
 
     async deleteOnlineWallet(id, name){
-        //console.log("Deleting online wallet");
+        ////console.log("Deleting online wallet");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'delete_keystore',
@@ -31479,7 +31479,7 @@ class Server {
     }
 
     async getContacts(){
-        //console.log("Getting contacts");
+        ////console.log("Getting contacts");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'get_contacts', username: session['username'], session_hash: session['session_hash']};
@@ -31489,7 +31489,7 @@ class Server {
     }
 
     async getNew2FASecret(){
-        //console.log("Getting new 2FA secret");
+        ////console.log("Getting new 2FA secret");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'get_new_2fa_secret', username: session['username'], session_hash: session['session_hash']};
@@ -31499,7 +31499,7 @@ class Server {
     }
 
     async is2FAEnabled(){
-        //console.log("Checking if 2FA enabled");
+        ////console.log("Checking if 2FA enabled");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'is_2fa_enabled', username: session['username'], session_hash: session['session_hash']};
@@ -31509,7 +31509,7 @@ class Server {
     }
 
     async delete2FASecret(){
-        //console.log("Deleting 2FA secret");
+        ////console.log("Deleting 2FA secret");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'delete_2fa_secret', username: session['username'], session_hash: session['session_hash']};
@@ -31519,7 +31519,7 @@ class Server {
     }
 
     async save2FASecret(secret, code){
-        //console.log("Saving 2FA secret");
+        ////console.log("Saving 2FA secret");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'save_new_2fa_secret', secret: secret, code: code, username: session['username'], session_hash: session['session_hash']};
@@ -31529,7 +31529,7 @@ class Server {
     }
 
     async addContact(contact_name, contact_address){
-        //console.log("Adding contacts");
+        ////console.log("Adding contacts");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'add_contact',
@@ -31543,7 +31543,7 @@ class Server {
     }
 
     async deleteContact(id){
-        //console.log("Deleting contact");
+        ////console.log("Deleting contact");
         var session = this.loadSession();
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'delete_contact',
@@ -31606,8 +31606,8 @@ class Server {
             } catch(e) {
                 return this.error('Malformed JSON Response', [res.status, res.text]);
             }
-            //console.log("Successful response from server")
-            console.log(json_response);
+            ////console.log("Successful response from server")
+            //console.log(json_response);
             if('session_hash' in json_response){
                 this.saveSession(json_response['session_hash']);
             }
@@ -31615,7 +31615,7 @@ class Server {
             if('error' in json_response){
                 if(json_response['error'] == 2020){
                     if(typeof window.logout !== 'undefined' && typeof window.popup !== 'undefined'){
-                        //console.log("Session expired");
+                        ////console.log("Session expired");
                         window.logout();
                         window.popup("Your session has expired. Please log in again to continue.");
                     }
@@ -31982,12 +31982,12 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, bl
                 transaction.createAddress = tx.createAddress || '0x';
                 transaction.executeOnSend = Bytes.fromNat(tx.executeOnSend ? '0x0' : '0x1');
 
-                //console.log('test2')
-                console.log(transaction.caller)
-                console.log(transaction.origin)
-                console.log(transaction.codeAddress)
-                console.log(transaction.createAddress)
-                console.log(transaction.executeOnSend)
+                ////console.log('test2')
+                //console.log(transaction.caller)
+                //console.log(transaction.origin)
+                //console.log(transaction.codeAddress)
+                //console.log(transaction.createAddress)
+                //console.log(transaction.executeOnSend)
 
                 var rlpEncoded = RLP.encode([
                     Bytes.fromNat(transaction.nonce),
@@ -32023,8 +32023,8 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, bl
 
             var rawTransaction = RLP.encode(rawTx);
 
-            //console.log('test3');
-            console.log(rawTransaction);
+            ////console.log('test3');
+            //console.log(rawTransaction);
 
             var values = RLP.decode(rawTransaction);
             result = {
@@ -32059,7 +32059,7 @@ Accounts.prototype.signTransaction = function signTransaction(tx, privateKey, bl
         if (isNot(args[0]) || isNot(args[1]) || isNot(args[2])) {
             throw new Error('One of the values "chainId", "gasPrice", or "nonce" couldn\'t be fetched: '+ JSON.stringify(args));
         }
-        //console.log("chainId = " + args[0] + ", gasPrice = " + args[1] + ", nonce = " + args[2])
+        ////console.log("chainId = " + args[0] + ", gasPrice = " + args[1] + ", nonce = " + args[2])
         return signed(_.extend(tx, {chainId: args[0], gasPrice: args[1], nonce: args[2]}))
     }).catch(function(error){
         return Promise.reject(error);
@@ -32125,7 +32125,7 @@ Accounts.prototype.signHeader = function signHeader(header, privateKey, callback
                 rawHeader: rawHeader
             };
 
-            console.log(Bytes.toNumber(values[5]))
+            //console.log(Bytes.toNumber(values[5]))
 
         } catch(e) {
             callback(e);
@@ -32232,7 +32232,7 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
             getTrieRootFromEncoded(encoded_proof_list)
             .then(function(proof_trie_root){
                 var parts_to_encode = [decoded_bundle[0], decoded_bundle[1][0], Bytes.fromUint8Array(proof_trie_root)];
-                console.log(parts_to_encode);
+                //console.log(parts_to_encode);
                 var hash = Hash.keccak256(RLP.encode(parts_to_encode));
                 resolve(hash);
             })
@@ -32300,8 +32300,8 @@ Accounts.prototype.signBlock = function signBlock(txs, privateKey, callback) {
                 var send_tx_root = args[0];
                 var receive_tx_root = args[1];
                 var reward_bundle_hash = args[2];
-                //console.log("Signing block header with timestamp");
-                console.log(timestamp);
+                ////console.log("Signing block header with timestamp");
+                //console.log(timestamp);
                 var header = {
                     chain_address: _this.privateKeyToAccount(privateKey).address,
                     parent_hash: block_creation_params.parent_hash,
@@ -53426,14 +53426,14 @@ function apply(args, fn) {
  * 
  * var myFunction = varArgs(
  *    function( fixedArgument, otherFixedArgument, variableNumberOfArguments ){
- *       console.log( variableNumberOfArguments );
+ *       //console.log( variableNumberOfArguments );
  *    }
  * )
  * 
  * myFunction('a', 'b', 1, 2, 3); // logs [1,2,3]
  * 
  * var myOtherFunction = varArgs(function( variableNumberOfArguments ){
- *    console.log( variableNumberOfArguments );
+ *    //console.log( variableNumberOfArguments );
  * })
  * 
  * myFunction(1, 2, 3); // logs [1,2,3]
@@ -82349,7 +82349,7 @@ var _jsonInterfaceMethodToString = function (json) {
  */
 var _flattenTypes = function(includeTuple, puts)
 {
-    // //console.log("entered _flattenTypes. inputs/outputs: " + puts)
+    // ////console.log("entered _flattenTypes. inputs/outputs: " + puts)
     var types = [];
 
     puts.forEach(function(param) {
@@ -82361,21 +82361,21 @@ var _flattenTypes = function(includeTuple, puts)
             var arrayBracket = param.type.indexOf('[');
             if (arrayBracket >= 0) { suffix = param.type.substring(arrayBracket); }
             var result = _flattenTypes(includeTuple, param.components);
-            // //console.log("result should have things: " + result)
+            // ////console.log("result should have things: " + result)
             if(_.isArray(result) && includeTuple) {
-                // //console.log("include tuple word, and its an array. joining...: " + result.types)
+                // ////console.log("include tuple word, and its an array. joining...: " + result.types)
                 types.push('tuple(' + result.join(',') + ')' + suffix);
             }
             else if(!includeTuple) {
-                // //console.log("don't include tuple, but its an array. joining...: " + result)
+                // ////console.log("don't include tuple, but its an array. joining...: " + result)
                 types.push('(' + result.join(',') + ')' + suffix);
             }
             else {
-                // //console.log("its a single type within a tuple: " + result.types)
+                // ////console.log("its a single type within a tuple: " + result.types)
                 types.push('(' + result + ')');
             }
         } else {
-            // //console.log("its a type and not directly in a tuple: " + param.type)
+            // ////console.log("its a type and not directly in a tuple: " + param.type)
             types.push(param.type);
         }
     });
@@ -82840,8 +82840,8 @@ var soliditySha3 = function () {
 
     var hexArgs = _.map(args, _processSoliditySha3Args);
 
-    // console.log(args, hexArgs);
-    // //console.log('0x'+ hexArgs.join(''));
+    // //console.log(args, hexArgs);
+    // ////console.log('0x'+ hexArgs.join(''));
 
     return utils.sha3('0x'+ hexArgs.join(''));
 };
@@ -84540,10 +84540,10 @@ var get_all_transactions_from_account = async function get_all_transactions_from
 
     try{
         var start_block_number = await web3.hls.getBlockNumber(account.address, start_timestamp);
-        //console.log("Getting all transactions starting at block number "+start_block_number);
+        ////console.log("Getting all transactions starting at block number "+start_block_number);
     }catch(err) {
-        //console.log('error')
-        console.log(err)
+        ////console.log('error')
+        //console.log(err)
         return err
     }
     var output = [];
@@ -84553,14 +84553,14 @@ var get_all_transactions_from_account = async function get_all_transactions_from
     if(end_block_number < 0){
         end_block_number = 0;
     }
-    //console.log('test');
-    console.log(start_block_number)
-    console.log(end_block_number)
+    ////console.log('test');
+    //console.log(start_block_number)
+    //console.log(end_block_number)
 
     for (var i = start_block_number; i >= end_block_number; i--) {
-        //console.log("Getting all transactions at block number "+i);
+        ////console.log("Getting all transactions at block number "+i);
         var new_block = await web3.hls.getBlockByNumber(i, account.address, true);
-        //console.log("block number "+i+" received");
+        ////console.log("block number "+i+" received");
         if(new_block.timestamp > start_timestamp){
             continue;
         }

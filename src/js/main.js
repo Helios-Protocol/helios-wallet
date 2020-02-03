@@ -6,6 +6,7 @@ var fileSaver = require("file-saver");
 var numerical = require("./numerical_helpers");
 
  var $ = require('jquery');
+ var async = require('async');
 var HeliosUtils = require('helios-utils');
 var ConnectionMaintainer = HeliosUtils.ConnectionMaintainer;
 var getNodeMessageFromError = HeliosUtils.getNodeMessageFromError;
@@ -82,5 +83,6 @@ module.exports = {
     numerical: numerical,
     getNodeMessageFromError:getNodeMessageFromError,
     helios_web3: helios_web3,
-    $:$
+    $:$,
+    async:async
 };

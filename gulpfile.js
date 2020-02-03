@@ -26,7 +26,7 @@ let onError = function(err) {
       sound: "Beep",
       icon: "images/icons/icon48.png"
     })(err);
-    console.log(err.toString());
+    //console.log(err.toString());
     this.emit("end");
   };
 function onSuccess(msg) {

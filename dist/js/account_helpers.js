@@ -18,10 +18,10 @@ var get_all_transactions_from_account = async function get_all_transactions_from
 
     try{
         var start_block_number = await web3.hls.getBlockNumber(account.address, start_timestamp);
-        console.log("Getting all transactions starting at block number "+start_block_number);
+        //console.log("Getting all transactions starting at block number "+start_block_number);
     }catch(err) {
-        console.log('error')
-        console.log(err)
+        //console.log('error')
+        //console.log(err)
         return err
     }
     var output = [];
@@ -31,14 +31,14 @@ var get_all_transactions_from_account = async function get_all_transactions_from
     if(end_block_number < 0){
         end_block_number = 0;
     }
-    console.log('test');
-    console.log(start_block_number)
-    console.log(end_block_number)
+    //console.log('test');
+    //console.log(start_block_number)
+    //console.log(end_block_number)
 
     for (var i = start_block_number; i >= end_block_number; i--) {
-        console.log("Getting all transactions at block number "+i);
+        //console.log("Getting all transactions at block number "+i);
         var new_block = await web3.hls.getBlockByNumber(i, account.address, true);
-        console.log("block number "+i+" received");
+        //console.log("block number "+i+" received");
         if(new_block.timestamp > start_timestamp){
             continue;
         }
