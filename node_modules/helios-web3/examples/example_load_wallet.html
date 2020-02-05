@@ -1,0 +1,46 @@
+<html>
+<body>
+<script src="../dist/helios_web3.js"></script>
+</body>
+<script>
+    // All of the output of this example will be sent to the console. Open chrome developer tools, then go to the
+    // console tab to see the output.
+
+    // Metamask likes to overwrite our web3 with their own. So to prevent that causing problems, lets set it back here
+    web3 = heliosWeb3;
+
+    // We will use a random private key for the example. You would need to replace this with your own private key or keystore
+
+    //
+    // This is how you load a wallet into a new account using a private key
+    //
+
+    var accountPriv = web3.hls.accounts.privateKeyToAccount('0x6edbbdf4e1a6e415b29444d38675364f67ae9c5a6192d3d755043f4b61e73cbb');
+    web3.hls.accounts.wallet.add(accountPriv);
+
+    console.log('accountPriv');
+    console.log(accountPriv);
+
+    //
+    // This is how you load a wallet into a new account using an encrypted keystore file
+    //
+    var jsonKeystore = '{"version":3,"id":"25e28a3f-be3f-461e-b3e2-c0eaca28ac0d","address":"b7be497a5b54dcce1bbadb716aafac4c732b917f","crypto":{"ciphertext":"ba4b045df5b4e0ef06abdf3d866844407d657b1c6dd505d31b190ccb8a52f656","cipherparams":{"iv":"767860b7842f03ba68abea9a21c3a767"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"60c671803fa3c609a7eca5d4cf5ea49cd340ddda454e22e25f7572b1f216fb9f","n":8192,"r":8,"p":1},"mac":"2b3654307310d7bcaec2ec62c49eb4428bd52d98dbc25f014da26e84cac41bf0"}}';
+    var keystorePassword = '123456789123456789';
+    var accountKeystore = web3.hls.accounts.decrypt(JSON.parse(jsonKeystore), keystorePassword);
+    web3.hls.accounts.wallet.add(accountKeystore);
+
+    console.log('accountKeystore');
+    console.log(accountKeystore);
+
+    //
+    // This is how you generate a new wallet, and encrypt it into a keystore json format.
+    //
+
+    var accountGenerated = web3.hls.accounts.create();
+    var jsonKeystoreGenerated = accountGenerated.encrypt('password123');
+    console.log('jsonKeystoreGenerated');
+    console.log(jsonKeystoreGenerated);
+
+
+</script>
+</html>

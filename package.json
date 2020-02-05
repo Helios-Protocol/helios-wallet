@@ -1,0 +1,30 @@
+{
+  "name": "gulp_new",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/core": "^7.8.4",
+    "async": "^3.1.1",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.0",
+    "file-saver": "^2.0.2",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "helios-utils": "^0.1.1",
+    "helios-web3": "^0.1.1",
+    "jquery": "^3.4.1",
+    "undertaker": "^1.2.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0"
+  },
+  "scripts": {
+    "test": "gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
