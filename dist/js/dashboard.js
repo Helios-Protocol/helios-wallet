@@ -46,6 +46,7 @@ $(document).ready(function(){
         add_transaction_to_block_from_form();
     })
     $('#send_block_pre_confirmation').submit(function (e) {
+        
         e.preventDefault();
         if (sending_account == null) {
             alertify.error('Need to load a wallet first.');
@@ -109,7 +110,15 @@ $(document).ready(function(){
 
     });
 
+    $('body').on('click', '.delete_transaction', function () {
+        var index = $(this).data('index');
+        pending_send_transactions.splice(index, 1);
+        refresh_pending_transaction_table()
+    });
+
+    //contact list
     
+    //
 });
 async function populateOnlineKeystores(keystores, password){
     if(keystores.length > 0){
@@ -172,7 +181,7 @@ async function refreshContactList(){
                 var cell0 = row.insertCell(0);
                 var cell1 = row.insertCell(1);
 
-                cell0.innerHTML = "<img src='images/x.png' class='delete_contact' data-id=" + contacts[i]['id'] + ">"+ contacts[i]['name'];
+                cell0.innerHTML = "<img src='dist/assets/icon/x.png' class='delete_contact' data-id=" + contacts[i]['id'] + ">"+ contacts[i]['name'];
                 cell1.innerHTML = contacts[i]['address'];
 
                 contact_name_to_address_lookup[contacts[i]['name']] = contacts[i]['address'];
@@ -261,6 +270,14 @@ function getAddressFromAutocompleteStringIfExist(autocomplete_string){
     }
     return autocomplete_string;
 }
+function getSumPendingTransactionsCost(){
+    var total_amount = web3.utils.toBN(0);
+    pending_send_transactions.forEach(function(tx){
+        var gas_cost = web3.utils.toBN(tx.gas).mul(web3.utils.toBN(tx.gasPrice))
+        total_amount = total_amount.add(web3.utils.toBN(tx.value)).add(web3.utils.toBN(gas_cost))
+    });
+    return total_amount;
+}
 var pending_send_transactions = [];
 function add_transaction_to_block_from_form(){
 
@@ -308,9 +325,16 @@ function add_transaction_to_block_from_form(){
     $('#input_amount').val("").trigger("change");
     $('#input_to').val("").trigger("change");
     //updateInputLabels();
-    console.log(pending_send_transactions);
+   // console.log(pending_send_transactions);
     return true;
 
+}
+function getAutocompleteStringFromAddressIfExist(address){
+    if(address in contact_address_to_name_lookup){
+        return contact_address_to_name_lookup[address] + " <" + address + ">";
+    }else{
+        return address
+    }
 }
 function refresh_pending_transaction_table(table_id, include_delete_button){
     if(table_id === undefined){
@@ -337,7 +361,7 @@ function refresh_pending_transaction_table(table_id, include_delete_button){
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         if(include_delete_button){
-            cell1.innerHTML = "<img src='images/x.png' class='delete_transaction' data-index=" + index + ">"+to_shortened;
+            cell1.innerHTML = "<img src='dist/assets/icon/x.png' class='delete_transaction pr-1' style='width: 4%;' data-index=" + index + ">"+to_shortened;
         }else{
             cell1.innerHTML = to_shortened;
         }
@@ -347,6 +371,19 @@ function refresh_pending_transaction_table(table_id, include_delete_button){
         cell4.innerHTML =transaction.gas; //show in wei
     }
 }
+var clear_vars = function(include_account = false){
+    if (include_account){
+        deleteAllOnlineWallets();
+        deleteAllOfflineWallets();
+        sending_account = null;
+        available_offline_accounts = {};
+        available_online_accounts = {};
+        online_wallet_to_id_lookup = {};
+        online_wallet_to_name_lookup = {};
+    }
+    pending_send_transactions = [];
+    document.getElementById("multiple_transaction_list").getElementsByTagName('tbody')[0].innerHTML = "";
+};
 function validateInputs(value, type){
     try {
         switch (type) {

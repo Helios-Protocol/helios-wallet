@@ -31376,8 +31376,9 @@ class Server {
     }
 
     saveSession(session_hash, username){
-        ////console.log('Saving session');
+        alert(window);
         if (typeof window !== 'undefined' && this.use_localStorage) {
+          //console.log('Saving session');
             window.localStorage.setItem("session_hash", session_hash);
             if(!(username === undefined)) {
                 window.localStorage.setItem("username", username);
@@ -31529,8 +31530,9 @@ class Server {
     }
 
     async addContact(contact_name, contact_address){
-        ////console.log("Adding contacts");
+        console.log("Adding contacts");
         var session = this.loadSession();
+        console.log(session);
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'add_contact',
                 username: session['username'],
@@ -31575,6 +31577,8 @@ class Server {
                     new_password_hash: new_password_hash,
                     new_salt: new_salt};
         var response = await this.queryServer(query);
+      //   console.log(response);
+      //  return false;
         if('session_hash' in response){
             this.saveSession(response['session_hash'], username);
         }
