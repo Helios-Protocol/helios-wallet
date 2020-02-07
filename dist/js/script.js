@@ -31359,7 +31359,7 @@ class Server {
         this.serverUrl = serverUrl;
         this.saltRounds = 11;
         this.superagent = superagent.agent();
-        this.use_localStorage = false;
+        this.use_localStorage = true;
         this.queryResponseTimeout = 4000; //Time till server responds
         this.queryResponseDeadline = 8000; //Allowed time for page to load
     }
@@ -31376,7 +31376,7 @@ class Server {
     }
 
     saveSession(session_hash, username){
-        alert(window);
+        
         if (typeof window !== 'undefined' && this.use_localStorage) {
           //console.log('Saving session');
             window.localStorage.setItem("session_hash", session_hash);
@@ -31530,9 +31530,9 @@ class Server {
     }
 
     async addContact(contact_name, contact_address){
-        console.log("Adding contacts");
+        //console.log("Adding contacts");
         var session = this.loadSession();
-        console.log(session);
+        //console.log(session);
         if(!(session['session_hash'] === undefined)) {
             var query = {action: 'add_contact',
                 username: session['username'],

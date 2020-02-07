@@ -139,35 +139,7 @@ $(document).ready(function(){
         sessionStorage.removeItem("password");
         sessionStorage.removeItem("online_keystores");
     });
-    $('#add_contact_form').submit(function (e) {
-        e.preventDefault();
-        
-        var contact_name = $("#add_contact_form_name").val();
-        var contact_address = $("#add_contact_form_address").val();
-        if(!(validateInputs(contact_name, 'contact_name') === true)){
-            alertify.error(validateInputs(contact_name, 'contact_name'));
-            return;
-        }
-        if(!(validateInputs(contact_address, 'wallet_address') === true)){
-            alertify.error(validateInputs(contact_address, 'wallet_address'));
-            return;
-        }
-        // console.log(contact_name);
-        // console.log(contact_address);
-        //Need to sign in to confirm their username and password is correct before encrypting the keystore.
-        server.addContact(contact_name, contact_address)
-        .then(function(response){
-            // console.log(response);
-            if(response !== false && "success" in response) {
-               //refreshContactList();
-                alertify.error("New contact added successfully.");
-            }else{
-                var popup_content = "Oops, something went wrong:<br><br>" + response['error_description'];
-                alertify.error(popup_content);
-            }
-        });
-
-    });
+   
 });
 
 

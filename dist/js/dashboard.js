@@ -116,8 +116,42 @@ $(document).ready(function(){
         refresh_pending_transaction_table()
     });
 
-    //contact list
     
+    //contact list
+    $('#add_contact_form').submit(function (e) {
+        e.preventDefault();
+        
+        var contact_name = $("#add_contact_form_name").val();
+        var contact_address = $("#add_contact_form_address").val();
+        if(!(validateInputs(contact_name, 'contact_name') === true)){
+            alertify.error(validateInputs(contact_name, 'contact_name'));
+            return;
+        }
+        if(!(validateInputs(contact_address, 'wallet_address') === true)){
+            alertify.error(validateInputs(contact_address, 'wallet_address'));
+            return;
+        }
+        // console.log(contact_name);
+        // console.log(contact_address);
+        //Need to sign in to confirm their username and password is correct before encrypting the keystore.
+        server.addContact(contact_name, contact_address)
+        .then(function(response){
+            //console.log(response);
+            if(response !== false && "success" in response) {
+                $("#add_contact_form_name").val('');
+                $("#add_contact_form_address").val('');
+                refreshContactList();
+                alertify.success("New contact added successfully.");
+            }else{
+                var popup_content = "Oops, something went wrong:<br><br>" + response['error_description'];
+                alertify.error(popup_content);
+            }
+        });
+
+    });
+    $('#modal-contact-remove-wallet-success , #modal-contact-remove-wallet-failed').on('hidden.bs.modal', function () {
+        location.reload();
+       })
     //
 });
 async function populateOnlineKeystores(keystores, password){
@@ -164,38 +198,100 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
 
 
 async function refreshContactList(){
-
-    var tableRef = $('#contact_list').find('tbody')[0];
-
+    $(".contact_div").remove();
     server.getContacts()
     .then(function(response){
         if(response !== false && "success" in response) {
-            //clear all rows
-            tableRef.innerHTML = "";
+            //console.log(response['contacts'].length);
+            var contacts = response['contacts'];
+            var html = '';
             contact_name_to_address_lookup = {};
             contact_address_to_name_lookup = {};
             contact_autocomplete_list = [];
-            var contacts = response['contacts'];
-            for (i = 0; i < contacts.length; i++) {
-                var row = tableRef.insertRow(tableRef.rows.length);
-                var cell0 = row.insertCell(0);
-                var cell1 = row.insertCell(1);
-
-                cell0.innerHTML = "<img src='dist/assets/icon/x.png' class='delete_contact' data-id=" + contacts[i]['id'] + ">"+ contacts[i]['name'];
-                cell1.innerHTML = contacts[i]['address'];
-
+            for(i=0; i < response['contacts'].length; i++){
+                
+                html +=  '<div class="d-flex contact_div">';
+                html +=  '<div class="contact_table_1 align-self-center">';
+                html +=  '<p class="mb-0 mr-2">'+contacts[i]['name']+'</p>';
+                html +=  '</div>';
+                html +=  '<div class="contact_table_2 align-self-center">';
+                html +=  ' <p class="mb-0 mr-2">'+contacts[i]['address']+'</p>';
+                html +=  '</div>';
+                html +=  '<div class="contact_table_3">';
+                html +=  '<button class="btn btn-contact-remove btn-rounded" id="delete_contact" data-toggle="modal" data-target="#modal-remove-contact-wallet" data-id="'+contacts[i]['id']+'" data-name="'+contacts[i]['name']+'" data-address="'+contacts[i]['address']+'" >Remove <i class="uil uil-trash-alt ml-1"></i></button>';
+                html +=  '</div>';
+                html +=  '</div>';
                 contact_name_to_address_lookup[contacts[i]['name']] = contacts[i]['address'];
                 contact_address_to_name_lookup[contacts[i]['address']] = contacts[i]['name'];
                 var autocomplete_entry = contacts[i]['name'] + " <" + contacts[i]['address'] + ">";
                 contact_autocomplete_list.push(autocomplete_entry);
                 contact_autocomplete_list_to_address_lookup[autocomplete_entry] = contacts[i]['address'];
+                
             }
-            autocomplete(document.getElementById("input_to"), contact_autocomplete_list);
+            $( html ).insertAfter( ".contact_head" );
             return true;
         }
     });
 
+    // var tableRef = $('#contact_list').find('tbody')[0];
+
+    // server.getContacts()
+    // .then(function(response){
+    //     if(response !== false && "success" in response) {
+    //         //clear all rows
+    //         tableRef.innerHTML = "";
+    //         contact_name_to_address_lookup = {};
+    //         contact_address_to_name_lookup = {};
+    //         contact_autocomplete_list = [];
+    //         var contacts = response['contacts'];
+    //         for (i = 0; i < contacts.length; i++) {
+    //             var row = tableRef.insertRow(tableRef.rows.length);
+    //             var cell0 = row.insertCell(0);
+    //             var cell1 = row.insertCell(1);
+
+    //             cell0.innerHTML = "<img src='dist/assets/icon/x.png' class='delete_contact' data-id=" + contacts[i]['id'] + ">"+ contacts[i]['name'];
+    //             cell1.innerHTML = contacts[i]['address'];
+
+    //             contact_name_to_address_lookup[contacts[i]['name']] = contacts[i]['address'];
+    //             contact_address_to_name_lookup[contacts[i]['address']] = contacts[i]['name'];
+    //             var autocomplete_entry = contacts[i]['name'] + " <" + contacts[i]['address'] + ">";
+    //             contact_autocomplete_list.push(autocomplete_entry);
+    //             contact_autocomplete_list_to_address_lookup[autocomplete_entry] = contacts[i]['address'];
+    //         }
+    //         autocomplete(document.getElementById("input_to"), contact_autocomplete_list);
+    //         return true;
+    //     }
+    // });
+
 }
+$('body').on('click', '.delete_id', function(e) {
+    var contact_id = $(this).data('id');
+    //Need to sign in to confirm their username and password is correct before encrypting the keystore.
+    server.deleteContact(contact_id)
+    .then(function(response){
+        if(response !== false && "success" in response) {
+            $('#modal-remove-contact-wallet').modal('hide');
+            $("#modal-contact-remove-wallet-success").modal("toggle");
+            refreshContactList();
+            //popup("Contact deleted successfully.");
+        }else{
+            $('#modal-remove-contact-wallet').modal('hide');
+            $("#modal-contact-remove-wallet-failed").modal("toggle");
+
+            var popup_content = "Oops, something went wrong:<br><br>" + response['error_description'];
+            //popup(popup_content, 500);
+        }
+    });
+});
+$('body').on('click',".btn-contact-remove",function(){
+    var name = $(this).data('name');
+    var address = $(this).data('address');
+    $(".delete_modal_content #contact_name").text(name);
+    $(".delete_modal_content #contact_address").text(address);
+    $(".delete_id").attr("data-id",$(this).data('id'));
+});
+
+
 var set_balance_status = function(status){
     $('#h-balance').text(status);
     $('.h-balance').text(status);
