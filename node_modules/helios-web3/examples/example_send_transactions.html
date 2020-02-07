@@ -1,0 +1,114 @@
+<html>
+<body>
+<script src="../dist/helios_web3.js"></script>
+</body>
+<script>
+    // All of the output of this example will be sent to the console. Open chrome developer tools, then go to the
+    // console tab to see the output.
+
+    // Metamask likes to overwrite our web3 with their own. So to prevent that causing problems, lets set it back here
+    web3 = heliosWeb3;
+
+    // log the object to ensure it has been injected correctly.
+    console.log(web3);
+
+    // Connect to a node using websockets
+    web3.setProvider(new web3.providers.WebsocketProvider("wss://bootnode.heliosprotocol.io:30304"));
+
+    //
+    // Now we will generate a random account and attempt to send two transactions.
+    //
+    var accountSending = web3.hls.accounts.create();
+    var accountReceiving = web3.hls.accounts.create();
+
+    // We have to add the two new accounts to our wallet, so that web3 knows how to sign the transactions later.
+    web3.hls.accounts.wallet.add(accountSending);
+    web3.hls.accounts.wallet.add(accountReceiving);
+
+    // Generate the two transactions
+    var pendingSendTransactions = [];
+
+    var transactionOne = {
+                    from: accountSending.address,
+                    to: accountReceiving.address,
+                    value: web3.utils.toWei('100', 'ether'),
+                    gas: 21000,
+                    gasPrice: web3.utils.toWei('1', 'Gwei')
+                }
+
+    pendingSendTransactions.push(transactionOne);
+
+    var transactionTwo = {
+                    from: accountSending.address,
+                    to: accountReceiving.address,
+                    value: web3.utils.toWei('1337', 'ether'),
+                    gas: 21000,
+                    gasPrice: web3.utils.toWei('1', 'Gwei')
+                }
+
+    pendingSendTransactions.push(transactionTwo);
+
+    // Generate a block with the two transactions, and send them to the node.
+    // This is a promise, so lets call it correctly:
+    web3.hls.sendTransactions(pendingSendTransactions)
+    .then(function(args){
+        console.log("Block sent to node")
+    })
+    .catch(function(error){
+        var error_message = getNodeMessageFromError(error);
+        console.log("Error when sending block: "+error_message);
+    });
+
+    // The node RPC process validates the block, but doesn't attempt to execute the transactions. So it won't give you
+    // an error if the account doesn't have enough funds. However, the RPC will send the new block to the VM thread,
+    // which will reject the transactions.
+
+    //
+    // Lets try to send an invalid block to see the error
+    //
+
+    // var transactionThree = {
+    //                 from: 'abcd',
+    //                 to: accountReceiving.address,
+    //                 value: web3.utils.toWei('1337', 'ether'),
+    //                 gas: 21000,
+    //                 gasPrice: web3.utils.toWei('1', 'Gwei')
+    //             }
+    //
+    // pendingSendTransactions.push(transactionThree);
+    //
+    // // Generate a block with the two transactions, and send them to the node.
+    // // This is a promise, so lets call it correctly:
+    // web3.hls.sendTransactions(pendingSendTransactions)
+    // .then(function(args){
+    //     console.log("Block sent to node")
+    // })
+    // .catch(function(error){
+    //     var error_message = getNodeMessageFromError(error);
+    //     console.log("Error when sending block: "+error_message);
+    // });
+
+    //
+    // Helper functions
+    //
+    var getNodeMessageFromError = function getNodeMessageFromError(error) {
+
+        if (error.message.indexOf('Returned error: ') !== -1) {
+            try {
+                var error_json = error.message.split("Returned error: ");
+                error_json = error_json[error_json.length - 1];
+                var error_array = JSON.parse(error_json);
+                return error_array['error'];
+            } catch (e) {
+                return error.message;
+            }
+        } else {
+            return error.message;
+        }
+    };
+
+
+
+
+</script>
+</html>
