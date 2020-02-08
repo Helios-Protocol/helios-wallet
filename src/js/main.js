@@ -1,6 +1,8 @@
 'use strict';
 var web3_main = require('./web3.js');
 var helios_web3 = web3_main.web3;
+
+
 var accountHelpers = require('./account_helpers.js');
 var fileSaver = require("file-saver");
 var numerical = require("./numerical_helpers");
@@ -85,4 +87,5 @@ module.exports = {
     helios_web3: helios_web3,
     $:$,
     async:async
+    
 };
