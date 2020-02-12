@@ -103,15 +103,50 @@ $(document).ready(function(){
             alertify.error("You must add at least one transaction to the block.");
         }
 
-        //var popup_content = document.getElementById("popup_content_confirm_transactions").innerHTML;
+        var popup_content = document.getElementById("popup_content_confirm_transactions").innerHTML;
 
         //ensure correct
-        alertify.error( "Please confirm your transactions in this list below and click send.");
+        $("#modal-transaction-confirm").find(".tran_send_modal").append(popup_content);
+        $("#modal-transaction-confirm").modal("show");
+       
         refresh_pending_transaction_table('final_tx_list_for_confirmation', false);
         
        
     });
+    $('body').on('submit', '#send_block_post_confirmation', function (e) {
+        e.preventDefault();
+        if(!connectionMaintainer.isConnected()){
+            alertify.error("You must be connected to a node to do this.")
+            return;
+        }
+        web3.hls.sendTransactions(pending_send_transactions)
+        .then(function(args){
+            if (pending_send_transactions.length <= 1) {
+                alertify.success("Transaction sent successfully");
+            } else {
+                alertify.success("Block sent successfully");
+            }
+            $("#modal-transaction-confirm").find(".tran_send_modal").html("");
+            $("#modal-transaction-confirm").modal("hide");
+            $("#modal-transaction-success").modal("show");
+            clear_vars();
+            //setTimeout(refreshDashboard, 2000);
+            $('#input_amount').val("").trigger("change");
+            $('#input_to').val("").trigger("change");
+            updateInputLabels();
+             
+        })
+        .catch(function(error){
+            var error_message = getNodeMessageFromError(error);
+            $("#modal-transaction-confirm").find(".tran_send_modal").html("");
+            $("#modal-transaction-confirm").modal("hide");
+            $("#modal-transaction-failed").modal("show");
+            //alertify.error("Error when sending block: "+error_message);
+            throw error;
 
+        });
+
+    });
     $('body').on('click', '.delete_transaction', function () {
         var index = $(this).data('index');
         pending_send_transactions.splice(index, 1);
@@ -133,9 +168,6 @@ $(document).ready(function(){
             alertify.error(validateInputs(contact_address, 'wallet_address'));
             return;
         }
-        // console.log(contact_name);
-        // console.log(contact_address);
-        //Need to sign in to confirm their username and password is correct before encrypting the keystore.
         server.addContact(contact_name, contact_address)
         .then(function(response){
             //console.log(response);
@@ -153,9 +185,49 @@ $(document).ready(function(){
     });
     $('#modal-contact-remove-wallet-success , #modal-contact-remove-wallet-failed').on('hidden.bs.modal', function () {
         location.reload();
-       })
-    //
+    })
+    
 });
+
+function updateInputLabels(){
+    $('input, textarea').each(function(){
+        // Don't remove the active class if we click on the label
+        if($(this).is(":focus")) {
+            return;
+        }
+        if(!$(this).val() || $(this).val() === "") {
+            $(this).siblings('.input__label').removeClass('input__label--active');
+        }else{
+
+            $(this).siblings('.input__label').addClass('input__label--active');
+        }
+    })
+}
+function checkPendingTransactionsGasPrice(){
+    pending_send_transactions.forEach(function(tx){
+        if(tx.gasPrice < current_min_gas_price){
+            return false;
+        }
+    });
+    return true;
+}
+function checkBlockGasLimit(){
+    var gas_used = 0;
+    pending_send_transactions.forEach(function(tx){
+        gas_used += parseFloat(tx.gas);
+    });
+
+    return gas_used < numerical.block_gas_limit;
+}
+function checkIntrinsicGas(){
+    pending_send_transactions.forEach(function(tx){
+        if(tx.gas < 21000){
+            return false;
+        }
+    });
+
+    return true;
+}
 async function refresh_transactions(start_index){
     if(sending_account == null){
         return
@@ -165,10 +237,10 @@ async function refresh_transactions(start_index){
         start_index = 0
     }
 
-    var from_month = $('select.from_month').children("option:selected").val();
-    var from_year = $('select.from_year').children("option:selected").val();
-    var to_month = $('select.to_month').children("option:selected").val();
-    var to_year = $('select.to_year').children("option:selected").val();
+    // var from_month = $('select.from_month').children("option:selected").val();
+    // var from_year = $('select.from_year').children("option:selected").val();
+    // var to_month = $('select.to_month').children("option:selected").val();
+    // var to_year = $('select.to_year').children("option:selected").val();
 
     // var start_timestamp = new Date(from_year, from_month, '01').getTime() / 1000
     // var end_timestamp = new Date(to_year, to_month, '01').getTime() / 1000
@@ -339,37 +411,6 @@ async function refreshContactList(){
             return true;
         }
     });
-
-    // var tableRef = $('#contact_list').find('tbody')[0];
-
-    // server.getContacts()
-    // .then(function(response){
-    //     if(response !== false && "success" in response) {
-    //         //clear all rows
-    //         tableRef.innerHTML = "";
-    //         contact_name_to_address_lookup = {};
-    //         contact_address_to_name_lookup = {};
-    //         contact_autocomplete_list = [];
-    //         var contacts = response['contacts'];
-    //         for (i = 0; i < contacts.length; i++) {
-    //             var row = tableRef.insertRow(tableRef.rows.length);
-    //             var cell0 = row.insertCell(0);
-    //             var cell1 = row.insertCell(1);
-
-    //             cell0.innerHTML = "<img src='dist/assets/icon/x.png' class='delete_contact' data-id=" + contacts[i]['id'] + ">"+ contacts[i]['name'];
-    //             cell1.innerHTML = contacts[i]['address'];
-
-    //             contact_name_to_address_lookup[contacts[i]['name']] = contacts[i]['address'];
-    //             contact_address_to_name_lookup[contacts[i]['address']] = contacts[i]['name'];
-    //             var autocomplete_entry = contacts[i]['name'] + " <" + contacts[i]['address'] + ">";
-    //             contact_autocomplete_list.push(autocomplete_entry);
-    //             contact_autocomplete_list_to_address_lookup[autocomplete_entry] = contacts[i]['address'];
-    //         }
-    //         autocomplete(document.getElementById("input_to"), contact_autocomplete_list);
-    //         return true;
-    //     }
-    // });
-
 }
 $('body').on('click', '.delete_id', function(e) {
     var contact_id = $(this).data('id');
@@ -432,6 +473,7 @@ var set_account_status = function(address, name){
     //     $('.sending_account_copy').hide().data('copy', '');
     // }
 }
+
 function calculate_estimated_tx_fee_loop(){
     var gas_price = web3.utils.toWei($('#input_gas_price').val(), 'gwei')
     gas_price = parseFloat(web3.utils.fromWei(web3.utils.toBN(gas_price), 'ether'));
@@ -520,7 +562,7 @@ function add_transaction_to_block_from_form(){
                     gas: total_gas.toString(),
                     gasPrice: gas_price,
                 }
-
+               
     pending_send_transactions.push(transaction);
 
     refresh_pending_transaction_table();

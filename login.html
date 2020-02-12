@@ -111,7 +111,7 @@
     </div>
     <!-- Login end -->
     <!-- Large modal Start-->
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div class="modal fade bd-example-modal-lg" id="modal-popup_content_frontpage_warning" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -156,18 +156,21 @@
             </div>
         </div>
     </div>
+    
     <!-- Large modal End-->
     <!-- External JS libraries -->
+    <script>
+        $(document).ready(function(){
+            $("#modal-popup_content_frontpage_warning").modal("show");
+        });
+    </script>
     <script src="dist/login_assets/js/jquery-2.2.0.min.js"></script>
     <script src="dist/login_assets/js/popper.min.js"></script>
     <script src="dist/login_assets/js/bootstrap.min.js"></script>
     <script src="dist/js/script.js?version=16" ></script>
     <script src="dist/js/main.js?version=16" ></script>
     <script src="dist/js/frontpage.js?version=16" ></script>
-    <script>
-        
-        
-    </script>
+   
     <!-- Custom JS Script -->
 
 </body>

@@ -196,7 +196,7 @@ $( document ).ready(function() {
 
     $('#get_min_gas_price').click(function (e){
         if(sending_account == null){
-            popup('Need to load a wallet first');
+            alertify.error('Need to load a wallet first');
             return
         }
         web3.hls.getGasPrice()
@@ -205,7 +205,7 @@ $( document ).ready(function() {
 
     $('#get_transaction_receipt').click(function (e){
         if(sending_account == null){
-            popup('Need to load a wallet first');
+            alertify.error('Need to load a wallet first');
             return
         }
         web3.hls.getBlockNumber(sending_account.address)
@@ -232,7 +232,7 @@ $( document ).ready(function() {
 
     $('#get_historical_min_gas_price').click(function (e){
         if(sending_account == null){
-            popup('Need to load a wallet first');
+            alertify.error('Need to load a wallet first');
             return
         }
         web3.hls.getHistoricalGasPrice()
@@ -248,11 +248,13 @@ $( document ).ready(function() {
         var data = $(this).data('copy');
         ////console.log('copying '+data);
         copyToClipboard(data);
-        popup("Address copied to clipboard");
+        alertify.error("Address copied to clipboard");
     });
 
-    var popup_content = document.getElementById("popup_content_frontpage_warning").innerHTML;
-    popup(popup_content, width=900);
+//     var popup_content = document.getElementById("popup_content_frontpage_warning").innerHTML;
+//    //alertify.error(popup_content, width=900);
+//     $("#modal-popup_content_frontpage_warning").find(".war-content").append(popup_content);
+//     $("#modal-popup_content_frontpage_warning").modal("show");
 
     $('#network_id_select').on('click',function(){
         var selected_network_id = $('select.network_id').children("option:selected").val();
@@ -398,7 +400,7 @@ function afterLoginInit(){
         ////console.log(sending_account);
         receiveAnyIncomingTransactions(sending_account.address)
         //initOnlineMenu();
-        //close_popup();
+        //close_alertify.error();
     });
     ////console.log("Starting");
 }

@@ -404,6 +404,8 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            
                             <!--Send Token End-->
                             <!--Top heading Division Start-->
                             <div class="row page-title-1 align-items-center">
@@ -1556,9 +1558,28 @@
         </div>
     </div>
     <!--Add Custom Token Pop-up End-->
+    <div class="popup_content_store" style="display: none;" id="popup_content_confirm_transactions">
+        Please confirm your transactions in this list below and click send.
+        <br><br>
+        <!-- <table id="final_tx_list_for_confirmation">
+            <thead>
+                <tr>
+                    <th>To</th><th>Amount</th><th>Gas Price</th><th>Max Gas</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table> -->
+        <div style="margin-top:20px;">
+            <form id="send_block_post_confirmation">
+                <input type="submit" class="light_button" style="top:0px;" value="Send">
+            </form>
+            <div class="light_button" id="exit_popup_submit" style="float:left;">Get me out of here!</div>
+        </div>
+    </div>
     <!--Confirm Transaction Pop-up Start-->
     <div class="modal fade" id="modal-transaction-confirm" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content bg-white">
                 <div class="modal-body text-center tran_confirm_modal">
                     <div class="">
@@ -1568,17 +1589,24 @@
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" color="#71cf4e" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up-circle mb-2 mt-2"><circle cx="12" cy="12" r="10"></circle><polyline points="16 12 12 8 8 12"></polyline><line x1="12" y1="16" x2="12" y2="8"></line></svg>
                     <h4 class="mt-2 mb-4">Review & Confirm</h4>
-                    <div class="confirm_modal_content">
-                        <p class="mb-0"><span class="fw-5">Amount:</span> <span class="ls-1 float-right">5000 HLS</span></p>
-                        <p class="mb-0"><span class="fw-5">Receptionist Address:</span> <span class="float-right">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</span></p>
-                        <p class="mb-0"><span class="fw-5">Gas:</span> <span class="ls-1 float-right">300</span></p>
+                    
+                    <div class="table-responsive table-transaction">
+                    <table class="table table-sm table-bordered" id="final_tx_list_for_confirmation">
+                        <thead>
+                            <tr>
+                                <th>To</th><th>Amount</th><th>Gas Price</th><th>Max Gas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                     </div>
                     <div class="mt-4">
-                        <a href="#" class="btn btn-outline-green btn-rounded width-md" data-toggle="modal" data-target="#modal-transaction-success" data-dismiss="modal">Confirm 1</a>
+                        <form id="send_block_post_confirmation">
+                            <input type="submit" class="btn btn-outline-green btn-rounded width-md light_button" style="top:0px;" value="Send">
+                        </form>
                     </div>
-                    <div class="mt-4">
-                        <a href="#" class="btn btn-outline-green btn-rounded width-md" data-toggle="modal" data-target="#modal-transaction-failed" data-dismiss="modal">Confirm 2</a>
-                    </div>
+                    
                     <p class="w-75 mx-auto mt-3 tran_confirm_modal_notice">Sending funds to someone you don't know ? <br /> Helios transfer are non-reversible.</p>
                 </div>
             </div>
@@ -1605,6 +1633,32 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-transaction-send" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body text-center delete_wallet_modal">
+                    <!--<div class="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" color="#cf4e4e" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-2 feather feather-x-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                    <h4 class="mt-4 mb-3">Remove Contact</h4>
+                    <p class="mx-auto delete_wallet_modal_note">You are about to delete your contact wallet from the online database. Make sure you have backed it up before doing so.</p>
+                    <div class="delete_modal_content">
+                        <p class="mb-0 text-white"><span>Wallet Name:</span> <span class="ls-1 float-right" id="contact_name"></span></p>
+                        <p class="mb-0 text-white"><span>Wallet Address:</span> <span class="float-right" id="contact_address"></span></p>
+                    </div>
+                    <div class="mt-4 mb-3 d-flex justify-content-between delete_button_media mx-lg-auto">
+                        <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Get me out of here !</a>
+                        <a href="#" class="btn btn-outline-delete btn-rounded width-md ml-3 delete_id" > Confirm contact deletion !</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!--Success Transaction Pop-up End-->
     <!--Failed Transaction Pop-up Start-->
     <div class="modal fade modal_success" id="modal-transaction-failed" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
@@ -1628,6 +1682,7 @@
     </div>
     <!--Failed Transaction Pop-up End-->
     <!--Modal End-->
+    
     <!-- Vendor js -->
     <script src="dist/assets/js/vendor.min.js"></script>
 

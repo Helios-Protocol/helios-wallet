@@ -31712,12 +31712,11 @@ var Web3 = function Web3() {
     var setProvider = this.setProvider;
     this.setProvider = function (provider, net) {
         setProvider.apply(_this, arguments);
-
         this.eth.setProvider(provider, net);
         this.shh.setProvider(provider, net);
         this.bzz.setProvider(provider);
         this.hls.setProvider(provider, net);
-
+        console.log(provider);
         return true;
     };
 };
@@ -74749,7 +74748,7 @@ var Bzz = function Bzz(provider) {
     if (provider && provider._requestManager) {
         provider = provider.currentProvider;
     }
-
+    console.log(provider);//sagar
     // only allow file picker when in browser
     if(typeof document !== 'undefined') {
         this.pick = swarm.pick;
@@ -74772,6 +74771,9 @@ Bzz.prototype.setProvider = function(provider) {
         provider = provider.bzz;
     // is no string, set default
     }
+
+    console.log(provider);
+    console.log("provider");
     // else if(!_.isString(provider)) {
     //      provider = 'http://swarm-gateways.net'; // default to gateway
     // }
@@ -76243,7 +76245,7 @@ var RequestManager = function RequestManager(provider) {
 
 
 
-RequestManager.givenProvider = givenProvider;
+RequestManager. s = givenProvider;
 
 RequestManager.providers = {
     WebsocketProvider: require('web3-providers-ws'),
@@ -84543,13 +84545,19 @@ var get_all_transactions_from_account = async function get_all_transactions_from
     }
 
     try{
-        var start_block_number = await web3.hls.getBlockNumber(account.address, start_timestamp);
-        ////console.log("Getting all transactions starting at block number "+start_block_number);
+        console.log(account.address);
+        console.log(start_timestamp);
+        var start_block_number = await web3.hls.getBlockByNumber(account.address, start_timestamp);
+        console.log('sagar-try');
+        console.log("Getting all transactions starting at block number "+start_block_number);
     }catch(err) {
         ////console.log('error')
         //console.log(err)
+        
+        console.log('sagar-catch');
         return err
     }
+    
     var output = [];
 
     start_block_number = start_block_number - start_index;
@@ -84596,7 +84604,9 @@ var get_all_transactions_from_account = async function get_all_transactions_from
             output.push(new datastructures.tx_info(new_block.timestamp, "Reward type 2", new_block.rewardBundle.rewardType2.amount, 0, account.address, "Coinbase", new_block.accountBalance, new_block.number))
         }
     }
+    console.log(output);
     return output
+
 };
 
 
