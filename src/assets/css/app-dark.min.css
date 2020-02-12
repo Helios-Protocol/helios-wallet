@@ -5067,6 +5067,24 @@ body.authentication-bg {
     position: static;
     float: left;
 }
+.table-transaction table th, .table-transaction table td {
+    border-width: 1px;
+    border-color: #aeb0b4;
+    text-align: left;
+    padding: 8px 14px;
+    color: #363c48;
+}
+
+.table-transaction table {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.table-transaction table th {font-weight: 600;}
+
+#modal-transaction-confirm .modal-lg {
+    max-width: 890px;
+}
 
 @media (min-width: 576px) {
     .modal_success .modal-dialog {
