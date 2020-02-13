@@ -271,12 +271,14 @@
                             <!--Form One Start-->
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="form-group mb-0">
-                                        <input type="text" id="preloading-timepicker" class="form-control text-down ls-1" placeholder="Enter password to encrypt wallet">
-                                    </div>
-                                    <div class="mt-3">
-                                        <button type="button" class="btn btn-green-local float-right">Create wallet</button>
-                                    </div>
+                                    <form id="generate_offline_wallet_form">
+                                        <div class="form-group mb-0">
+                                            <input type="password" id="generate_offline_wallet_password" class="form-control text-down ls-1" placeholder="Enter password to encrypt wallet">
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-green-local float-right">Create wallet</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!--Form One End-->
@@ -301,12 +303,16 @@
                             <!--Form Two Start-->
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="form-group mb-0">
-                                        <input type="text" id="preloading-timepicker" class="form-control text-down ls-1" placeholder="Enter private key">
-                                    </div>
-                                    <div class="mt-3">
-                                        <button type="button" class="btn btn-green-local float-right">Load wallet</button>
-                                    </div>
+                                    <form id="load_offline_wallet_private_key_form">
+                                       
+                                    
+                                        <div class="form-group mb-0">
+                                            <input type="password" id="load_offline_wallet_from_private_key" class="form-control text-down ls-1" placeholder="Enter private key">
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-green-local float-right">Load wallet</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!--Form Two End-->
@@ -324,16 +330,18 @@
                             <!--Form Three Start-->
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input text-down ls-1" id="validatedCustomFile" required>
-                                        <label class="custom-file-label form-control" for="validatedCustomFile">Select keystore file</label>
-                                    </div>
-                                    <div class="form-group mb-0 mt-3">
-                                        <input type="text" id="preloading-timepicker" class="form-control text-down ls-1" placeholder="Enter keystore password">
-                                    </div>
-                                    <div class="mt-3">
-                                        <button type="button" class="btn btn-green-local float-right">Load wallet</button>
-                                    </div>
+                                    <form id="load_offline_wallet_keystore_form">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input text-down ls-1" id="load_offline_wallet_from_keystore_file_input" required>
+                                            <label class="custom-file-label form-control" for="load_offline_wallet_from_keystore_file_input">Select keystore file</label>
+                                        </div>
+                                        <div class="form-group mb-0 mt-3">
+                                            <input type="text" id="load_offline_wallet_from_keystore_password" class="form-control text-down ls-1" placeholder="Enter keystore password">
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-green-local float-right">Load wallet</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!--Form Three End-->
