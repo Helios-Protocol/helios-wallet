@@ -191,10 +191,17 @@
                             </a>
                         </li>
                         <li>
-                            <a href="local_wallet.html">
+                            <a href="javascript: void(0);">
                                 <img src="dist/assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Local Wallets </span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <ul class="nav-second-level sub_menu local_wallet" aria-expanded="false">
+                                
+                                <li>
+                                    <a href="local_wallet.html">Add New Wallet</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="javascript: void(0);">
@@ -202,7 +209,7 @@
                                 <span> Online Wallets </span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <ul class="nav-second-level sub_menu" aria-expanded="false">
+                            <ul class="nav-second-level sub_menu live_wallet" aria-expanded="false">
                                 <li>
                                     <a href="existing_online_wallet.html">Existing Wallet</a>
                                 </li>
@@ -230,7 +237,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a  id="logout">
                                 <img src="dist/assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Logout </span>
                             </a>
