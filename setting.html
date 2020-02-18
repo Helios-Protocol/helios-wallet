@@ -19,6 +19,10 @@
     <link href="dist/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" />
     <link href="dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="dist/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/js/alertify.css">
+    <script src="dist/js/alertify.js"></script>
+    <script src="dist/js/frontpage.js"></script>
 </head>
 <body>
     <!-- Begin page -->
@@ -146,7 +150,7 @@
                                 <img src="dist/assets/images/users/avatar-7.jpg" alt="user-image" class="rounded-circle align-self-center" />
                                 <div class="media-body text-left align-self-center">
                                     <p class="ml-2 my-0 text-white ls-1">
-                                        <span>Raj Ladumor</span>
+                                        <span id="lusername"></span>
                                     </p>
                                 </div>
                             </div>
@@ -154,10 +158,10 @@
                     </li>
                     <li class="d-sm-block align-self-center">
                         <div class="btn-group mr-1">
-                            <button type="button" class="btn btn-network dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mainnet <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></i></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Mainnet</a>
-                                <a class="dropdown-item" href="#">Hypothesis Testnet</a>
+                            <button type="button" class="btn btn-network dropdown-toggle networkidselect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mainnet <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></i></button>
+                            <div class="dropdown-menu netselect">
+                                <a class="dropdown-item" data-id="1">Mainnet</a>
+                                <a class="dropdown-item" data-id="42">Hypothesis Testnet</a>
                             </div>
                         </div>
                     </li>
@@ -191,10 +195,17 @@
                             </a>
                         </li>
                         <li>
-                            <a href="local_wallet.html">
+                            <a href="javascript: void(0);">
                                 <img src="dist/assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Local Wallets </span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <ul class="nav-second-level sub_menu local_wallet" aria-expanded="false">
+                                
+                                <li>
+                                    <a href="local_wallet.html">Add New Wallet</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="javascript: void(0);">
@@ -202,7 +213,7 @@
                                 <span> Online Wallets </span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <ul class="nav-second-level sub_menu" aria-expanded="false">
+                            <ul class="nav-second-level sub_menu live_wallet" aria-expanded="false">
                                 <li>
                                     <a href="existing_online_wallet.html">Existing Wallet</a>
                                 </li>
@@ -230,7 +241,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a  id="logout">
                                 <img src="dist/assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Logout </span>
                             </a>
@@ -322,8 +333,8 @@
                                     </div>
                                     <div class="security_setting_status d-flex justify-content-between align-items-center">
                                         <h6 class="mt-0 mb-0">2 - Factor Authentication Status - </h6>
-                                        <!--<h5 class="Enabled mt-0 mb-0"><i class="uil uil-shield"></i> Enabled</h5>-->
-                                        <h5 class="Disabled mt-0 mb-0"><i class="uil uil-shield-slash"></i> Disabled</h5>
+                                        <!--<h5 class="Enabled mt-0 mb-0"></h5>-->
+                                        <h5 class="Disabled mt-0 mb-0" id="two_factor_authentication_status"><i class="uil uil-shield-slash"></i> Disabled</h5>
                                     </div>
                                     <div class="security_setting_download d-flex">
                                         <img src="dist/assets/images/google_authenticator.png" class="avatar rounded mr-4 align-self-center" alt="Helios">
@@ -336,9 +347,9 @@
                                     <div class="security_setting_links">
                                         <h5 class="mt-0">Quick links</h5>
                                         <div class="d-flex justify-content-between mt-3">
-                                            <button type="button" class="btn btn-yellow-local float-left" data-toggle="modal" data-target="#modal-disable-2fa">Disable 2FA</button>
-                                            <button type="button" class="btn btn-yellow-local float-left" data-toggle="modal" data-target="#modal-enable-2fa">Enable 2FA</button>
-                                            <button type="button" class="btn btn-yellow-local float-left" data-toggle="modal" data-target="#modal-generate-2fa">Generate New 2FA</button>
+                                            <button type="button" class="btn btn-yellow-local float-left" id="two_factor_disable" data-toggle="modal">Disable 2FA</button>
+                                            <button type="button" class="btn btn-yellow-local float-left generate_new_two_factor" data-toggle="modal" data-val="1" >Enable 2FA</button>
+                                            <button type="button" class="btn btn-yellow-local float-left generate_new_two_factor" data-toggle="modal" data-val="2">Generate New 2FA</button>
                                         </div>
                                     </div>
                                 </div>
@@ -453,23 +464,21 @@
                             <p>Important ! : We strongly suggest that you save the Secure 2FA key. If you ever lose access to your phone you will need to re-link 2FA to another device to enter your wallet.</p>
                         </div>
                         <div>
-                            <img src="dist/assets/images/code.png" class="avatar-code rounded mr-4 align-self-center" alt="Helios">
+                            <img src="dist/assets/images/code.png" class="avatar-code rounded mr-4 align-self-center" id="two_factor_authentication_confirm_qr_code" alt="Helios">
                         </div>
                     </div>
                     <div class="mx-auto enable_secure_key mt-2">
-                        Secure 2FA key :- LYUUKVCULB4GCQRYK5KEQNZQGR4SUKCX
+                        Secure 2FA key :- <span id="two_factor_authentication_confirm_secret"></span>
                     </div>
-                    <div class="form-group position-relative form_title_head_account mx-auto enable_enter_code mt-3">
-                        <input type="text" id="preloading-timepicker" class="form-control-enter-code text-down ls-1" placeholder=" Enter the validation code" value="">
-                    </div>
-                    <div class="mt-4 mb-3 d-flex justify-content-between confirm_enable_button mx-lg-auto">
-                        <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Get me out of here !</a>
-                        <a href="#" class="btn btn-outline-delete btn-rounded width-md ml-3" data-dismiss="modal" data-toggle="modal" data-target="#modal-enable-2fa-success"> Confirm - 1</a>
-                    </div>
-                    <div class="mt-4 mb-3 d-flex justify-content-between confirm_enable_button mx-lg-auto">
-                        <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Get me out of here !</a>
-                        <a href="#" class="btn btn-outline-delete btn-rounded width-md ml-3" data-dismiss="modal" data-toggle="modal" data-target="#modal-enable-2fa-failed"> Confirm  - 2</a>
-                    </div>
+                    <form id="confirm_new_two_factor_authentication_secret">
+                        <div class="form-group position-relative form_title_head_account mx-auto enable_enter_code mt-3">
+                            <input type="text" id="new_two_factor_authentication_code" class="form-control-enter-code text-down ls-1" placeholder=" Enter the validation code" value="">
+                        </div>
+                        <div class="mt-4 mb-3 d-flex justify-content-between confirm_enable_button mx-lg-auto">
+                            <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Get me out of here !</a>
+                            <button type="submit" class="btn btn-outline-delete btn-rounded width-md ml-3" > Confirm </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -529,7 +538,7 @@
                     </div>-->
                     <i class="uil uil-shield-exclamation"></i>
                     <h4 class="mt-2 mb-2">Oops, Something went wrong !</h4>
-                    <p class="mx-auto delete_wallet_modal_note">Two-factor authentication code mismatch.</p>
+                    <p class="mx-auto delete_wallet_modal_note msgfailed">Two-factor authentication code mismatch.</p>
                     <div class="mt-3">
                         <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Retry !</a>
                     </div>
@@ -625,7 +634,7 @@
     <!-- Vendor js -->
     <script src="dist/assets/js/vendor.min.js"></script>
     <!-- datatable js -->
-    <script src="dist/assets/libs/datatables/jquery.dataTables.min.js"></script>
+    <!-- <script src="dist/assets/libs/datatables/jquery.dataTables.min.js"></script>
     <script src="dist/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="dist/assets/libs/datatables/dataTables.responsive.min.js"></script>
     <script src="dist/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
@@ -639,8 +648,8 @@
     <script src="dist/assets/libs/datatables/dataTables.keyTable.min.js"></script>
     <script src="dist/assets/libs/datatables/dataTables.select.min.js"></script>
 
-    <!-- Datatables init -->
-    <script src="dist/assets/js/pages/datatables.init.js"></script>
+
+    <script src="dist/assets/js/pages/datatables.init.js"></script> -->
     <!-- optional plugins -->
     <script src="dist/assets/libs/moment/moment.min.js"></script>
     <script src="dist/assets/libs/flatpickr/flatpickr.min.js"></script>
@@ -650,6 +659,15 @@
 
     <!-- App js -->
     <script src="dist/assets/js/app.min.js"></script>
+    <script src="dist/js/dashboard.js" ></script>
+    <script src="dist/js/script.js?version=16" ></script>
+    <script src="dist/js/main.js?version=16" ></script>
+    <script src="dist/js/frontpage.js?version=16" ></script>
+    <script>
+        $(document).ready(function(){
+            
+        });
+    </script>
 
 
 </body>

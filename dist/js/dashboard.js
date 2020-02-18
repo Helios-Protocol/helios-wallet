@@ -1,9 +1,12 @@
 $(document).ready(function(){
     var username = sessionStorage.getItem("username");
     var password = sessionStorage.getItem("password");
+    var facode = sessionStorage.getItem("facode");
+    set_two_factor_authentication_status(facode);
     if(username == null && password == null){
         window.location.href = './login.html';
     }
+    
     $("#lusername").text(username);
     var keystores = sessionStorage.getItem("online_keystores");
     populateOnlineKeystores($.parseJSON(keystores), password);
@@ -522,7 +525,83 @@ $(document).ready(function(){
 
 
     });
+    $('body').on('click', '.edit_online_wallet', function(e) {
+        var wallet_address = $(this).data('address');
+        // var wallet_id = online_wallet_to_id_lookup[wallet_address];
+        var wallet_name = online_wallet_to_name_lookup[wallet_address];
+
+        //Add the correct data to the editing page
+        prepareEditOnlineWalletPage(wallet_address, wallet_name);
+
+    });
+    $('.generate_new_two_factor').click(function(){
+        var val = $(this).data('val');
+        server.getNew2FASecret()
+        .then(function(response){
+            if(response !== false && "success" in response) {
+                //success
+                // var popup_content = document.getElementById("popup_content_new_two_factor_authentication").innerHTML;
+
+                // //ensure correct
+                // popup(popup_content, 400);
+
+                $('#two_factor_authentication_confirm_qr_code').attr('src', response['img_url']);
+                $('#two_factor_authentication_confirm_secret').html(response['secret']);
+               
+                    $('#modal-enable-2fa').modal("show");
+              
+            }else{
+                //fail
+                var popup_content = "Oops, something went wrong:" + response['error_description'];
+                alertify.error(popup_content);
+            }
+        })
+    });
+    $('body').on('submit', '#confirm_new_two_factor_authentication_secret', function (e) {
+        e.preventDefault();
+        var secret = $('#two_factor_authentication_confirm_secret').html();
+        var code = $('#new_two_factor_authentication_code').val();
+        server.save2FASecret(secret, code)
+        .then(function(response){
+            if(response !== false && "success" in response) {
+                $('#modal-enable-2fa').modal("hide");
+                $("#modal-enable-2fa-success").modal("show");
+                sessionStorage.setItem("facode",true);
+                set_two_factor_authentication_status(true);
+            }else{
+                $('#modal-enable-2fa').modal("hide");
+                $("#modal-enable-2fa-failed").modal("show");
+            }
+        })
+
+    });
+    $('#two_factor_disable').click(function(){
+        server.delete2FASecret()
+        .then(function(response){
+            if(response !== false && "success" in response) {
+                $("#modal-disable-2fa").modal("show");
+                sessionStorage.setItem("facode",false);
+                set_two_factor_authentication_status(false);
+            }else{
+                var popup_content = "Oops, something went wrong:" + response['error_description'];
+                alertify.error(popup_content);
+            }
+        })
+    });
 });
+function set_two_factor_authentication_status(tfa_enabled){
+    if(tfa_enabled) {
+        
+        $('#two_factor_authentication_status').text('');
+        $('#two_factor_authentication_status').removeClass("Disabled").addClass("Enabled");
+        $('#two_factor_authentication_status').append('<i class="uil uil-shield"></i> Enabled');
+    }else{
+        
+        $('#two_factor_authentication_status').text('');
+        $('#two_factor_authentication_status').removeClass("Enabled").addClass("Disabled");
+        $('#two_factor_authentication_status').append('<i class="uil uil-shield-slash"></i> Disabled');
+    }
+}
 function addOfflineWallet(new_wallet, do_not_make_active_account){
     web3.hls.accounts.wallet.add(new_wallet);
     
@@ -532,10 +611,9 @@ function addOfflineWallet(new_wallet, do_not_make_active_account){
         refreshDashboard();
     }
 
-    var wallet_name_short = new_wallet.address.substr(0,25) + "...";
+    var wallet_name_short = new_wallet.address.substr(0,15) + "...";
 
     var wallet_menu_item = "<li><a href='existing_online_wallet.html'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-address='"+new_wallet.address+"' src='dist/assets/icon/use_button.png'></li>"; 
-    //console.log(wallet_menu_item);
     $('.local_wallet').prepend(wallet_menu_item);
     //Now add it to the menu
     // var wallet_menu_item = " <li role=\"presentation\" class=\"nav__item\">\n" +
@@ -557,13 +635,13 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
         refreshDashboard();
     }
 
-    var wallet_name_short = wallet_name.substr(0,25);
+    var wallet_name_short = wallet_name.substr(0,15);
     if(wallet_name.length > 25){
         wallet_name_short = wallet_name_short + "...";
     }
 
     var wallet_menu_item = "<li style='display:inline-flex;'><a href='existing_online_wallet.html'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-address='"+new_wallet.address+"' src='dist/assets/icon/use_button.png'></li>"; 
-                            console.log(wallet_menu_item);
+                           
     $('.live_wallet').prepend(wallet_menu_item);
     //Now add it to the menu
     // var wallet_menu_item = " <li role=\"presentation\" class=\"nav__item\">\n" +
@@ -829,11 +907,11 @@ var set_account_status = function(address, name){
         $('#account_status').val(address);
     }
 
-    // if(web3 !== undefined && address !== undefined && web3.utils.isAddress(address.toLowerCase())){
-    //     $('.sending_account_copy').show().data('copy', address);
-    // }else{
-    //     $('.sending_account_copy').hide().data('copy', '');
-    // }
+    if(web3 !== undefined && address !== undefined && web3.utils.isAddress(address.toLowerCase())){
+        $('.sending_account_copy').show().data('copy', address);
+    }else{
+        $('.sending_account_copy').hide().data('copy', '');
+    }
 }
 
 function calculate_estimated_tx_fee_loop(){

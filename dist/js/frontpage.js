@@ -26,6 +26,7 @@ $(document).ready(function(){
                         if(response !== false && "success" in response) {
                             sessionStorage.setItem("username", username);
                             sessionStorage.setItem("password", password);
+                            sessionStorage.setItem("facode", false);
                             var online_keystores = response['keystores'];
                             sessionStorage.setItem("online_keystores", online_keystores);
                             window.location.href = "./dashboard.html";
@@ -78,6 +79,7 @@ $(document).ready(function(){
                 if (response !== false && "success" in response) {
                     sessionStorage.setItem("username", username);
                     sessionStorage.setItem("password", password);
+                    sessionStorage.setItem("facode", false);
                     var keystores = JSON.stringify(response['keystores']);
                     sessionStorage.setItem("online_keystores", keystores);
                     window.location.href = "./dashboard.html";
@@ -115,6 +117,8 @@ $(document).ready(function(){
                 if(response !== false && "success" in response) {
                     sessionStorage.setItem("username", username);
                     sessionStorage.setItem("password", password);
+                    var tfa_enabled = (response['2fa_enabled'] === 'true');
+                    sessionStorage.setItem("facode", tfa_enabled);
                     var keystores = JSON.stringify(response['keystores']);
                     sessionStorage.setItem("online_keystores", keystores);
                     window.location.href = "./dashboard.html";
