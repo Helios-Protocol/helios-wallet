@@ -317,15 +317,15 @@ async function refreshDashboard() {
         ////console.log('Refreshing dashboard. No account loaded.')
         set_account_status("No wallet loaded");
     } else {
-        //console.log('Refreshing dashboard. Sending account = '+ sending_account.address);
-        if (online_wallet_to_name_lookup[sending_account.address] !== undefined) {
-            var name = online_wallet_to_name_lookup[sending_account.address]
-            var address = sending_account.address;
-            set_account_status(address, name);
-        } else {
-            var address = sending_account.address;
-            set_account_status(address);
-        }
+        var name = sending_account.walletname;
+        var address = sending_account.address;
+        set_account_status(address, name);
+        // if (online_wallet_to_name_lookup[sending_account.address] !== undefined) {
+           
+        // } else {
+        //     var address = sending_account.address;
+        //     set_account_status(address);
+        // }
     }
     if(connectionMaintainer.isConnected() && sending_account !== null && sending_account!== undefined && sending_account.address !== undefined) {
         receivingTransactions = await receiveAnyIncomingTransactions(sending_account.address)

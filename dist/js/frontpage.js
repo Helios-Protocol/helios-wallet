@@ -81,6 +81,7 @@ $(document).ready(function(){
                     sessionStorage.setItem("password", password);
                     sessionStorage.setItem("facode", false);
                     var keystores = JSON.stringify(response['keystores']);
+                    storemenu(response['keystores'],password);
                     sessionStorage.setItem("online_keystores", keystores);
                     window.location.href = "./dashboard.html";
                 } else {
@@ -143,6 +144,30 @@ $(document).ready(function(){
         sessionStorage.removeItem("password");
         sessionStorage.removeItem("online_keystores");
     });
+    function storemenu(keystores,password){
+        if(keystores.length > 0){
+            var walletmenu = {};
+            for(var i = 0; i < keystores.length; i++){
+                var keystore = keystores[i]['keystore'];
+                var wallet_id = keystores[i]['id'];
+                var wallet_name = keystores[i]['name'];
+                // var new_wallet = web3.eth.accounts.decrypt(JSON.parse(keystore), password);
+                var j = JSON.parse(keystore);
+                var wallet_name_short = wallet_name.substr(0,15);
+                if(wallet_name.length > 25){
+                    wallet_name_short = wallet_name_short + "...";
+                }
+                if(i === 0) {
+                   walletmenu[i]="<li style='display:inline-flex;'><a href='existing_online_wallet.html'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-keystore='"+JSON.stringify(j)+"' data-name='"+wallet_name+"' src='dist/assets/icon/use_button.png'></li>";
+                    
+                }else{
+                   walletmenu[i]="<li style='display:inline-flex;'><a href='existing_online_wallet.html'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-keystore='"+JSON.stringify(j)+"' data-name='"+wallet_name+"' src='dist/assets/icon/use_button.png'></li>";
+                }
+            }
+            sessionStorage.setItem("walletmenu", JSON.stringify(walletmenu));
+            return true
+        }
+    }
    
 });
 

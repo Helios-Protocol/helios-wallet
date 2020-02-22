@@ -8,7 +8,7 @@ var fileSaver = require("file-saver");
 var numerical = require("./numerical_helpers");
 
  var $ = require('jquery');
- var async = require('async');
+ 
 var HeliosUtils = require('helios-utils');
 var ConnectionMaintainer = HeliosUtils.ConnectionMaintainer;
 var getNodeMessageFromError = HeliosUtils.getNodeMessageFromError;
@@ -64,9 +64,9 @@ if (typeof window !== 'undefined') {
     if (typeof window.accountHelpers === 'undefined'){
         window.accountHelpers = accountHelpers;
     }
-    // if (typeof window.fileSaver === 'undefined'){
-    //     window.fileSaver = fileSaver;
-    // }
+    if (typeof window.fileSaver === 'undefined'){
+        window.fileSaver = fileSaver;
+    }
     
     if (typeof window.numerical === 'undefined'){
         window.numerical = numerical;
@@ -85,7 +85,7 @@ module.exports = {
     numerical: numerical,
     getNodeMessageFromError:getNodeMessageFromError,
     helios_web3: helios_web3,
-    $:$,
-    async:async
+    $:$
+    
     
 };

@@ -4221,6 +4221,7 @@ body.authentication-bg {
     margin-bottom: 10px;
     cursor: pointer;
     justify-content: space-between;
+    align-items: center; /* sagar */
 }
 
 .account_setting_div {
