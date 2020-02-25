@@ -5086,6 +5086,80 @@ body.authentication-bg {
 #modal-transaction-confirm .modal-lg {
     max-width: 890px;
 }
+/*--------------------------------------------------------------------------------------
+PRELOADER
+--------------------------------------------------------------------------------------*/
+.preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999999;
+    text-align: center;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.line {
+    width: 5px;
+    height: 40px;
+    background: #e6d46a;
+    margin: 0 3px;
+    border-radius: 10px;
+    animation: loading 0.8s infinite;
+}
+
+    .line:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .line:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+
+    .line:nth-child(4) {
+        animation-delay: 0.3s;
+    }
+
+    .line:nth-child(5) {
+        animation-delay: 0.4s;
+    }
+
+    .line:nth-child(6) {
+        animation-delay: 0.5s;
+    }
+
+    .line:nth-child(7) {
+        animation-delay: 0.6s;
+    }
+
+    .line:nth-child(8) {
+        animation-delay: 0.7s;
+    }
+
+@keyframes loading {
+    0% {
+        height: 0;
+    }
+
+    50% {
+        height: 40px;
+    }
+
+    100% {
+        height: 0;
+    }
+}
 
 @media (min-width: 576px) {
     .modal_success .modal-dialog {

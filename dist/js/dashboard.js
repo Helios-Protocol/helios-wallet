@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $(window).on('load', function(event) {
+        //$('.preloader').delay(500).fadeOut(500);
+        $('.preloader').show();
+    });
     var username = sessionStorage.getItem("username");
     var password = sessionStorage.getItem("password");
     var facode = sessionStorage.getItem("facode");
@@ -15,15 +19,7 @@ $(document).ready(function () {
     $("#lusername").text(username);
     var keystores = sessionStorage.getItem("online_keystores");
     populateOnlineKeystores($.parseJSON(keystores), password);
-    // $.each(JSON.parse(keystores), function (i, item) {
-    //     var keystore = item['keystore'];
-    //     var wallet_id = item['id'];
-    //     var wallet_name = item['name'];
-    //     var new_wallet = web3.eth.accounts.decrypt(JSON.parse(keystore), password);
-    //     available_online_accounts[new_wallet.address] = new_wallet;
-    //     online_wallet_to_id_lookup[new_wallet.address] = wallet_id;
-    //     online_wallet_to_name_lookup[new_wallet.address] = wallet_name;
-    // });
+    
     sessionStorage.setItem("online_keystores", keystores);
     afterLoginInit();
 
@@ -558,7 +554,7 @@ $(document).ready(function () {
         prepareEditOnlineWalletPage(wallet_address, wallet_name);
 
     });
-    $('.generate_new_two_factor').click(function () {
+    $('body').on('click', '.generate_new_two_factor', function (e) {
         var val = $(this).data('val');
         server.getNew2FASecret()
             .then(function (response) {
@@ -612,6 +608,7 @@ $(document).ready(function () {
                 }
             })
     });
+    
 });
 function set_two_factor_authentication_status(tfa_enabled) {
     if (tfa_enabled) {
@@ -725,36 +722,64 @@ function checkIntrinsicGas() {
 
     return true;
 }
-async function refresh_transactions(start_index) {
+$("#dash-daterange").change(function(){
+    refresh_transactions(0);
+});
+$(".tran_send").click(function(){
+    refresh_transactions(0,"send");
+});
+$(".tran_receive").click(function(){
+    refresh_transactions(0,"receive");
+});
+
+async function refresh_transactions(start_index,tran_type = '') {
     if (sending_account == null) {
         return
     }
-
     if (start_index === undefined) {
         start_index = 0
     }
-
-    // var from_month = $('select.from_month').children("option:selected").val();
-    // var from_year = $('select.from_year').children("option:selected").val();
-    // var to_month = $('select.to_month').children("option:selected").val();
-    // var to_year = $('select.to_year').children("option:selected").val();
-
-    // var start_timestamp = new Date(from_year, from_month, '01').getTime() / 1000
-    // var end_timestamp = new Date(to_year, to_month, '01').getTime() / 1000
-
-    var pastDate = new Date();
-    var dd1 = pastDate.getDate() - 365;
-    var dd2 = pastDate.getDate();
-    var mm = pastDate.getMonth() + 1;
-    var y = pastDate.getFullYear();
-    var start_timestamp =  new Date(y,mm,dd1).getTime() / 1000;
-    var end_timestamp = new Date(y,mm,dd2).getTime()/1000;
+    var selectdate1 = $("#dash-daterange").val();
+    if(selectdate1 != undefined){
+        var selectdate = selectdate1.split(" to ");
+        var firstDate = new Date(selectdate[0]);
+        var secondeDate = new Date(selectdate[1]);
+        var dd1 = firstDate.getDate();
+        var dd2 = secondeDate.getDate();
+        var mm1 = firstDate.getMonth() + 1;
+        var mm2 = secondeDate.getMonth() + 1;
+        var y1 = firstDate.getFullYear();
+        var y2 = secondeDate.getFullYear();
+        var start_timestamp =  new Date(y1,mm1,dd1).getTime() / 1000;
+        var end_timestamp = new Date(y2,mm2,dd2).getTime() / 1000;
+    }else{
+        var pastDate = new Date();
+        var dd1 = pastDate.getDate() - 365;
+        var dd2 = pastDate.getDate();
+        var mm = pastDate.getMonth() + 1;
+        var y = pastDate.getFullYear();
+        var start_timestamp =  new Date(y,mm,dd1).getTime() / 1000;
+        var end_timestamp = new Date(y,mm,dd2).getTime() / 1000;
+    }
     var txs = await accountHelpers.get_all_transactions_from_account(sending_account, start_timestamp, end_timestamp, start_index);
-
-    //console.log(txs);
+    console.log(txs);
     $(".transaction_view").find("div").remove();
     $.each(txs, function (i, item) {
-        var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+        console.log(tran_type);
+        // if(tran_type != ""){
+        //     if(tran_type == "send"){
+        //         if(item.description != "Send transaction"){
+        //             continue;
+        //         }
+        //     }else if(tran_type == "receive"){
+        //         if(item.description != "Receive transaction"){
+        //             continue;
+        //         }
+        //     }else {
+
+        //     }
+        // }
+        var d = new Date(0); 0
         d.setUTCSeconds(item.timestamp);
         var options = { day: 'numeric', year: 'numeric', month: 'short'};
         var tableRef = '<div class="d-flex transaction_div collapsed" data-toggle="collapse"';
@@ -783,8 +808,8 @@ async function refresh_transactions(start_index) {
         tableRef += '<p>'+item.to+'</p>';
         tableRef += '</div>';
         tableRef += '<div class="mr-3 table_data_5">';
-        tableRef += '<p class="sent_color">- 50.00 $ </p>';
-        tableRef += '<p class="sent_color">- '+web3.utils.fromWei(web3.utils.toBN(item.value)).toString()+' HLS</p>';
+        
+        tableRef += '<p class="sent_color"> '+web3.utils.fromWei(web3.utils.toBN(item.value)).toString()+' HLS</p>';
         tableRef += '</div>';
         tableRef += '<div class="align-self-center">';
         tableRef += '<button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>';
@@ -796,7 +821,7 @@ async function refresh_transactions(start_index) {
         tableRef += '<div class="col-12"><h1>Transaction Details</h1></div>';
         tableRef += '<div class="col-md-6 col-sm-12">';
         tableRef += '<p><strong>Token Name:</strong> Helios Protocol (HRS)</p>';
-        tableRef += '<p><strong>Amount:</strong> $ 50.00 = '+web3.utils.fromWei(web3.utils.toBN(item.value)).toString()+' HLS</p>';
+        tableRef += '<p><strong>Amount:</strong>'+web3.utils.fromWei(web3.utils.toBN(item.value)).toString()+' HLS</p>';
         options = { day: 'numeric', year: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName:'short'};
         tableRef += '<p><strong>Date:</strong><span> '+d.toLocaleString('en-US',options)+'</span></p>';
         tableRef += '<p><strong>Fees:</strong> '+web3.utils.fromWei(web3.utils.toBN(item.gas_cost)).toString() +'</p>';
@@ -810,6 +835,7 @@ async function refresh_transactions(start_index) {
         tableRef += '</div>';
         tableRef += '</div>';
         $(".transaction_view").append(tableRef);
+        $('.preloader').hide();
     });
     
    
