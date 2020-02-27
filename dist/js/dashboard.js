@@ -1,31 +1,5 @@
 $(document).ready(function () {
-    $(window).on('load', function(event) {
-        //$('.preloader').delay(500).fadeOut(500);
-        $('.preloader').show();
-    });
-    var username = sessionStorage.getItem("username");
-    var password = sessionStorage.getItem("password");
-    var facode = sessionStorage.getItem("facode");
-    set_two_factor_authentication_status(facode);
-    if (username == null && password == null) {
-        window.location.href = './login.html';
-    }
-    var walletmenu = sessionStorage.getItem("walletmenu");
-    //console.log(JSON.parse(walletmenu));
-    $.each(JSON.parse(walletmenu), function (i, item) {
-        $('.live_wallet').prepend(item);
-    });
-
-    $("#lusername").text(username);
-    var keystores = sessionStorage.getItem("online_keystores");
-    populateOnlineKeystores($.parseJSON(keystores), password);
-    
-    sessionStorage.setItem("online_keystores", keystores);
-    afterLoginInit();
-
-    setTimeout(function(){
-        refresh_transactions(0);
-    },1000) 
+    main();
     $(".netselect").find("a").click(function () {
         var selected_network_id = $(this).data("id");
         var selectedtext = $(this).text();
@@ -34,7 +8,7 @@ $(document).ready(function () {
             set_connection_status("Connecting to network with id " + selected_network_id, false)
             connectionMaintainer.setNetworkIdAndReconnect(parseInt(selected_network_id));
         }
-    })
+    });
     $('body').on('click', '.switch_wallet_link', function (e) {
         e.stopPropagation();
         e.preventDefault();
@@ -69,7 +43,6 @@ $(document).ready(function () {
         // }
 
     });
-
     $('#send_transaction_advanced_options_link').click(function () {
         if ($(this).hasClass('active')) {
             //$('#send_transaction_advanced_options_container').hide();
@@ -200,8 +173,6 @@ $(document).ready(function () {
         pending_send_transactions.splice(index, 1);
         refresh_pending_transaction_table()
     });
-
-
     //contact list
     $('#add_contact_form').submit(function (e) {
         e.preventDefault();
@@ -233,7 +204,7 @@ $(document).ready(function () {
     });
     $('#modal-contact-remove-wallet-success , #modal-contact-remove-wallet-failed').on('hidden.bs.modal', function () {
         location.reload();
-    })
+    }); 
     //add local wallet
     $('#generate_offline_wallet_form').submit(function (e) {
         e.preventDefault();
@@ -347,7 +318,6 @@ $(document).ready(function () {
         reader.readAsText(keystore_file);
 
     });
-
     //add online wallet
     $('#generate_online_wallet_form').submit(function (e) {
         e.preventDefault();
@@ -392,7 +362,6 @@ $(document).ready(function () {
             });
 
     });
-
     $('#load_online_wallet_keystore_form').submit(function (e) {
         e.preventDefault();
         //console.log("loading wallet from keystore")
@@ -466,7 +435,6 @@ $(document).ready(function () {
 
 
     });
-
     $('#load_online_wallet_private_key_form').submit(function (e) {
         e.preventDefault();
         //console.log("loading wallet from private key")
@@ -608,8 +576,33 @@ $(document).ready(function () {
                 }
             })
     });
-    
 });
+function main(){
+    $('.preloader').show();
+    var username = sessionStorage.getItem("username");
+    var password = sessionStorage.getItem("password");
+    var facode = sessionStorage.getItem("facode");
+    set_two_factor_authentication_status(facode);
+    if (username == null && password == null) {
+        window.location.href = './login.html';
+    }
+    var walletmenu = sessionStorage.getItem("walletmenu");
+    $.each(JSON.parse(walletmenu), function (i, item) {
+        $('.live_wallet').prepend(item);
+    });
+    $("#lusername").text(username);
+    var keystores = sessionStorage.getItem("online_keystores");
+    populateOnlineKeystores($.parseJSON(keystores), password);
+    sessionStorage.setItem("online_keystores", keystores);
+    afterLoginInit();
+
+    setTimeout(function(){
+        refresh_transactions(0);
+    },1000) 
+    //$('#dash-daterange').datepicker("setDate", new Date(2008,9,03) );
+    $('.preloader').hide();
+
+}
 function set_two_factor_authentication_status(tfa_enabled) {
     if (tfa_enabled) {
 
@@ -731,8 +724,7 @@ $(".tran_send").click(function(){
 $(".tran_receive").click(function(){
     refresh_transactions(0,"receive");
 });
-
-async function refresh_transactions(start_index,tran_type = '') {
+async function refresh_transactions(start_index,tran_type = ''){
     if (sending_account == null) {
         return
     }
@@ -969,7 +961,6 @@ var set_account_status = function (address, name) {
         $('.sending_account_copy').hide().data('copy', '');
     }
 }
-
 function calculate_estimated_tx_fee_loop() {
     var gas_price = web3.utils.toWei($('#input_gas_price').val(), 'gwei')
     gas_price = parseFloat(web3.utils.fromWei(web3.utils.toBN(gas_price), 'ether'));

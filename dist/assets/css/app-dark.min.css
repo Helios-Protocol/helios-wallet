@@ -265,7 +265,7 @@ body {
 .user-profile {
     padding: 0px 16px 0px 30px;
     border-right: 2px solid #787c87;
-    border-left: 1.5px solid #787c87;
+    /*border-left: 1.5px solid #787c87;*/
 }
 
     .user-profile .avatar-xs {

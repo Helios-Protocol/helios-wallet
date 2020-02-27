@@ -316,7 +316,7 @@
             ,
             t.prototype.init = function () {
                 o("#dash-daterange").flatpickr({
-                    mode: "range", defaultDate: [moment().subtract(7, "days").format("YYYY-MM-DD"), moment().format("YYYY-MM-DD")]
+                    mode: "range", defaultDate: [moment().subtract(90, "days").format("YYYY-MM-DD"), moment().format("YYYY-MM-DD")]
                 }
                 ),
                     o("#calendar-widget").flatpickr({

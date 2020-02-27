@@ -24,7 +24,7 @@
     <!-- Begin page -->
     <div id="wrapper">
         <!-- Topbar Start -->
-        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom" id="content">
             <div class="container-fluid">
                 <!--Logo Start-->
                 <a href="layouts-dark.html" class="navbar-brand mr-0 mr-md-2 logo">
@@ -47,99 +47,8 @@
                 <!--Menu Icon End-->
                 <!--Right List Start-->
                 <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
-                    <li class="dropdown d-lg-block" data-toggle="tooltip" data-placement="left" title="Check Your Mail">
-                        <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="false" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </a>
-                    </li>
-                    <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left"
-                        title="8 new unread notifications">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                           aria-expanded="false">
-                            <i data-feather="bell"></i>
-                            <span class="noti-icon-badge"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-                            <!-- item-->
-                            <div class="dropdown-item noti-title border-bottom">
-                                <h5 class="m-0 font-size-16">
-                                    <span class="float-right">
-                                        <a href="#" class="text-dark">
-                                            <small>Clear All</small>
-                                        </a>
-                                    </span>Notification
-                                </h5>
-                            </div>
-                            <div class="slimscroll noti-scroll">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon bg-primary"><i class="uil uil-user-plus"></i></div>
-                                    <p class="notify-details">
-                                        New user registered.<small class="text-muted">5 hours ago</small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon">
-                                        <img src="dist/assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle" alt="" />
-                                    </div>
-                                    <p class="notify-details">Karen Robinson</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Wow ! this admin looks good and awesome design</small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon">
-                                        <img src="dist/assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
-                                    </div>
-                                    <p class="notify-details">Cristina Pride</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Hi, How are you? What about our next meeting</small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom active">
-                                    <div class="notify-icon bg-success"><i class="uil uil-comment-message"></i> </div>
-                                    <p class="notify-details">
-                                        Jaclyn Brunswick commented on Dashboard<small class="text-muted">
-                                            1
-                                            min
-                                            ago
-                                        </small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon bg-danger"><i class="uil uil-comment-message"></i></div>
-                                    <p class="notify-details">
-                                        Caleb Flakelar commented on Admin<small class="text-muted">
-                                            4 days
-                                            ago
-                                        </small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-primary">
-                                        <i class="uil uil-heart"></i>
-                                    </div>
-                                    <p class="notify-details">
-                                        Carlos Crouch liked
-                                        <b>Admin</b>
-                                        <small class="text-muted">13 days ago</small>
-                                    </p>
-                                </a>
-                            </div>
-                            <!-- All-->
-                            <a href="javascript:void(0);"
-                               class="dropdown-item text-center text-primary notify-item notify-all border-top">
-                                View all
-                                <i class="fi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </li>
+                    
+                    
                     <li class="d-sm-block d-none dropdown notification-list align-self-center">
                         <a class="nav-link dropdown-toggle nav-user mr-0">
                             <div class="media user-profile">
@@ -417,6 +326,18 @@
             <div class="rightbar-overlay"></div>
         </div>
     </div>
+    <div class="preloader">
+        <div class="loading">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
     <!-- Vendor js -->
     <script src="dist/assets/js/vendor.min.js"></script>
 
@@ -425,7 +346,7 @@
     <script src="dist/assets/libs/flatpickr/flatpickr.min.js"></script>
 
     <!-- page js -->
-    <script src="dist/assets/js/pages/dashboard.init.js"></script>
+    <!-- <script src="dist/assets/js/pages/dashboard.init.js"></script> -->
 
     <!-- App js -->
     <script src="dist/assets/js/app.min.js"></script>

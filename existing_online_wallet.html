@@ -15,12 +15,16 @@
     <link href="dist/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" />
     <link href="dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="dist/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/js/alertify.css">
+    <script src="dist/js/alertify.js"></script>
+    <script src="dist/js/frontpage.js"></script>
 </head>
 <body>
     <!-- Begin page -->
     <div id="wrapper">
         <!-- Topbar Start -->
-        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom" id="content">
             <div class="container-fluid">
                 <!--Logo Start-->
                 <a href="layouts-dark.html" class="navbar-brand mr-0 mr-md-2 logo">
@@ -43,106 +47,15 @@
                 <!--Menu Icon End-->
                 <!--Right List Start-->
                 <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
-                    <li class="dropdown d-lg-block" data-toggle="tooltip" data-placement="left" title="Check Your Mail">
-                        <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="false" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </a>
-                    </li>
-                    <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left"
-                        title="8 new unread notifications">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                           aria-expanded="false">
-                            <i data-feather="bell"></i>
-                            <span class="noti-icon-badge"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-                            <!-- item-->
-                            <div class="dropdown-item noti-title border-bottom">
-                                <h5 class="m-0 font-size-16">
-                                    <span class="float-right">
-                                        <a href="#" class="text-dark">
-                                            <small>Clear All</small>
-                                        </a>
-                                    </span>Notification
-                                </h5>
-                            </div>
-                            <div class="slimscroll noti-scroll">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon bg-primary"><i class="uil uil-user-plus"></i></div>
-                                    <p class="notify-details">
-                                        New user registered.<small class="text-muted">5 hours ago</small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon">
-                                        <img src="dist/assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle" alt="" />
-                                    </div>
-                                    <p class="notify-details">Karen Robinson</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Wow ! this admin looks good and awesome design</small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon">
-                                        <img src="dist/assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
-                                    </div>
-                                    <p class="notify-details">Cristina Pride</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Hi, How are you? What about our next meeting</small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom active">
-                                    <div class="notify-icon bg-success"><i class="uil uil-comment-message"></i> </div>
-                                    <p class="notify-details">
-                                        Jaclyn Brunswick commented on Dashboard<small class="text-muted">
-                                            1
-                                            min
-                                            ago
-                                        </small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                    <div class="notify-icon bg-danger"><i class="uil uil-comment-message"></i></div>
-                                    <p class="notify-details">
-                                        Caleb Flakelar commented on Admin<small class="text-muted">
-                                            4 days
-                                            ago
-                                        </small>
-                                    </p>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-primary">
-                                        <i class="uil uil-heart"></i>
-                                    </div>
-                                    <p class="notify-details">
-                                        Carlos Crouch liked
-                                        <b>Admin</b>
-                                        <small class="text-muted">13 days ago</small>
-                                    </p>
-                                </a>
-                            </div>
-                            <!-- All-->
-                            <a href="javascript:void(0);"
-                               class="dropdown-item text-center text-primary notify-item notify-all border-top">
-                                View all
-                                <i class="fi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </li>
+                    
+                    
                     <li class="d-sm-block d-none dropdown notification-list align-self-center">
                         <a class="nav-link dropdown-toggle nav-user mr-0">
                             <div class="media user-profile">
                                 <img src="dist/assets/images/users/avatar-7.jpg" alt="user-image" class="rounded-circle align-self-center" />
                                 <div class="media-body text-left align-self-center">
                                     <p class="ml-2 my-0 text-white ls-1">
-                                        <span>Raj Ladumor</span>
+                                        <span id="lusername"></span>
                                     </p>
                                 </div>
                             </div>
@@ -150,10 +63,10 @@
                     </li>
                     <li class="d-sm-block align-self-center">
                         <div class="btn-group mr-1">
-                            <button type="button" class="btn btn-network dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mainnet <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></i></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Mainnet</a>
-                                <a class="dropdown-item" href="#">Hypothesis Testnet</a>
+                            <button type="button" class="btn btn-network dropdown-toggle networkidselect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mainnet <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></i></button>
+                            <div class="dropdown-menu netselect">
+                                <a class="dropdown-item" data-id="1">Mainnet</a>
+                                <a class="dropdown-item" data-id="42">Hypothesis Testnet</a>
                             </div>
                         </div>
                     </li>
@@ -187,10 +100,17 @@
                             </a>
                         </li>
                         <li>
-                            <a href="local_wallet.html">
+                            <a href="javascript: void(0);">
                                 <img src="dist/assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Local Wallets </span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <ul class="nav-second-level sub_menu local_wallet" aria-expanded="false">
+                                
+                                <li>
+                                    <a href="local_wallet.html">Add New Wallet</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="javascript: void(0);">
@@ -198,7 +118,7 @@
                                 <span> Online Wallets </span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <ul class="nav-second-level sub_menu" aria-expanded="false">
+                            <ul class="nav-second-level sub_menu live_wallet" aria-expanded="false">
                                 <li>
                                     <a href="existing_online_wallet.html">Existing Wallet</a>
                                 </li>
@@ -226,7 +146,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a  id="logout">
                                 <img src="dist/assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Logout </span>
                             </a>
@@ -513,6 +433,18 @@
             </div>
         </div>
     </div>
+    <div class="preloader">
+        <div class="loading">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
     <!--Delete failed Pop-up End-->
     <!-- Vendor js -->
     <script src="dist/assets/js/vendor.min.js"></script>
@@ -522,10 +454,14 @@
     <script src="dist/assets/libs/flatpickr/flatpickr.min.js"></script>
 
     <!-- page js -->
-    <script src="dist/assets/js/pages/dashboard.init.js"></script>
+    <!-- <script src="dist/assets/js/pages/dashboard.init.js"></script> -->
 
     <!-- App js -->
     <script src="dist/assets/js/app.min.js"></script>
+    <script src="dist/js/dashboard.js" ></script>
+    <script src="dist/js/script.js?version=16" ></script>
+    <script src="dist/js/main.js?version=16" ></script>
+    <script src="dist/js/frontpage.js?version=16" ></script>
 
 
 </body>
