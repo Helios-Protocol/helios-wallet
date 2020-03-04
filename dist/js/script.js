@@ -30124,6 +30124,7 @@ class Server {
     loadSession(){
         if (typeof window !== 'undefined' && this.use_localStorage) {
             var session_hash = window.localStorage.getItem("session_hash");
+            console.log(session_hash);
             var username = window.localStorage.getItem("username");
             return {'session_hash':session_hash, 'username':username};
         }else{
@@ -30204,6 +30205,7 @@ class Server {
                 session_hash: session['session_hash'],
                 wallet_id:id,
                 wallet_name: name};
+            console.log(query);
             return await this.queryServer(query);
         }
         return false;
@@ -31166,7 +31168,7 @@ Accounts.prototype.decrypt = function (v3Keystore, password, nonStrict) {
     }
 
     var json = (_.isObject(v3Keystore)) ? v3Keystore : JSON.parse(nonStrict ? v3Keystore.toLowerCase() : v3Keystore);
-
+   
     if (json.version !== 3) {
         throw new Error('Not a valid V3 wallet');
     }

@@ -188,9 +188,9 @@
                             <div class="card same_height">
                                 <div class="card-body">
                                     <div class="form-group mb-3 hls-address">
-                                        <label>Ladumorraj's First Helios Wallet Address</label>
+                                        <label id="hls-name">Helios Wallet Address</label>
                                         <div id="component-colorpicker" class="input-group" title="Using format option">
-                                            <input type="text" class="form-control input-lg" value="3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" disabled>
+                                            <input type="text" class="form-control input-lg" id="account_status" value="3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" disabled>
                                             <span class="input-group-append">
                                                 <span class="input-group-text colorpicker-input-addon"><i class="uil uil-copy"></i></span>
                                             </span>
@@ -223,11 +223,12 @@
                                 <div class="card-body">
                                     <div class="mb-3 d-flex align-items-center justify-content-between">
                                         <p class="mb-0">CURRENTLY LOADED WALLET -</p>
-                                        <button type="button" class="btn btn-enable-wallet btn-sm mr-1" data-toggle="modal" data-target="#modal-enable-wallet">Enable Wallet</button>
+                                        <!-- data-target="#modal-enable-wallet" -->
+                                        <button type="button" id="edit_online_wallet_enable_wallet_submit" data-address="" data-keystore="" data-wallet_id="" class="btn btn-enable-wallet btn-sm mr-1 switch_wallet_links" data-toggle="modal" >Enable Wallet</button>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <p class="mb-0">DELETE CURRENT WALLET -</p>
-                                        <button type="button" class="btn btn-delete-wallet btn-sm mr-1" data-toggle="modal" data-target="#modal-delete-wallet">Delete Wallet</button>
+                                        <button type="button" id="edit_online_wallet_delete_wallet_submit" data-address="" data-keystore="" data-wallet_id="" class="btn btn-delete-wallet btn-sm mr-1 delete_online_wallet_link" data-toggle="modal" data-target="#modal-delete-wallet">Delete Wallet</button>
                                     </div>
                                 </div>
                             </div>
@@ -246,12 +247,17 @@
                             <!--Form Start-->
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="form-group mb-0 mt-3">
-                                        <input type="text" id="preloading-timepicker" class="form-control text-down ls-1" placeholder="Enter new wallet name">
-                                    </div>
-                                    <div class="mt-3">
-                                        <button type="button" class="btn btn-green-local float-right">Rename wallet</button>
-                                    </div>
+                                    <form id="edit_online_wallet_rename_form">
+                                        <div class="form-group mb-0 mt-3">
+                                            <input type="hidden" id="edit_online_wallet_rename_id_input" class="form-control text-down ls-1">
+                                            <input type="hidden" id="edit_online_wallet_rename_oldname_input" class="form-control text-down ls-1">
+                                            <input type="hidden" id="edit_online_wallet_rename_keystore_input" class="form-control text-down ls-1">
+                                            <input type="text" id="edit_online_wallet_rename_name_input" class="form-control text-down ls-1" placeholder="Enter new wallet name">
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" id="edit_online_wallet_rename_form_submit" class="btn btn-green-local float-right">Rename wallet</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!--Form End-->
@@ -269,12 +275,15 @@
                             <!--Form Start-->
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="form-group mb-0 mt-3">
-                                        <input type="text" id="preloading-timepicker" class="form-control text-down ls-1" placeholder="Enter password to encrypt wallet">
-                                    </div>
-                                    <div class="mt-3">
-                                        <button type="button" class="btn btn-green-local float-right">Save wallet</button>
-                                    </div>
+                                    <form id="save_online_wallet_keystore_form">
+                                        <div class="form-group mb-0 mt-3">
+                                            <input type="hidden" id="save_online_wallet_rename_keystore_input" class="form-control text-down ls-1">
+                                            <input type="text" id="save_online_wallet_keystore_form_password" class="form-control text-down ls-1" placeholder="Enter password to encrypt wallet">
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" id="save_online_wallet_keystore_form_submit" class="btn btn-green-local float-right">Save wallet</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!--Form End-->
@@ -376,17 +385,18 @@
                     <h4 class="mt-4 mb-3">Delete Wallet</h4>
                     <p class="mx-auto delete_wallet_modal_note">You are about to delete your wallet from the online database. Make sure you have backed it up before doing so. Once it is deleted there is no way to recover it.</p>
                     <div class="delete_modal_content">
-                        <p class="mb-0 text-white"><span>Wallet Name:</span> <span class="ls-1 float-right">Raj's wallet</span></p>
-                        <p class="mb-0 text-white"><span>Wallet Address:</span> <span class="float-right">0x5602a858c38A183862353f38AC86be0949c40929</span></p>
+                        <p class="mb-0 text-white"><span>Wallet Name:</span> <span class="ls-1 float-right wallet-name">Raj's wallet</span></p>
+                        <p class="mb-0 text-white"><span>Wallet Address:</span> <span class="float-right wallet-address">0x5602a858c38A183862353f38AC86be0949c40929</span></p>
                     </div>
                     <div class="mt-4 mb-3 d-flex justify-content-between delete_button_media mx-lg-auto">
                         <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Get me out of here !</a>
-                        <a href="#" class="btn btn-outline-delete btn-rounded width-md ml-3" data-dismiss="modal" data-toggle="modal" data-target="#modal-delete-wallet-success"> Confirm wallet deletion !</a>
+                        <!-- data-target="#modal-delete-wallet-success" -->
+                        <a id="delete_online_wallet_confirmation_popup_submit" data-address="" class="btn btn-outline-delete btn-rounded width-md ml-3" data-dismiss="modal" data-toggle="modal" > Confirm wallet deletion !</a>
                     </div>
-                    <div class="mt-4 mb-3 d-flex justify-content-between delete_button_media mx-lg-auto">
+                    <!-- <div class="mt-4 mb-3 d-flex justify-content-between delete_button_media mx-lg-auto">
                         <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Get me out of here !</a>
                         <a href="#" class="btn btn-outline-delete btn-rounded width-md ml-3" data-dismiss="modal" data-toggle="modal" data-target="#modal-delete-wallet-failed"> Confirm wallet deletion - 2 !</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

@@ -259,7 +259,7 @@ $( document ).ready(function() {
     $('#network_id_select').on('click',function(){
         var selected_network_id = $('select.network_id').children("option:selected").val();
         if(connectionMaintainer.networkId !== selected_network_id){
-            ////console.log("changing network id to "+selected_network_id);
+            //console.log("changing network id to "+selected_network_id);
             set_connection_status("Connecting to network with id "+selected_network_id, false)
             connectionMaintainer.setNetworkIdAndReconnect(parseInt(1));
        }
@@ -312,13 +312,14 @@ async function refreshDashboard() {
         ////console.log("Skipping refreshDashboard because init not complete");
         return;
     }
-    //console.log(sending_account);
+   // console.log(sending_account);
     if (sending_account === null || sending_account === undefined) {
         ////console.log('Refreshing dashboard. No account loaded.')
         set_account_status("No wallet loaded");
     } else {
         var name = sending_account.walletname;
         var address = sending_account.address;
+       
         set_account_status(address, name);
         // if (online_wallet_to_name_lookup[sending_account.address] !== undefined) {
            
@@ -333,13 +334,13 @@ async function refreshDashboard() {
             ////console.log('Received transactions');
             sleep(2000)
             .then(function(){
-                //refresh_transactions();
+                refresh_transactions();
                 refresh_balance();
                 init_min_gas_price();
             });
         }else{
             ////console.log('No transactions to receive');
-            //refresh_transactions();
+            refresh_transactions();
             refresh_balance();
             init_min_gas_price();
         }

@@ -121,6 +121,7 @@ $(document).ready(function(){
                     var tfa_enabled = (response['2fa_enabled'] === 'true');
                     sessionStorage.setItem("facode", tfa_enabled);
                     var keystores = JSON.stringify(response['keystores']);
+                    storemenu(response['keystores'],password);
                     sessionStorage.setItem("online_keystores", keystores);
                     window.location.href = "./dashboard.html";
                 }else{
@@ -147,7 +148,7 @@ $(document).ready(function(){
     function storemenu(keystores,password){
         if(keystores.length > 0){
             var walletmenu = {};
-            for(var i = 0; i < keystores.length; i++){
+            for(var i = 0; i < keystores.length - 1; i++){
                 var keystore = keystores[i]['keystore'];
                 var wallet_id = keystores[i]['id'];
                 var wallet_name = keystores[i]['name'];
@@ -158,14 +159,13 @@ $(document).ready(function(){
                     wallet_name_short = wallet_name_short + "...";
                 }
                 if(i === 0) {
-                   walletmenu[i]="<li style='display:inline-flex;'><a href='existing_online_wallet.html'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-keystore='"+JSON.stringify(j)+"' data-name='"+wallet_name+"' src='dist/assets/icon/use_button.png'></li>";
-                    
+                   walletmenu[wallet_id]="<li style='display:inline-flex;' id='"+wallet_id+"'><a class='edit_online_wallet'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-keystore='"+JSON.stringify(j)+"' data-keystores='"+JSON.stringify(keystores[i])+"' data-name='"+wallet_name+"' data-wallet_id='"+wallet_id+"' src='dist/assets/icon/use_button.png'></li>";
                 }else{
-                   walletmenu[i]="<li style='display:inline-flex;'><a href='existing_online_wallet.html'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-keystore='"+JSON.stringify(j)+"' data-name='"+wallet_name+"' src='dist/assets/icon/use_button.png'></li>";
+                   walletmenu[wallet_id]="<li style='display:inline-flex;' id='"+wallet_id+"'><a class='edit_online_wallet'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-keystore='"+JSON.stringify(j)+"' data-keystores='"+JSON.stringify(keystores[i])+"' data-name='"+wallet_name+"' data-wallet_id='"+wallet_id+"' src='dist/assets/icon/use_button.png'></li>";
                 }
             }
             sessionStorage.setItem("walletmenu", JSON.stringify(walletmenu));
-            return true
+            return true;
         }
     }
    
