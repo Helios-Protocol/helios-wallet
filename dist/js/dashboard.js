@@ -721,6 +721,7 @@ function main(){
     var username = sessionStorage.getItem("username");
     var password = sessionStorage.getItem("password");
     var facode = sessionStorage.getItem("facode");
+    console.log(facode);
     set_two_factor_authentication_status(facode);
     if (username == null && password == null) {
         window.location.href = './login.html';
@@ -731,6 +732,7 @@ function main(){
         $('.live_wallet').prepend(item);
     });
     $("#lusername").text(username);
+    $(".lusername").val(username);
     var keystores = sessionStorage.getItem("online_keystores");
     populateOnlineKeystores($.parseJSON(keystores), password);
     sessionStorage.setItem("online_keystores", keystores);
@@ -760,6 +762,8 @@ function main(){
                 ////console.log(current_wallet.wallet_id);
                 set_account_status(current_wallet.address,current_wallet.walletname);
                 prepareEditOnlineWalletPage(current_wallet.address,current_wallet.walletname,current_wallet.wallet_id,current_wallet.keystore,current_wallet);
+                $('.paper_private').attr("src","https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl="+current_wallet.privateKey);
+                $('#en_privateKey').text(current_wallet.privateKey);
             }
             sending_account = current_wallet;
         }
@@ -800,7 +804,8 @@ function prepareEditOnlineWalletPage(wallet_address, wallet_name, wallet_id, key
     $('#currently_editing_online_wallet_address_status').html(wallet_name + " <br>" + wallet_address)
 }
 function set_two_factor_authentication_status(tfa_enabled) {
-    if (tfa_enabled) {
+    console.log(tfa_enabled);
+    if (tfa_enabled == "true") {
 
         $('#two_factor_authentication_status').text('');
         $('#two_factor_authentication_status').removeClass("Disabled").addClass("Enabled");
@@ -1150,9 +1155,14 @@ var set_account_status = function (address, name) {
     if (name === undefined) {
         $("#hls-name").text(name);
         $('#account_status').val(address);
+        $('#account_status_paper').text(address);
+        $('.paper_address').attr("src","https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl="+address);
+        
     } else {
         $("#hls-name").text(name);
         $('#account_status').val(address);
+        $('#account_status_paper').text(address);
+        $('.paper_address').attr("src","https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl="+address);
     }
 
     if (web3 !== undefined && address !== undefined && web3.utils.isAddress(address.toLowerCase())) {

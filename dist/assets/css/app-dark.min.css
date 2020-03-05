@@ -479,6 +479,82 @@ body {
 
 .left-side-menu-condensed .user-box {
     display: none
+}.paper_wallet {
+    width: 1025px;
+    position: relative;
+}
+
+.paper_wallet_size {
+    max-width: 100%;
+    width: 100%;
+}
+
+.paper_wallet_content_head {
+    position: absolute;
+    top: 40px;
+    left: 140px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+    .paper_wallet_content_head h1 {
+        color: #fff;
+        letter-spacing: 4px;
+        font-weight: 200;
+        font-size: 14px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .paper_wallet_content_head h2 {
+        color: #fff;
+        letter-spacing: 4px;
+        font-size: 14px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+.paper_margin {
+    margin-bottom: 30px;
+}
+
+.paper_wallet_content_bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 140px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+    .paper_wallet_content_bottom h1 {
+        color: #fff;
+        letter-spacing: 4px;
+        font-weight: 200;
+        font-size: 14px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .paper_wallet_content_bottom h2 {
+        color: #fff;
+        letter-spacing: 4px;
+        font-size: 14px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+.paper_wallet_code_key {
+    position: absolute;
+    top: 89px;
+    right: 317px;
+}
+
+.paper_wallet_code_address {
+    position: absolute;
+    top: 89px;
+    right: 55px;
+}
+
+.paper_key {
+    width: 80%;
+}
+
+.paper_wallet_scroll {
+    overflow-x: auto;
 }
 
 @media (min-width:769px) {
