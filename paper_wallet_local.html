@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Helios Wallet</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="An infinitely scalable cryptocurrency and smart contract platform based on fully parallelized concurrent blockchains. The Helios platform is designed from the ground up to be futureproof with secure, high speed, and low fee transactions, and to enable truly decentralized and democratic applications." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="dist/assets/images/favicon.ico">
+        <!-- plugins -->
+        <link href="dist/assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="dist/assets/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="dist/assets/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="dist/assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="dist/assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+        <!-- App css -->
+        <link href="dist/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" />
+        <link href="dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="dist/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/js/alertify.css">
+        <script src="dist/js/alertify.js"></script>
+        <script src="dist/js/frontpage.js"></script>
+    </head>
+<body>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- Topbar Start -->
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom" id="content">
+            <div class="container-fluid">
+                <!--Logo Start-->
+                <a href="layouts-dark.html" class="navbar-brand mr-0 mr-md-2 logo">
+                    <span class="logo-lg">
+                        <img src="dist/assets/images/logo.png" alt="" height="40" />
+                    </span>
+                    <span class="logo-sm">
+                        <img src="dist/assets/images/helios_logo_solo.png" alt="" height="35">
+                    </span>
+                </a>
+                <!--Logo End-->
+                <!--Menu Icon Start-->
+                <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+                    <li class="">
+                        <button class="button-menu-mobile open-left">
+                            <i data-feather="menu" class="menu-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+                <!--Menu Icon End-->
+                <!--Right List Start-->
+                <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+                    
+                    
+                    <li class="d-sm-block d-none dropdown notification-list align-self-center">
+                        <a class="nav-link dropdown-toggle nav-user mr-0">
+                            <div class="media user-profile">
+                                <img src="dist/assets/images/users/avatar-7.jpg" alt="user-image" class="rounded-circle align-self-center" />
+                                <div class="media-body text-left align-self-center">
+                                    <p class="ml-2 my-0 text-white ls-1">
+                                        <span id="lusername"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="d-sm-block align-self-center">
+                        <div class="btn-group mr-1">
+                            <button type="button" class="btn btn-network dropdown-toggle networkidselect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mainnet <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></i></button>
+                            <div class="dropdown-menu netselect">
+                                <a class="dropdown-item" data-id="1">Mainnet</a>
+                                <a class="dropdown-item" data-id="42">Hypothesis Testnet</a>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="dropdown notification-list" data-toggle="tooltip" data-placement="left" title="Settings">
+                        <a href="javascript:void(0);" class="nav-link right-bar-toggle">
+                            <i data-feather="settings"></i>
+                        </a>
+                    </li>-->
+                </ul>
+                <!--Right List End-->
+            </div>
+        </div>
+        <!--Topbar End-->
+        <!--Left Sidebar Start-->
+        <div class="left-side-menu">
+            <div class="sidebar-content">
+                <!--- Sidemenu -->
+                <div id="sidebar-menu" class="slimscroll-menu">
+                    <ul class="metismenu" id="menu-bar">
+                        <!--<li class="menu-title">Navigation</li>-->
+                        <li>
+                            <a href="dashboard_local.html">
+                                <img src="dist/assets/icon/menu1.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Dashboard </span>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="transactions.html">
+                                <img src="dist/assets/icon/menu2.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Transactions </span>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="javascript: void(0);">
+                                <img src="dist/assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Local Wallets </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level sub_menu local_wallet" aria-expanded="false">
+                                
+                                <li>
+                                    <a href="local_wallet_local.html">Add New Wallet</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- <li>
+                            <a href="javascript: void(0);">
+                                <img src="dist/assets/icon/menu4.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Online Wallets </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level sub_menu live_wallet" aria-expanded="false">
+                                <li>
+                                    <a href="existing_online_wallet.html">Existing Wallet</a>
+                                </li> 
+                                <li>
+                                    <a href="add_online_wallet.html">Add New Wallet</a>
+                                </li>
+                            </ul>
+                        </li> -->
+                        <li>
+                            <a href="paper_wallet_local.html">
+                                <img src="dist/assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Paper Wallet </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="local_logout">
+                                <img src="dist/assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Go Back To Sign In </span>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="contact_list.html">
+                                <img src="dist/assets/icon/menu5.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Contact List </span>
+                            </a>
+                        </li> -->
+                        <!--<li>
+                            <a href="account_setting.html">
+                                <img src="dist/assets/icon/menu6.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Account </span>
+                            </a>
+                        </li>-->
+                        <!-- <li>
+                            <a href="setting.html">
+                                <img src="dist/assets/icon/menu7.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Setting </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a  id="logout">
+                                <img src="dist/assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Logout </span>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!--Left Sidebar End-->
+        <!--Contact Start-->
+        <div class="content-page">
+            <div class="content">
+                <!--Main Start-->
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!--Top heading Start-->
+                            <div class="row page-title-2 align-items-center d-none d-sm-block">
+                                <div class="col-sm-12 col-xl-12">
+                                    <h4 class="mb-1 mt-0">Paper Wallet</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <!--Top heading Start-->
+                            <div class="row page-title align-items-center d-md-none d-sm-none">
+                                <div class="col-sm-4 col-xl-6">
+                                    <h4 class="mb-1 mt-0">Paper Wallet</h4>
+                                </div>
+                            </div>
+                            <!--Top heading End-->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="paper_wallet_scroll" id="paper_wallet_scrollid">
+                                        <div class="paper_wallet">
+                                            <div><img src="dist/assets/images/paper_wallet_back.jpg" alt="user-image" class="paper_wallet_size"></div>
+                                            <div class="paper_wallet_content_head">
+                                                <div class="paper_margin">
+                                                    <h1>HELIOS WALLET NAME :</h1>
+                                                    <h2>HELIOS</h2>
+                                                </div>
+                                                <div>
+                                                    <h1>HELIOS WALLET USERNAME :</h1>
+                                                    <h2 id="hls-name"></h2>
+                                                </div>
+                                            </div>
+                                            <div class="paper_wallet_content_bottom">
+                                                <div class="paper_margin">
+                                                    <h1>YOUR ADDRESS :</h1>
+                                                    <h2 id="account_status_paper"></h2>
+                                                </div>
+                                                <div>
+                                                    <h1>YOUR PRIVATE KEY :</h1>
+                                                    <h2 id="en_privateKey"></h2>
+                                                </div>
+                                            </div>
+                                            <div class="paper_wallet_code_key">
+                                                <img src="https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" class="paper_key paper_private">
+                                            </div>
+                                            <div class="paper_wallet_code_address">
+                                                <img src="https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" class="paper_key paper_address">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button type="button" class="btn btn-token-selection-2" onclick="myFunction()"> DOWNLOAD PDF / PRINT </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Wallet Page End-->
+            <!-- END wrapper -->
+            <!-- Right Sidebar -->
+            
+            <!-- /Right-bar -->
+            <!-- Right bar overlay-->
+            <div class="rightbar-overlay"></div>
+        </div>
+        <!--Contact End-->
+        <!--Footer Start-->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 font-size-11 text-white">
+                        Helios Wallet Version 0.2
+                    </div>
+                    <div class="col-12 font-size-12 text-white">
+                        &copy; COPYRIGHT 2019. HELIOS BLOCKCHAIN TECHNOLOGIES LTD. ALL RIGHTS RESERVED.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--Footer End-->
+        <div class="preloader">
+            <div class="loading">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function myFunction() {
+            var printContents = document.getElementById('paper_wallet_scrollid').innerHTML;
+            var originalContents = document.body.innerHTML;
+            console.log(printContents);
+            document.body.innerHTML = printContents;
+
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+    <!-- Vendor js -->
+    <script src="dist/assets/js/vendor.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="dist/assets/libs/moment/moment.min.js"></script>
+    <script src="dist/assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- page js -->
+    <!-- <script src="dist/assets/js/pages/dashboard.init.js"></script> -->
+
+    <!-- App js -->
+    <script src="dist/assets/js/app.min.js"></script>
+    <script src="dist/js/dashboard.js" ></script>
+    <script src="dist/js/script.js?version=16" ></script>
+    <script src="dist/js/main.js?version=16" ></script>
+    <script src="dist/js/frontpage.js?version=16" ></script>
+
+
+</body>
+</html>

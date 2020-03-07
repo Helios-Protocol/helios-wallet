@@ -145,6 +145,12 @@ $(document).ready(function(){
         sessionStorage.removeItem("password");
         sessionStorage.removeItem("online_keystores");
     });
+    $("#local_logout").on("click", function () {
+        window.location.href = "./login.html";
+        // sessionStorage.removeItem("username");
+        // sessionStorage.removeItem("password");
+        // sessionStorage.removeItem("online_keystores");
+    });
     function storemenu(keystores,password){
         if(keystores.length > 0){
             var walletmenu = {};
