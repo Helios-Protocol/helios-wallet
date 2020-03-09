@@ -165,9 +165,9 @@ $(document).ready(function(){
                     wallet_name_short = wallet_name_short + "...";
                 }
                 if(i === 0) {
-                   walletmenu[wallet_id]="<li style='display:inline-flex;' id='"+wallet_id+"'><a class='edit_online_wallet'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-keystore='"+JSON.stringify(j)+"' data-keystores='"+JSON.stringify(keystores[i])+"' data-name='"+wallet_name+"' data-wallet_id='"+wallet_id+"' src='dist/assets/icon/use_button.png'></li>";
+                   walletmenu[wallet_id]="<li class='local_remove' id='"+wallet_id+"'><a class='edit_online_wallet'>"+wallet_name_short+"</a><label class='switch' id='switch_wallet_link'  data-keystore='"+JSON.stringify(j)+"' data-keystores='"+JSON.stringify(keystores[i])+"' data-name='"+wallet_name+"' data-wallet_id='"+wallet_id+"'><input type='checkbox' name='live_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
                 }else{
-                   walletmenu[wallet_id]="<li style='display:inline-flex;' id='"+wallet_id+"'><a class='edit_online_wallet'>"+wallet_name_short+"</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-keystore='"+JSON.stringify(j)+"' data-keystores='"+JSON.stringify(keystores[i])+"' data-name='"+wallet_name+"' data-wallet_id='"+wallet_id+"' src='dist/assets/icon/use_button.png'></li>";
+                   walletmenu[wallet_id]="<li class='local_remove' id='"+wallet_id+"'><a class='edit_online_wallet'>"+wallet_name_short+"</a><label class='switch' id='switch_wallet_link'  data-keystore='"+JSON.stringify(j)+"' data-keystores='"+JSON.stringify(keystores[i])+"' data-name='"+wallet_name+"' data-wallet_id='"+wallet_id+"'><input type='checkbox' name='live_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
                 }
             }
             sessionStorage.setItem("walletmenu", JSON.stringify(walletmenu));

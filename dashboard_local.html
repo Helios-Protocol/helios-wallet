@@ -222,7 +222,7 @@
                                                     <div id="component-colorpicker" class="input-group" title="Using format option">
                                                         <input type="text" class="form-control input-lg" id="account_status" value="3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" disabled>
                                                         <span class="input-group-append">
-                                                            <span class="input-group-text colorpicker-input-addon"><i class="uil uil-copy"></i></span>
+                                                            <span class="input-group-text colorpicker-input-addon" onclick="myFunctionCopy(this)"><i class="uil uil-copy"></i></span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -664,7 +664,7 @@
                                                     <img src="dist/assets/icon/incoming.png" class="avatar rounded align-self-center" alt="Helios">
                                                     <h5 class="mt-3 mb-0 text-white">Incoming Transaction</h5>
                                                     <p class="text-down fw-3 mt-2 mb-4">If you are expecting to receive a transaction, click this button to check and process it.</p>
-                                                    <button type="button" class="btn btn-check-now btn-sm mr-1">CHECK NOW</button>
+                                                    <button type="button" id="incoming_transactions_accept" class="btn btn-check-now btn-sm mr-1">CHECK NOW</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -921,6 +921,25 @@
                     <p class="w-75 mx-auto tran_success_modal_note">Your transaction has been declined.</p>
                     <div class="mt-2">
                         <a href="#" class="btn btn-outline-done btn-rounded width-md" data-dismiss="modal"> Retry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal_success" id="modal-enable-wallet" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content ">
+                <div class="modal-body text-center enable_wallet_modal">
+                    <!--<div class="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>-->
+                    <i class="uil uil-wallet"></i>
+                    <h4 class="mt-4 mb-2">Currently loaded wallet</h4>
+                    <p class="w-75 mx-auto enable_wallet_modal_note">0x5602a858c38A183862353f38AC86be0949c40929</p>
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Okay !</a>
                     </div>
                 </div>
             </div>
