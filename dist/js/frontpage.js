@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
     web3 = helios_web3;
-    $(".btnreg").on("click", function (e) {
+    $('#regform').submit(function (e) {
         e.preventDefault();
         var username = $(".username").val();
         var email = $(".email").val();
@@ -65,7 +65,11 @@ $(document).ready(function(){
           
         }
     });
-    $("#btnlogin").on("click", function (e) {
+    $('#loginform').submit(function () {
+        // e.preventDefault();
+        // e.stopPropagation();
+       // e.stopImmediatePropagation();
+        $(".preloader").show();
         e.preventDefault();
         var username = $(".username").val();
         var password = $(".password").val();
@@ -74,6 +78,7 @@ $(document).ready(function(){
         }else if(password == ""){
             alertify.error("Password cannot be left blank.");
         }else{
+            $(".preloader").show();
             server.signIn(username, password, "")
             .then(function (response) {
                 if (response !== false && "success" in response) {
@@ -100,8 +105,11 @@ $(document).ready(function(){
                 }
             });
         }
+        $(".preloader").hide();
+        //e.preventDefault();
+       return false;
     });
-    $(".2fa").on("click", function (e) {
+    $('#loginform').submit(function (e) {
         e.preventDefault();
         var facode = $(".facode").val();
         var username = sessionStorage.getItem("username");
@@ -154,7 +162,7 @@ $(document).ready(function(){
     function storemenu(keystores,password){
         if(keystores.length > 0){
             var walletmenu = {};
-            for(var i = 0; i < keystores.length - 1; i++){
+            for(var i = 1; i < keystores.length - 1; i++){
                 var keystore = keystores[i]['keystore'];
                 var wallet_id = keystores[i]['id'];
                 var wallet_name = keystores[i]['name'];

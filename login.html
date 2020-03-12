@@ -39,8 +39,19 @@
             style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <div class="page_loader"></div>
-
+    <div class="preloader">
+        <div class="loading">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <!-- <img src="dist/assets/images/loader.gif"/> -->
+        </div>
+    </div>
     <!-- Login start -->
     <div class="login-7 tab-box">
         <div class="container-fluid">
@@ -82,7 +93,7 @@
                                 </a>
                             </div>
                             <h3>Login into your account</h3>
-                            <form method="">
+                            <form id="loginform">
                                 <div class="form-group form-box">
                                     <input type="text" name="username" class="input-text username"
                                         placeholder="Username">
@@ -94,7 +105,7 @@
                                     <img src="dist/login_assets/img/password.png" alt="logo">
                                 </div>
                                 <div class="form-group float-left">
-                                    <button type="button" class="btn-md btn-theme " id="btnlogin">Login <img
+                                    <button type="submit" class="btn-md btn-theme " id="btnlogin">Login <img
                                             src="dist/login_assets/img/right-arrow.png" alt="logo"
                                             class="ml-1"></button>
                                 </div>
