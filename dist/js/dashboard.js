@@ -56,7 +56,11 @@ $(document).ready(function () {
         var keystore = $(this).data('keystore');
         sending_account = keystore;
         refreshDashboard();
+        var wallet_name_short = keystore.address.substr(0, 15) + "...";
+        set_account_status_local_offline(keystore.address, wallet_name_short);
+        set_account_status_local(keystore.address, wallet_name_short);
         sessionStorage.setItem("enabled_wallet_local", JSON.stringify(keystore));
+        sessionStorage.setItem("enabled_wallet", JSON.stringify(keystore));
         $(".enable_wallet_modal_note").text(sending_account.address);
         $("#modal-enable-wallet").modal("show");
         $(".preloader").css("display", "none");
@@ -170,7 +174,7 @@ $(document).ready(function () {
                 $("#modal-transaction-confirm").modal("hide");
                 $("#modal-transaction-success").modal("show");
                 clear_vars();
-                //setTimeout(refreshDashboard, 2000);
+                refreshDashboard();
                 $('#input_amount').val("").trigger("change");
                 $('#input_to').val("").trigger("change");
                 updateInputLabels();
@@ -242,7 +246,7 @@ $(document).ready(function () {
         $('#generate_offline_wallet_password').val("");
         $('#generate_offline_wallet_password').trigger("change");
         addOfflineWallet(new_wallet);
-        refreshDashboard();
+        //refreshDashboard();
         alertify.success("The new wallet has been loaded and added to local wallets on the top menu.");
     });
     $('#generate_offline_wallet_form_local').submit(function (e) {
@@ -705,9 +709,10 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.edit_online_wallet', function (e) {
-        var current = $(this).next("label.switch_wallet_link").data("keystores");
-        var wallet_id = $(this).next("label.switch_wallet_link").data("wallet_id");
+        var current = $(this).prev("label#switch_wallet_link").data("keystores");
+        var wallet_id = $(this).prev("label#switch_wallet_link").data("wallet_id");
         var password = sessionStorage.getItem("password");
+        console.log(current);
         var current_wallet = web3.eth.accounts.decrypt(JSON.parse(current.keystore), password, null, current.name);
         current_wallet['wallet_id'] = wallet_id;
         current_wallet['keystore'] = current.keystore;
@@ -719,6 +724,12 @@ $(document).ready(function () {
 
         sessionStorage.setItem("current_wallet_local", JSON.stringify(current));
         window.location.href = 'existing_online_wallet_local.html';
+    });
+    $('body').on('click', '.edit_online_wallet_local_live', function (e) {
+        var current = $(this).next("label#switch_wallet_link_local").data("keystore");
+
+        sessionStorage.setItem("current_wallet", JSON.stringify(current));
+        window.location.href = 'existing_offline_wallet.html';
     });
     $('body').on('click', '.delete_online_wallet_link', function (e) {
         var wallet_address = $(this).data('address');
@@ -897,7 +908,9 @@ function main() {
     var password = sessionStorage.getItem("password");
     var facode = sessionStorage.getItem("facode");
     var pathname = window.location.pathname.split("/");
-
+    if(pathname[pathname.length - 1] == "index.html"){
+        window.location.href = './login.html';
+    }
     if (username == null && password == null && (pathname[pathname.length - 1] != "local_wallet_local.html" && pathname[pathname.length - 1] != "dashboard_local.html" && pathname[pathname.length - 1] != "existing_online_wallet_local.html" && pathname[pathname.length - 1] != "paper_wallet_local.html")) {
         window.location.href = './login.html';
     } else {
@@ -992,7 +1005,24 @@ function main() {
                     }
                 })
             }
-            refreshDashboard();
+            //refreshDashboard();
+        } else if(pathname[pathname.length - 1] == "existing_offline_wallet.html"){
+            var current_wallet = JSON.parse(sessionStorage.getItem("enabled_wallet_local"));
+            if (current_wallet != null) {
+                var wallet_name_short = current_wallet.address.substr(0, 15) + "...";
+                set_account_status_local_offline(current_wallet.address, wallet_name_short);
+                prepareEditOfflineWalletPage(current_wallet.address, '', '', current_wallet, current_wallet);
+
+                sending_account = current_wallet;
+                var address_wallet = current_wallet.address;
+                $(document).find(".switch").each(function () {
+                    var add = $(this).attr("data-address");
+                    if (add == address_wallet) {
+                        $(this).find("input[type='checkbox']").prop('checked', true);
+                    }
+                })
+            }
+            
         } else {
             var current_wallet = JSON.parse(sessionStorage.getItem("enabled_wallet"));
             if (current_wallet != null) {
@@ -1002,23 +1032,32 @@ function main() {
                 $('#en_privateKey').text(current_wallet.privateKey);
 
                 sending_account = current_wallet;
-                refreshDashboard();
+                //refreshDashboard();
                 var address_wallet = current_wallet.address;
                 $(document).find(".switch").each(function () {
                     var add = $(this).attr("data-address");
                     if (add == address_wallet) {
-                        $(this).find("input[type='checkbox']").prop('checked', true);
+                        $(this).prev("input[type='radio']").prop('checked', true);
                     }
                 })
             }
         }
         afterLoginInit();
-        setTimeout(function () {
-            refresh_transactions(0);
-        }, 1000)
+        refreshDashboard();
+        // setTimeout(function () {
+        //     refresh_transactions(0);
+        // }, 1000)
     }
-    $('.preloader').hide();
+    
 }
+function prepareEditOfflineWalletPage(wallet_address, wallet_name, wallet_id, keystore,keystores=''){
+    //Add the correct data to the editing page
+    $('#currently_editing_offline_wallet_address').val(wallet_address);
+    $('#currently_editing_offline_wallet_address_status').html(wallet_address);
+    $('#edit_offline_wallet_enable_wallet_submit').data('address', wallet_address);
+    $('#edit_offline_wallet_delete_wallet_submit').data('address', wallet_address);
+}
+
 function deleteOnlineWallet(wallet_address) {
     if (sending_account !== undefined && sending_account !== null && sending_account.address === wallet_address) {
         sending_account = null;
@@ -1087,16 +1126,39 @@ function fixMEWWalletJSON(jsonData) {
 function addOfflineWallet(new_wallet, do_not_make_active_account) {
     web3.hls.accounts.wallet.add(new_wallet);
 
+    // available_offline_accounts[new_wallet.address] = new_wallet;
+    // if (!(do_not_make_active_account === true)) {
+    //     sending_account = new_wallet;
+    //     refreshDashboard();
+    // }
+
+    // var wallet_name_short = new_wallet.address.substr(0, 15) + "...";
+
+    // var wallet_menu_item = "<li class='local_remove'><a href='existing_online_wallet.html'>" + wallet_name_short + "</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-address='" + new_wallet.address + "' src='dist/assets/icon/use_button.png'></li>";
+    // $('.local_wallet').prepend(wallet_menu_item);
     available_offline_accounts[new_wallet.address] = new_wallet;
     if (!(do_not_make_active_account === true)) {
         sending_account = new_wallet;
         refreshDashboard();
     }
 
-    var wallet_name_short = new_wallet.address.substr(0, 15) + "...";
-
-    var wallet_menu_item = "<li class='local_remove'><a href='existing_online_wallet.html'>" + wallet_name_short + "</a><img class='switch_wallet_link' style='height: 20px;margin: 7px 0px 0px;' data-address='" + new_wallet.address + "' src='dist/assets/icon/use_button.png'></li>";
-    $('.local_wallet').prepend(wallet_menu_item);
+    var wallet_name_short = new_wallet.address.substr(0, 10) + "...";
+    var wallet_menu_item = "<li class='' id='" + new_wallet.address + "'><div class='custom-control-sidebar custom-radio-sidebar' style='display:flex;'><input type='radio' id='wallet_radio_" + new_wallet.address + "' name='customRadio-sidebar' class='custom-control-input-sidebar'><label class='custom-control-label-sidebar switch' id='switch_wallet_link_local' for='wallet_radio_" + new_wallet.address + "'  data-keystore= '" + JSON.stringify(new_wallet) + "' data-address='" + new_wallet.address + "'></label><a class='edit_online_wallet_local_live'>" + wallet_name_short + "</a></div></li>";
+    //var wallet_menu_item = "<li class='local_remove'><a class='edit_online_wallet_local_live'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link_local' data-keystore= '" + JSON.stringify(new_wallet) + "' data-address='" + new_wallet.address + "'><input type='checkbox' name='local_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
+    var local_wallet = sessionStorage.getItem("local_wallet");
+    var obj = new Array();
+    if (local_wallet != undefined && local_wallet != "null") {
+        obj = JSON.parse(local_wallet);
+    }
+    obj.push(wallet_menu_item);
+    //console.log(obj);
+    sessionStorage.setItem("local_wallet", JSON.stringify(obj));
+    //$('.local_wallet').prepend(wallet_menu_item);
+    var print_local_wallet = sessionStorage.getItem("local_wallet");
+    $('.local_wallet').find(".local_remove").remove();
+    $.each(JSON.parse(print_local_wallet), function (i, item) {
+        $('.local_wallet').prepend(item);
+    });
 
 }
 function addOfflineWalletLocal(new_wallet, do_not_make_active_account) {
@@ -1109,8 +1171,8 @@ function addOfflineWalletLocal(new_wallet, do_not_make_active_account) {
     }
 
     var wallet_name_short = new_wallet.address.substr(0, 10) + "...";
-
-    var wallet_menu_item = "<li class='local_remove'><a class='edit_online_wallet_local'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link_local' data-keystore= '" + JSON.stringify(new_wallet) + "' data-address='" + new_wallet.address + "'><input type='checkbox' name='local_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
+    var wallet_menu_item = "<li class='' id='" + new_wallet.address + "'><div class='custom-control-sidebar custom-radio-sidebar' style='display:flex;'><input type='radio' id='wallet_radio_" + new_wallet.address + "' name='customRadio-sidebar' class='custom-control-input-sidebar'><label class='custom-control-label-sidebar switch' id='switch_wallet_link_local' for='wallet_radio_" + new_wallet.address + "' data-keystore= '" + JSON.stringify(new_wallet) + "' data-address='" + new_wallet.address + "'></label><a class='edit_online_wallet_local'>" + wallet_name_short + "</a></div></li>";
+   // var wallet_menu_item = "<li class='local_remove'><a class='edit_online_wallet_local'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link_local' data-keystore= '" + JSON.stringify(new_wallet) + "' data-address='" + new_wallet.address + "'><input type='checkbox' name='local_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
     var local_wallet = sessionStorage.getItem("local_wallet");
     var obj = new Array();
     if (local_wallet != undefined && local_wallet != "null") {
@@ -1134,6 +1196,15 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
     // online_wallet_to_name_lookup[new_wallet.address] = wallet_name;
     if (!(do_not_make_active_account === true)) {
         sending_account = new_wallet;
+        sessionStorage.setItem("enabled_wallet", JSON.stringify(new_wallet));
+        console.log(new_wallet);
+        var address_wallet = new_wallet.address;
+        $(document).find(".switch").each(function () {
+            var add = $(this).attr("data-address");
+            if (add == address_wallet) {
+                $(this).prev("input[type='radio']").prop('checked', true);
+            }
+        })
         refreshDashboard();
     }
 
@@ -1145,7 +1216,8 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
     new_wallet = JSON.parse(JSON.stringify(new_wallet));
     //console.log(new_wallet);
     new_wallet['walletname'] = new_wallet["walletname"].replace(/['"]+/g, '*');
-    var wallet_menu_item = "<li class='local_remove'><a  class='edit_online_wallet'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link'  data-name='" + wallet_name.replace(/['"]+/g, '') + "' data-keystore='" + keystores["keystore"] + "' data-wallet_id='" + wallet_id + "'  data-keystores='" + JSON.stringify(keystores) + "' data-address='" + new_wallet.address + "'><input type='checkbox' name='live_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
+    var wallet_menu_item = "<li class='' id='" + wallet_id + "'><div class='custom-control-sidebar custom-radio-sidebar' style='display:flex;'><input type='radio' id='wallet_radio_" + wallet_id + "' name='customRadio-sidebar' class='custom-control-input-sidebar'><label class='custom-control-label-sidebar switch' id='switch_wallet_link' for='wallet_radio_" + wallet_id + "'  data-name='" + wallet_name.replace(/['"]+/g, '') + "' data-keystore='" + keystores["keystore"] + "' data-wallet_id='" + wallet_id + "'  data-keystores='" + JSON.stringify(keystores) + "' data-address='" + new_wallet.address + "'></label><a class='edit_online_wallet'>" + wallet_name_short + "</a></div></li>";
+   // var wallet_menu_item = "<li class='local_remove'><a  class='edit_online_wallet'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link'  data-name='" + wallet_name.replace(/['"]+/g, '') + "' data-keystore='" + keystores["keystore"] + "' data-wallet_id='" + wallet_id + "'  data-keystores='" + JSON.stringify(keystores) + "' data-address='" + new_wallet.address + "'><input type='checkbox' name='local_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
     //console.log(wallet_menu_item);
     $('.live_wallet').prepend(wallet_menu_item);
     //Now add it to the menu
@@ -1197,8 +1269,10 @@ function checkIntrinsicGas() {
 
     return true;
 }
-$("#dash-daterange").change(function () {
+$("#dash-dateranges").click(function () {
+    $(".preloader").show();
     refresh_transactions(0);
+    $(".preloader").hide();
 });
 $(".tran_send").click(function () {
     refresh_transactions(0, "send");
@@ -1207,6 +1281,7 @@ $(".tran_receive").click(function () {
     refresh_transactions(0, "receive");
 });
 async function refresh_transactions(start_index, tran_type = '') {
+    $('.preloader').show();
     if (sending_account == null) {
         return
     }
@@ -1216,16 +1291,27 @@ async function refresh_transactions(start_index, tran_type = '') {
     var selectdate1 = $("#dash-daterange").val();
     if (selectdate1 != undefined) {
         var selectdate = selectdate1.split(" to ");
-        var firstDate = new Date(selectdate[0]);
-        var secondeDate = new Date(selectdate[1]);
-        var dd1 = firstDate.getDate();
-        var dd2 = secondeDate.getDate();
-        var mm1 = firstDate.getMonth() + 1;
-        var mm2 = secondeDate.getMonth() + 1;
-        var y1 = firstDate.getFullYear();
-        var y2 = secondeDate.getFullYear();
-        var start_timestamp = new Date(y1, mm1, dd1).getTime() / 1000;
-        var end_timestamp = new Date(y2, mm2, dd2).getTime() / 1000;
+        if(selectdate.length > 1){
+
+        
+            var firstDate = new Date(selectdate[0]);
+            var secondeDate = new Date(selectdate[1]);
+            var dd1 = firstDate.getDate();
+            var dd2 = secondeDate.getDate();
+            var mm1 = firstDate.getMonth() + 1;
+            var mm2 = secondeDate.getMonth() + 1;
+            var y1 = firstDate.getFullYear();
+            var y2 = secondeDate.getFullYear();
+            console.log(mm1);
+            console.log(mm2);
+            if(mm1 == mm2){
+                mm1 = mm1-1;
+            }
+            var start_timestamp = new Date(y1, mm1, dd1).getTime() / 1000;
+            var end_timestamp = new Date(y2, mm2, dd2).getTime() / 1000;
+            //console.log(start_timestamp);
+            //console.log(end_timestamp);
+        }
     } else {
         var pastDate = new Date();
         var dd1 = pastDate.getDate() - 365;
@@ -1235,10 +1321,25 @@ async function refresh_transactions(start_index, tran_type = '') {
         var start_timestamp = new Date(y, mm, dd1).getTime() / 1000;
         var end_timestamp = new Date(y, mm, dd2).getTime() / 1000;
     }
-    var txs = await accountHelpers.get_all_transactions_from_account(sending_account, start_timestamp, end_timestamp, start_index);
+    var txs = "";
+    if(start_timestamp && end_timestamp){
+       // start_timestamp = new Date(2014, 01, 01).getTime() /1000;
+       // start_timestamp =new Date().getDate().add;
+       //console.log(start_timestamp);
+       // var d = new Date();
+       // end_timestamp = new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime() / 1000;
+       // console.log(end_timestamp);
+        txs = await accountHelpers.get_all_transactions_from_account(sending_account, start_timestamp, end_timestamp, start_index);
+        console.log(txs);
+    }
     $(".transaction_view").find("div").remove();
+    if(txs.length == undefined){
+        alertify.error("There is no transaction available.");
+    }
+    var dis='';
     $.each(txs, function (i, item) {
-        var d = new Date(0); 0
+        
+        var d = new Date(0); 
         d.setUTCSeconds(item.timestamp);
         var options = { day: 'numeric', year: 'numeric', month: 'short' };
         var tableRef = '<div class="d-flex transaction_div collapsed" data-toggle="collapse"';
@@ -1274,8 +1375,12 @@ async function refresh_transactions(start_index, tran_type = '') {
         tableRef += '<button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>';
         tableRef += '</div>';
         tableRef += '</div>';
-
-        tableRef += '<div id="alltrancollapseone' + item.timestamp + '" class="collapse col-12 dropdown-transaction" aria-labelledby="headingTwo" data-parent="#all_tran_1">';
+        if(i == 0){
+             dis = "show";
+        }else{
+            dis = '';
+        }
+        tableRef += '<div id="alltrancollapseone' + item.timestamp + '" class="collapse col-12 dropdown-transaction '+dis+'" aria-labelledby="headingTwo" data-parent="#all_tran_1">';
         tableRef += '<div class="row">';
         tableRef += '<div class="col-12"><h1>Transaction Details</h1></div>';
         tableRef += '<div class="col-md-6 col-sm-12">';
@@ -1294,28 +1399,10 @@ async function refresh_transactions(start_index, tran_type = '') {
         tableRef += '</div>';
         tableRef += '</div>';
         $(".transaction_view").append(tableRef);
-        $('.preloader').hide();
+       
     });
 
-
-
-    //     if(start_index <= 0){
-    //         $('.newest_blocks_nav.explorer_prev_nav').hide();
-    //     }else{
-    //         $('.newest_blocks_nav.explorer_prev_nav').show();
-    //     }
-
-    //     if((start_index-newBlockListLength) < 0){
-    //         var prev = 0;
-    //     }else{
-    //         var prev = start_index-newBlockListLength;
-    //     }
-
-    //     var next = start_index+newBlockListLength
-    //     $('.tx_hist_nav.tx_hist_prev_nav').data('start', prev);
-    //     $('.tx_hist_nav.tx_hist_next_nav').data('start', next);
-    //     $('.tx_hist_page_nav').html(start_index + " - " + next);
-    // }
+    $('.preloader').hide();
 }
 async function populateOnlineKeystores(keystores, password) {
     // if(keystores.length > 0){
@@ -1415,6 +1502,26 @@ var set_min_gas_price_status = function (status) {
 var set_account_status = function (address, name) {
     //console.log(address);
     //console.log(name);
+    if (name === undefined) {
+        $("#hls-name").text(name);
+        $('#account_status').val(address);
+        $('#account_status_paper').text(address);
+        $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);
+
+    } else {
+        $("#hls-name").text(name);
+        $('#account_status').val(address);
+        $('#account_status_paper').text(address);
+        $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);
+    }
+
+    if (web3 !== undefined && address !== undefined && web3.utils.isAddress(address.toLowerCase())) {
+        $('.sending_account_copy').show().data('copy', address);
+    } else {
+        $('.sending_account_copy').hide().data('copy', '');
+    }
+}
+var set_account_status_local_offline = function (address, name) {
     if (name === undefined) {
         $("#hls-name").text(name);
         $('#account_status').val(address);
@@ -1597,15 +1704,18 @@ function refresh_pending_transaction_table(table_id, include_delete_button) {
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
-        if (include_delete_button) {
-            cell1.innerHTML = "<img src='dist/assets/icon/x.png' class='delete_transaction pr-1' style='width: 4%;' data-index=" + index + ">" + to_shortened;
-        } else {
-            cell1.innerHTML = to_shortened;
-        }
-
+        var cell5 = row.insertCell();
+        cell1.innerHTML = to_shortened;
         cell2.innerHTML = amount_shortened;
         cell3.innerHTML = web3.utils.fromWei(transaction.gasPrice, 'gwei'); //show in gwei
-        cell4.innerHTML = transaction.gas; //show in wei
+        cell4.innerHTML = transaction.gas;
+        if (include_delete_button) {
+            
+            cell5.innerHTML = '<button class="btn btn-contact-remove-table btn-rounded delete_transaction" id="delete_contact" data-index=' + index + ' data-address="0xd6a194963b479affb38b5c74782DFe4aE431713f">Remove <i class="uil uil-trash-alt ml-1"></i></button>';
+        } else {
+            cell5.innerHTML = to_shortened;
+        }
+        //show in wei
     }
 }
 var clear_vars = function (include_account = false) {
@@ -1735,6 +1845,7 @@ function myFunctionCopy(element) {
     $temp.val($("#account_status").val()).select();
     document.execCommand("copy");
     $temp.remove();
+    alertify.success("Address copied to clipboard !");
 }
 function myFunctionCopy1(element) {
     /* Get the text field */
@@ -1743,4 +1854,5 @@ function myFunctionCopy1(element) {
     $temp.val($("#account_status_local").val()).select();
     document.execCommand("copy");
     $temp.remove();
+    alertify.success("Address copied to clipboard !");
 }

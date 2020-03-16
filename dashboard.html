@@ -120,7 +120,7 @@
                             <ul class="nav-second-level sub_menu local_wallet" aria-expanded="false">
                                 
                                 <li>
-                                    <a href="local_wallet.html">Add New Wallet</a>
+                                    <a href="local_wallet.html"><i class="uil uil-plus-circle add_wallet_plus mr-2"></i>Add New Wallet</a>
                                 </li>
                             </ul>
                         </li>
@@ -135,13 +135,13 @@
                                     <a href="existing_online_wallet.html">Existing Wallet</a>
                                 </li> -->
                                 <li>
-                                    <a href="add_online_wallet.html">Add New Wallet</a>
+                                    <a href="add_online_wallet.html"><i class="uil uil-plus-circle add_wallet_plus mr-2"></i>Add New Wallet</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a href="paper_wallet.html">
-                                <img src="dist/assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <img src="dist/assets/icon/menu3p.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Paper Wallet </span>
                             </a>
                         </li>
@@ -216,7 +216,7 @@
                                                     <div id="component-colorpicker" class="input-group" title="Using format option">
                                                         <input type="text" class="form-control input-lg" id="account_status" value="3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" disabled>
                                                         <span class="input-group-append">
-                                                            <span class="input-group-text colorpicker-input-addon" onclick="myFunctionCopy(this)"><i class="uil uil-copy"></i></span>
+                                                            <span class="input-group-text colorpicker-input-addon" style="cursor: pointer;" onclick="myFunctionCopy(this)"><i class="uil uil-copy"></i></span>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -308,10 +308,11 @@
                                                             <table class="table" id="multiple_transaction_list">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th class="hls-address"><label>To</label></th>
-                                                                        <th class="hls-address"><label>Amount</label></th>
-                                                                        <th class="hls-address"><label>Gas Price</label></th>
-                                                                        <th class="hls-address"><label>Max Gas</label></th>
+                                                                        <th class="block_table_heading"><label>To</label></th>
+                                                                        <th class="block_table_heading"><label>Amount</label></th>
+                                                                        <th class="block_table_heading"><label>Gas Price</label></th>
+                                                                        <th class="block_table_heading"><label>Max Gas</label></th>
+                                                                        <th class="block_table_heading"><label>Action</label></th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -357,7 +358,7 @@
                             <!--Top heading Division End-->
                             <!--Transaction Division Start-->
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body scroll_height_transaction">
                                     <div>
                                         <!--List Start-->
                                         

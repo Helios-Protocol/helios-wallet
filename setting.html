@@ -112,7 +112,7 @@
                             <ul class="nav-second-level sub_menu local_wallet" aria-expanded="false">
                                 
                                 <li>
-                                    <a href="local_wallet.html">Add New Wallet</a>
+                                    <a href="local_wallet.html"><i class="uil uil-plus-circle add_wallet_plus mr-2"></i>Add New Wallet</a>
                                 </li>
                             </ul>
                         </li>
@@ -127,13 +127,13 @@
                                     <a href="existing_online_wallet.html">Existing Wallet</a>
                                 </li> -->
                                 <li>
-                                    <a href="add_online_wallet.html">Add New Wallet</a>
+                                    <a href="add_online_wallet.html"><i class="uil uil-plus-circle add_wallet_plus mr-2"></i>Add New Wallet</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a href="paper_wallet.html">
-                                <img src="dist/assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <img src="dist/assets/icon/menu3p.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
                                 <span> Paper Wallet </span>
                             </a>
                         </li>
@@ -177,21 +177,20 @@
                 <!--Main Start-->
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <!--Top heading Start-->
+                        <!-- <div class="col-lg-6">
+                           
                             <div class="row page-title-2 align-items-center d-none d-sm-block">
                                 <div class="col-sm-12 col-xl-12">
                                     <h4 class="mb-1 mt-0">Account Settings</h4>
                                 </div>
                             </div>
-                            <!--Top heading End-->
-                            <!--Top heading Start-->
+                            
                             <div class="row page-title align-items-center d-md-none d-sm-none">
                                 <div class="col-sm-12 col-xl-12">
                                     <h4 class="mb-1 mt-0">Account Settings</h4>
                                 </div>
                             </div>
-                            <!--Top heading End-->
+                            
                             <div class="card same_height_setting">
                                 <div class="card-body">
                                     <div class="account_setting_div">
@@ -199,10 +198,7 @@
                                             <img src="dist/assets/images/users/avatar-7.jpg" alt=""
                                                  class="avatar-lg rounded-circle" />
                                             <h5 id="lusername"></h5>
-                                            <!-- <label class="profile_label">
-                                                Edit Profile Photo
-                                                <input type="file" size="60" class="profile_input">
-                                            </label> -->
+                                           
                                         </div>
                                     </div>
                                     <div class="pt-2">
@@ -210,21 +206,13 @@
                                             <h5>Username:</h5>
                                             <input type="text" id="preloading-timepicker" class="form-control text-down ls-1 lusername" placeholder="Enter new user name" value="Raj Ladumor">
                                         </div>
-                                        <!-- <div class="form-group position-relative mb-3 form_title_head_account">
-                                            <h5>Email for Notification:</h5>
-                                            <input type="text" id="preloading-timepicker" class="form-control text-down ls-1" placeholder="Enter new Email Address" value="ladumor.raj0198@gmail.com">
-                                            <p class="mb-2 account_verify">Email is verified.</p>
-                                            <p class="mb-2 account_not_verify">Email is not verified.</p>
-                                        </div>
-                                        <div class="mt-1">
-                                            <button type="button" class="btn btn-green-local float-left">Save Changes</button>
-                                        </div> -->
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!--Section Start-->
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
                             <!--Top heading Start-->
                             <div class="row page-title-2 align-items-center d-none d-sm-block">
                                 <div class="col-sm-12 col-xl-12">
@@ -239,7 +227,7 @@
                                 </div>
                             </div>
                             <!--Top heading End-->
-                            <div class="card same_height_setting">
+                            <div class="card">
                                 <div class="card-body">
                                     <div class="security_setting_div">
                                         <i class="uil uil-shield-check"></i>
@@ -373,12 +361,12 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" color="#71cf4e" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-4 mb-2 feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                     <h4 class="mt-3 mb-3">Enable 2FA</h4>
                     <p class="mx-auto delete_wallet_modal_note"><strong>Warning:</strong> This will overwrite any previously used two-factor authentication!</p>
-                    <div class="d-flex enable_modal_inner mx-auto">
-                        <div>
+                    <div class="d-flex enable_modal_inner mx-auto row">
+                        <div class="col-lg-9">
                             <p>Scan the QR code below to set up your authenticator app. or you can manually type in the code below. Then type your authentication code in the box below to confirm.</p>
                             <p>Important ! : We strongly suggest that you save the Secure 2FA key. If you ever lose access to your phone you will need to re-link 2FA to another device to enter your wallet.</p>
                         </div>
-                        <div>
+                        <div class="col-lg-3 text-center mb-2">
                             <img src="dist/assets/images/code.png" class="avatar-code rounded mr-4 align-self-center" id="two_factor_authentication_confirm_qr_code" alt="Helios">
                         </div>
                     </div>
@@ -475,12 +463,12 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" color="#71cf4e" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-4 mb-2 feather feather-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
                     <h4 class="mt-3 mb-3">Generate new 2FA</h4>
                     <p class="mx-auto delete_wallet_modal_note"><strong>Warning:</strong> This will overwrite any previously used two-factor authentication!</p>
-                    <div class="d-flex enable_modal_inner mx-auto">
-                        <div>
+                    <div class="d-flex enable_modal_inner mx-auto row">
+                        <div class="col-lg-9">
                             <p>Scan the QR code below to set up your authenticator app. or you can manually type in the code below. Then type your authentication code in the box below to confirm.</p>
                             <p>Important ! : We strongly suggest that you save the Secure 2FA key. If you ever lose access to your phone you will need to re-link 2FA to another device to enter your wallet.</p>
                         </div>
-                        <div>
+                        <div class="col-lg-3 text-center mb-2">
                             <img src="dist/assets/images/code.png" class="avatar-code rounded mr-4 align-self-center" alt="Helios">
                         </div>
                     </div>

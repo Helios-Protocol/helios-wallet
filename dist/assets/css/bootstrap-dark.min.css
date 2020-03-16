@@ -1922,25 +1922,24 @@ pre {
     color: #a1a8b8
 }
 
-    .table td,
-    .table th {
-        padding: .75rem;
-        vertical-align: top;
-        border-top: 1px solid #3b414e
-    }
+.table td,
+.table th {
+    padding: 1.00rem;
+}
 
-    .table thead th {
-        vertical-align: bottom;
-        border-bottom: 2px solid #3b414e
-    }
+.table thead th {
+    vertical-align: bottom;
+    background: #3b414f;
+}
 
-    .table tbody + tbody {
-        border-top: 2px solid #3b414e
+    .table thead th:first-child {
+        border-radius: 0.3rem 0rem 0rem 0.3rem;
     }
-
-.table-sm td,
-.table-sm th {
-    padding: .3rem
+    .table thead th:last-child {
+        border-radius: 0rem 0.3rem 0.3rem 0rem;
+    }
+.table tbody + tbody {
+    border-top: 2px solid #3b414e
 }
 
 .table-bordered {
@@ -4202,7 +4201,7 @@ input[type=submit].btn-block {
     .custom-control-input:checked ~ .custom-control-label::before {
         color: #363c48;
         border-color: #e6d46a;
-        background-color: #e6d46a;ss
+        background-color: #e6d46a;
     }
 
     .custom-control-input:focus ~ .custom-control-label::before {

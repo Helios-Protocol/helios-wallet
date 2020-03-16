@@ -167,9 +167,6 @@ $(document).ready(function () {
         window.location.href = "./login.html";
         sessionStorage.removeItem("username");
         sessionStorage.removeItem("password");
-        sessionStorage.removeItem("local_wallet");
-        sessionStorage.removeItem("current_wallet");
-        sessionStorage.removeItem("enabled_wallet");
         sessionStorage.removeItem("online_keystores");
     });
     $("#local_logout").on("click", function () {
@@ -185,18 +182,16 @@ $(document).ready(function () {
                 var keystore = keystores[i]['keystore'];
                 var wallet_id = keystores[i]['id'];
                 var wallet_name = keystores[i]['name'];
-                var new_wallet = web3.eth.accounts.decrypt(JSON.parse(keystore), password);
+                // var new_wallet = web3.eth.accounts.decrypt(JSON.parse(keystore), password);
                 var j = JSON.parse(keystore);
                 var wallet_name_short = wallet_name.substr(0, 15);
                 if (wallet_name.length > 25) {
                     wallet_name_short = wallet_name_short + "...";
                 }
                 if (i === 0) {
-                    walletmenu[wallet_id] = "<li class='' id='" + wallet_id + "'><div class='custom-control-sidebar custom-radio-sidebar' style='display:flex;'><input type='radio' id='wallet_radio_" + wallet_id + "' name='customRadio-sidebar' class='custom-control-input-sidebar'><label class='custom-control-label-sidebar switch' id='switch_wallet_link' for='wallet_radio_" + wallet_id + "'  data-keystore='" + JSON.stringify(j) + "' data-keystores='" + JSON.stringify(keystores[i]) + "' data-address='" + new_wallet.address + "' data-name='" + wallet_name + "' data-wallet_id='" + wallet_id + "'></label><a class='edit_online_wallet'>" + wallet_name_short + "</a></div></li>";
-                    //walletmenu[wallet_id] = "<li class='local_remove' id='" + wallet_id + "'><a class='edit_online_wallet'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link'  data-keystore='" + JSON.stringify(j) + "' data-keystores='" + JSON.stringify(keystores[i]) + "' data-name='" + wallet_name + "' data-wallet_id='" + wallet_id + "'><input type='checkbox' name='live_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
+                    walletmenu[wallet_id] = "<li class='local_remove' id='" + wallet_id + "'><a class='edit_online_wallet'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link'  data-keystore='" + JSON.stringify(j) + "' data-keystores='" + JSON.stringify(keystores[i]) + "' data-name='" + wallet_name + "' data-wallet_id='" + wallet_id + "'><input type='checkbox' name='live_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
                 } else {
-                    walletmenu[wallet_id] = "<li class='' id='" + wallet_id + "'><div class='custom-control-sidebar custom-radio-sidebar' style='display:flex;'><input type='radio' id='wallet_radio_" + wallet_id + "' name='customRadio-sidebar' class='custom-control-input-sidebar'><label class='custom-control-label-sidebar switch' id='switch_wallet_link' for='wallet_radio_" + wallet_id + "'  data-keystore='" + JSON.stringify(j) + "' data-keystores='" + JSON.stringify(keystores[i]) + "' data-address='" + new_wallet.address + "' data-name='" + wallet_name + "' data-wallet_id='" + wallet_id + "'></label><a class='edit_online_wallet'>" + wallet_name_short + "</a></div></li>";
-                    //walletmenu[wallet_id] = "<li class='local_remove' id='" + wallet_id + "'><a class='edit_online_wallet'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link'  data-keystore='" + JSON.stringify(j) + "' data-keystores='" + JSON.stringify(keystores[i]) + "' data-name='" + wallet_name + "' data-wallet_id='" + wallet_id + "'><input type='checkbox' name='live_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
+                    walletmenu[wallet_id] = "<li class='local_remove' id='" + wallet_id + "'><a class='edit_online_wallet'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link'  data-keystore='" + JSON.stringify(j) + "' data-keystores='" + JSON.stringify(keystores[i]) + "' data-name='" + wallet_name + "' data-wallet_id='" + wallet_id + "'><input type='checkbox' name='live_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
                 }
             }
             sessionStorage.setItem("walletmenu", JSON.stringify(walletmenu));
