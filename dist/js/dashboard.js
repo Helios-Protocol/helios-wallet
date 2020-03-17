@@ -976,6 +976,7 @@ function main() {
         setTimeout(function () {
             refresh_transactions(0);
         }, 1000)
+        $(".preloader").hide();
     }
     if (pathname[pathname.length - 1] != "local_wallet_local.html" && pathname[pathname.length - 1] != "dashboard_local.html" && pathname[pathname.length - 1] != "existing_online_wallet_local.html" && pathname[pathname.length - 1] != "paper_wallet_local.html") {
         set_two_factor_authentication_status(facode);

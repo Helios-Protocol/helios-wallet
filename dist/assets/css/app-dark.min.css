@@ -4971,7 +4971,7 @@ body.authentication-bg {
 .twitter_news {
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 345px;
+    max-height: 390px;
     border-radius: 0.25rem;
 }
 

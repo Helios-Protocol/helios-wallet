@@ -463,7 +463,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin: 0 0 25px;
     font-size: 20px;
     font-weight: 400;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Graphik';
     color: #505050;
     text-align: center;
 }
@@ -472,7 +472,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin: 0 0 25px;
     font-size: 20px;
     font-weight: 400;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Graphik';
     color: #505050;
     text-align: center;
 }
@@ -509,7 +509,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     width: 100%;
     padding: 14px 20px 14px 60px;
     border-radius: 50px;
+    box-shadow: 0 0.025rem .25rem rgba(0,0,0,.075) !important
 }
+
 
 .login-2 .form-section .input-text {
     font-size: 14px;
@@ -523,9 +525,13 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .login-7 .login-inner-form .input-text {
     font-size: 14px;
     outline: none;
-    background: #f1f1f1;
+    background: #fff;
     border-radius: 3px;
     border: 1px solid #e8e8e8;
+}
+.login-7 .login-inner-form .input-text:focus {
+    border: 1px solid #e6d46a;
+    transition: 0.5s;
 }
 
 .login-2 .form-section .form-box i {
@@ -1947,7 +1953,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     background-size: cover;
     top: 0;
     width: 100%;
-    background: rgb(14, 14, 14) url(../img/wallet_bg.png) no-repeat;
+    background: rgb(14, 14, 14) url(../img/wallet_bg.jpg) no-repeat;
     bottom: 0;
     background-position: center;
     min-height: 100vh;
@@ -1978,7 +1984,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 70px;
+    padding: 30px 60px;
     min-height: 70vh;
 }
 
@@ -1996,6 +2002,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     z-index: -1;
     right: 100%;
     transition: 0.5s ease-in-out;
+    border-radius: 25px;
 }
 
 .login-7 .btn-theme-1:hover:before {
@@ -2008,9 +2015,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .login-7 .btn-theme-1 {
     border-radius: 25px;
-    padding: 11px 25px 11px 25px;
+    padding: 13px 25px 13px 25px;
     color: #e6d46a;
-    background: #0e0e0e;
+    background: transparent;
     letter-spacing: 1px;
     font-family: 'Graphik';
     font-size: 15px;
@@ -2075,15 +2082,49 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .login-7 .login-inner-form h3 {
-    margin: 0 0 30px;
-    font-size: 20px;
+    margin: 0 0 25px;
+    font-size: 23px;
     font-weight: 400;
     float: left;
     color: #717171;
 }
 
 .login-7 .login-inner-form .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+}
+.login-7 .login-inner-form .checkbox {
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.login-7 .login-inner-form .form-check {
+    float: left;
+    margin-bottom: 0;
+}
+.login-7 .login-inner-form .form-check-input {
+    position: absolute;
+    margin-left: 2px;
+}
+.login-7 .login-inner-form .checkbox-theme input[type="checkbox"]:checked + label::before {
+    background-color: #e6d46a;
+    border-color: #e6d46a;
+}
+.login-7 .login-inner-form input[type=checkbox]:checked + label:before {
+    font-weight: 300;
+    color: #0e0e0e;
+    line-height: 15px;
+    font-size: 14px;
+    content: "\2713";
+}
+.login-7 .login-inner-form .form-check label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    margin-left: -22px;
+    border: 1px solid #c5c3c3;
+    border-radius: 3px;
+    background-color: #fff;
 }
 
 .login-7 .login-inner-form .input-text {
@@ -2092,7 +2133,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-size: 13px;
     font-weight: 400;
     font-family: 'Graphik';
-    border: 1px solid #c3c3c3;
+    border: 1px solid #f2f2f2;
     outline: none;
     color: #0e0e0e;
     letter-spacing: 1px;
