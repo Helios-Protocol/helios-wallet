@@ -1281,7 +1281,13 @@ $(".tran_send").click(function () {
 $(".tran_receive").click(function () {
     refresh_transactions(0, "receive");
 });
-async function refresh_transactions(start_index, tran_type = '') {
+$(".tran_all").click(function () {
+    refresh_transactions(0, "");
+});
+
+
+
+async function refresh_transactions(start_index, tran_type = 'all') {
     $('.preloader').show();
     if (sending_account == null) {
         return
@@ -1339,7 +1345,15 @@ async function refresh_transactions(start_index, tran_type = '') {
     }
     var dis='';
     $.each(txs, function (i, item) {
-        
+        if(tran_type == "send"){
+            if(item.description != "Send transaction"){
+                return;
+            }
+        }else if(tran_type == "receive"){
+            if(item.description != "Receive transaction"){
+                return;
+            }
+        }
         var d = new Date(0); 
         d.setUTCSeconds(item.timestamp);
         var options = { day: 'numeric', year: 'numeric', month: 'short' };
