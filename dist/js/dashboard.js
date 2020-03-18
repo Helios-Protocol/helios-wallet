@@ -1026,6 +1026,7 @@ function main() {
             
         } else {
             var current_wallet = JSON.parse(sessionStorage.getItem("enabled_wallet"));
+            console.log(current_wallet);
             if (current_wallet != null) {
                 set_account_status(current_wallet.address, current_wallet.walletname);
                 prepareEditOnlineWalletPage(current_wallet.address, current_wallet.walletname, current_wallet.wallet_id, current_wallet.keystore, current_wallet);
@@ -1191,15 +1192,23 @@ function addOfflineWalletLocal(new_wallet, do_not_make_active_account) {
 
 }
 function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_account, keystores) {
-    web3.hls.accounts.wallet.add(new_wallet);
-    // available_online_accounts[new_wallet.address] = new_wallet;
-    // online_wallet_to_id_lookup[new_wallet.address] = wallet_id;
-    // online_wallet_to_name_lookup[new_wallet.address] = wallet_name;
-    if (!(do_not_make_active_account === true)) {
-        sending_account = new_wallet;
-        sessionStorage.setItem("enabled_wallet", JSON.stringify(new_wallet));
-        console.log(new_wallet);
+    var enabled_wallet = sessionStorage.getItem("enabled_wallet");
+        console.log(enabled_wallet);
+    if(enabled_wallet != ""){
+        new_wallet = JSON.parse(enabled_wallet);
+    }
+        web3.hls.accounts.wallet.add(new_wallet);
+        // available_online_accounts[new_wallet.address] = new_wallet;
+        // online_wallet_to_id_lookup[new_wallet.address] = wallet_id;
+        // online_wallet_to_name_lookup[new_wallet.address] = wallet_name;
+        if (!(do_not_make_active_account === true)) {
+            sending_account = new_wallet;
+            
+            sessionStorage.setItem("enabled_wallet", JSON.stringify(new_wallet));
+        }
+       
         var address_wallet = new_wallet.address;
+        
         $(document).find(".switch").each(function () {
             var add = $(this).attr("data-address");
             if (add == address_wallet) {
@@ -1207,7 +1216,7 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
             }
         })
         refreshDashboard();
-    }
+   
 
     var wallet_name_short = wallet_name.substr(0, 15);
     if (wallet_name.length > 25) {
@@ -1719,16 +1728,16 @@ function refresh_pending_transaction_table(table_id, include_delete_button) {
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell();
-        cell1.innerHTML = to_shortened;
+        
+        cell1.innerHTML = transaction.to;
         cell2.innerHTML = amount_shortened;
         cell3.innerHTML = web3.utils.fromWei(transaction.gasPrice, 'gwei'); //show in gwei
         cell4.innerHTML = transaction.gas;
         if (include_delete_button) {
-            
+            var cell5 = row.insertCell(4);
             cell5.innerHTML = '<button class="btn btn-contact-remove-table btn-rounded delete_transaction" id="delete_contact" data-index=' + index + ' data-address="0xd6a194963b479affb38b5c74782DFe4aE431713f">Remove <i class="uil uil-trash-alt ml-1"></i></button>';
         } else {
-            cell5.innerHTML = to_shortened;
+            
         }
         //show in wei
     }

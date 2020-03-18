@@ -1189,9 +1189,9 @@ body {
 }
 
     .nav-user img {
-        height: 42px;
-        width: 42px;
-        border: 2px solid #fff;
+        height: 33px;
+        width: 33px;
+        
     }
 
 @media (max-width:1024px) {
@@ -5336,7 +5336,7 @@ body.authentication-bg {
     overflow: auto;
 }
 .scroll_height_transaction_single {
-    max-height: 613px;
+    max-height: 702px;
     overflow: auto;
 }
 .confirm_enable_button {
