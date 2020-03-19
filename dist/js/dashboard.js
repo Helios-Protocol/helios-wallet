@@ -1194,7 +1194,7 @@ function addOfflineWalletLocal(new_wallet, do_not_make_active_account) {
 function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_account, keystores) {
     var enabled_wallet = sessionStorage.getItem("enabled_wallet");
         console.log(enabled_wallet);
-    if(enabled_wallet != ""){
+    if(enabled_wallet != null){
         new_wallet = JSON.parse(enabled_wallet);
     }
         web3.hls.accounts.wallet.add(new_wallet);
