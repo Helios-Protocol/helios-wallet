@@ -1528,13 +1528,17 @@ var set_account_status = function (address, name) {
     //console.log(name);
     if (name === undefined) {
         $("#hls-name").text(name);
+        $(".hls-name").text(name);
         $('#account_status').val(address);
+        $('.account_status').val(address);
         $('#account_status_paper').text(address);
         $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);
 
     } else {
         $("#hls-name").text(name);
+        $(".hls-name").text(name);
         $('#account_status').val(address);
+        $('.account_status').val(address);
         $('#account_status_paper').text(address);
         $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);
     }

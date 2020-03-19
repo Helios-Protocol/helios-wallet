@@ -5831,7 +5831,7 @@ PRELOADER
     .network_connection {
         display: block;
         text-align: center;
-        height: 165px;
+        height: 175px;
     }
 
     .same_height p {
