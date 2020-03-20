@@ -2,6 +2,7 @@
 $(document).ready(function () {
     web3 = helios_web3;
     $('#regform').submit(function (e) {
+        e.preventDefault();
         $(".preloader").show();
         setTimeout(() => {
             e.preventDefault();
@@ -30,7 +31,7 @@ $(document).ready(function () {
                                         sessionStorage.setItem("password", password);
                                         sessionStorage.setItem("facode", false);
                                         var online_keystores = response['keystores'];
-                                        sessionStorage.setItem("online_keystores", online_keystores);
+                                        sessionStorage.setItem("online_keystores", JSON.stringify(online_keystores));
                                         window.location.href = "./dashboard.html";
                                     } else {
                                         if (response.error == "4000" && response.error_description == "Two factor authentication code mismatch.") {
@@ -171,6 +172,9 @@ $(document).ready(function () {
         sessionStorage.removeItem("current_wallet");
         sessionStorage.removeItem("enabled_wallet");
         sessionStorage.removeItem("online_keystores");
+        sessionStorage.removeItem("facode");
+        sessionStorage.removeItem("networkid");
+        sessionStorage.removeItem("walletmenu");
     });
     $("#local_logout").on("click", function () {
         window.location.href = "./login.html";
