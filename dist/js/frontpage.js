@@ -172,9 +172,6 @@ $(document).ready(function () {
         sessionStorage.removeItem("current_wallet");
         sessionStorage.removeItem("enabled_wallet");
         sessionStorage.removeItem("online_keystores");
-        sessionStorage.removeItem("facode");
-        sessionStorage.removeItem("networkid");
-        sessionStorage.removeItem("walletmenu");
     });
     $("#local_logout").on("click", function () {
         window.location.href = "./login.html";

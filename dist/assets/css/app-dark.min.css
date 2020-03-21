@@ -5698,7 +5698,7 @@ PRELOADER
     }
 
     .table_data_5 {
-        width: 40%;
+        width: 30%;
     }
 
     .balance-sec-1 {
@@ -5844,6 +5844,11 @@ PRELOADER
         font-size: 9px;
         font-weight: 300;
         letter-spacing: 1px;
+        display: block;
+    width: 100%;
+    margin-top: 10px;
+    overflow: hidden;
+    height: 27px;
     }
 
     .network_connection_img {
