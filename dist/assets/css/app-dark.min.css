@@ -561,6 +561,7 @@ body {
     display: inline-block;
     height: 23px;
     margin: 0;
+    cursor: pointer;
   }
   
   .switch input { 
@@ -795,16 +796,19 @@ body {
     padding: 0 0 0 5px !IMPORTANT;
     width: 100%;
     color: #fff !important;
+    cursor: pointer;
 }
 .edit_online_wallet_local_live{
     padding: 0 0 0 5px !IMPORTANT;
     width: 100%;
     color: #fff !important;
+    cursor: pointer;
 }
 .edit_online_wallet_local{
     padding: 0 0 0 5px !IMPORTANT;
     width: 100%;
     color: #fff !important;
+    cursor: pointer;
 }
 @media (min-width:769px) {
     body.left-side-menu-condensed {
