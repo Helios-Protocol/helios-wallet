@@ -491,7 +491,7 @@ $(document).ready(function () {
 
                             $('#generate_online_wallet_password').val("");
                             $('#generate_online_wallet_password').trigger("change");
-                            addOnlineWallet(new_wallet, response2['id'], wallet_name);
+                            addOnlineWallet(new_wallet, response2['id'], wallet_name,false,keystore);
                             refreshDashboard();
                             alertify.success("The new wallet has been added.");
                         });
@@ -554,7 +554,7 @@ $(document).ready(function () {
                     $('#load_online_wallet_from_keystore_fake_file_input').text("Select keystore file");
                     $('#load_online_wallet_from_keystore_password').val("");
 
-                    addOnlineWallet(new_wallet, response2['id'], wallet_name);
+                    addOnlineWallet(new_wallet, response2['id'], wallet_name,false,keystore);
                     refreshDashboard();
                     updateInputLabels();
                     alertify.success("The new wallet has been added.");
@@ -639,7 +639,7 @@ $(document).ready(function () {
                             $('#load_online_wallet_from_private_key').val("").trigger("change");
 
 
-                            addOnlineWallet(new_wallet, response2['id'], wallet_name);
+                            addOnlineWallet(new_wallet, response2['id'], wallet_name,false,keystore);
                             refreshDashboard();
                             updateInputLabels();
                             alertify.success("The new wallet has been added.");
@@ -1036,7 +1036,7 @@ function main() {
                 $(document).find(".switch").each(function () {
                     var add = $(this).attr("data-address");
                     if (add == address_wallet) {
-                        $("#wallet_radio_"+add).prop('checked',true);
+                        $(this).prev("input[type='radio']").prop('checked',true);
                     }
                 })
             }
@@ -1053,7 +1053,7 @@ function main() {
                 $(document).find(".switch").each(function () {
                     var add = $(this).attr("data-address");
                     if (add == address_wallet) {
-                        $("#wallet_radio_"+add).prop('checked',true);
+                        $(this).prev("input[type='radio']").prop('checked',true);
                     }
                 })
             }
@@ -1073,7 +1073,8 @@ function main() {
                 $(document).find(".switch").each(function () {
                     var add = $(this).attr("data-address");
                     if (add == address_wallet) {
-                        $("#wallet_radio_"+add).prop('checked',true);
+                        $(this).prev("input[type='radio']").prop('checked',true);
+                        //$("#wallet_radio_"+add).prop('checked',true);
                     }
                 })
             }
@@ -1256,7 +1257,9 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
     if (wallet_name.length > 25) {
         wallet_name_short = wallet_name_short + "...";
     }
+    if(keystores['name'] != undefined){
     keystores['name'] = keystores["name"].replace(/['"]+/g, '*');
+    }
     new_wallet = JSON.parse(JSON.stringify(new_wallet));
     //console.log(new_wallet);
     new_wallet['walletname'] = new_wallet["walletname"].replace(/['"]+/g, '*');
@@ -1268,11 +1271,12 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
     console.log(JSON.parse(walletmenu));
     walletmenu = JSON.parse(walletmenu);
     console.log(wallet_menu_item);
-    if(walletmenu == undefined){
+   // if(walletmenu == undefined){
         walletmenu.push(wallet_menu_item);
         console.log(walletmenu);
         sessionStorage.setItem("walletmenu",JSON.stringify(walletmenu));
-    }
+   // }
+    //sessionStorage.setItem("walletmenu",JSON.stringify(walletmenu));
     //Now add it to the menu
     // var wallet_menu_item = " <li role=\"presentation\" class=\"nav__item\">\n" +
     //     "                            <a href='#main_page-online_wallet' id='main_page-online_wallet-menu_item' class='nav__link edit_online_wallet' data-address='"+new_wallet.address+"'>\n" +

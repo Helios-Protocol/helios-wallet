@@ -32074,25 +32074,26 @@ Hls.prototype.sendTransactions = function sendTransactions(txs) {
 
     try {
         var account = getAccountFromWallet(from, _this.accounts);
+        if (account && account.privateKey) {
+
+          return Promise.all([
+              account.signBlock(txs)
+          ]).then(function(args){
+              var signed_block = args[0];
+              return _this.sendRawBlock(signed_block.rawBlock);
+          });
+  
+  
+      } else {
+          error = new Error('Not implemented yet. You must use sendTransactions with a local wallet so that it can be signed here.');
+  
+          return Promise.reject(error);
+      }
     }catch(error){
         var err = new Error('Error loading account from wallet:' +error);
         return Promise.reject(err);
     }
-    if (account && account.privateKey) {
-
-        return Promise.all([
-            account.signBlock(txs)
-        ]).then(function(args){
-            var signed_block = args[0];
-            return _this.sendRawBlock(signed_block.rawBlock);
-        });
-
-
-    } else {
-        error = new Error('Not implemented yet. You must use sendTransactions with a local wallet so that it can be signed here.');
-
-        return Promise.reject(error);
-    }
+    
 }
 
 //This sends a block containing all pending receive transactions including the reward block

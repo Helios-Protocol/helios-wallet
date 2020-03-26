@@ -119,7 +119,8 @@ $(document).ready(function () {
         //e.preventDefault();
         return false;
     });
-    $('#loginform').submit(function (e) {
+    $('#facode').submit(function (e) {
+        e.preventDefault();
         $(".preloader").show();
         setTimeout(() => {
             e.preventDefault();
