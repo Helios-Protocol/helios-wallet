@@ -32014,7 +32014,7 @@ Hls.prototype.sendTransaction = function sendTransaction(tx) {
     var _this = this,
         error = false,
         result;
-
+    
     if(!tx){
         error = new Error('No transaction provided');
 
@@ -32026,6 +32026,7 @@ Hls.prototype.sendTransaction = function sendTransaction(tx) {
         var err = new Error('Error loading account from wallet:' +error);
         return Promise.reject(err);
     }
+    console.log("Account  :- "+ account);
     if (account && account.privateKey) {
 
         return Promise.all([

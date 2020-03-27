@@ -37,6 +37,7 @@ $(document).ready(function () {
             var password = sessionStorage.getItem("password");
             var wallet_name = $(this).data('name');
             var keys = web3.eth.accounts.decrypt(JSON.stringify(keystoreq), password, null, wallet_name);
+            web3.hls.accounts.wallet.add(keys);
             var wallet_address = keys.address;
             sending_account = keys;
             refreshDashboard();
@@ -55,6 +56,7 @@ $(document).ready(function () {
     $('body').on('click', '#switch_wallet_link_local , .switch_wallet_links_local', function () {
         $(".preloader").css("display", "block");
         var keystore = $(this).data('keystore');
+        web3.hls.accounts.wallet.add(keystore);
         sending_account = keystore;
         refreshDashboard();
         var wallet_name_short = keystore.address.substr(0, 15) + "...";
@@ -907,6 +909,7 @@ function main() {
     $('.preloader').show();
     
     var username = sessionStorage.getItem("username");
+    $("#hls-name-same").text(username);
     var password = sessionStorage.getItem("password");
     var facode = sessionStorage.getItem("facode");
     var networkid = sessionStorage.getItem("networkid");
@@ -1161,6 +1164,7 @@ function fixMEWWalletJSON(jsonData) {
     return json_account
 }
 function addOfflineWallet(new_wallet, do_not_make_active_account) {
+    console.log(new_wallet);
     web3.hls.accounts.wallet.add(new_wallet);
 
     // available_offline_accounts[new_wallet.address] = new_wallet;
@@ -1267,7 +1271,8 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
    // var wallet_menu_item = "<li class='local_remove'><a  class='edit_online_wallet'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link'  data-name='" + wallet_name.replace(/['"]+/g, '') + "' data-keystore='" + keystores["keystore"] + "' data-wallet_id='" + wallet_id + "'  data-keystores='" + JSON.stringify(keystores) + "' data-address='" + new_wallet.address + "'><input type='checkbox' name='local_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";
     //console.log(wallet_menu_item);
     $('.live_wallet').prepend(wallet_menu_item);
-    var walletmenu = sessionStorage.getItem("walletmenu");
+    var walletmenu = new Array();
+    walletmenu = sessionStorage.getItem("walletmenu");
     console.log(JSON.parse(walletmenu));
     walletmenu = JSON.parse(walletmenu);
     console.log(wallet_menu_item);

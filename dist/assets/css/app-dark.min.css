@@ -810,6 +810,9 @@ body {
     color: #fff !important;
     cursor: pointer;
 }
+#logout{
+    cursor: pointer;
+}
 @media (min-width:769px) {
     body.left-side-menu-condensed {
         min-height: 1200px
