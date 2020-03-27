@@ -1275,9 +1275,9 @@ function addOnlineWallet(new_wallet, wallet_id, wallet_name, do_not_make_active_
     walletmenu = sessionStorage.getItem("walletmenu");
     console.log(JSON.parse(walletmenu));
     walletmenu = JSON.parse(walletmenu);
-    console.log(wallet_menu_item);
+    console.log(walletmenu);
    // if(walletmenu == undefined){
-        walletmenu.push(wallet_menu_item);
+        walletmenu[wallet_id] = wallet_menu_item;
         console.log(walletmenu);
         sessionStorage.setItem("walletmenu",JSON.stringify(walletmenu));
    // }
