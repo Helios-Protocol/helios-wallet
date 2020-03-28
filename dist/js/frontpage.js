@@ -186,6 +186,8 @@ $(document).ready(function () {
     function storemenu(keystores, password) {
         if (keystores.length > 0) {
             var walletmenu = {};
+            console.log(keystores);
+            //return false;
             for (var i = 1; i < keystores.length - 1; i++) {
                 var keystore = keystores[i]['keystore'];
                 var wallet_id = keystores[i]['id'];
@@ -196,6 +198,7 @@ $(document).ready(function () {
                 if (wallet_name.length > 25) {
                     wallet_name_short = wallet_name_short + "...";
                 }
+                keystores[i]['name'] = keystores[i]["name"].replace(/['"]+/g, '');
                 if (i === 0) {
                     walletmenu[wallet_id] = "<li class='' id='" + wallet_id + "'><div class='custom-control-sidebar custom-radio-sidebar' style='display:flex;'><input type='radio' id='wallet_radio_" + wallet_id + "' name='customRadio-sidebar' class='custom-control-input-sidebar'><label class='custom-control-label-sidebar switch' id='switch_wallet_link' for='wallet_radio_" + wallet_id + "'  data-keystore='" + JSON.stringify(j) + "' data-keystores='" + JSON.stringify(keystores[i]) + "' data-address='" + new_wallet.address + "' data-name='" + wallet_name + "' data-wallet_id='" + wallet_id + "'></label><a class='edit_online_wallet'>" + wallet_name_short + "</a></div></li>";
                     //walletmenu[wallet_id] = "<li class='local_remove' id='" + wallet_id + "'><a class='edit_online_wallet'>" + wallet_name_short + "</a><label class='switch' id='switch_wallet_link'  data-keystore='" + JSON.stringify(j) + "' data-keystores='" + JSON.stringify(keystores[i]) + "' data-name='" + wallet_name + "' data-wallet_id='" + wallet_id + "'><input type='checkbox' name='live_wallet_btn[1][]'><span class='slider1 round1'></span></label></li>";

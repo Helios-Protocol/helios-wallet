@@ -332,7 +332,7 @@ async function refreshDashboard() {
         receivingTransactions = await receiveAnyIncomingTransactions(sending_account.address)
         if(receivingTransactions === true){
             ////console.log('Received transactions');
-            sleep(2000)
+            sleep(1000)
             .then(function(){
                 refresh_transactions();
                 refresh_balance();
