@@ -819,6 +819,30 @@ body {
     text-overflow: ellipsis;
     width: 330px;
 }
+.btn-transaction-date {
+    background: #3b414f;
+    padding: 10px 20px 10px 20px;
+    border: 0.5px solid rgba(230, 212, 106, 0.50);
+}
+
+.scroll_height_transaction_single {
+    max-height: 715px;
+    overflow: auto;
+}
+
+.year_month_div h5 {
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+.year_month_div {
+    margin-bottom: 30px;
+}
+.date_padding {
+    padding: 10px 40px 10px 30px;
+}
 @media (min-width:769px) {
     body.left-side-menu-condensed {
         min-height: 1200px

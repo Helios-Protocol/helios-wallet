@@ -463,44 +463,52 @@ $(document).ready(function () {
     });
     //add online wallet
     $('#generate_online_wallet_form').submit(function (e) {
+        
         e.preventDefault();
-        // loaderPopup();
-        var password = $("#generate_online_wallet_password").val();
-        var username = $("#generate_online_wallet_username").val();
-        var wallet_name = $("#generate_online_wallet_name").val();
-        if (!(validateInputs(username, 'username') === true)) {
-            alertify.error(validateInputs(username, 'username'));
-            return;
-        }
-        if (!(validateInputs(wallet_name, 'wallet_name') === true)) {
-            alertify.error(validateInputs(wallet_name, 'wallet_name'));
-            return;
-        }
+        $(".preloader").show();
+        setTimeout(() => {
+            e.preventDefault();
+            // loaderPopup();
+            var password = $("#generate_online_wallet_password").val();
+            var username = $("#generate_online_wallet_username").val();
+            var wallet_name = $("#generate_online_wallet_name").val();
+            if (!(validateInputs(username, 'username') === true)) {
+                alertify.error(validateInputs(username, 'username'));
+                return;
+            }
+            if (!(validateInputs(wallet_name, 'wallet_name') === true)) {
+                alertify.error(validateInputs(wallet_name, 'wallet_name'));
+                return;
+            }
 
-        //Need to sign in to confirm their username and password is correct before encrypting the keystore.
-        server.signIn(username, password)
-            .then(function (response) {
-                if (response !== false && "success" in response) {
-                    var new_wallet = web3.eth.accounts.create();
-                    var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, password);
-                    server.addOnlineWallet(keystore, wallet_name)
-                        .then(function (response2) {
-                            $('#generate_online_wallet_username').val("");
-                            $('#generate_online_wallet_username').trigger("change");
+            //Need to sign in to confirm their username and password is correct before encrypting the keystore.
+            server.signIn(username, password)
+                .then(function (response) {
+                    if (response !== false && "success" in response) {
+                        var new_wallet = web3.eth.accounts.create();
+                        var keystore = web3.eth.accounts.encrypt(new_wallet.privateKey, password);
+                        server.addOnlineWallet(keystore, wallet_name)
+                            .then(function (response2) {
+                                $('#generate_online_wallet_username').val("");
+                                $('#generate_online_wallet_username').trigger("change");
 
-                            $('#generate_online_wallet_name').val("");
-                            $('#generate_online_wallet_name').trigger("change");
+                                $('#generate_online_wallet_name').val("");
+                                $('#generate_online_wallet_name').trigger("change");
 
-                            $('#generate_online_wallet_password').val("");
-                            $('#generate_online_wallet_password').trigger("change");
-                            addOnlineWallet(new_wallet, response2['id'], wallet_name,false,keystore);
-                            refreshDashboard();
-                            alertify.success("The new wallet has been added.");
-                        });
-                } else {
-                    alertify.error("The username and password you entered didn't match. Please type the username and password you use to log in to your account.")
-                }
-            });
+                                $('#generate_online_wallet_password').val("");
+                                $('#generate_online_wallet_password').trigger("change");
+                                addOnlineWallet(new_wallet, response2['id'], wallet_name,false,keystore);
+                                refreshDashboard();
+                                alertify.success("The new wallet has been added.");
+                            });
+                    } else {
+                        alertify.error("The username and password you entered didn't match. Please type the username and password you use to log in to your account.")
+                    }
+                });
+                setTimeout(() => {
+                    $(".preloader").show();
+                }, 1000);
+            }, 2000);
 
     });
 
@@ -1354,36 +1362,44 @@ async function refresh_transactions(start_index, tran_type = 'all') {
     if (start_index === undefined) {
         start_index = 0
     }
-    var selectdate1 = $("#dash-daterange").val();
+    var selectdate1 = $("#start_month").val();
     if (selectdate1 != undefined) {
         var selectdate = selectdate1.split(" to ");
-        if(selectdate.length > 1){
-
-        
-            var firstDate = new Date(selectdate[0]);
-            var secondeDate = new Date(selectdate[1]);
-            var dd1 = firstDate.getDate();
-            var dd2 = secondeDate.getDate();
-            var mm1 = firstDate.getMonth() + 1;
-            var mm2 = secondeDate.getMonth() + 1;
-            var y1 = firstDate.getFullYear();
-            var y2 = secondeDate.getFullYear();
-            console.log(mm1);
-            console.log(mm2);
-            if(mm1 == mm2){
-                mm1 = mm1-1;
+        var start_month = $("#start_month").val();
+        var start_year = $("#start_year").val();
+        var end_month = $("#end_month").val();
+        var end_year = $("#end_year").val();
+        // console.log(start_month);
+        // console.log(end_month);
+        // console.log(start_year);
+        // console.log(end_year);
+        //if(selectdate.length > 1){
+            // var firstDate = new Date(selectdate[0]);
+            // var secondeDate = new Date(selectdate[1]);
+            // var dd1 = firstDate.getDate();
+            // var dd2 = secondeDate.getDate();
+            // var mm1 = firstDate.getMonth() + 1;
+            // var mm2 = secondeDate.getMonth() + 1;
+            // var y1 = firstDate.getFullYear();
+            // var y2 = secondeDate.getFullYear();
+            // console.log(mm1);
+            //console.log(mm2);
+            if(start_month == end_month){
+                start_month = start_month-1;
             }
-            var start_timestamp = new Date(y1, mm1, dd1).getTime() / 1000;
-            var end_timestamp = new Date(y2, mm2, dd2).getTime() / 1000;
+            var start_timestamp = new Date(start_year, start_month, '01').getTime() / 1000;
+            var end_timestamp = new Date(end_year, end_month, '01').getTime() / 1000;
             //console.log(start_timestamp);
             //console.log(end_timestamp);
-        }
+       // }
     } else {
         var pastDate = new Date();
         var dd1 = pastDate.getDate() - 365;
         var dd2 = pastDate.getDate();
         var mm = pastDate.getMonth() + 1;
         var y = pastDate.getFullYear();
+        console.log(mm);
+       
         var start_timestamp = new Date(y, mm, dd1).getTime() / 1000;
         var end_timestamp = new Date(y, mm, dd2).getTime() / 1000;
     }
