@@ -506,7 +506,7 @@ $(document).ready(function () {
                     }
                 });
                 setTimeout(() => {
-                    $(".preloader").show();
+                    $(".preloader").hide();
                 }, 1000);
             }, 2000);
 
@@ -1057,6 +1057,7 @@ function main() {
                     var add = $(this).attr("data-address");
                     if (add == address_wallet) {
                         $(this).prev("input[type='radio']").prop('checked',true);
+                        return;
                     }
                 })
             }
@@ -1074,6 +1075,7 @@ function main() {
                     var add = $(this).attr("data-address");
                     if (add == address_wallet) {
                         $(this).prev("input[type='radio']").prop('checked',true);
+                        return;
                     }
                 })
             }
@@ -1094,6 +1096,7 @@ function main() {
                     var add = $(this).attr("data-address");
                     if (add == address_wallet) {
                         $(this).prev("input[type='radio']").prop('checked',true);
+                        return;
                         //$("#wallet_radio_"+add).prop('checked',true);
                     }
                 })
@@ -1339,8 +1342,13 @@ function checkIntrinsicGas() {
 }
 $("#dash-dateranges").click(function () {
     $(".preloader").show();
-    refresh_transactions(0);
-    $(".preloader").hide();
+    setTimeout(() => {
+         refresh_transactions(0);
+        setTimeout(() => {
+            $(".preloader").hide();
+        }, 1000);
+    }, 2000);
+    //$(".preloader").hide();
 });
 $(".tran_send").click(function () {
     refresh_transactions(0, "send");
