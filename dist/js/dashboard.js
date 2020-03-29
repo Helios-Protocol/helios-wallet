@@ -740,7 +740,7 @@ $(document).ready(function () {
     $('body').on('click', '.delete_online_wallet_link', function (e) {
         var wallet_address = $(this).data('address');
         var wallet_id = $(this).data('wallet_id');
-        var wallet_name = $("#hls-name").text();
+        var wallet_name = $("#hls-name_d").text();
         $(".wallet-name").text(wallet_name);
         $(".wallet-address").text(wallet_address);
 
@@ -755,7 +755,7 @@ $(document).ready(function () {
     $('body').on('click', '#delete_online_wallet_confirmation_popup_submit', function (e) {
         var wallet_address = $(this).data('address');
         var wallet_id = $(this).data('wallet_id');
-        var wallet_name = $("#hls-name").text();
+        var wallet_name = $("#hls-name_d").text();
         server.deleteOnlineWallet(wallet_id, wallet_name)
             .then(function (response) {
                 if (response !== false && "success" in response) {
@@ -912,11 +912,8 @@ function main() {
     $('.preloader').show();
     
     var username = sessionStorage.getItem("username");
-    var showusername = username;
-    if (showusername.length > 15) {
-        showusername = showusername.substr(0, 15) + "...";
-    }
-    $("#hls-name-same").text(showusername);
+    
+    $("#hls-name-same").text(username);
     var password = sessionStorage.getItem("password");
     var facode = sessionStorage.getItem("facode");
     var networkid = sessionStorage.getItem("networkid");
@@ -1025,9 +1022,15 @@ function main() {
     if (pathname[pathname.length - 1] != "local_wallet_local.html" && pathname[pathname.length - 1] != "dashboard_local.html" && pathname[pathname.length - 1] != "existing_online_wallet_local.html" && pathname[pathname.length - 1] != "paper_wallet_local.html") {
         set_two_factor_authentication_status(facode);
         var walletmenu = sessionStorage.getItem("walletmenu");
-        $.each(JSON.parse(walletmenu), function (i, item) {
-            $('.live_wallet').prepend(item);
-        });
+        var ordered = JSON.parse(walletmenu);
+        function sorter(b, c) {
+            return c - b;
+        }
+        var keysofmenu = Object.keys(ordered).sort(sorter);
+        for(i=0;i < keysofmenu.length;i++){
+            $('.live_wallet').prepend(ordered[keysofmenu[i]]);
+        }
+        
         $("#lusername").text(username);
         $(".lusername").val(username);
         var keystores = sessionStorage.getItem("online_keystores");
@@ -1574,24 +1577,20 @@ var set_account_status = function (address, name) {
     //console.log(address);
     //console.log(name);
     if (name === undefined) {
-        var showname = name;
-        if (showname.length > 15) {
-            showname = showname.substr(0, 15) + "...";
-        }
-        $("#hls-name").text(showname);
+        
+        $("#hls-name").text(name);
         $(".hls-name").text(name);
+        $("#hls-name_d").text(name);
         $('#account_status').val(address);
         $('.account_status').val(address);
         $('#account_status_paper').text(address);
         $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);
 
     } else {
-        var showname = name;
-        if (showname.length > 15) {
-            showname = showname.substr(0, 15) + "...";
-        }
-        $("#hls-name").text(showname);
+        
+        $("#hls-name").text(name);
         $(".hls-name").text(name);
+        $("#hls-name_d").text(name);
         $('#account_status').val(address);
         $('.account_status').val(address);
         $('#account_status_paper').text(address);
@@ -1607,12 +1606,14 @@ var set_account_status = function (address, name) {
 var set_account_status_local_offline = function (address, name) {
     if (name === undefined) {
         $("#hls-name").text(name);
+        $("#hls-name_d").text(name);
         $('#account_status').val(address);
         $('#account_status_paper').text(address);
         $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);
 
     } else {
         $("#hls-name").text(name);
+        $("#hls-name_d").text(name);
         $('#account_status').val(address);
         $('#account_status_paper').text(address);
         $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);
@@ -1627,12 +1628,14 @@ var set_account_status_local_offline = function (address, name) {
 var set_account_status_local = function (address, name) {
     if (name === undefined) {
         $("#hls-name").text(name);
+        $("#hls-name_d").text(name);
         $('#account_status_local').val(address);
         $('#account_status_paper').text(address);
         $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);
 
     } else {
         $("#hls-name").text(name);
+        $("#hls-name_d").text(name);
         $('#account_status_local').val(address);
         $('#account_status_paper').text(address);
         $('.paper_address').attr("src", "https://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + address);

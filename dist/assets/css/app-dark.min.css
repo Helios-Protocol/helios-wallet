@@ -813,6 +813,12 @@ body {
 #logout{
     cursor: pointer;
 }
+.name_change{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 330px;
+}
 @media (min-width:769px) {
     body.left-side-menu-condensed {
         min-height: 1200px
