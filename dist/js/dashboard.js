@@ -170,9 +170,11 @@ $(document).ready(function () {
             .then(function (args) {
                 if (pending_send_transactions.length <= 1) {
                     alertify.success("Transaction sent successfully");
+                    refresh_transactions();
                 } else {
                     alertify.success("Block sent successfully");
                 }
+
                 $("#modal-transaction-confirm").find(".tran_send_modal").html("");
                 $("#modal-transaction-confirm").modal("hide");
                 $("#modal-transaction-success").modal("show");
@@ -696,12 +698,14 @@ $(document).ready(function () {
                 if (response !== false && "success" in response) {
                     $('#modal-enable-2fa').modal("hide");
                     $("#modal-enable-2fa-success").modal("show");
+                    
                     sessionStorage.setItem("facode", true);
                     set_two_factor_authentication_status(true);
                 } else {
                     $('#modal-enable-2fa').modal("hide");
                     $("#modal-enable-2fa-failed").modal("show");
                 }
+                $('#new_two_factor_authentication_code').val("");
             })
 
     });
@@ -926,6 +930,7 @@ function main() {
     var facode = sessionStorage.getItem("facode");
     var networkid = sessionStorage.getItem("networkid");
    // console.log(networkid);
+    set_two_factor_authentication_status(facode);
     if(networkid != undefined){
         $(".netselect").find("a").each(function(){
             var id = $(this).data("id");
@@ -1028,7 +1033,7 @@ function main() {
        
     }
     if (pathname[pathname.length - 1] != "local_wallet_local.html" && pathname[pathname.length - 1] != "dashboard_local.html" && pathname[pathname.length - 1] != "existing_online_wallet_local.html" && pathname[pathname.length - 1] != "paper_wallet_local.html") {
-        set_two_factor_authentication_status(facode);
+        
         var walletmenu = sessionStorage.getItem("walletmenu");
         var ordered = JSON.parse(walletmenu);
         function sorter(b, c) {
@@ -1162,7 +1167,7 @@ function prepareEditOnlineWalletPage_local(wallet_address, wallet_name, wallet_i
 }
 function set_two_factor_authentication_status(tfa_enabled) {
     console.log(tfa_enabled);
-    if (tfa_enabled == "true") {
+    if (tfa_enabled == "true" || tfa_enabled == true) {
 
         $('#two_factor_authentication_status').text('');
         $('#two_factor_authentication_status').removeClass("Disabled").addClass("Enabled");
