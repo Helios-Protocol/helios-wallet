@@ -1,5 +1,6 @@
 $(document).ready(function () {
     main();
+
     $(".netselect").find("a").click(function () {
         var selected_network_id = $(this).data("id");
         var selectedtext = $(this).text();
@@ -170,7 +171,8 @@ $(document).ready(function () {
             .then(function (args) {
                 if (pending_send_transactions.length <= 1) {
                     alertify.success("Transaction sent successfully");
-                    refresh_transactions();
+                    //refresh_transactions();
+                   // $('#incoming_transactions_accept').trigger("click");
                 } else {
                     alertify.success("Block sent successfully");
                 }
@@ -1112,6 +1114,11 @@ function main() {
         // setTimeout(function () {
         //     refresh_transactions(0);
         // }, 1000)
+        setInterval(function(){
+           
+            $('#incoming_transactions_accept').trigger("click");
+        },15000);
+        
     }
     
 }
@@ -1367,8 +1374,10 @@ $(".tran_all").click(function () {
 
 
 
-async function refresh_transactions(start_index, tran_type = 'all') {
-    $('.preloader').show();
+async function refresh_transactions(start_index, tran_type = 'all',load="Y") {
+    if(load == "Y"){
+        $('.preloader').show();
+    }
     if (sending_account == null) {
         return
     }
@@ -1471,8 +1480,8 @@ async function refresh_transactions(start_index, tran_type = 'all') {
         tableRef += '<p>' + item.to + '</p>';
         tableRef += '</div>';
         tableRef += '<div class="mr-3 table_data_5">';
-
-        tableRef += '<p class="sent_color"> ' + web3.utils.fromWei(web3.utils.toBN(item.value)).toString() + ' HLS</p>';
+        var color = (item.description === "Send transaction") ? 'sent' : 'receive';
+        tableRef += '<p class="'+color+'_color"> ' + web3.utils.fromWei(web3.utils.toBN(item.value)).toString() + ' HLS</p>';
         tableRef += '</div>';
         tableRef += '<div class="align-self-center">';
         tableRef += '<button type="button" class="btn btn-transaction-complete btn-rounded">Complete <i class="uil uil-check-circle ml-1"></i></button>';
@@ -1706,7 +1715,7 @@ async function receiveAnyIncomingTransactions(wallet_address, notify_if_none) {
                     });
             } else {
                 if (notify_if_none) {
-                    alertify.error("There are no new incoming transactions");
+                    //alertify.error("There are no new incoming transactions");
                 }
                 return false;
             }

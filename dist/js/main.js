@@ -334,13 +334,13 @@ async function refreshDashboard() {
             ////console.log('Received transactions');
             sleep(1000)
             .then(function(){
-                refresh_transactions();
+                refresh_transactions(0,'',"N");
                 refresh_balance();
                 init_min_gas_price();
             });
         }else{
             ////console.log('No transactions to receive');
-            refresh_transactions();
+            refresh_transactions(0,'',"N");
             refresh_balance();
             init_min_gas_price();
         }
