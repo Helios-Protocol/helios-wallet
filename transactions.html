@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Helios Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="An infinitely scalable cryptocurrency and smart contract platform based on fully parallelized concurrent blockchains. The Helios platform is designed from the ground up to be futureproof with secure, high speed, and low fee transactions, and to enable truly decentralized and democratic applications." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="dist/assets/images/favicon.ico">
+    <!-- plugins -->
+    <link href="dist/assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    <link href="dist/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" />
+    <link href="dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="dist/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="dist/js/alertify.css">
+    <script src="dist/js/alertify.js"></script>
+    <script src="dist/js/frontpage.js"></script>
+</head>
+<body>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- Topbar Start -->
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom" id="content">
+            <div class="container-fluid">
+                <!--Logo Start-->
+                <a href="dashboard.html" class="navbar-brand mr-0 mr-md-2 logo">
+                    <span class="logo-lg">
+                        <img src="dist/assets/images/logo.png" alt="" height="40" />
+                    </span>
+                    <span class="logo-sm">
+                        <img src="dist/assets/images/helios_logo_solo.png" alt="" height="35">
+                    </span>
+                </a>
+                <!--Logo End-->
+                <!--Menu Icon Start-->
+                <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+                    <li class="">
+                        <button class="button-menu-mobile open-left">
+                            <i data-feather="menu" class="menu-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+                <!--Menu Icon End-->
+                <!--Right List Start-->
+                <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+                    
+                    
+                    <li class="d-sm-block d-none dropdown notification-list align-self-center">
+                        <a class="nav-link dropdown-toggle nav-user mr-0">
+                            <div class="media user-profile">
+                                <img src="dist/assets/images/users/avatar-7.png" alt="user-image" class="rounded-circle align-self-center" />
+                                <div class="media-body text-left align-self-center">
+                                    <p class="ml-2 my-0 text-white ls-1">
+                                        <span id="lusername"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="d-sm-block align-self-center">
+                        <div class="btn-group mr-1">
+                            <button type="button" class="btn btn-network dropdown-toggle networkidselect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mainnet <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></i></button>
+                            <div class="dropdown-menu netselect">
+                                <a class="dropdown-item" style="cursor: pointer;" data-id="1">Mainnet</a>
+                                <a class="dropdown-item" style="cursor: pointer;" data-id="42">Hypothesis Testnet</a>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="dropdown notification-list" data-toggle="tooltip" data-placement="left" title="Settings">
+                        <a href="javascript:void(0);" class="nav-link right-bar-toggle">
+                            <i data-feather="settings"></i>
+                        </a>
+                    </li>-->
+                </ul>
+                <!--Right List End-->
+            </div>
+        </div>
+        <!--Topbar End-->
+        <!--Left Sidebar Start-->
+        <div class="left-side-menu">
+            <div class="sidebar-content">
+                <!--- Sidemenu -->
+                <div id="sidebar-menu" class="slimscroll-menu">
+                    <ul class="metismenu" id="menu-bar">
+                        <!--<li class="menu-title">Navigation</li>-->
+                        <li>
+                            <a href="dashboard.html">
+                                <img src="dist/assets/icon/menu1.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Dashboard </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="transactions.html">
+                                <img src="dist/assets/icon/menu2.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Transactions </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <img src="dist/assets/icon/menu3.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Local Wallets </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level sub_menu local_wallet" aria-expanded="false">
+                                
+                                <li>
+                                    <a href="local_wallet.html"><i class="uil uil-plus-circle add_wallet_plus mr-2"></i>Add New Wallet</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <img src="dist/assets/icon/menu4.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Online Wallets </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level sub_menu live_wallet" aria-expanded="false">
+                                <!-- <li>
+                                    <a href="existing_online_wallet.html">Existing Wallet</a>
+                                </li> -->
+                                <li>
+                                    <a href="add_online_wallet.html"><i class="uil uil-plus-circle add_wallet_plus mr-2"></i>Add New Wallet</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="paper_wallet.html">
+                                <img src="dist/assets/icon/menu3p.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Paper Wallet </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact_list.html">
+                                <img src="dist/assets/icon/menu5.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Contact List </span>
+                            </a>
+                        </li>
+                        <!--<li>
+                            <a href="account_setting.html">
+                                <img src="dist/assets/icon/menu6.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Account </span>
+                            </a>
+                        </li>-->
+                        <li>
+                            <a href="setting.html">
+                                <img src="dist/assets/icon/menu7.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Setting </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a  id="logout">
+                                <img src="dist/assets/icon/menu8.png" class="avatar-menu rounded align-self-center mr-2" alt="Helios">
+                                <span> Logout </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!--Left Sidebar End-->
+        <!--Wallet Page Start-->
+        <div class="content-page">
+            <div class="content">
+                <!--Main Start-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!--Transaction Section Start-->
+                        <div class="col-lg-12 order-2 order-sm-1">
+                            <!--Top heading Division Start-->
+                            <div class="row page-title-2 align-items-center">
+                                <div class="col-sm-4 col-6">
+                                    <h4 class="mb-1 mt-0">Transaction</h4>
+                                </div>
+                            </div>
+                                <!-- <div class="col-sm-8 col-6">
+                                    <button type="button" class="btn btn-token-selection-2 float-right" id="dash-dateranges">Search</button>
+                                    <form class="form-inline mt-3 mt-sm-0 float-right">
+                                        <div class="form-group mb-sm-0 mr-2">
+                                            <input type="text" class="form-control flatpickr-input active" id="dash-daterange" style="min-width: 190px;" readonly="readonly">
+                                        </div>
+                                    </form>
+                                    
+                                </div> -->
+                                <div class="row align-items-center">
+                                    <!--Start Date Start-->
+                                    <div class="col-sm-5 col-12">
+                                        <div class="year_month_div">
+                                            <!--Heading Start-->
+                                            <div>
+                                                <h5>Start Date</h5>
+                                            </div>
+                                            <!--Heading End-->
+                                            <div class="d-table">
+                                                <!--Select Year Start-->
+                                                <div class="btn-group">
+                                                    <select id="start_month" class="custom-select custom-select-md mb-2 date_padding">
+                                                        <option selected="">Select Month</option>
+                                                        <option value="1" selected>01- January</option>
+                                                        <option value="2">02 - February</option>
+                                                        <option value="3">03 - March</option>
+                                                        <option value="4">04 - April</option>
+                                                        <option value="5">05 - May</option>
+                                                        <option value="6">06 - June</option>
+                                                        <option value="7">07 - July</option>
+                                                        <option value="8">08 - August</option>
+                                                        <option value="9">09 - September</option>
+                                                        <option value="10">10 - October</option>
+                                                        <option value="11">11 - November</option>
+                                                        <option value="12">12 -December</option>
+                                                    </select>
+                                                </div>
+                                                <!--Select Year End-->
+                                                <!--Select Month Start-->
+                                                <div class="btn-group ml-2">
+                                                    <select id="start_year" class="custom-select custom-select-md mb-2 date_padding">
+                                                        <option selected="">Select Year</option>
+                                                        <option value="2018">2018</option>
+                                                        <option value="2019">2019</option>
+                                                        <option value="2020" selected>2020</option>
+                                                    </select>
+                                                </div>
+                                                <!--Select Month End-->
+                                                <!--Search Button Start-->
+                                                <!--<div class="btn-group">
+                                                    <button type="button" class="btn btn-token-selection-2 modal-title ml-sm-3 mb-2" data-toggle="modal" data-target="#add_custom_token">Search</button>
+                                                </div>-->
+                                                <!--Search Button End-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Start Date End-->
+                                    <!--End Date Start-->
+                                    <div class="col-sm-7 col-12">
+                                        <div class="year_month_div">
+                                            <!--Heading Start-->
+                                            <div>
+                                                <h5>End Date</h5>
+                                            </div>
+                                            <!--Heading End-->
+                                            <div class="d-table">
+                                                <!--Select Year Start-->
+                                                <div class="btn-group">
+                                                    <select id="end_month" class="custom-select custom-select-md mb-2 date_padding">
+                                                        <option selected="">Select Month</option>
+                                                        <option value="1">01- January</option>
+                                                        <option value="2">02 - February</option>
+                                                        <option value="3">03 - March</option>
+                                                        <option value="4" selected>04 - April</option>
+                                                        <option value="5">05 - May</option>
+                                                        <option value="6">06 - June</option>
+                                                        <option value="7">07 - July</option>
+                                                        <option value="8">08 - August</option>
+                                                        <option value="9">09 - September</option>
+                                                        <option value="10">10 - October</option>
+                                                        <option value="11">11 - November</option>
+                                                        <option value="12">12 -December</option>
+                                                    </select>
+                                                </div>
+                                                <!--Select Year End-->
+                                                <!--Select Month Start-->
+                                                <div class="btn-group ml-2">
+                                                    <select id="end_year" class="custom-select custom-select-md mb-2 date_padding">
+                                                        <option selected="">Select Year</option>
+                                                        <option value="2018">2018</option>
+                                                        <option value="2019">2019</option>
+                                                        <option value="2020" selected>2020</option>
+                                                    </select>
+                                                </div>
+                                                <!--Select Month End-->
+                                                <!--Search Button Start-->
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-token-selection-2 modal-title ml-sm-3 mt-sm-0 mt-2 mb-2" id="dash-dateranges">Search Transaction</button>
+                                                </div>
+                                                <!--Search Button End-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Date End-->
+                                </div>
+                            
+                            <!--Top heading Division End-->
+                            <!--Transaction Division Start-->
+                            <div class="card">
+                                <div class="card-body scroll_height_transaction_single">
+                                    <div>
+                                        <!--List Start-->
+                                        <h5 class="card-title mt-0 mb-3 header-title-transaction text-helios">All Transaction</h5>
+                                        <ul class="nav transaction_list">
+                                            <li class="nav-item">
+                                                <a href="" data-toggle="tab" aria-expanded="false"
+                                                   class="nav-link active transaction_list tran_all">
+                                                    <span class="d-sm-block">ALL</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="" data-toggle="tab" aria-expanded="true"
+                                                   class="nav-link transaction_list tran_send">
+                                                    <span class="d-sm-block">SEND</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="" data-toggle="tab" aria-expanded="false"
+                                                   class="nav-link transaction_list tran_receive">
+                                                    <span class="d-sm-block">RECEIVE</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        
+                                        <!--List End-->
+                                        <!--Transaction Start-->
+                                        <div class="tab-content">
+                                            <!--All Transaction Start-->
+                                            <div class="tab-pane table-responsive mt-4 show active" id="all_transaction">
+                                                
+                                                <!--All One Start-->
+                                                <div class="transaction_view">
+
+                                                </div>
+                                            </div>
+                                            <!--All Transaction End-->
+                                            <!--Send Transaction Start-->
+                                          
+                                            <!--Receive Transaction End-->
+                                            <!--Pagination Start-->
+                                            <!-- <nav aria-label="Page navigation example">
+                                                <ul class="pagination float-right mt-3">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav> -->
+                                            <!--Pagination End-->
+                                            <!--Previous Next Start-->
+                                            <!--<div class="d-inline-block align-middle float-right mt-2">
+                                                <div class="row">
+                                                    <div class="col-8 align-self-center text-white font-size-12">
+                                                        Showing 1 - 10 of 289
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="btn-group float-right">
+                                                            <button type="button" class="btn btn-previous btn-sm"><i class="uil uil-angle-left"></i></button>
+                                                            <button type="button" class="btn btn-next btn-sm"><i class="uil uil-angle-right"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            <!--Previous Next End-->
+                                        </div>
+                                        <!--Transaction End-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Transaction Division End-->
+                        </div>
+                        <!--Transaction Section End-->
+                        <!--Footer Start-->
+                        <footer class="footer">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 font-size-11 text-white">
+                                        Helios Wallet Version 0.2 | <a class="text-white" target="_blank" href="https://heliosprotocol.io/terms_of_service.php">Terms of use</a>
+                                    </div>
+                                    <div class="col-12 font-size-12 text-white">
+                                        &copy; COPYRIGHT 2020. HELIOS BLOCKCHAIN TECHNOLOGIES LTD. ALL RIGHTS RESERVED.
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                        <!--Footer End-->
+                    </div>
+                    <!--Main End-->
+                </div>
+            </div>
+            <!--Wallet Page End-->
+            <!-- END wrapper -->
+            <!-- Right Sidebar -->
+            <div class="right-bar">
+                <div class="rightbar-title">
+                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                        <i data-feather="x-circle"></i>
+                    </a>
+                    <h5 class="m-0">Customization</h5>
+                </div>
+
+                <div class="slimscroll-menu">
+
+                    <h5 class="font-size-16 pl-3 mt-4">Choose Variation</h5>
+                    <div class="p-3">
+                        <h6>Default</h6>
+                        <a href="index.html"><img src="dist/assets/images/layouts/vertical.jpg" alt="vertical" class="img-thumbnail demo-img" /></a>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h6>Top Nav</h6>
+                        <a href="layouts-horizontal.html"><img src="dist/assets/images/layouts/horizontal.jpg" alt="horizontal" class="img-thumbnail demo-img" /></a>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h6>Dark Side Nav</h6>
+                        <a href="layouts-dark-sidebar.html"><img src="dist/assets/images/layouts/vertical-dark-sidebar.jpg" alt="dark sidenav" class="img-thumbnail demo-img" /></a>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h6>Condensed Side Nav</h6>
+                        <a href="layouts-dark-sidebar.html"><img src="dist/assets/images/layouts/vertical-condensed.jpg" alt="condensed" class="img-thumbnail demo-img" /></a>
+                    </div>
+                    <div class="px-3 py-1">
+                        <h6>Fixed Width (Boxed)</h6>
+                        <a href="layouts-boxed.html">
+                            <img src="dist/assets/images/layouts/boxed.jpg" alt="boxed"
+                                 class="img-thumbnail demo-img" />
+                        </a>
+                    </div>
+                </div> <!-- end slimscroll-menu-->
+            </div>
+            <!-- /Right-bar -->
+            <!-- Right bar overlay-->
+            <div class="rightbar-overlay"></div>
+        </div>
+    </div>
+    <div class="modal fade modal_success" id="modal-enable-wallet" tabindex="-1" role="dialog" aria-labelledby="modal-errorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content ">
+                <div class="modal-body text-center enable_wallet_modal">
+                    <!--<div class="">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>-->
+                    <i class="uil uil-wallet"></i>
+                    <h4 class="mt-4 mb-2">Currently loaded wallet</h4>
+                    <p class="w-75 mx-auto enable_wallet_modal_note">0x5602a858c38A183862353f38AC86be0949c40929</p>
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-outline-enable btn-rounded width-md" data-dismiss="modal"> Okay !</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="preloader">
+        <div class="loading">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    <!-- Vendor js -->
+    <script src="dist/assets/js/vendor.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="dist/assets/libs/moment/moment.min.js"></script>
+    <script src="dist/assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- page js -->
+    <script src="dist/assets/js/pages/dashboard.init.js"></script>
+
+    <!-- App js -->
+    <script src="dist/assets/js/app.min.js"></script>>
+    <script src="dist/js/dashboard.js?version=18" ></script>
+    <script src="dist/js/script.js?version=16" ></script>
+    <script src="dist/js/main.js?version=16" ></script>
+    <script src="dist/js/frontpage.js?version=16" ></script>
+
+
+</body>
+</html>

@@ -1,57 +1,48 @@
-const gulp = require("gulp");
-const fileinclude = require("gulp-file-include");
+var gulp = require( 'gulp' );
+var rename = require( 'gulp-rename' );
 const browserify = require("browserify");
-const buffer = require("vinyl-buffer");
 const plumber = require("gulp-plumber");
-const rename = require("gulp-rename");
+const buffer = require("vinyl-buffer");
 const notify = require("gulp-notify");
 const source = require("vinyl-source-stream");
+var web_main = require("helios-web3");
+var styleSRC = './src/scss/style.css';
+var styleDIST = './dist/css/';
 
-const app = "./app/";
-const dist = "./dist/";
+var jsSRC = './src/js/script.js';
+var jsDIST = './dist/js/';
 
-// Error / Success Handling
-let onError = function(err) {
-  notify.onError({
-    title: "Error: " + err.plugin,
-    subtitle: "<%= file.relative %>",
-    message: "<%= error.message %>",
-    sound: "Beep",
-    icon: app + "images/icons/icon48.png"
-  })(err);
-  console.log(err.toString());
-  this.emit("end");
-};
-
-function onSuccess(msg) {
-  return {
-    message: msg + " Complete! ",
-    //sound:     "Pop",
-    icon: app + "images/icons/icon48.png",
-    onLast: true
-  };
-}
-
-// HTML / TPL Pages
-let htmlFiles = app + "layouts/*.html";
-let includeFiles = app + "includes/*.html";
-
-gulp.task("html", function(done) {
-  return gulp
-    .src(htmlFiles)
-    .pipe(plumber({ errorHandler: onError }))
-    .pipe(fileinclude({ prefix: "@@", basepath: "@file" }))
-    .pipe(gulp.dest(dist))
-    .pipe(notify(onSuccess("HTML")));
+gulp.task('style',function(){
+   gulp.src( styleSRC )
+   .pipe( rename( { suffix: '.min' } ))
+   .pipe( gulp.dest( styleDIST ));
 });
 
+let onError = function(err) {
+    notify.onError({
+      title: "Error: " + err.plugin,
+      subtitle: "<%= file.relative %>",
+      message: "<%= error.message %>",
+      sound: "Beep",
+      icon: "images/icons/icon48.png"
+    })(err);
+    //console.log(err.toString());
+    this.emit("end");
+  };
+function onSuccess(msg) {
+    return {
+      message: msg + " Complete! ",
+      //sound:     "Pop",
+      icon: "images/icons/icon48.png",
+      onLast: true
+    };
+  }
 
-// js: Browserify
-let js_folder = "scripts/";
-let jsFolder = app + js_folder
+
+let jsFolder = "src/js/";
 let js_srcFile = jsFolder + "main.js";
-let js_destFolder = dist + "js/";
-let js_destFile = "helios-wallet-master.js";
+let js_destFolder = "dist/js/";
+let js_destFile = "script.js";
 
 function bundle_js(bundler) {
   return bundler
@@ -63,73 +54,12 @@ function bundle_js(bundler) {
     .pipe(gulp.dest(js_destFolder))
     .pipe(notify(onSuccess("JS")));
 }
-
-
 gulp.task("js", function() {
   let bundler = browserify(js_srcFile)
   return bundle_js(bundler);
 });
+gulp.task('default',gulp.parallel("style","js"));
 
-
-// Copy
-let imgSrcFolder = app + "images/**/*";
-let jsonFile = app + "*.json";
-
-let jsStaticFolder = jsFolder + "static/*";
-let cssFolder = app + "css/*";
-let readMe = "./README.rst";
-
-gulp.task("copy", function() {
-  gulp
-    .src(imgSrcFolder)
-    .pipe(gulp.dest(dist + "images"))
-
-  gulp
-    .src(jsStaticFolder)
-    .pipe(gulp.dest(dist + "js"))
-
-  gulp
-    .src(cssFolder)
-    .pipe(gulp.dest(dist + "css"))
-
-  gulp
-    .src(jsonFile)
-    .pipe(gulp.dest(dist))
-
-  return gulp
-      .src(readMe)
-      .pipe(gulp.dest(dist))
-      .pipe(notify(onSuccess(" Copy ")));
-});
-
-
-let js_watchFolder = app + "scripts/**/*.{js,json,html}";
-
-gulp.task("watchJS", function() {
-  gulp.watch(js_watchFolder, gulp.parallel(["js","copy"]));
-});
-gulp.task("watchHtml", function() {
-  gulp.watch(htmlFiles, gulp.series("html"));
-});
-gulp.task("watchIncludes", function() {
-  gulp.watch(includeFiles, gulp.series("html"));
-});
-gulp.task("watchImages", function() {
-  gulp.watch(imgSrcFolder, gulp.series("copy"));
-});
-gulp.task("watchCss", function() {
-  gulp.watch(cssFolder, gulp.series("copy"));
-});
-
-
-gulp.task("watch", gulp.parallel(
-  "watchJS",
-  "watchHtml",
-  "watchIncludes",
-  "watchImages",
-  "watchCss"
-));
-
-// gulp.task("build", ["js", "html"]);
-//
-gulp.task('default',gulp.parallel("html", "js", "copy"));
+// gulp.task('server', ['build'], function(){
+//     browser.init({server: './_site', port: port});
+// });
