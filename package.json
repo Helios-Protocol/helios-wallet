@@ -23,7 +23,7 @@
     "request-promise-native": "^1.0.7",
     "superagent": "^4.1.0",
     "superagent-no-cache": "^0.1.1",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   },
